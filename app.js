@@ -72,9 +72,17 @@ app.set('port', process.env.PORT || 3000);
 // catch 404 and forward to error handler
 
 
-app.get('/logout', function (req, res, next) {
-  req.session.reset();
-  res.redirect('/');
+app.get('/deepdive', function (req, res, next) {
+  res.render('deepDive', { title: 'Deep Dive' });
+});
+app.get('/faq', function (req, res, next) {
+  res.render('faq', { title: 'FAQ' });
+});
+app.get('/governance', function (req, res, next) {
+  res.render('governance', { title: 'Governance' });
+});
+app.get('/whitepaper', function (req, res, next) {
+  res.render('whitePaper', { title: 'White Paper' });
 });
 
 
