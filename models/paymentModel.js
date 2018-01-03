@@ -11,11 +11,6 @@ var paymentSchema = new Schema({
     amount: { type: Schema.Types.Decimal },
     time: { type: Date, default: Date.now }
 
-
-    
-
-
-
 });
 
 mongoose.model('payment', paymentSchema);

@@ -1,6 +1,7 @@
 TODO 
 X Get sessions/cookies working
 X Register
+- email confirmation
 X Login with csrf
 X Logout button
 - form Validator
