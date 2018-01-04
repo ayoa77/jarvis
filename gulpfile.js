@@ -11,15 +11,15 @@ var browserSync = require('browser-sync');
 var nodemon = require('gulp-nodemon');
 var nodeInspector = require('gulp-node-inspector');
 
-// gulp.task('browser-sync', ['nodemon'], function () {
-//     browserSync.init(null, {
-//         proxy: "http://localhost:8000",
-//         files: ["public/**/*.*"],
-//         browser: "google-chrome",
-//         port: 8001,
-//         notify: false,
-//     });
-// });
+gulp.task('browser-sync', ['nodemon'], function () {
+    browserSync.init(null, {
+        proxy: "http://localhost:8000",
+        files: ["public/**/*.*"],
+        browser: "google-chrome",
+        port: 8001,
+        notify: false,
+    });
+});
 
 gulp.task('bs-reload', function () {
     browserSync.reload();
@@ -60,7 +60,7 @@ gulp.task('scripts', function () {
 
 gulp.task('js-watch', ['scripts'], function (done) {
     browserSync.reload();
-    done()
+    done();
 });
 
 gulp.task('nodemon', function () {
