@@ -1,4 +1,52 @@
-body{
-  background:pink;
-  height:2000px;
+$blue10: #F6F7FB;
+$bluegreen:  #30BCC8;
+$blue50: #148AAE;
+
+body {
+  background: white;
+  font-family: helvetica;
 }
+
+.flexed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sh-splash {
+  height: 100vh;
+}
+
+.sty-splash {
+  background: linear-gradient(#fff, $blue10);
+}
+
+.sh-white-block {
+  height: 80vh;
+}
+
+.sty-white-block {
+  background: white;
+}
+
+.sh-grey-block {
+  height: 80vh;
+}
+
+.sty-grey-block {
+  background: #aaa;
+}
+
+.sh-blue-block {
+  height: 100vh;
+}
+
+.sty-blue-block {
+  background: linear-gradient($bluegreen, $blue50);
+}
+
+// @include media-breakpoint-up(xs) {}
+// @include media-breakpoint-up(sm) {}
+// @include media-breakpoint-up(md) {}
+// @include media-breakpoint-up(lg) {}
+// @include media-breakpoint-up(xl) {}
