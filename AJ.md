@@ -1,4 +1,5 @@
 TODO 
+- Give Nathan a High-Five! 👏👏👏👏👏
 X Get sessions/cookies working
 X Register
 - email confirmation
@@ -45,6 +46,3 @@ walletSchema
 kycSchema
 - userid - number userRelation:[{ type: Schema.Types.ObjectId, ref: 'user' }],
 - images - [String]
-
-
-
