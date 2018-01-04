@@ -13,10 +13,10 @@ var nodeInspector = require('gulp-node-inspector');
 
 gulp.task('browser-sync', ['nodemon'], function () {
     browserSync.init(null, {
-        proxy: "http://localhost:8000",
+        proxy: "http://localhost:3000",
         files: ["public/**/*.*"],
         browser: "google-chrome",
-        port: 8001,
+        port: 3001,
         notify: false,
     });
 });
@@ -84,7 +84,7 @@ gulp.task('no-wifi', ['nodemon'], function () {
 gulp.task('serve', ['browser-sync'], function () {
     gulp.watch("public/main.css", ['prefix']);
     gulp.watch("public/js/partials/*.js", ['scripts', 'bs-reload']);
-    gulp.watch("views/**/*.ejs", ['bs-reload']);
+    gulp.watch("views/**/*.html", ['bs-reload']);
     // gulp.watch(config.jade.watch, ['jade', browserSync.reload]);
 });
 
