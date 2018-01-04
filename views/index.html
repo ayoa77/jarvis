@@ -1,12 +1,65 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <a href="/login"> login </a>
-  </body>
-</html>
+<% include partials/_head.html %>
+
+<% include partials/_nav.html %>
+
+<div class="container-fluid">
+
+  <div class="row sh-splash sty-splash">
+    <div class="col-xs-12">
+      <p class="big-text">
+          JARVIS.AI
+      </p>
+
+      <p class="sub-text">
+          The Decentralized AI Platform
+      </p>
+
+      <p class="body-text">
+          Join our mailing list to stay in the loop on community 
+          updates and to receive additional information about our 
+          upcoming token generation event and alpha/beta releases.
+      </p>
+
+      <div class="email-signup">
+          <form action="POST">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <input id="email" type="text" class="form-control" name="email" placeholder="E-mail Address">
+                </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row sh-white-block sty-white-block">
+
+  </div>
+
+  <div class="row sh-grey-block sty-grey-block">
+
+  </div>
+
+  <div class="row sh-white-block sty-white-block">
+
+  </div>
+
+  <div class="row sh-blue-block sty-blue-block">
+
+  </div>
+
+  <div class="row sh-white-block sty-white-block">
+
+  </div>
+
+  <div class="row sh-grey-block sty-grey-block">
+
+  </div>
+
+  <div class="row sh-white-block sty-white-block">
+
+  </div>
+
+</div>
+
+<% include partials/_footer.html %>

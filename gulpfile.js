@@ -58,7 +58,7 @@ gulp.task('js-watch', ['scripts'], function (done) {
 gulp.task('nodemon', function () {
     nodemon({
         script: 'app.js',
-        ext: 'js html',
+        ext: 'js',
         ignore: 'public/img/*'
         // env: {
         //     'NODE_ENV': 'development'
@@ -70,7 +70,7 @@ gulp.task('browser-sync', function () {
     browserSync.init(null, {
         proxy: "http://localhost:3000",
         files: ["public/**/*.*"],
-        browser: "google-chrome",
+        browser: "google chrome",
         port: 3001,
         notify: false,
     });
