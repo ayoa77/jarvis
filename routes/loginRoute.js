@@ -32,6 +32,7 @@ router.post('/', csrfProtection, function (req, res) {
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.user = user;  //set-cookie: session = {email, passwords}
+                delete req.session.user.password;
                 res.redirect('/user');
             } else {
                 res.render('login', { error: 'invalid email or password', csrfToken: req.csrfToken() });

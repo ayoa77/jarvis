@@ -64,11 +64,15 @@ var indexRoute = require('./routes/indexRoute');
 var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
 var registerRoute = require('./routes/registerRoute');
+var tokenController = require('./controllers/tokenController');
 
 app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.get('/confirmation/:id?', tokenController.confirmationGet);
+app.post('/resend', tokenController.resendTokenPost);
+
 app.set('port', process.env.PORT || 3000);
 // catch 404 and forward to error handler
 
@@ -86,6 +90,10 @@ app.get('/whitepaper', function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper' });
 });
 
+app.get('/logout', function (req, res, next) {
+  req.session.reset();
+  res.redirect('/');
+});
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

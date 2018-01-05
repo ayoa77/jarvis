@@ -16,8 +16,8 @@ exports.sendVerification = (req, res, next) => {
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",
             auth: {
-                user: "ayodeleamadi@gmail.com",
-                pass: "Bling#7744"
+                user: "test@gmail.com",
+                pass: "testing#7"
             }
         });
         var rand, mailOptions, host, link;
