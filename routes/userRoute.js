@@ -1,17 +1,19 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var router = express.Router();
-var userSchema = mongoose.model('user', userSchema);
+// var mongoose = require('mongoose');
+// var userSchema = mongoose.model('user', userSchema);
 // var bcrypt = require('bcryptjs');
 
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.render('this is where a users account will be - change this method to res.require once you arrive here');
-// });
-
 router.get('/', function (req, res, next) {
-  res.render('user', { title: 'Jarvis' });
+  console.log(req.session.user.status);
+  if (req.session.user.status == 'NEW'){
+    res.render('verify', { title: 'Verify' });
+  } else if (!req.session.user) {
+  res.redirect('user', { title: 'This comes up when there is no user in the session - LOAD THE LOGIN MODAL' }); //tell the page to drop down the modal
+  } else {
+    res.render('user', { title: 'User' });
+  }
 });
 
 module.exports = router;

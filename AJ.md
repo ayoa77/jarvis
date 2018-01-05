@@ -2,6 +2,7 @@ TODO
 - Give Nathan a High-Five! 👏👏👏👏👏
 X Get sessions/cookies working
 X Register
+- email confirmation
 X Login with csrf
 X Logout button
 - form Validator
@@ -16,7 +17,7 @@ X talk to Alex about the database
 - README
 - Docker
 - https/http2 - lets encrypt
-- nginx to gzip
+- nginx to gzip/brotli
 - CDN - Aryaka?
 - SEO Optimization
 - RBT.txt
