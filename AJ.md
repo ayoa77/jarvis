@@ -1,10 +1,11 @@
 TODO 
-- Give Nathan a High-Five! 👏👏👏👏👏
+X Give Nathan a High-Five! 👏👏👏👏👏
 X Get sessions/cookies working
 X Register
-- email confirmation
+X email confirmation
 X Login with csrf
 X Logout button
+- password reset
 - form Validator
 - research more about mongoose and mongodb
 X test and make sure database is working

@@ -5,8 +5,8 @@ var userSchema = new Schema({
     email: { type: String, unique: true },
     mailingList: { type: Boolean, default: false },
     password: String,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
+    passwordResetToken: { type: String, default: '123' },
+    passwordResetExpires: { type: Date, default: Date.now() },
     status:{ type: String, enum: ['NEW', 'EMAIL', 'APPROVED'], default: 'NEW'}	
 });
 

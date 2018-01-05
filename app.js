@@ -12,6 +12,8 @@ var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
 var helmet = require('helmet');
 var fs = require('fs');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 
 
 // MODELS
@@ -65,6 +67,7 @@ var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
 var registerRoute = require('./routes/registerRoute');
 var tokenController = require('./controllers/tokenController');
+var passwordController = require('./controllers/passwordController');
 
 app.use('/', indexRoute);
 app.use('/user', userRoute);
@@ -72,6 +75,12 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
+app.route('/emailresetpassword')
+  .get(csrfProtection, passwordController.emailResetPasswordGet)
+  .post(csrfProtection, passwordController.emailResetPasswordPost);
+app.route('/resetpassword/:id?')
+  .get(csrfProtection, passwordController.passwordResetGet)
+  .post(csrfProtection, passwordController.passwordResetPost);
 
 app.set('port', process.env.PORT || 3000);
 // catch 404 and forward to error handler

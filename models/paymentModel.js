@@ -9,7 +9,7 @@ var paymentSchema = new Schema({
     token: { type: String, enum: ['ETHER', 'JAR'] },
     //may need to use mongoose-bigdecimal here
     amount: { type: Schema.Types.Decimal },
-    time: { type: Date, default: Date.now }
+    time: { type: Date, default: Date.now() }
 
 });
 

@@ -7,7 +7,7 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 /**
-* POST /confirmation
+* GET /confirmation
 */
 exports.confirmationGet = function (req, res, next) {
     // req.assert('email', 'Email is not valid').isEmail();
