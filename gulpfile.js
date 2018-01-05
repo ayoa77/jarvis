@@ -35,7 +35,7 @@ gulp.task('styles', function(){
     //   sourceMap: true
     }).on('error', sass.logError))
     // .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('public/styles/css'))
+    .pipe(gulp.dest('./public/styles/css/'))
     .pipe(browserSync.reload({stream:true}))
 });
 

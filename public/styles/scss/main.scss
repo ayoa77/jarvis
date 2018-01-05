@@ -1,20 +1,19 @@
-$blue10: #F6F7FB;
-$bluegreen:  #30BCC8;
-$blue50: #148AAE;
+@import "partials/_variables";
+@import "partials/_mixins";
+@import "partials/_typography";
+@import "partials/_placeholders";
+
+// Site-Wide Containers
 
 body {
   background: white;
   font-family: helvetica;
 }
 
-.flexed {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .sh-splash {
   height: 100vh;
+  padding: 0 20px;
+  @include flexed;
 }
 
 .sty-splash {
@@ -22,7 +21,7 @@ body {
 }
 
 .sh-white-block {
-  height: 80vh;
+  padding: 0 20px;
 }
 
 .sty-white-block {
@@ -31,6 +30,7 @@ body {
 
 .sh-grey-block {
   height: 80vh;
+  padding: 0 20px;
 }
 
 .sty-grey-block {
@@ -39,11 +39,35 @@ body {
 
 .sh-blue-block {
   height: 100vh;
+  padding: 0 20px;
 }
 
 .sty-blue-block {
   background: linear-gradient($bluegreen, $blue50);
 }
+
+// Typography
+
+.big-text {
+  font-family: "DINPro-Bold";
+  font-size: 34px;
+  @include text-center;
+}
+
+.sub-text {
+  font-family: "Aileron-Light";
+  font-size: 18px;
+  @include text-center;
+}
+
+.body-text {
+  font-family: "Aileron-Light";
+  font-size: 12px;
+  @include text-center;
+}
+
+
+
 
 // @include media-breakpoint-up(xs) {}
 // @include media-breakpoint-up(sm) {}
