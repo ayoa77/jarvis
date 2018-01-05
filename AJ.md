@@ -17,7 +17,7 @@ X talk to Alex about the database
 - README
 - Docker
 - https/http2 - lets encrypt
-- nginx to gzip
+- nginx to gzip/brotli
 - CDN - Aryaka?
 - SEO Optimization
 - RBT.txt
