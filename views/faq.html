@@ -1,16 +1,26 @@
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <a href = "/">Home</a>
-    <a href = "/deepdive">Deep Dive</a>
-    <a href = "/faq">FAQ</a>
-    <a href = "/governance">Governance</a>
-    <a href = "/whitepaper">White Paper</a>
-   
-    
-  </body>
-</html>
+<% include partials/_head.html %>
+
+<% include partials/_nav.html %>
+
+<div class="container-fluid">
+
+    <div class="row sh-splash sty-splash">
+      <div class="col-12">
+        <p class="big-text-alt text-center">
+            FAQs
+        </p>
+  
+      </div>
+    </div>
+
+    <div class="row sh-white-block sty-white-block" style="padding: 0;">
+      <div class="col-12">
+        TODO : Add Drop Downs for FAQs
+      </div>
+    </div>
+
+
+
+</div>
+
+<% include partials/_footer.html %>

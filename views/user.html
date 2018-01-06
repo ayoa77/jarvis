@@ -1,16 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <a href = "/deepdive">Deep Dive</a>
-    <a href = "/faq">FAQ</a>
-    <a href = "/governance">Governance</a>
-    <a href = "/whitepaper">White Paper</a>
-    <p>Welcome to <%= title %>, this is your user page!</p>
-    <a href = "/logout">logout</a>
-  </body>
-</html>
+<% include partials/_head.html %>
+<% include partials/_nav.html %>
+
+<div class="container-fluid">
+    <div class="row sh-splash sty-splash">
+        <div class="col-12">
+          <p class="big-text-alt text-center">
+              ${username or email}
+          </p>
+  
+          <p class="big-text-alt text-center">
+              0 JAR
+          </p>
+  
+          <p class="sub-text text-center">
+              0 ETH
+          </p>
+  
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<% include partials/_footer.html %>
