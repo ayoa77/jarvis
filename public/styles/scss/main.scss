@@ -64,6 +64,7 @@ body {
 .body-text {
   font-family: "Aileron-Light";
   font-size: 12px;
+  max-width: 400px;
 }
 
 .question-text {
@@ -77,6 +78,213 @@ body {
   font-size: 12px;
 }
 
+// Login / Register Modal
+
+.modal-container {
+  height: 400px;
+  width: 600px;
+  
+  background: white;
+  
+  display: flex;
+}
+
+.thing1, .thing2 {
+  width: 50%;
+  height: 100%;
+  flex: 1;
+}
+
+.thing1 {
+    background: linear-gradient(to top right, #007ddf, #10bdff);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thing2 {
+  background: white;
+  box-shadow: -2px 0 30px rgba(0, 0, 0, .4);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  
+  background-image: url("https://orig00.deviantart.net/59f2/f/2016/120/c/e/umbrella_corporation_by_darmbass-da0qhlj.png");
+  background-size: 100% 100%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.signin, .signup {
+  font-size: 24px;
+  color: #aaa;
+  
+  border-bottom: 1px solid #fff;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.or {
+  color: #aaa;
+}
+
+#signUpForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#signUpForm input{
+  width: 200px;
+  
+  margin: 10px 0;
+  padding: 4px 5px;
+  
+  border: none;
+  border-bottom: 1px solid #aaa;
+  
+  font-size: 10px;
+}
+
+#signUpForm button {
+  padding: 10px 16px;
+  margin: 25px 0 0 0;
+  
+  background-color: #4CAF50; /* Green */
+  border: none;
+  
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.active {
+  border-bottom: 1px solid #333;
+  color: #007ddf;
+  
+  transition: all .3s;
+}.modal-container {
+  height: 400px;
+  width: 600px;
+  
+  background: white;
+  
+  display: flex;
+}
+
+.thing1, .thing2 {
+  width: 50%;
+  height: 100%;
+  flex: 1;
+}
+
+.thing1 {
+    background: linear-gradient(to top right, #007ddf, #10bdff);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thing2 {
+  background: white;
+  box-shadow: -2px 0 30px rgba(0, 0, 0, .4);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  
+  background-image: url("https://orig00.deviantart.net/59f2/f/2016/120/c/e/umbrella_corporation_by_darmbass-da0qhlj.png");
+  background-size: 100% 100%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.signin, .signup {
+  font-size: 24px;
+  color: #aaa;
+  
+  border-bottom: 1px solid #fff;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.or {
+  color: #aaa;
+}
+
+#signUpForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#signUpForm input{
+  width: 200px;
+  
+  margin: 10px 0;
+  padding: 4px 5px;
+  
+  border: none;
+  border-bottom: 1px solid #aaa;
+  
+  font-size: 10px;
+}
+
+#signUpForm button {
+  padding: 10px 16px;
+  margin: 25px 0 0 0;
+  
+  background-color: #4CAF50; /* Green */
+  border: none;
+  
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.active {
+  border-bottom: 1px solid #333;
+  color: #007ddf;
+  
+  transition: all .3s;
+}
+
+// Index
+
+.cont-splash {
+  max-width: 400px;
+}
 
 // Deep-Dive
 
