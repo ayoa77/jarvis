@@ -7,7 +7,7 @@ var userSchema = new Schema({
     password: String,
     passwordResetToken: { type: String, default: '123' },
     passwordResetExpires: { type: Date, default: Date.now() },
-    status:{ type: String, enum: ['NEW', 'EMAIL', 'APPROVED'], default: 'NEW'}	
+    status:{ type: String, enum: ['NEW', 'EMAIL', 'APPROVED']},
 });
 
 mongoose.model('user', userSchema);

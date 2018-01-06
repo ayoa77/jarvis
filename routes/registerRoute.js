@@ -24,7 +24,8 @@ router.post('/', function (req, res) {
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         email: req.body.email,
-        password: hash
+        password: hash,
+        status: 'NEW'
     });
     user.save(function (err) {
         if (err) {
