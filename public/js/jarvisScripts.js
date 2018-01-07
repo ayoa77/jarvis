@@ -1,13 +1,13 @@
 $(document).ready(function() {
   
     $( '.signin' ).click(function() {
-      $( '.signup' ).removeClass('active');
-      $( '.signin' ).addClass('active');
+      $( '.signup' ).removeClass('activeMode');
+      $( '.signin' ).addClass('activeMode');
     });
     
     $( '.signup' ).click(function() {
-      $( '.signin' ).removeClass('active');
-      $( '.signup' ).addClass('active');
+      $( '.signin' ).removeClass('activeMode');
+      $( '.signup' ).addClass('activeMode');
     });
     
   });

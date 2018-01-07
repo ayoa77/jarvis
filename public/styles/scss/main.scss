@@ -11,7 +11,7 @@ body {
 }
 
 .sh-splash {
-  height: 100vh;
+  height: calc(100vh - 50px);
   padding: 0 20px;
   @include flexed;
 }
@@ -21,7 +21,7 @@ body {
 }
 
 .sh-white-block {
-  padding: 0 20px;
+  padding: 30px 20px;
 }
 
 .sty-white-block {
@@ -29,7 +29,7 @@ body {
 }
 
 .sh-grey-block {
-  padding: 0 20px;
+  padding: 30px 20px;
 }
 
 .sty-grey-block {
@@ -37,7 +37,7 @@ body {
 }
 
 .sh-blue-block {
-  padding: 0 20px;
+  padding: 50px 20px;
 }
 
 .sty-blue-block {
@@ -174,12 +174,14 @@ body {
   font-size: 12px;
 }
 
-.active {
+.activeMode {
   border-bottom: 1px solid #333;
   color: #007ddf;
   
   transition: all .3s;
-}.modal-container {
+}
+
+.modal-container {
   height: 400px;
   width: 600px;
   
@@ -273,7 +275,7 @@ body {
   font-size: 12px;
 }
 
-.active {
+.activeMode {
   border-bottom: 1px solid #333;
   color: #007ddf;
   
@@ -289,20 +291,24 @@ body {
 // Deep-Dive
 
 .gradient-drop {
-  height: 120px;
   width: 100%;
+  padding: 20px 20px;
+
+  position: relative;
 
   background: linear-gradient(#eee, 20%,  #fff);
   
   .deco-line {
     width: 100%;
     height: 1px;
-
-    background: linear-gradient(to right, #eee, #ccc, #eee);
-
+    
     margin: 0;
     padding: 0;
 
+    position: absolute;
+    top: 0;
+
+    background: linear-gradient(to right, #eee, #ccc, #eee);
   }
 }
 
