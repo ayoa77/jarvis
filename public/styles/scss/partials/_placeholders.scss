@@ -1,14 +1,14 @@
 .pl-box {
     height: 300px;
     width: 100%;
-    background: #ddaadd44;
+
     margin: 20px 0;
     @include flexed;
 }
 
 .pl-box-col {
     height: 300px;
-    background: #ddaadd44;
+
     margin: 20px 0;
     @include col-flexed;
 }
