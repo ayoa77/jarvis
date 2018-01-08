@@ -38,6 +38,7 @@ exports.confirmationGet = function (req, res, next) {
                 console.log(user);
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // res.status(200).send("The account has been verified. Please log in.");
+                req.session.message = "The account has been verified. To complete this process, please log in."
                 res.redirect('/login');
             });
         });

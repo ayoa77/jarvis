@@ -16,10 +16,13 @@
     "express": "~4.15.5",
     "express-rate-limit": "^2.11.0",
     "helmet": "^3.9.0",
+    "mailchimp-api-v3": "^1.8.0",
+    "md5": "^2.2.1",
     "mongoose": "^5.0.0-rc0",
     "morgan": "~1.9.0",
     "nodemailer": "^4.4.1",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "validator": "^9.2.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",

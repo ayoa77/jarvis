@@ -63,6 +63,7 @@ app.use(sessions({
 
 
 var indexRoute = require('./routes/indexRoute');
+var mailingListRoute = require('./routes/mailingListRoute');
 var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
 var registerRoute = require('./routes/registerRoute');
@@ -73,6 +74,7 @@ app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.post('/mailerSignUp', indexRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
 app.route('/emailresetpassword')

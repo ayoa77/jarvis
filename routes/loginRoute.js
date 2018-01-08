@@ -10,7 +10,9 @@ var requireLogin = require('../middleware/requireLogin.js');
 router.get('/', csrfProtection, function (req, res) {
     var lang = req.cookies.lang;
     if (!req.user) {
-        res.render('login', { lang: lang, csrfToken: req.csrfToken() });
+        res.render('login', { lang: lang, csrfToken: req.csrfToken(), message: req.session.message });
+        console.log(req.session.message);
+       req.session.message = 'undefined';
     } else {
         res.redirect('/user');
     }
@@ -20,11 +22,14 @@ router.get('/:id?', csrfProtection, function (req, res) {
     var x;
     if (id == 'false') { x = 'Please Log in' };
     if (!req.user) {
-        res.render('login', { error: x, csrfToken: req.csrfToken() });
+        res.render('login', { error: x, csrfToken: req.csrfToken(), message: req.session.message  });
+        console.log(req.session.message);
+        delete req.session.message;
     } else {
         res.redirect('/user');
+
     }
-})
+});
 router.post('/', csrfProtection, function (req, res) {
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) {
@@ -35,6 +40,7 @@ router.post('/', csrfProtection, function (req, res) {
                 delete req.session.user.password;
                 res.redirect('/user');
             } else {
+    
                 res.render('login', { error: 'invalid email or password', csrfToken: req.csrfToken() });
             }
         }
