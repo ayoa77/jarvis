@@ -1,13 +1,11 @@
 @mixin flexed {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 @mixin col-flexed {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 // Classes
@@ -18,3 +16,4 @@
     justify-content: center;
     align-items: center;
 }
+

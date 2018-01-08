@@ -12,16 +12,29 @@ body {
 
 .sh-splash {
   height: calc(100vh - 50px);
-  padding: 0 20px;
+  padding: 0 0;
   @include flexed;
 }
 
 .sty-splash {
+  position: relative;
   background: linear-gradient(#fff, $blue10);
 }
 
+.pattern-splash {
+  height: 226px;
+  width: 100%;
+
+  background-image: url('../../images/pattern.png');
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+
+  position: absolute;
+  bottom: 0;
+}
+
 .sh-white-block {
-  padding: 30px 20px;
+  padding: 30px 0;
 }
 
 .sty-white-block {
@@ -29,15 +42,15 @@ body {
 }
 
 .sh-grey-block {
-  padding: 30px 20px;
+  padding: 30px 0;
 }
 
 .sty-grey-block {
-  background: #e0e0e0;
+  background: #efefef;
 }
 
 .sh-blue-block {
-  padding: 50px 20px;
+  padding: 50px 0;
 }
 
 .sty-blue-block {
@@ -125,7 +138,7 @@ body {
   display: flex;
   align-items: center;
   
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .signin, .signup {
@@ -197,7 +210,7 @@ body {
 }
 
 .thing1 {
-    background: linear-gradient(to top right, #007ddf, #10bdff);
+  background: linear-gradient(to top right, #007ddf, #10bdff);
   
   display: flex;
   justify-content: center;
@@ -226,7 +239,7 @@ body {
   display: flex;
   align-items: center;
   
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .signin, .signup {
@@ -286,13 +299,111 @@ body {
 
 .cont-splash {
   max-width: 400px;
+  margin-top: calc(50vh - 220px);
+}
+
+.input-group {
+  display: flex;
+}
+
+.input-group input {
+  border-left: 1px solid #ccc;
+
+  border-radius: 4px 0 0 4px;
+}
+
+.input-group button {
+  background: #4CAF50;
+  border: none;
+  color: white;
+
+  padding: 0 20px;
+
+  border-radius: 0 4px 4px 0;
+
+  @include flexed;
+}
+
+
+.logo-white {
+  height: 200px;
+  width: 200px;
+
+  margin: 0 auto;
+
+  background-image: url('./../../images/logo-white.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.world-box {
+  height: 300px;
+
+  background-image: url('./../../images/world-map.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @include flexed;
+}
+
+.world-box-col {
+  margin: 20px 0;
+
+  @include col-flexed;
+  justify-content: center;
+}
+
+.radial-illustration-box {
+  width: auto;
+  max-width: 700px;
+  height: 70vw;
+  max-height: 400px;
+  margin: 0 auto;
+
+  background-image: url(./../../images/radial-illustration-mobile.png);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+
+  border-bottom: 1px solid #aaa;
+
+  @include flexed;
+}
+
+.advisor-card {
+  height: 100px;
+  width: auto;
+
+  margin: 0 0 30px;
+
+  box-shadow: 0 6px 6px #ccc;
+}
+
+.advisor-picture {
+  width: 75px;
+  height: 75px;
+
+  border-radius: 100%;
+
+  background: #dad;
+}
+
+.advisor-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.advisor-title {
+  color: #aaa;
 }
 
 // Deep-Dive
 
 .gradient-drop {
   width: 100%;
-  padding: 20px 20px;
+  padding: 0 0;
 
   position: relative;
 
@@ -325,7 +436,12 @@ body {
 
 
 
-// @include media-breakpoint-up(xs) {}
+@media (min-width: 375px) {
+  .sh-blue-block {
+    padding: 50px 10vw;
+  }
+}
+
 // @include media-breakpoint-up(sm) {}
 // @include media-breakpoint-up(md) {}
 // @include media-breakpoint-up(lg) {}
