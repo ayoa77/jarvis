@@ -302,6 +302,29 @@ body {
   margin-top: calc(50vh - 220px);
 }
 
+.input-group {
+  display: flex;
+}
+
+.input-group input {
+  border-left: 1px solid #ccc;
+
+  border-radius: 4px 0 0 4px;
+}
+
+.input-group button {
+  background: #4CAF50;
+  border: none;
+  color: white;
+
+  padding: 0 20px;
+
+  border-radius: 0 4px 4px 0;
+
+  @include flexed;
+}
+
+
 .logo-white {
   height: 200px;
   width: 200px;
@@ -332,17 +355,18 @@ body {
 }
 
 .radial-illustration-box {
-  width: 100%;
+  width: auto;
+  max-width: 700px;
   height: 70vw;
+  max-height: 400px;
+  margin: 0 auto;
 
   background-image: url(./../../images/radial-illustration-mobile.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom center;
 
   border-bottom: 1px solid #aaa;
-
-  justify-content: bottom center;
 
   @include flexed;
 }
