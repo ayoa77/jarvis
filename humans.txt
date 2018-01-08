@@ -1,7 +1,15 @@
+Must Include:
+
+	World Map (Blue Dots)
+	By sNowFleikuN at deviantART (deviantART) 
+	[CC BY 3.0 (http://creativecommons.org/licenses/by/3.0)], via Wikimedia Commons
+
+
 /* EXAMPLE */
 
 
 /* TEAM */
+
 	Chef:Juanjo Bernabeu
 	Contact: hello [at] humanstxt.org
 	Twitter: @juanjobernabeu
@@ -70,6 +78,7 @@
 		
 
 /* SITE */
+
 	Last update:2012/02/04
 	Language: Català / Czech / Deutsch / English / Castellano / Japanese / Dutch / Russian / Chinese
 	Doctype: HTML5
