@@ -1,7 +1,19 @@
+@import "partials/_reset";
 @import "partials/_variables";
 @import "partials/_mixins";
 @import "partials/_typography";
 @import "partials/_placeholders";
+
+// Odd-Ball Classes
+.text-center-onoff {
+  text-align: center;
+}
+
+// Site-Wide Resets
+
+a {
+  text-decoration: none !important;
+}
 
 // Site-Wide Containers
 
@@ -61,17 +73,24 @@ body {
 
 .big-text {
   font-family: "DINPro-Bold";
-  font-size: 34px;
+  font-size: 42px;
+
+  margin: 0 0 12px;
 }
 
 .big-text-alt {
+  margin: 0 0 20px; 
+
   font-family: "Aileron-Light";
   font-size: 32px;
+  line-height: 38px;
 }
 
 .sub-text {
   font-family: "Aileron-Light";
-  font-size: 18px;
+  font-size: 20px;
+
+  margin: 0 0 14px;
 }
 
 .body-text {
@@ -80,9 +99,13 @@ body {
   font-family: "Aileron-Light";
   font-size: 12px;
   line-height: 24px;
+
+  margin: 0 0 20px;
 }
 
 .question-text {
+  margin: 0 0 20px;
+
   font-family: "Aileron-Regular";
   font-size: 12px;
   color: $gray;
@@ -330,6 +353,22 @@ body {
   @include flexed;
 }
 
+.whitepaper-link {
+  font-family: "Aileron-Bold";
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: $bluegreen;
+
+  .right-arrow {
+    font-family: "FontAwesome";
+    font-size: 12px;
+  }
+
+  &:hover {
+    color:$blue50;
+  }
+}
+
 
 .logo-white {
   height: 200px;
@@ -375,6 +414,17 @@ body {
   border-bottom: 1px solid #aaa;
 
   @include flexed;
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+
+  margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
 }
 
 .advisor-card {
@@ -458,6 +508,8 @@ body {
 .footer {
   width: 100%;
 
+  position: relative;
+
   background: #eee;
 }
 
@@ -482,9 +534,15 @@ body {
 
   a {
     margin: 0 0 15px;
+    font-family: "Aileron";
+    color: #4F545A;
 
     &:last-child {
       margin-bottom: 30px;
+    }
+
+    &:hover {
+      color: #222;
     }
   }
 }
@@ -499,8 +557,21 @@ body {
   .sm-icon {
     height: 40px;
     width: 40px;
-    border-radius: 100%;
-    background: #dad;
+    margin: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fb, .tw, .in, .git, .rd {
+    font-family: "FontAwesome";
+    font-size: 30px;
+    color: #ADAEAF;
+
+    &:hover {
+      color: #222;
+    }
   }
 }
 
@@ -525,7 +596,6 @@ body {
 }
 
 
-
 @media (min-width: 375px) {
   .sh-blue-block {
     padding: 50px 10vw;
@@ -533,7 +603,49 @@ body {
 }
 
 @media (min-width: 425px) {}
-@media (min-width: 768px) {}
-@media (min-width: 1024px) {}
-@media (min-width: 1378px) {}
-@media (min-width: 1440px) {}
+
+@media (min-width: 768px) {
+  .text-center-onoff {
+    text-align: left;
+  }
+  
+  .unfluid {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .radial-illustration-box {
+    background-image: url('./../../images/radial-illustration.png');
+  }
+}
+
+@media (min-width: 992px) {
+  .ftr-nav {
+    flex-direction: row;
+    justify-content: space-around;
+
+    a {
+      margin: 0;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .ftr-social-media {
+    margin-top: 20px;
+  }
+
+  .unfluid {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .unfluid {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+}
