@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+// var flash = require('express-flash');
 // var mongoose = require('mongoose');
 // var userSchema = mongoose.model('user', userSchema);
 // var bcrypt = require('bcryptjs');

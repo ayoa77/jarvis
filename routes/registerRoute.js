@@ -6,6 +6,7 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+// var flash = require('express-flash');
 
 // var requireLogin = require('../middleware/requireLogin.js');
 

@@ -29,3 +29,14 @@
         </ul>
     </div>
 </nav>
+<p><a href="http://localhost:3000/session-flash">Click here</a> for a flash message using custom middleware it will only work one time prevent duplicate messages being sent...</p>
+<p>After you refresh to clear the flash message you won't be able to get these messages to reappear to prevent duplicate messages. Hello Nathan I will give this the types 'error' and 'message', you can work with these classes to make them distinct from one another ;) </p>
+
+
+    <% if ( sessionFlash && sessionFlash.message) { %>
+        <div class="<%= sessionFlash.type %>">
+            <strong>FLASH!</strong>
+            <%= sessionFlash.message %>
+        </div>
+        <% } %>
+

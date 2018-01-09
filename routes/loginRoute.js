@@ -6,6 +6,7 @@ var bcrypt = require('bcryptjs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var requireLogin = require('../middleware/requireLogin.js');
+// var flash = require('express-flash');
 
 router.get('/', csrfProtection, function (req, res) {
     var lang = req.cookies.lang;
