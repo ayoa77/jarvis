@@ -14,6 +14,7 @@ var md5 = require('md5');
 
 
 router.post('/mailerSignUp', function (req, res, next) {
+    req.session.sessionFlash
     email = req.body.email;
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             //get a mailchimp api key from Jarvis guys
@@ -40,6 +41,7 @@ router.post('/mailerSignUp', function (req, res, next) {
                 type: 'error',
                 message: 'Please enter in a valid email.'
             };
+            return res.redirect('/');
         }
 
             console.log(email);
@@ -54,6 +56,7 @@ router.post('/mailerSignUp', function (req, res, next) {
                             type: 'message',
                             message: 'This email is already added to our mailing list! We will send you more information soon!' 
                         };
+                        return res.redirect('/');
                     } 
                     } else {
                         req.session.sessionFlash = {
