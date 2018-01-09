@@ -75,9 +75,11 @@ body {
 }
 
 .body-text {
+  max-width: 400px;
+
   font-family: "Aileron-Light";
   font-size: 12px;
-  max-width: 400px;
+  line-height: 24px;
 }
 
 .question-text {
@@ -307,19 +309,23 @@ body {
 }
 
 .input-group input {
-  border-left: 1px solid #ccc;
+  padding: 10px 15px;
 
   border-radius: 4px 0 0 4px;
+  border: none;
+
+  font-size: 12px;
 }
 
 .input-group button {
-  background: #4CAF50;
-  border: none;
+  background: #16CAD1;
+  padding: 0 30px;
+
+  font-size: 12px;
   color: white;
 
-  padding: 0 20px;
-
   border-radius: 0 4px 4px 0;
+  border: none;
 
   @include flexed;
 }
@@ -399,6 +405,29 @@ body {
   color: #aaa;
 }
 
+#slider {
+  .employee-container {
+    height: 250px;
+    width: 200px;
+
+    margin: 0 auto;
+  }
+
+  .employee-photo {
+      height: 200px;
+      width: 200px;
+  }
+
+  .employee-info {
+      text-align: center;
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
 // Deep-Dive
 
 .gradient-drop {
@@ -427,12 +456,73 @@ body {
 
 // Footer
 .footer {
-  height: 500px;
   width: 100%;
 
-  background: #ccc;
+  background: #eee;
 }
 
+.ftr-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 20px 0;
+
+  img {
+    height: 50px;
+    width: auto;
+  }
+}
+
+.ftr-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    margin: 0 0 15px;
+
+    &:last-child {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.ftr-social-media {
+  height: auto;
+  margin: 0 0 30px;
+
+  display: flex;
+  justify-content: space-around;
+
+  .sm-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background: #dad;
+  }
+}
+
+.ftr-tos {
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ftr-copyright {
+  margin: 20px 0;
+
+  font-family: DINPro-Bold;
+  font-size: 12px;
+  color: #ADAEAF;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 
@@ -442,7 +532,8 @@ body {
   }
 }
 
-// @include media-breakpoint-up(sm) {}
-// @include media-breakpoint-up(md) {}
-// @include media-breakpoint-up(lg) {}
-// @include media-breakpoint-up(xl) {}
+@media (min-width: 425px) {}
+@media (min-width: 768px) {}
+@media (min-width: 1024px) {}
+@media (min-width: 1378px) {}
+@media (min-width: 1440px) {}
