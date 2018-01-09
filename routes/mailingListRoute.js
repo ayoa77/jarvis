@@ -14,60 +14,54 @@ var md5 = require('md5');
 
 
 router.post('/mailerSignUp', function (req, res, next) {
-    req.session.sessionFlash
     email = req.body.email;
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            //get a mailchimp api key from Jarvis guys
-            mailchimp.post('/lists/60fd62b926/members', {
-                email_address: email,
-                status: 'subscribed'
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        //get a mailchimp api key from Jarvis guys
+        mailchimp.post('/lists/60fd62b926/members', {
+            email_address: email,
+            status: 'subscribed'
+        })
+            .then(function (results) {
+                console.log(results);
             })
-                .then(function (results) {
-                    console.log(results);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                                if (err.title = 'Member Exists') {
-                                    req.session.sessionFlash = {
-                                        type: 'message',
-                                        message: 'This email is already added to our mailing list! We will send you more information soon!'
-                                    };
-                                } 
-                            });
-
-                } else {
-            
-                req.session.sessionFlash = {
-                type: 'error',
-                message: 'Please enter in a valid email.'
-            };
-            return res.redirect('/');
-        }
-
-            console.log(email);
-            var mailingList = new mailingListSchema({
-                email: req.body.email,
+            .catch(function (err) {
+                console.log(err);
+                if (err.title = 'Member Exists') {
+                    req.session.sessionFlash = {
+                        type: 'message',
+                        message: 'This email is already added to our mailing list! We will send you more information soon!'
+                    };
+                } 
             });
-            console.log(mailingList.email);
-            mailingList.save(function (err) {
-                if (err) {
-                    if (err.code == 11000) {
-                        req.session.sessionFlash = {
-                            type: 'message',
-                            message: 'This email is already added to our mailing list! We will send you more information soon!' 
-                        };
-                        return res.redirect('/');
-                    } 
-                    } else {
-                        req.session.sessionFlash = {
-                            type: 'message',
-                            message: 'You have successfully signed up for our mailing list! We will send you more information soon!'
-                        };
-                    }
-    // ValidateEmail(email);
-      console.log(req.session.sessionFlash);
-    res.redirect('/');
-});
+
+    } else {
+        
+        req.session.sessionFlash = {
+        type: 'error',
+        message: 'Please enter in a valid email.'
+    };
+    return res.redirect('/');
+            }
+    var mailingList = new mailingListSchema({
+        email: email,
+    });
+    mailingList.save(function (err) {
+        if (err) {
+            if (err.code == 11000) {
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: 'This email is already added to our mailing list! We will send you more information soon!' 
+                };
+                return res.redirect('/');
+            } 
+            } else {
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: 'You have successfully signed up for our mailing list! We will send you more information soon!'
+                };
+            }
+                res.redirect('/');
+    });
 });
 // router.post('/mailerSignUp', function (req, res, next) {
 //     email = req.body.email;
