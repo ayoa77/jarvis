@@ -6,6 +6,7 @@ var userSchema = mongoose.model('user', userSchema);
 var tokenSchema = mongoose.model('token', tokenSchema);
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+// var flash = require('express-flash');
 /**
 * GET /confirmation
 */

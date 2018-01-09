@@ -8,6 +8,7 @@ var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+// var flash = require('express-flash');
 
 exports.emailResetPasswordGet = function (req, res) {
     res.render('emailResetPassword', { csrfToken: req.csrfToken() });

@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var app = express();
 var bodyParser = require('body-parser');
-var sessions = require('client-sessions');
+var session = require('express-session');
+var flash = require('express-flash');
 var chalk = require('chalk');
 var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
@@ -51,7 +52,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(sessions({
+app.use(session({
   cookieName: 'session',
   secret: '!MysecretisSchwiftyandYours?',
   duration: 30 * 60 * 10000,
@@ -60,6 +61,20 @@ app.use(sessions({
   secure: true, // only use cookies over https
   ephemeral: true // delete this cookie when the browser is closed
 }));
+app.use(function (req, res, next) {
+  // if there's a flash message in the session request, make it available in the response, then delete it
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
+  next();
+});
+// Route that creates a flash message using custom middleware
+app.all('/session-flash', function (req, res) {
+  req.session.sessionFlash = {
+    type: 'success',
+    message: 'This is a flash message using custom middleware and express-session.'
+  }
+  res.redirect(301, '/');
+});
 
 
 var indexRoute = require('./routes/indexRoute');
@@ -74,7 +89,7 @@ app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
-app.post('/mailerSignUp', indexRoute);
+app.post('/mailerSignUp', mailingListRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
 app.route('/emailresetpassword')
@@ -85,6 +100,11 @@ app.route('/resetpassword/:id?')
   .post(csrfProtection, passwordController.passwordResetPost);
 
 app.set('port', process.env.PORT || 3000);
+
+app.all('/express-flash', function (req, res) {
+  req.flash('success', 'This is a flash message using the express-flash module.');
+  res.redirect(301, '/');
+});
 // catch 404 and forward to error handler
 
 
