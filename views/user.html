@@ -5,7 +5,7 @@
     <div class="row sh-splash sty-splash">
         <div class="col-12">
           <p class="big-text-alt text-center">
-              ${username or email}
+              ${user.name}
           </p>
   
           <p class="big-text-alt text-center">
@@ -16,6 +16,24 @@
               0 ETH
           </p>
   
+        </div>
+
+    <div class="row sh-splash sty-splash">
+        <div class="col-12">
+            
+            <form action="/userEdit" method="POST">
+                <input type="hidden", name="_csrf" , value=<%=csrfToken %>> </input>
+                    <label for="country"> Country </label>
+                    <input type="text", name="password" disabled="disabled"></input>
+
+                    <br>
+                    <button class="btn" type="submit"> Submit </button>
+            </form>
+
+            <form action="/walletId" method="POST">
+                <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
+            </form>
+           
         </div>
       </div>
 

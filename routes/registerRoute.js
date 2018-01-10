@@ -6,22 +6,23 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 // var flash = require('express-flash');
 
 // var requireLogin = require('../middleware/requireLogin.js');
 
-router.get('/', function (req, res) {
+router.get('/', csrfProtection, function (req, res, next){
     // var lang = req.cookies.lang;
     if (!req.user) {
         error = ' ';
-        // res.render('register', { lang: lang, error: error });
-        res.render('register', { error: error });
+        res.render('register', { error: error, csrfToken: req.csrfToken()});
     } else {
         res.redirect('/user');
     }
     // res.redirect('/404')
 });
-router.post('/', function (req, res) {
+router.post('/', csrfProtection, function (req, res, next){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         email: req.body.email,
@@ -30,11 +31,11 @@ router.post('/', function (req, res) {
     });
     user.save(function (err) {
         if (err) {
-            error = 'something else happened';
+            error = 'We have experienced an unknown error. Contact us if this persists.';
             if (err.code === 11000) {
                 error = 'That email is already taken :(';
             }
-            res.render('register', { error: error });
+            res.render('register', { error: error, csrfToken: req.csrfToken() });
         } else {
             //set the user's session
             req.user = user;
@@ -44,7 +45,6 @@ router.post('/', function (req, res) {
 
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
-            console.log(token)
             // Save the verification token
             token.save(function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
@@ -64,4 +64,4 @@ router.post('/', function (req, res) {
     });
 });
 
-module.exports = router
+module.exports = router;

@@ -5,7 +5,7 @@ var userSchema = mongoose.model('user', userSchema);
 var bcrypt = require('bcryptjs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
-var requireLogin = require('../middleware/requireLogin.js');
+// var requireLogin = require('../middleware/requireLogin.js');
 // var flash = require('express-flash');
 
 router.get('/', csrfProtection, function (req, res) {
@@ -18,7 +18,7 @@ router.get('/', csrfProtection, function (req, res) {
         res.redirect('/user');
     }
 });
-router.get('/:id?', csrfProtection, function (req, res) {
+router.get('/:id?', csrfProtection, function (req, res, next) {
     var id = req.params.id;
     var x;
     if (id == 'false') { x = 'Please Log in' };
@@ -31,7 +31,7 @@ router.get('/:id?', csrfProtection, function (req, res) {
 
     }
 });
-router.post('/', csrfProtection, function (req, res) {
+router.post('/', csrfProtection, function (req, res, next) {
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) {
             res.render('login', { error: 'invalid email or password', csrfToken: req.csrfToken() });

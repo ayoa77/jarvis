@@ -7,7 +7,7 @@ var mailingListSchema = mongoose.model('mailingList', mailingListSchema);
 // var flash = require('express-flash');
 var Mailchimp = require('mailchimp-api-v3');
 var validator = require('validator');
-//DEV API
+//DEV API 
 var mailchimp = new Mailchimp('5e0b4a1b50b66ae689fb23e520122405-us17');
 // LIVE API
 // var mailchimp = new Mailchimp('mail chimp api from jarvis');
@@ -33,6 +33,7 @@ router.post('/mailerSignUp', csrfProtection, function (req, res, next) {
                         type: 'message',
                         message: 'This email is already added to our mailing list! We will send you more information soon!'
                     };
+                    return res.redirect('/');
                 } 
             });
 
@@ -50,6 +51,7 @@ router.post('/mailerSignUp', csrfProtection, function (req, res, next) {
     mailingList.save(function (err) {
         if (err) {
             if (err.code == 11000) {
+                console.log(email);
                 req.session.sessionFlash = {
                     type: 'message',
                     message: 'This email is already added to our mailing list! We will send you more information soon!' 
@@ -62,7 +64,7 @@ router.post('/mailerSignUp', csrfProtection, function (req, res, next) {
                     message: 'You have successfully signed up for our mailing list! We will send you more information soon!'
                 };
             }
-                res.redirect('/');
+               return res.redirect('/');
     });
 });
 // router.post('/mailerSignUp', function (req, res, next) {

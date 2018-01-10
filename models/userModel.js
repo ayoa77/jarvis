@@ -6,9 +6,11 @@ var userSchema = new Schema({
     password: String,
     name: String,
     lang: String,
+    country: String,
+    commitether: String,
     passwordResetToken: { type: String, default: '123' },
     passwordResetExpires: { type: Date, default: Date.now() },
-    status:{ type: String, enum: ['NEW', 'EMAIL', 'APPROVED']},
+    status:{ type: String, enum: ['NEW', 'EMAIL', 'EULA']},
 });
 
 mongoose.model('user', userSchema);

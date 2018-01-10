@@ -7,7 +7,6 @@ var walletSchema = new Schema({
     wallet: { type: String, unique: true },
     jarvis: {String, default: 0},
     ethereum: {String, default: 0},
-
     // birthDay:Date,	
     // adminLevel:Number
 });
