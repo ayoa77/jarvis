@@ -5,9 +5,17 @@ var router = express.Router();
 var userSchema = mongoose.model('user', userSchema);
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
-var nodemailer = require('nodemailer');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+var nodemailer = require('nodemailer');
+var sgTransport = require('nodemailer-sendgridv3-transport');
+
+// api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
+var options = {
+    auth: {
+        api_key: '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'
+    }
+}
 // var flash = require('express-flash');
 
 exports.emailResetPasswordGet = function (req, res) {
@@ -27,8 +35,8 @@ exports.emailResetPasswordPost = function (req, res) {
             if (err) { return res.status(500).send({ msg: err.message }); }
 
             // Send the email
-            var transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: "ayojamadi@gmail.com", pass: 'testingtester123' } });
-            var mailOptions = { from: 'ayojamadi@gmail.com', to: user.email, subject: 'Password Reset', text: 'Hello,\n\n' + 'Please click on the link to reset your password: \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '.\n' };
+            var transporter = nodemailer.createTransport(sgTransport(options));
+            var mailOptions = { from: 'noreply@jarvis.com', to: user.email, subject: 'Password Reset', text: 'Hello,\n\n' + 'Please click on the link to reset your password: \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); 
             }   else   {

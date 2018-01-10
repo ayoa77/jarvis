@@ -122,7 +122,7 @@ app.get('/whitepaper', function (req, res, next) {
 });
 
 app.get('/logout', function (req, res, next) {
-  req.session.reset();
+  req.session.destroy();
   res.redirect('/');
 });
 

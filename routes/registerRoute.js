@@ -5,9 +5,18 @@ var userSchema = mongoose.model('user', userSchema);
 var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
-var nodemailer = require('nodemailer');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+var nodemailer = require('nodemailer');
+var sgTransport = require('nodemailer-sendgridv3-transport');
+
+// api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
+var options = {
+    auth: {
+        api_key: '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'
+    }
+};
+
 // var flash = require('express-flash');
 
 // var requireLogin = require('../middleware/requireLogin.js');
@@ -50,8 +59,8 @@ router.post('/', csrfProtection, function (req, res, next){
                 if (err) { return res.status(500).send({ msg: err.message }); }
             //sending token mailer
             // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
-            var transporter = nodemailer.createTransport({ service: 'Gmail', auth: { user: 'ayojamadi@gmail.com', pass: 'testingtester123' } });
-            var mailOptions = { from: 'ayojamadi@gmail.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+                var transporter = nodemailer.createTransport(sgTransport(options));
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // res.status(200).send('A verification email has been sent to ' + user.email + '.');
