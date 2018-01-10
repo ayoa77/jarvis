@@ -20,14 +20,14 @@ $(document).ready(function() {
 
   $('.center').slick({
     centerMode: true,
-    slidesToShow: 1,
+    slidesToShow: 5,
     responsive: [
       {
         breakpoint: 1920,
         settings: {
           arrows: false,
           centerMode: true,
-          centerPadding: '150px',
+          centerPadding: '50px',
           slidesToShow: 5,
           speed: 100
         }
@@ -87,7 +87,7 @@ $(document).ready(function() {
         settings: {
           arrows: false,
           centerMode: true,
-          centerPadding: '40px',
+          centerPadding: '35px',
           slidesToShow: 1,
           speed: 100
       }
