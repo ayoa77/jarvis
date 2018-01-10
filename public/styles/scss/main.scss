@@ -597,11 +597,15 @@ body {
 
 .gradient-drop {
   width: 100%;
-  padding: 0 0;
+  padding: 40px 20px;
 
   position: relative;
 
-  background: linear-gradient(#eee, 20%,  #fff);
+  background: linear-gradient(#fafafa,  #fff, #fff);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   .deco-line {
     width: 100%;
@@ -614,6 +618,13 @@ body {
     top: 0;
 
     background: linear-gradient(to right, #eee, #ccc, #eee);
+  }
+
+  p {
+    max-width: 768px;
+    font-family: "Aileron-Light";
+    font-size: 16px;
+    line-height: 32px;
   }
 }
 
