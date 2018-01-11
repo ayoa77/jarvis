@@ -36,7 +36,7 @@ exports.emailResetPasswordPost = function (req, res) {
 
             // Send the email
             var transporter = nodemailer.createTransport(sgTransport(options));
-            var mailOptions = { from: 'noreply@jarvis.com', to: user.email, subject: 'Password Reset', text: 'Hello,\n\n' + 'Please click on the link to reset your password: \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '.\n' };
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Password Reset', text: 'Hello,\n\n' + 'Please click on the link to reset your password: \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); 
             }   else   {
