@@ -89,7 +89,7 @@ body {
   font-family: "Aileron-Light";
   color: #59636e;
   font-size: 32px;
-  line-height: 24px;
+  line-height: 40px;
 }
 
 .sub-text {
@@ -551,6 +551,26 @@ body {
   color: #594262;
 
   border: 2px solid #eee;
+  border-radius: 5px;
+}
+
+.puzzle-info {
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px 20px;
+
+  background: #fff;
+
+  font-size: 12px;
+  text-align: center;
+  font-family: "Aileron-Bold";
+  letter-spacing: 1px;
+  color: #594262;
+  line-height: 20px;
+
+  border: 1px solid #aaa;
+  border-radius: 5px;
 }
 
 .resource-illustration-box {
@@ -585,7 +605,7 @@ body {
     width: 100%;
     height: 1px;
     
-    margin: 0 0 30px;
+    margin: 0 0 50px;
     padding: 0;
 
     background: linear-gradient(to right, rgba(180, 180, 180, 0), rgba(180, 180, 180, 1), rgba(180, 180, 180, 0));
