@@ -26,16 +26,16 @@ fs.readdirSync(__dirname + '/models').forEach(function (filename) {
 var userSchema = mongoose.model('user', userSchema);
 
 // Connect to the db
-// if ('development' == app.get('env')) {
-  // console.log('you are running in dev mode');
+if ('development' == app.get('env')) {
+  console.log('you are running in dev mode');
   mongoose.connect('mongodb://localhost/jarvis?socketTimeoutMS=100000');
   // app.locals.pretty = true;
-// } else if ('production') {
-//   console.log("you are running in production");
-//   mongoose.connect('mongodb://172.17.0.1/jarvis?socketTimeoutMS=100000');
+} else if ('production') {
+  console.log("you are running in production");
+  mongoose.connect('mongodb://172.17.0.1/jarvis?socketTimeoutMS=100000');
 
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
-// };
+};
 
 
 
