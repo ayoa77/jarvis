@@ -22,50 +22,36 @@
 
       <div class="email-signup">
 
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-  #mc_embed_signup {
-    background: #fff;
-    clear: left;
-    font: 14px Helvetica, Arial, sans-serif;
-  }
-  /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-  <form action="https://jarvis.us17.list-manage.com/subscribe/post?u=73bb213e8dabaa5213d3c88ae&amp;id=2f9a2ebcd1" method="post"
-    id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-      <label for="mce-EMAIL">Subscribe to our mailing list</label>
-      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_73bb213e8dabaa5213d3c88ae_2f9a2ebcd1" tabindex="-1" value=""></div>
-      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-    </div>
-  </form>
-</div>
+<!-- Mail Chimp Stuff  -->
 
-<!--End mc_embed_signup-->
-          <!-- <form  action="/mailerSignUp" method="POST">
-              <div class="input-group">
-                  <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
-                  <input id="email" type="text" class="form-control email-input" name="email" placeholder="E-mail Address">
-                  <button id="maillistsave" type="button">Submit</button>
-                </div>
-          </form> -->
+        <form action="https://jarvis.us17.list-manage.com/subscribe/post?u=73bb213e8dabaa5213d3c88ae&amp;id=2f9a2ebcd1" 
+              method="post"
+              id="mc-embedded-subscribe-form" 
+              name="mc-embedded-subscribe-form" 
+              class="validate" 
+              target="_blank" 
+              novalidate>
+
+            <div class="input-group">
+              <input type="hidden" , name="_csrf" , value=<%=csrfToken %> </input>
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail Address" required>
+              <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            </div>
+
+        </form>
+        
       </div>
 
       
     </div>
-    <div class="pattern-splash"></div>
+    <div class="col-12 pattern-splash"></div>
   </div>
 
 </div>
 
 <div class="container">
 
-  <div class="row sh-white-block sty-white-block">
+  <div class="row align-items-center sh-white-block sty-white-block">
     <div class="col-md-6 world-box"></div>
     <div class="col-md-6 world-box-col">
       <p class="question-text">
@@ -109,8 +95,8 @@
           <div class="col-md-6 valign">
             <p class="body-text">
               Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit. Curabitur nec diam id metus 
-                porttitor pretium. Vestibulum in viverra erat.
+              adipiscing elit. Curabitur nec diam id metus 
+              porttitor pretium. Vestibulum in viverra erat.
             </p>
           </div>
 
@@ -123,6 +109,8 @@
       </div>
 
   </div>
+</div>
+<div class="container">
 
   <div class="row sh-white-block sty-white-block">
     <div class="col-12">
@@ -201,25 +189,37 @@
     </div>
 
   </div>
+</div>
 
+<div class="container-fluid">
 
   <div class="row sh-blue-block sty-blue-block">
-    <div class="col-md-6">
-      <div class="logo-white"></div>
+    <div class="col-12">
+      <div class="row unfluid">
+
+          <div class="col-md-6 col-xl-4">
+              <div class="logo-white"></div>
+            </div>
+            <div class="col-md-6 col-xl-8 world-box-col">
+              <p class="big-text-alt text-center" style="color: white;">
+                JAR: The AI Token
+              </p>
+              <p class="body-text text-center" style="color: white; margin: 0 auto;">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                  Curabitur nec diam id metus porttitor pretium. 
+                  Vestibulum in viverra erat. Phasellus sed enim at ex 
+                  tincidunt finibus. Donec tincidunt, nisl sed
+                  vulputate, neque urna gravida purus.
+              </p>
+            </div>
+
+      </div>
     </div>
-    <div class="col-md-6 world-box-col">
-      <p class="big-text-alt text-center" style="color: white;">
-        JAR: The AI Token
-      </p>
-      <p class="body-text text-center" style="color: white; margin: 0 auto;">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Curabitur nec diam id metus porttitor pretium. 
-          Vestibulum in viverra erat. Phasellus sed enim at ex 
-          tincidunt finibus. Donec tincidunt, nisl sed
-          vulputate, neque urna gravida purus.
-      </p>
-    </div>
+
   </div>
+</div>
+
+<div class="container">
 
   <div class="row sh-white-block sty-white-block">
       <div class="col-12">
@@ -299,6 +299,10 @@
   
     </div>
 
+</div>
+
+<div class="container-fluid">
+
   <div class="row sh-grey-block sty-grey-block">
       <div class="col-12 unfluid bottom-spacer">
         
@@ -377,21 +381,13 @@
             </div>
 
 
-      </div>
+        </div>
 
+    </div>
   </div>
-</div>
 
 <% include partials/_advisors.html %>
 
-<<<<<<< HEAD
-<script>
-
-    
-  
-</script>
-=======
-  </div>
->>>>>>> 7620bd8a7aef047ef0483a2e734a20aecd6ecc03
+</div>
 
 <% include partials/_footer.html %>

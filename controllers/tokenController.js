@@ -81,7 +81,7 @@ exports.resendTokenPost = function  (req, res, next) {
 
             // Send the email
             var transporter = nodemailer.createTransport(sgTransport(options));
-            var mailOptions = { from: 'noreply@jarvis.com', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // res.status(200).send('A verification email has been sent to ' + user.email + '.');

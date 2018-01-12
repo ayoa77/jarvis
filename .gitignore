@@ -17,6 +17,11 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# config files
+.env.dev
+.env.production
+
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 

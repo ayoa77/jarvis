@@ -1,8 +1,8 @@
-@import "partials/_reset";
 @import "partials/_variables";
 @import "partials/_mixins";
 @import "partials/_typography";
 @import "partials/_placeholders";
+@import "partials/_mailchimp";
 
 // Odd-Ball Classes
 .text-center-onoff {
@@ -23,7 +23,6 @@ body {
 }
 
 .sh-splash {
-  height: calc(100vh - 50px);
   padding: 0 0;
   @include flexed;
 }
@@ -40,13 +39,10 @@ body {
   background-image: url('../../images/pattern.png');
   background-repeat: repeat-x;
   background-size: auto 100%;
-
-  position: absolute;
-  bottom: 0;
 }
 
 .sh-white-block {
-  padding: 30px 0;
+  padding: 70px 0;
 }
 
 .sty-white-block {
@@ -54,7 +50,7 @@ body {
 }
 
 .sh-grey-block {
-  padding: 30px 0;
+  padding: 70px 0;
 }
 
 .sty-grey-block {
@@ -62,11 +58,14 @@ body {
 }
 
 .sh-blue-block {
-  padding: 50px 0;
+  padding: 70px 0;
 }
 
 .sty-blue-block {
   background: linear-gradient($bluegreen, $blue50);
+  .big-text-alt {
+    margin: 0 0 20px;
+  }
 }
 
 // Typography
@@ -93,12 +92,13 @@ body {
   font-family: "Aileron-Light";
   color: #59636e;
   font-size: 32px;
-  line-height: 24px;
+  line-height: 40px;
 }
 
 .sub-text {
   font-family: "Aileron-Light";
   font-size: 20px;
+  line-height: 26px;
   color: #59636e;
 
   margin: 0 0 14px;
@@ -126,6 +126,40 @@ body {
   font-family: "Aileron-SemiBold";
   font-size: 12px;
 }
+
+// Navigation
+
+.navbar {
+  padding: 1.2rem;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+.nav-logo {
+  height: 50px;
+  width: auto;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+  font-family: "Aileron";
+  font-size: 18px;
+  text-align: center;
+
+  padding-right: .8rem;
+  padding-left: .8rem;
+}
+
+.navbar-light .navbar-toggler {
+  border: none;
+}
+
 
 // Login / Register Modal
 
@@ -335,33 +369,10 @@ body {
 
 .cont-splash {
   max-width: 400px;
-  margin-top: calc(50vh - 220px);
-}
 
-.input-group {
-  display: flex;
-}
+  margin: 12% 0;
 
-.input-group input {
-  padding: 10px 15px;
-
-  border-radius: 4px 0 0 4px;
-  border: none;
-
-  font-size: 12px;
-}
-
-.input-group button {
-  background: #16CAD1;
-  padding: 0 30px;
-
-  font-size: 12px;
-  color: white;
-
-  border-radius: 0 4px 4px 0;
-  border: none;
-
-  @include flexed;
+  overflow: hidden;
 }
 
 .whitepaper-link {
@@ -385,7 +396,7 @@ body {
   height: 200px;
   width: 200px;
 
-  margin: 0 auto;
+  margin: 0 auto 20px;
 
   background-image: url('./../../images/logo-white.png');
   background-size: 100%;
@@ -404,7 +415,7 @@ body {
 }
 
 .line-people-box {
-  height: 300px;
+  height: 250px;
   overflow: hidden;
 
   background-image: url('./../../images/people-line-art.png');
@@ -416,25 +427,21 @@ body {
 }
 
 .world-box-col {
-  margin: 20px 0;
-
   @include col-flexed;
   justify-content: center;
 }
 
 .radial-illustration-box {
   width: auto;
-  max-width: 700px;
-  height: 70vw;
-  max-height: 400px;
+  max-width: 900px;
+  height: 325px;
+  max-height: 600px;
   margin: 0 auto;
 
   background-image: url(./../../images/radial-illustration-mobile.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: bottom center;
-
-  border-bottom: 1px solid #aaa;
 
   @include flexed;
 }
@@ -578,6 +585,26 @@ body {
   color: #594262;
 
   border: 2px solid #eee;
+  border-radius: 5px;
+}
+
+.puzzle-info {
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px 20px;
+
+  background: #fff;
+
+  font-size: 12px;
+  text-align: center;
+  font-family: "Aileron-Bold";
+  letter-spacing: 1px;
+  color: #594262;
+  line-height: 20px;
+
+  border: 1px solid #aaa;
+  border-radius: 5px;
 }
 
 .resource-illustration-box {
@@ -597,26 +624,58 @@ body {
 
 .gradient-drop {
   width: 100%;
-  padding: 0 0;
+  padding: 0 20px 50px;
 
   position: relative;
 
-  background: linear-gradient(#eee, 20%,  #fff);
+  background: linear-gradient(#fafafa,  #fff, #fff);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   
   .deco-line {
     width: 100%;
     height: 1px;
     
-    margin: 0;
+    margin: 0 0 50px;
     padding: 0;
 
-    position: absolute;
-    top: 0;
+    background: linear-gradient(to right, rgba(180, 180, 180, 0), rgba(180, 180, 180, 1), rgba(180, 180, 180, 0));
+  }
 
-    background: linear-gradient(to right, #eee, #ccc, #eee);
+  p {
+    max-width: 768px;
+    font-family: "Aileron-Light";
+    font-size: 16px;
+    line-height: 32px;
   }
 }
 
+.title-deco-line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #000;
+}
+
+.training-flow, .prediction-flow {
+  margin: 30px 0 20px;
+  font-family: "Aileron-Bold";
+  font-size: 14px;
+  text-align: center;
+  color: #58616c;
+}
+
+.flow-illustration-box {
+  width: 90%;
+  margin: 0px auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
 // Footer
@@ -743,7 +802,22 @@ body {
 }
 
 @media (min-width: 768px) {
+
+  .big-header-text {
+    font-size: 60px;
+    line-height: 60px;
+  }
+
+  .big-text-alt {
+    margin-bottom: 0;
+  }
+
   .text-center-onoff {
+    text-align: left;
+  }
+
+  .navbar-expand-md .navbar-nav .nav-link {
+    font-size: 14px;
     text-align: left;
   }
   
@@ -752,7 +826,23 @@ body {
   //   margin: 0 auto;
   // }
 
+  .big-text {
+    font-size: 48px;
+  }
+
+  .logo-white {
+    height: 250px;
+    width: 250px;
+
+    margin: 0 auto;
+  }
+
+  .line-people-box {
+    height: 300px;
+  }
+
   .radial-illustration-box {
+    height: 600px;
     background-image: url('./../../images/radial-illustration.png');
   }
 
@@ -785,11 +875,16 @@ body {
     margin: 0 auto;
   }
 
+  .logo-white {
+    height: 300px;
+    width: 300px;
+  }
+
 }
 
 @media (min-width: 1200px) {
   .unfluid {
-    max-width: 1140px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
