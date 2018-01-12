@@ -433,17 +433,15 @@ body {
 
 .radial-illustration-box {
   width: auto;
-  max-width: 700px;
-  height: 70vw;
-  max-height: 400px;
+  max-width: 900px;
+  height: 325px;
+  max-height: 600px;
   margin: 0 auto;
 
   background-image: url(./../../images/radial-illustration-mobile.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: bottom center;
-
-  border-bottom: 1px solid #aaa;
 
   @include flexed;
 }
@@ -844,6 +842,7 @@ body {
   }
 
   .radial-illustration-box {
+    height: 600px;
     background-image: url('./../../images/radial-illustration.png');
   }
 
