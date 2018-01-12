@@ -13,11 +13,7 @@ var chalk = require('chalk');
 var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
 var helmet = require('helmet');
-<<<<<<< HEAD
 var dotenv = require('dotenv');
-=======
-const dotenv = require('dotenv');
->>>>>>> master
 var fs = require('fs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
@@ -178,12 +174,7 @@ app.use(function(err, req, res, next) {
 
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 
-<<<<<<< HEAD
-  s = app.get('env');
-  console.log(s);
-=======
-  console.log(process.env.SESSION_SECRET)
->>>>>>> master
+  // console.log(process.env.SESSION_SECRET)
   console.log('  Press CTRL-C to stop\n');
 });
 
