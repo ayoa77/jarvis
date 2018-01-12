@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var router = express.Router();
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 var userSchema = mongoose.model('user', userSchema);
 var tokenSchema = mongoose.model('token', tokenSchema);
 var crypto = require('crypto');
@@ -18,7 +20,7 @@ var options = {
 /**
 * GET /confirmation
 */
-exports.confirmationGet = function (req, res, next) {
+exports.confirmationGet = function  (req, res, next) {
     // req.assert('email', 'Email is not valid').isEmail();
     // req.assert('email', 'Email cannot be blank').notEmpty();
     // req.assert('token', 'Token cannot be blank').notEmpty();
@@ -57,7 +59,7 @@ exports.confirmationGet = function (req, res, next) {
 /**
 * POST /resend
 */
-exports.resendTokenPost = function (req, res, next) {
+exports.resendTokenPost = function  (req, res, next) {
     // req.assert('email', 'Email is not valid').isEmail();
     // req.assert('email', 'Email cannot be blank').notEmpty();
     // req.sanitize('email').normalizeEmail({ remove_dots: false });
@@ -83,7 +85,7 @@ exports.resendTokenPost = function (req, res, next) {
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // res.status(200).send('A verification email has been sent to ' + user.email + '.');
-                res.render('verify', { title: 'verify' , message: 'A verification email has been sent to ' + user.email + '.'});
+                res.render('verify', { title: 'verify', csrfToken: req.csrfToken(), message: 'A verification email has been sent to ' + user.email + '.'});
             });
         });
 

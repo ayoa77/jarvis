@@ -18,12 +18,13 @@
 
 
     <form action="/resend", method="POST">
+      <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
     <p>resend verification email </p>
       <label for="email"> Email </label>
       <input type="text" name="email"></input>
 
       <br>
-     <p>You will only have one hour to verif your email, please click on the email that we will send you or return here to verify again. </p>
+     <p>You will only have one hour to verify your email, please click on the email that we will send you or return here to verify again. </p>
       <button class="btn" type="submit"> Send </button>
   
     </form>

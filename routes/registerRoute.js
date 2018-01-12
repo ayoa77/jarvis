@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var userSchema = mongoose.model('user', userSchema);
+var walletSchema = mongoose.model('wallet', walletSchema);
 var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
@@ -34,9 +35,15 @@ router.get('/', csrfProtection, function (req, res, next){
 router.post('/', csrfProtection, function (req, res, next){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
+        name: req.body.name,
+        country: req.body.country,
         email: req.body.email,
         password: hash,
         status: 'NEW'
+    });
+    var wallet = new walletSchema({
+        _userId: user,
+        wallet: ''
     });
     user.save(function (err) {
         if (err) {
@@ -47,6 +54,7 @@ router.post('/', csrfProtection, function (req, res, next){
             res.render('register', { error: error, csrfToken: req.csrfToken() });
         } else {
             //set the user's session
+            wallet.save(function (err) {
             req.user = user;
             req.session.user = user;
             delete req.user.password;
@@ -68,8 +76,9 @@ router.post('/', csrfProtection, function (req, res, next){
             res.redirect('/user');
             console.log('going to user');
             });
-        });
-        }
+            });
+            }
+            )};
     });
 });
 

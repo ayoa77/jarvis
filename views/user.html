@@ -16,35 +16,34 @@
               0 ETH
           </p>
   
-        </div>
-
-    <div class="row sh-splash sty-splash">
-        <div class="col-12">
+          <br>
+          
+          
+          <form action="/userEdit" method="POST">
+            <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
+       
+            <label for="name"> Name </label>
+            <input type="text" name="name"></input>
             
-            <form action="/userEdit" method="POST">
-                <input type="hidden", name="_csrf" , value= <%#=csrfToken %>> </input>
-                    <label for="country"> Country </label>
-                    <input type="text", name="password" disabled="disabled"></input>
-
-                    <br>
-                    <button class="btn" type="submit"> Submit </button>
-            </form>
-
-            <form action="/walletId" method="POST">
-                <input type="hidden" , name="_csrf" , value= <%#=csrfToken %>> </input>
-            </form>
+            <!-- <input type="text", name="password" disabled="disabled"></input> -->
+            
+            <br>
+            <button class="btn" type="submit"> Submit </button>
+        </form>
+        
+        <form action="/walletId" method="POST">
+            <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
            
-        </div>
-      </div>
+            <label for="wallet"> Ethereum Wallet ID </label>
+            <input type="text" name="wallet"></input>
+            
+            <br>
+            <button class="btn" type="submit"> Submit </button>
 
-
-
-
-
-
-
-
-
+        </form>
+        <a href="/logout">Logout</a>
+        
+    </div>
 </div>
 
 
