@@ -5,8 +5,6 @@ var router = express.Router();
 var userSchema = mongoose.model('user', userSchema);
 var walletSchema = mongoose.model('wallet', walletSchema);
 var bcrypt = require('bcryptjs');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 
@@ -18,24 +16,27 @@ var options = {
 };
 
 ///need to add edit logic to this
-router.post('/', csrfProtection, function (req, res, next) {
-    walletSchema.findOne({ email: req.session.user.email }, function (err, user) {
+router.post('/', function (req, res, next) {
+    console.log(req.session.user);
+    walletSchema.findOne({userID: req.session.user._id}, function (err, wallet) {
 
-        user.name = req.body.name || user.name,
-            user.language = req.body.language || user.language,
+        wallet.wallet = req.body.wallet || wallet.wallet,
 
-            user.save(function (err) {
+            wallet.save(function (err) {
                 if (err) {
+                    
                     error = 'We have experienced an unknown error. Contact us if this persists.';
                     if (err.code === 11000) {
                         error = 'Something went wrong, please try again or contact us.';
                     }
-                    res.render('/', { error: error, csrfToken: req.csrfToken() });
+                    res.redirect('back');
                 }
+                console.log(wallet)
+                //put flash message here
             });
 
         var transporter = nodemailer.createTransport(sgTransport(options));
-        var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Your Jarvis user was edited', text: `Hello ${user.name || user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
+        var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at http://' + req.headers.host + '.\n' };
         transporter.sendMail(mailOptions, function (err) {
             if (err) { return res.status(500).send({ msg: err.message }); }
             // res.status(200).send('A verification email has been sent to ' + user.email + '.');

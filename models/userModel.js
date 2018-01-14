@@ -7,8 +7,8 @@ var userSchema = new Schema({
     name: String,
     lang: String,
     country: String,
-    commitether: String,
-    passwordResetToken: { type: String, default: '123' },
+    commitEther: { type: String, default: '0' },
+    passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Date, default: Date.now() },
     status:{ type: String, enum: ['NEW', 'EMAIL', 'EULA']},
 });

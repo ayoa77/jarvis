@@ -6,8 +6,6 @@ var walletSchema = mongoose.model('wallet', walletSchema);
 var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 
@@ -22,7 +20,7 @@ var options = {
 
 // var requireLogin = require('../middleware/requireLogin.js');
 
-router.get('/', csrfProtection, function (req, res, next){
+router.get('/', function (req, res, next){
     // var lang = req.cookies.lang;
     if (!req.user) {
         error = ' ';
@@ -32,7 +30,7 @@ router.get('/', csrfProtection, function (req, res, next){
     }
     // res.redirect('/404')
 });
-router.post('/', csrfProtection, function (req, res, next){
+router.post('/', function (req, res, next){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         name: req.body.name,
@@ -42,7 +40,7 @@ router.post('/', csrfProtection, function (req, res, next){
         status: 'NEW'
     });
     var wallet = new walletSchema({
-        _userId: user,
+        userID: user.id,
         wallet: ''
     });
     user.save(function (err) {

@@ -1,4 +1,5 @@
 var express = require('express');
+var redis = require('redis');
 var helmet = require('helmet');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -8,7 +9,9 @@ var cookieParser = require('cookie-parser');
 var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var flash = require('express-flash');
+var RedisStore = require('connect-redis')(session);
+var client = redis.createClient();
+// var flash = require('express-flash');
 var chalk = require('chalk');
 var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
@@ -17,8 +20,9 @@ var dotenv = require('dotenv');
 var fs = require('fs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
-
 app.use(helmet());
+
+
 // MODELS
 fs.readdirSync(__dirname + '/models').forEach(function (filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
@@ -37,7 +41,7 @@ if ('development' == app.get('env')) {
   // dotenv.load({ path: '.env.prod' });
   console.log("you are running in production");
   mongoose.connect(`mongodb://172.17.0.1/${process.env.MONGO_DB}?socketTimeoutMS=100000`);
-
+  
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
 };
 
@@ -45,19 +49,22 @@ if ('development' == app.get('env')) {
 
 var app = express();
 
-// view engine setup
+// view engine and express setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
+  store: new RedisStore({
+    host: 'localhost',
+    port: 6379,
+    client: client,
+    ttl: 2600
+  }),
   cookieName: 'session',
   secret: '!MysecretisSchwiftyandYours?',
   duration: 30 * 60 * 10000,
@@ -66,14 +73,17 @@ app.use(session({
   secure: true, // only use cookies over https
   ephemeral: true // delete this cookie when the browser is closed
 }));
+
+// Route that creates a flash message using custom middleware
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
   delete req.session.sessionFlash;
   next();
 });
-// Route that creates a flash message using custom middleware
 
+//middleware for csrf
+app.use(csrf());
 
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
@@ -87,19 +97,19 @@ var passwordController = require('./controllers/passwordController');
 
 app.use('/', indexRoute);
 app.use('/user', userRoute);
-app.post('/userEdit', userRoute);
+// app.post('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
-app.post('/walletEdit', walletRoute);
+app.use('/wallet', walletRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
 app.route('/emailresetpassword')
-.get(csrfProtection, passwordController.emailResetPasswordGet)
-.post(csrfProtection, passwordController.emailResetPasswordPost);
+.get(passwordController.emailResetPasswordGet)
+.post(passwordController.emailResetPasswordPost);
 app.route('/resetpassword/:id?')
-.get(csrfProtection, passwordController.passwordResetGet)
-.post(csrfProtection, passwordController.passwordResetPost);
+.get(passwordController.passwordResetGet)
+.post(passwordController.passwordResetPost);
 
 app.set('port', process.env.PORT || 3000);
 
@@ -144,11 +154,11 @@ app.use((req, res, next) => {
     userSchema.findOne({ email: req.session.user.email }, function (err, user) {
       if (user) {
         req.user = user;
-        delete req.session.user.password
-        delete req.session.user.passwordResetToken
-        delete req.session.user.passwordResetExpires
         req.session.user = user;
         res.locals.user = user;
+        req.session.user.password = "null";
+        req.session.user.passwordResetToken = "null";
+        req.session.user.passwordResetExpires = "null";
       }
       next();
     });

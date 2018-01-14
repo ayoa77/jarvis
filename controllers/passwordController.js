@@ -5,8 +5,6 @@ var router = express.Router();
 var userSchema = mongoose.model('user', userSchema);
 var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 
@@ -51,7 +49,7 @@ exports.emailResetPasswordPost = function (req, res) {
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
         res.render('newPassword',{ csrfToken: req.csrfToken() });
-        console.log(req.body.token)
+        console.log(req.body.token);
         };
 
 exports.passwordResetPost = function (req, res, next) {

@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 var mailingListSchema = mongoose.model('mailingList', mailingListSchema);
 // var flash = require('express-flash');
 var Mailchimp = require('mailchimp-api-v3');
@@ -15,7 +13,7 @@ var md5 = require('md5');
 
 
 
-router.post('/mailerSignUp', csrfProtection, function (req, res, next) {
+router.post('/mailerSignUp', function (req, res, next) {
     email = req.body.email;
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         //get a mailchimp api key from Jarvis guys

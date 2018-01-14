@@ -5,25 +5,40 @@
     <div class="row sh-splash sty-splash">
         <div class="col-12">
           <p class="big-text-alt text-center">
-              <%= user.email %>
+              <%= user.name || user.email %> 
           </p>
   
           <p class="big-text-alt text-center">
-              0 JAR
+              <%=wallet.jarvis %> JAR
           </p>
   
           <p class="sub-text text-center">
-              0 ETH
+              <%=wallet.ethereum %> ETH
           </p>
+
+        <p class="sub-text text-center">
+             commited Ether = <%= user.commitEther %>
+        </p>
+
+          <p class="sub-text text-center">
+             Public Ethereum Wallet ID = <%= wallet.wallet %>
+        </p>
+
+       
   
           <br>
           
           
-          <form action="/userEdit" method="POST">
+          <form action="/user" method="POST">
             <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
-       
+     
             <label for="name"> Name </label>
             <input type="text" name="name"></input>
+            
+            <br>
+            <label for="commitEther"> How much ether would you like to commit? </label>
+            <!-- make this one only accept decimals -->
+            <input type="text" name="commitEther"></input> 
             
             <!-- <input type="text", name="password" disabled="disabled"></input> -->
             
@@ -31,7 +46,7 @@
             <button class="btn" type="submit"> Submit </button>
         </form>
         
-        <form action="/walletId" method="POST">
+        <form action="/wallet" method="POST">
             <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
            
             <label for="wallet"> Ethereum Wallet ID </label>

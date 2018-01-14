@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 var mailingListSchema = mongoose.model('mailingList', mailingListSchema);
 // var flash = require('express-flash');
 var Mailchimp = require('mailchimp-api-v3');
@@ -16,7 +14,7 @@ var md5 = require('md5');
 
 
 /* GET home page. */
-router.get('/', csrfProtection, function (req, res, next) {
+router.get('/', function (req, res, next) {
   console.log(req.session);
   console.log(res.locals.sessionFlash)
   res.render('index', { title: 'Jarvis', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
