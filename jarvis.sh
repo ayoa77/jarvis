@@ -34,6 +34,7 @@ apt-get install -y mongodb-org
 service mongod start
 mongo < mongoInit.js
 service mongod restart
+systemctl enable mongod.service
 echo "${green}-------------------Done Setting Up MongoDB-------------------${reset}"
 
 echo "${yellow}-------------------Installing NginX-------------------${reset}"

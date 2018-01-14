@@ -38,8 +38,7 @@ Jarvis.sh will
 *  Run Docker Image
 *  Install NginX
 *  Config Nginx
-*  Install Redis (not just yet)
-*  
+*  Install Redis  
 9. **Edit `/etc/mongod.conf`**  
 add:  
 `security.authorization : enabled`
