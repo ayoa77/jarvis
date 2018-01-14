@@ -1,0 +1,24 @@
+/* TEAM */
+
+	Company: Frankish International
+	Contact: contact@frankish.com.tw
+	Location:Taipei, Taiwan
+
+	Web developer: Nathan Wade
+	From: United States of America
+
+	Web developer: Ayodele Joseph Amadi
+	From: United States of America
+
+/* CREDITS */
+
+	Image:	World Map (Blue Dots)
+	By: sNowFleikuN at deviantART (deviantART) 
+	Licenses:	[CC BY 3.0 (http://creativecommons.org/licenses/by/3.0)], via Wikimedia Commons
+		
+
+/* SITE */
+	Company Name: Jarvis.Ai
+	URL: https://www.jarvis.ai
+	Language: zh-TW / en-US / zh-CN / kr / jp
+	Doctype: HTML5

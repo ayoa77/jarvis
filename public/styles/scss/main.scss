@@ -28,6 +28,7 @@ body {
 }
 
 .sty-splash {
+  height: calc(100vh - 100px);
   position: relative;
   background: linear-gradient(#fff, $blue10);
 }
@@ -39,6 +40,8 @@ body {
   background-image: url('../../images/pattern.png');
   background-repeat: repeat-x;
   background-size: auto 100%;
+
+  align-self: flex-end;
 }
 
 .sh-white-block {
@@ -370,8 +373,6 @@ body {
 .cont-splash {
   max-width: 400px;
 
-  margin: 12% 0;
-
   overflow: hidden;
 }
 
@@ -682,7 +683,6 @@ body {
 #footer {
   width: 100%;
   padding-top: 30px;
-  padding-bottom: 30px;
 
   position: relative;
 
@@ -780,6 +780,38 @@ body {
   align-items: center;
 }
 
+.ftr-illustration-container {
+  height: 100px;
+  margin-top: -100px;
+
+  overflow:hidden;
+}
+
+.ftr-illustration {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .ftr-left {
+    background-image: url('./../../images/footer-left.png');
+  }
+  .ftr-right {
+    background-image: url('./../../images/footer-right.png');
+  }
+
+  .ftr-left, .ftr-right {
+    width: 50%;
+    overflow: hidden;
+
+    opacity: .5;
+
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+}
 
 @media (min-width: 375px) {
 
@@ -810,6 +842,10 @@ body {
 
   .big-text-alt {
     margin-bottom: 0;
+  }
+
+  .cont-splash {
+    margin-top: 100px;
   }
 
   .text-center-onoff {
@@ -850,21 +886,14 @@ body {
     background-size: auto 90%;
   }
 
+  .ftr-illustration-container {
+    height: 150px;
+    opacity: .3;
+  }
+
 }
 
 @media (min-width: 992px) {
-  .ftr-nav {
-    flex-direction: row;
-    justify-content: space-around;
-
-    a {
-      margin: 0;
-
-      &:last-child {
-        margin-bottom: 0px;
-      }
-    }
-  }
 
   .ftr-social-media {
     margin-top: 20px;
@@ -880,9 +909,34 @@ body {
     width: 300px;
   }
 
+  .ftr-illustration-container {
+    height: 200px;
+    opacity: .3;
+  }
+
 }
 
 @media (min-width: 1200px) {
+  .ftr-illustration-container {
+    height: 300px;
+    margin-top: -200px;
+
+    opacity: .2;
+  }
+    
+  .ftr-nav {
+    flex-direction: row;
+    justify-content: space-around;
+
+    a {
+      margin: 0;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
   .unfluid {
     max-width: 1100px;
     margin: 0 auto;
@@ -897,5 +951,10 @@ body {
         z-index: 1;
         opacity: 1;
     }
+  }
+  
+  .ftr-illustration-container {
+    height: 200px;
+    opacity: .3;
   }
 }

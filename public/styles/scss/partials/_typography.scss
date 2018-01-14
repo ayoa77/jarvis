@@ -1,23 +1,23 @@
 // Fonts - Headers - DINPro
 @font-face {
   font-family: "DINPro-Bold";
-  src: url("../../fonts/DinPro/DINPro-Bold.ttf");
+  src: url("./../../../fonts/DinPro/DINPro-Bold.ttf");
 }
 
 // Fonts - Body - Aileron
 @font-face {
   font-family: "Aileron";
-  src: url("../../fonts/Aileron/Aileron-Light.otf");
+  src: url("./../../../fonts/Aileron/Aileron-Regular.otf");
 }
 
 @font-face {
-  font-family: "Aileron";
-  src: url("../../fonts/Aileron/Aileron-Regular.otf");
+  font-family: "Aileron-Light";
+  src: url("./../../../fonts/Aileron/Aileron-Light.otf");
 }
 
 @font-face {
-  font-family: "Aileron";
-  src: url("../../fonts/Aileron/Aileron-SemiBold.otf");
+  font-family: "Aileron-Bold";
+  src: url("../../../../fonts/Aileron/Aileron-SemiBold.otf");
 }
 
 // Fonts - Icons - FontAwesome
