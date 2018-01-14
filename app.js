@@ -131,7 +131,11 @@ app.get('/logout', function (req, res, next) {
   req.session.destroy();
   res.redirect('/');
 });
-
+// robots.txt config
+app.get('/robots.txt', function (req, res) {
+  res.type('text/plain');
+  res.send("User-agent: *\nDisallow: /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");
+});
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
