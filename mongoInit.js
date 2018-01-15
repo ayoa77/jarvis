@@ -13,12 +13,12 @@ db.createUser({
 db.auth( adminName, adminPass)
 
 // CHANGE dbName TO THE DB THAT YOU ARE USING
-use dbName
+use jarvis
 db.createUser({
   user:dbUser,
   pwd:dbUserPass,
   roles:[{
     role:"dbOwner",
-    db:"dbName"
+    db:"jarvis"
   }]
 })
