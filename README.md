@@ -21,30 +21,35 @@ change to:
 Log out of the VM, and on your local computer  
 `$ssh-copy-id example_user@203.0.113.10`  
 
-7. ** Edit the ./nginx file to match your server configuration**  
+7. **Clone the Repo**
 8. **Run jarvis.sh**  
 If not logged in as root, Change jarvis.sh permission level  
 `$sudo ./jarvis.sh`  
-
-Jarvis.sh will
-*  Install MongoDB
-*  Config MongoDB Permissions
-*  Install ufw
-*  Config ufw
-*  Enable ufw
-*  Install fail2ban
-*  Install Docker
-*  Build Docker Image
-*  Run Docker Image
-*  Install NginX
-*  Config Nginx
-*  Install Redis  
+**Jarvis.sh will:**  
+  Install MongoDB  
+  Config MongoDB Permissions  
+  Install ufw  
+  Config ufw  
+  Enable ufw  
+  Install fail2ban  
+  Install Docker  
+  Build Docker Image  
+  Run Docker Image  
+  Install NginX  
+  Config Nginx  
+  Install Redis    
 9. **Edit `/etc/mongod.conf`**  
 add:  
 `security.authorization : enabled`
-10. **Restart Mongod**  
+10. **Edit the ./nginx file to match your server configuration**  
+
+11. **Restart Mongod**  
 `$sudo service mongod restart`
-11. **If you don't trust other people on the VM (like AJ), edit `/etc/redis/redis.conf`**  
+12. **If you don't trust other people on the VM (like AJ), edit `/etc/redis/redis.conf`**  
 In security uncomment and then type the password:  
 `requirepass passwordThatIWantToUse` 
-12. 
+13. Install HTTPS via letsencrypt  
+`sudo apt-get install certbot -t jessie-backports`  
+`sudo certbot certonly`  
+14. Renew HTTPS via letsencrypt  
+`sudo certbot renew`
