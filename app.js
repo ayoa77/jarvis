@@ -90,6 +90,7 @@ if ('development' == app.get('env')) {
     httpOnly: true, // don't let browser JS access cookie ever
     secure: true, // only use cookies over https
     ephemeral: true // delete this cookie when the browser is closed
+  }));
 }
 // Route that creates a flash message using custom middleware
 app.use(function (req, res, next) {
