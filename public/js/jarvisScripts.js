@@ -13,9 +13,18 @@ $(document).ready(function() {
  });
 
 
+ // Check if User is a Keyboard Navigator to add/remove Chrome's default Focus
+function handleFirstTab(e) {
+  if (e.keyCode === 9) { // the "I am a keyboard user" key
+      document.body.classList.add('user-is-tabbing');
+      window.removeEventListener('keydown', handleFirstTab);
+  }
+}
+
+window.addEventListener('keydown', handleFirstTab);
 
 
-
+// Initialize the Slick Slider on the Index Page
  function initSlickSlider() {
 
   $('.center').slick({

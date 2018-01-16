@@ -43,7 +43,7 @@ if ('development' == app.get('env')) {
   app.locals.pretty = true;
 } else if ('production') {
   // dotenv.load({ path: '.env.prod' });
-  console.log("you are running in production");
+  console.log("you are running production Mongo");
   mongoose.connect(`mongodb://172.17.0.1/${process.env.MONGO_DB}?socketTimeoutMS=100000`);
   
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
@@ -64,22 +64,40 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  store: new RedisStore({
-    host: 'localhost',
-    port: 6379,
-    client: client,
-    ttl: 2600
-  }),
-  cookieName: 'session',
-  secret: '!MysecretisSchwiftyandYours?',
-  duration: 30 * 60 * 10000,
-  activeDuration: 5 * 60 * 1000,
-  httpOnly: true, // don't let browser JS access cookie ever
-  secure: true, // only use cookies over https
-  ephemeral: true // delete this cookie when the browser is closed
-}));
-
+if ('development' == app.get('env')) {
+  app.use(session({
+    store: new RedisStore({
+      host: 'localhost',
+      port: 6379,
+      client: client,
+      ttl: 2600
+    }),
+    cookieName: 'session',
+    secret: '!MysecretisSchwiftyandYours?',
+    duration: 30 * 60 * 10000,
+    activeDuration: 5 * 60 * 1000,
+    httpOnly: true, // don't let browser JS access cookie ever
+    secure: true, // only use cookies over https
+    ephemeral: true // delete this cookie when the browser is closed
+  }));
+}else if ('production' == app.get('env')) {
+  console.log("you are running production Redis");  
+  app.use(session({
+    store: new RedisStore({
+      host: '172.17.0.1',
+      port: 6379,
+      client: client,
+      ttl: 2600
+    }),
+    cookieName: 'session',
+    secret: '!MysecretisSchwiftyandYours?',
+    duration: 30 * 60 * 10000,
+    activeDuration: 5 * 60 * 1000,
+    httpOnly: true, // don't let browser JS access cookie ever
+    secure: true, // only use cookies over https
+    ephemeral: true // delete this cookie when the browser is closed
+  }));
+}
 // Route that creates a flash message using custom middleware
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
