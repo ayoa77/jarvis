@@ -4,9 +4,22 @@
 @import "partials/_placeholders";
 @import "partials/_mailchimp";
 
+// Focus Add / Remove
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+
 // Odd-Ball Classes
 .text-center-onoff {
   text-align: center;
+}
+
+.no-padding {
+  padding: 0;
+  margin: 0;
 }
 
 // Site-Wide Resets
@@ -45,7 +58,7 @@ body {
 }
 
 .sh-white-block {
-  padding: 70px 0;
+  padding: 40px 0 70px;
 }
 
 .sty-white-block {
@@ -108,13 +121,13 @@ body {
 }
 
 .body-text {
-  max-width: 400px;
+  // max-width: 400px;
 
   font-family: "Aileron-Light";
   font-size: 14px;
   line-height: 28px;
 
-  margin: 0 0 20px;
+  // margin: 0 0 20px;
 }
 
 .question-text {
@@ -129,6 +142,8 @@ body {
   font-family: "Aileron-SemiBold";
   font-size: 12px;
 }
+
+
 
 // Navigation
 
@@ -451,7 +466,29 @@ body {
   height: 50px;
   width: 50px;
 
+  margin: 0 auto 20px;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.icon-big {
+  height: 75px;
+  width: 75px;
+
   margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.icon-tiny {
+  height: 30px;
+  width: 30px;
+
+  margin-right: 10px;
 
   background-repeat: no-repeat;
   background-size: 100%;
@@ -591,15 +628,15 @@ body {
 
 .puzzle-info {
   width: 100%;
-  max-width: 700px;
+  max-width: 600px;
   margin: 20px auto;
   padding: 15px 20px;
 
   background: #fff;
 
   font-size: 12px;
-  text-align: center;
-  font-family: "Aileron-Bold";
+  text-align: left;
+  font-family: "Aileron";
   letter-spacing: 1px;
   color: #594262;
   line-height: 20px;
@@ -655,9 +692,13 @@ body {
 }
 
 .title-deco-line {
+  max-width: 200px;
   width: 100%;
   height: 1px;
-  border-bottom: 1px solid #000;
+
+  border-bottom: 1px solid #ccc;
+  margin: 20px auto 40px;
+  
 }
 
 .training-flow, .prediction-flow {
@@ -678,11 +719,45 @@ body {
   }
 }
 
+.extra-info-container {
+  width: 150px;
+  display: flex;
+}
+
+
+.title-box {
+  height: 100%;
+  width: 278px;
+
+  padding: 20px 10px 5px;
+
+  text-align: center;
+  color: #4F545A;
+  font-size: 24px;
+  line-height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.architecture-box {
+  width: 100%;
+  max-width: 300px;
+
+  img {
+    height: auto;
+    width: 100%;
+
+    padding: 20px 0;
+  }
+}
+
 
 // Footer
 #footer {
   width: 100%;
-  padding-top: 30px;
+  padding-top: 30px 0;
 
   position: relative;
 
@@ -782,7 +857,10 @@ body {
 
 .ftr-illustration-container {
   height: 100px;
+  width: 100%;
   margin-top: -100px;
+
+  opacity: .4;
 
   overflow:hidden;
 }
@@ -811,6 +889,17 @@ body {
     background-position: bottom;
   }
 
+}
+
+// FAQs
+
+.card {
+  border: none;
+  margin-bottom: 20px;
+  .card-header {
+    border-bottom: none;
+    padding: 40px;
+  }
 }
 
 @media (min-width: 375px) {
@@ -888,7 +977,27 @@ body {
 
   .ftr-illustration-container {
     height: 150px;
+
+    margin-top: -150px;
+
     opacity: .3;
+  }
+
+  .icon-big {
+    height: 100px;
+    width: 100px;
+  }
+
+  .title-deco-line {
+    max-width: 300px;
+  }
+
+  .title-box {
+    padding: 20px 10px;
+  }
+
+  .architecture-box {
+    max-width: 100%;
   }
 
 }
@@ -918,10 +1027,10 @@ body {
 
 @media (min-width: 1200px) {
   .ftr-illustration-container {
-    height: 300px;
+    height: 200px;
     margin-top: -200px;
 
-    opacity: .2;
+    opacity: .1;
   }
     
   .ftr-nav {
@@ -952,9 +1061,5 @@ body {
         opacity: 1;
     }
   }
-  
-  .ftr-illustration-container {
-    height: 200px;
-    opacity: .3;
-  }
+
 }
