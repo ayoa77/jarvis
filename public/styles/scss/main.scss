@@ -17,6 +17,11 @@ body:not(.user-is-tabbing) textarea:focus {
   text-align: center;
 }
 
+.no-padding {
+  padding: 0;
+  margin: 0;
+}
+
 // Site-Wide Resets
 
 a {
@@ -461,7 +466,7 @@ body {
   height: 50px;
   width: 50px;
 
-  margin: 0 auto;
+  margin: 0 auto 20px;
 
   background-repeat: no-repeat;
   background-size: 100%;
@@ -473,6 +478,17 @@ body {
   width: 75px;
 
   margin: 0 auto;
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.icon-tiny {
+  height: 30px;
+  width: 30px;
+
+  margin-right: 10px;
 
   background-repeat: no-repeat;
   background-size: 100%;
@@ -620,7 +636,7 @@ body {
 
   font-size: 12px;
   text-align: left;
-  font-family: "Aileron-Bold";
+  font-family: "Aileron";
   letter-spacing: 1px;
   color: #594262;
   line-height: 20px;
@@ -676,9 +692,13 @@ body {
 }
 
 .title-deco-line {
+  max-width: 200px;
   width: 100%;
   height: 1px;
-  border-bottom: 1px solid #000;
+
+  border-bottom: 1px solid #ccc;
+  margin: 20px auto 40px;
+  
 }
 
 .training-flow, .prediction-flow {
@@ -696,6 +716,40 @@ body {
   img {
     width: 100%;
     height: auto;
+  }
+}
+
+.extra-info-container {
+  width: 150px;
+  display: flex;
+}
+
+
+.title-box {
+  height: 100%;
+  width: 278px;
+
+  padding: 20px 10px 5px;
+
+  text-align: center;
+  color: #4F545A;
+  font-size: 24px;
+  line-height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.architecture-box {
+  width: 100%;
+  max-width: 300px;
+
+  img {
+    height: auto;
+    width: 100%;
+
+    padding: 20px 0;
   }
 }
 
@@ -931,6 +985,18 @@ body {
   .icon-big {
     height: 100px;
     width: 100px;
+  }
+
+  .title-deco-line {
+    max-width: 300px;
+  }
+
+  .title-box {
+    padding: 20px 10px;
+  }
+
+  .architecture-box {
+    max-width: 100%;
   }
 
 }
