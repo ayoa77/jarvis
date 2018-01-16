@@ -1,17 +1,17 @@
 var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
 var redis = require('redis');
 var helmet = require('helmet');
-var mongoose = require('mongoose');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var client = redis.createClient();
-// var flash = require('express-flash');
+var flash = require('express-flash');
 var chalk = require('chalk');
 var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
@@ -20,7 +20,11 @@ var dotenv = require('dotenv');
 var fs = require('fs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
-app.use(helmet());
+var i18n = require('i18n-2');
+var expressValidator = require("express-validator");
+
+
+
 
 
 // MODELS
@@ -47,8 +51,10 @@ if ('development' == app.get('env')) {
 
 
 
-var app = express();
 
+app.use(helmet());
+
+app.use(expressValidator());
 // view engine and express setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
@@ -84,6 +90,26 @@ app.use(function (req, res, next) {
 
 //middleware for csrf
 app.use(csrf());
+//middleware updating user throughout project
+  app.use(function(req, res, next) {
+    if (req.session && req.session.user) {
+      userSchema.findOne({ _id: req.session.user.id }, function (err, user) {
+        if (user) {
+          console.log(user);
+          req.user = user;
+          req.session.user.commitEther = user.commitEther || ' ' ;
+          req.session.user._id = user._id;
+          req.session.user.name = user.name;
+          req.session.user.country = user.country;
+          req.session.user.email = user.email;
+          res.locals.user = req.session.user;
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  });
 
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
@@ -97,7 +123,6 @@ var passwordController = require('./controllers/passwordController');
 
 app.use('/', indexRoute);
 app.use('/user', userRoute);
-// app.post('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
@@ -110,6 +135,27 @@ app.route('/emailresetpassword')
 app.route('/resetpassword/:id?')
 .get(passwordController.passwordResetGet)
 .post(passwordController.passwordResetPost);
+
+// Attach the i18n property to the express request object
+// And attach helper methods for use in templates
+i18n.expressBind(app, {
+  // setup some locales - other locales default to en silently
+  locales: ['en', 'zh-TW', 'zh', 'jp', 'kr'],
+  // change the cookie name from 'lang' to 'locale'
+  cookieName: 'lang'
+});
+
+// This is how you'd set a locale from req.cookies.
+// Don't forget to set the cookie either on the client or in your Express app.
+app.use(function (req, res, next) {
+  console.log(req.session.lang);
+  // console.log(req.cookies.locale) //=> 'de'
+  console.log(req.i18n.locale);
+  // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
+  req.i18n.setLocaleFromCookie();
+
+  next();
+});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -125,16 +171,16 @@ app.all('/session-flash', function (req, res, next) {
 });
 
 app.get('/deepdive', function (req, res, next) {
-  res.render('deepDive', { title: 'Deep Dive' });
+  res.render('deepDive', { title: 'Deep Dive', sessionFlash: res.locals.sessionFlash });
 });
 app.get('/faq', function (req, res, next) {
-  res.render('faq', { title: 'FAQ' });
+  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash });
 });
 app.get('/governance', function (req, res, next) {
-  res.render('governance', { title: 'Governance' });
+  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash });
 });
 app.get('/whitepaper', function (req, res, next) {
-  res.render('whitePaper', { title: 'White Paper' });
+  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash });
 });
 
 app.get('/logout', function (req, res, next) {
@@ -153,23 +199,6 @@ app.use(function(req, res, next) {
 });
 
 
-app.use((req, res, next) => {
-  if (req.session && req.session.user) {
-    userSchema.findOne({ email: req.session.user.email }, function (err, user) {
-      if (user) {
-        req.user = user;
-        req.session.user = user;
-        res.locals.user = user;
-        req.session.user.password = "null";
-        req.session.user.passwordResetToken = "null";
-        req.session.user.passwordResetExpires = "null";
-      }
-      next();
-    });
-  } else {
-    next();
-  }
-});
 
 
 // error handler
@@ -180,15 +209,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 
-// app.listen(8000, function () {
-// });
-
 app.listen(app.get('port'), () => {
-  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 
-  // console.log(process.env.SESSION_SECRET)
+  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
 

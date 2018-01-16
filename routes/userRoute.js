@@ -18,54 +18,87 @@ var options = {
 router.get('/', function (req, res, next) {
 
   if (!req.session.user) {
-    res.redirect('/', { title: 'This comes up when there is no user in the session - LOAD THE LOGIN MODAL' }); //tell the page to drop down the modal
+    res.redirect('/login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
-    res.render('verify', { title: 'Verify', csrfToken: req.csrfToken() });
+    res.render('verify', { title: 'Verify', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
   } else {
-    console.log(req.session.user._id)
+    userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
+
     walletSchema.findOne({ userID: req.session.user._id }, function (err, wallet) {
-  console.log(wallet)
-    res.render('user', { title: 'User', user: req.session.user, wallet: wallet,  csrfToken: req.csrfToken()});
-    }
-    )};
+  // console.log(req.session.user)
+  // console.log(wallet);
+      res.render('user', { title: 'User', user: user, wallet: wallet, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
     });
+    });
+  }
+});
 
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
-  userSchema.findOne({ email: req.session.user.email }, function (err, user) {
 
-    user.name = req.body.name || user.name,
-    user.language = req.body.language || user.language,
-    user.commitEther = req.body.commitEther || user.commitEther,
+  userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 
-  user.save(function (err) {
 
-    if (err) {
-      error = 'We have experienced an unknown error. Contact us if this persists.';
-      if (err.code === 11000) {
-        error = 'Something went wrong, please try again or contact us.';
+  userSchema.update({ _id: user._id,  }, { $set:
+      {
+        name: req.body.name || user.name ,
+        lang: req.body.lang || user.lang ,
+        commitEther: req.body.commitEther || user.commitEther
       }
-      res.render('/', { error: error, csrfToken: req.csrfToken() });      
     }
+  ).exec(function (err, user) {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        // req.session.user = user;
+        console.log(req.body);
+        console.log(user);
+        res.redirect('/user');
+      }
+    });
   });
+});
+  // userSchema.findOne({ email: req.session.user.email }, function (err, user) {
+
+  //   user.name = req.body.name,
+  //   user.lang = req.body.lang,
+  //   user.commitEther = req.body.commitEther,
+
+  // user.save(function (err) {
+  //     if (err) {
+  //       console.log(err);
+  //       return;
+  //     }
+
+  //     return res.json({ token: generateToken(user), user: user });
+
+    // if (err) {
+    //   error = 'We have experienced an unknown error. Contact us if this persists.';
+    //   if (err.code === 11000) {
+    //     error = 'Something went wrong, please try again or contact us.';
+    //   }
+    //   return res.render('/', { error: error, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });      
+  //   });
+  // });
 
       // var transporter = nodemailer.createTransport(sgTransport(options));
       //   var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Your Jarvis user was edited', text: `Hello ${user.name || user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
       //   transporter.sendMail(mailOptions, function (err) {
       //     if (err) { return res.status(500).send({ msg: err.message }); }
           // res.status(200).send('A verification email has been sent to ' + user.email + '.');
-          console.log(user)
-          req.user = user;
-          req.session.user = user;
-          res.locals.user = user;
-          req.session.user.password = "null";
-          req.session.user.passwordResetToken = "null";
-          req.session.user.passwordResetExpires = "null";
-          res.redirect('/user');
-      // }
-    // )}
-  });
-});
+          // req.user = user;
+          // req.session.user = user;
+          // res.locals.user = user;
+          // req.session.user.password = "null";
+          // req.session.user.passwordResetToken = "null";
+          // console.log(req.session.user)
+          // console.log(user)
+          //  res.redirect('/user');
+//       // }
+//     // )}
+//   });
+// });
 
         
 

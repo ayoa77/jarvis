@@ -17,7 +17,7 @@ var options = {
 // var flash = require('express-flash');
 
 exports.emailResetPasswordGet = function (req, res) {
-    res.render('emailResetPassword', { csrfToken: req.csrfToken() });
+    res.render('emailResetPassword', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 };
 
 
@@ -48,7 +48,7 @@ exports.emailResetPasswordPost = function (req, res) {
 
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
-        res.render('newPassword',{ csrfToken: req.csrfToken() });
+    res.render('newPassword', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
         console.log(req.body.token);
         };
 
