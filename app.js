@@ -21,7 +21,7 @@ var fs = require('fs');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
-var expressValidator = require("express-validator");
+var validator = require("express-validator");
 
 
 
@@ -54,7 +54,7 @@ if ('development' == app.get('env')) {
 
 app.use(helmet());
 
-app.use(expressValidator());
+app.use(validator());
 // view engine and express setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');

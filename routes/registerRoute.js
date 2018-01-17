@@ -7,7 +7,7 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
-var sgTransport = require('nodemailer-sendgridv3-transport');
+var sgTransport = require('nodemailer-sendgridv3-transport'); 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
     auth: {
@@ -15,9 +15,6 @@ var options = {
     }
 };
 
-// var flash = require('express-flash');
-
-// var requireLogin = require('../middleware/requireLogin.js');
 
 router.get('/', function (req, res, next){
     // var lang = req.cookies.lang;
@@ -30,21 +27,20 @@ router.get('/', function (req, res, next){
     // res.redirect('/404')
 });
 router.post('/', function (req, res, next){
-    error = ' ';
     req.body.email = req.body.email.toLowerCase();
-    req.assert(req.body.email, 'Email is not valid').isEmail();
-    req.assert(req.body.email, 'Email cannot be blank').notEmpty();
-    req.assert(req.body.password, 'Password cannot be blank and must be between 6 and 20 characters').notEmpty().len(5, 20);
-    req.sanitize(req.body.email).normalizeEmail({ remove_dots: false });
+    req.checkBody('email', `Email is not valid <%= i18n.password-format-incorrect %>` ).isEmail();
+    req.checkBody('country', `Country cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
+    req.checkBody('name', `Name cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
+    req.checkBody('email', `Email cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
+    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= i18n.password-format-incorrect %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
 
     var errors = req.validationErrors();
-    console.log(req.validationErrors());
-    
     if (errors) {
-        res.status(400).send(errors);
-    
+        console.log(errors)
+        res.send(errors);
+        return;
     } else {
-
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         name: req.body.name,
@@ -64,7 +60,7 @@ router.post('/', function (req, res, next){
             if (err.code === 11000) {
                 error = 'That email is already taken :(';
             }
-            res.render('register', { error: error, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+            res.status(400).send(error);
         } else {
             //set the user's session
             wallet.save(function (err) {
@@ -92,7 +88,7 @@ router.post('/', function (req, res, next){
             });
             });
             };
-        });
+        });    
     }    
 });
 

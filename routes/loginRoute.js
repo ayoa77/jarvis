@@ -30,6 +30,7 @@ router.get('/:id?', function (req, res, next) {
     }
 });
 router.post('/', function (req, res, next) {
+    req.body.email = req.body.email.toLowerCase();
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) {
             res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });

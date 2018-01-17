@@ -20,14 +20,15 @@ var options = {
 * GET /confirmation
 */
 exports.confirmationGet = function  (req, res, next) {
+    req.body.email = req.body.email.toLowerCase();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });
     // req.assert('token', 'Token cannot be blank').notEmpty(); "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
 
     // Check for validation errors    
-    // var errors = req.validationErrors();
-    // if (errors) return res.status(400).send(errors);
+    var errors = req.validationErrors();
+    if (errors) return res.status(400).send(errors);
     // Delete cookie to make edits to user and to make sure they have to login again
     delete req.session.user;
     // Find a matching token

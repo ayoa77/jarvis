@@ -17,8 +17,18 @@ var options = {
 
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
+    
+    req.checkBody('wallet', `Please enter a properly formatted Ethereum wallet id<%= i18n.commitedEthereum-format-incorrect %>`).len(42);
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors)
+        res.send(errors);
+        return;
+    } else {
+
     console.log(req.session.user);
     walletSchema.findOne({userID: req.session.user._id}, function (err, wallet) {
+
 
         wallet.wallet = req.body.wallet || wallet.wallet,
 
@@ -31,7 +41,7 @@ router.post('/', function (req, res, next) {
                     }
                     res.redirect('back');
                 }
-                console.log(wallet)
+                console.log(wallet);
                 //put flash message here
             });
 
@@ -43,10 +53,10 @@ router.post('/', function (req, res, next) {
 
             res.redirect('/user');
         }
+    
         )
-    }
-    );
+    });
+    };
 });
-
 
 module.exports = router;

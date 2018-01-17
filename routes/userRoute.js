@@ -35,6 +35,13 @@ router.get('/', function (req, res, next) {
 
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
+  req.checkBody('commitEther', `only numbers and decimals allowed <%= i18n.commitedEthereum-format-incorrect %>`).matches(/([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
+  var errors = req.validationErrors();
+  if (errors) {
+    console.log(errors)
+    res.send(errors);
+    return;
+  } else {
 
   userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 
@@ -54,10 +61,20 @@ router.post('/', function (req, res, next) {
         // req.session.user = user;
         console.log(req.body);
         console.log(user);
+          
+        var transporter = nodemailer.createTransport(sgTransport(options));
+          var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Your Jarvis user was edited', text: `Hello ${user.name || user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
+            transporter.sendMail(mailOptions, function (err) {
+              if (err) { return res.status(500).send({ msg: err.message }); }
+          res.status(200).send('A verification email has been sent to ' + user.email + '.');
+
         res.redirect('/user');
-      }
+            
+        })
+      };
     });
   });
+};
 });
   // userSchema.findOne({ email: req.session.user.email }, function (err, user) {
 
