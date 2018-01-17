@@ -1,5 +1,5 @@
 {
-    "Language": "Taiwan",        
+    "Language": "Japanese",
     "Hello": "Hello",
         "Hello %s, how are you today?": "Hello %s, how are you today?",
             "weekend": "weekend",

@@ -158,19 +158,48 @@ app.route('/resetpassword/:id?')
 // And attach helper methods for use in templates
 i18n.expressBind(app, {
   // setup some locales - other locales default to en silently
-  locales: ['en', 'zh-TW', 'zh', 'jp', 'kr'],
-  // change the cookie name from 'lang' to 'locale'
-  cookieName: 'lang'
+  locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
+  // change the cookie name from 'locale' to 'lang'
+  cookieName: 'locale'
 });
+
+// TODO ---- Find Users country via IP and compare with 
 
 // This is how you'd set a locale from req.cookies.
 // Don't forget to set the cookie either on the client or in your Express app.
 app.use(function (req, res, next) {
-  console.log(req.session.lang);
+  if (req.session && req.session.user && req.session.user.lang) {
+    userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
+    
+    lang = user.lang;
+   
+    });
+    console.log('----------------------------------------------')
+    // console.log(req.headers["accept-language"]);
+    console.log('final language is: ' + lang);
+    console.log('----------------------------------------------')
+  } else if(res.locals.locale != " "){
+    lang = res.locals.locale;
+    
+    // } else if (logic for country will go here){
+    }
+    
+    if (lang) {
+      
+    } else {
+      var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
+  lang = accepted_language;
+    console.log('None of [fr, es, en] is accepted');
+
+  }
+  // console.log(req.i18n);
   // console.log(req.cookies.locale) //=> 'de'
-  console.log(req.i18n.locale);
+  // console.log(req.i18n.locale);
   // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
-  req.i18n.setLocaleFromCookie();
+  // req.i18n.setLocaleFromCookie();
+  req.i18n.setLocale(lang);
+  res.locals.locale = lang;
+
 
   next();
 });
@@ -200,6 +229,12 @@ app.get('/governance', function (req, res, next) {
 app.get('/whitepaper', function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash });
 });
+app.get('/testing', function (req, res) {
+    console.log(res.locale); // en
+    console.log(req.locale); // ja
+    console.log(res.locals); // { locale: en, /* ... */ }
+  res.send(req.i18n.__('Language'));
+});
 
 app.get('/logout', function (req, res, next) {
   req.session.destroy();
@@ -217,6 +252,9 @@ app.use(function(req, res, next) {
 });
 
 
+app.get('/accepted-languages', function (req, res) {
+
+});
 
 
 // error handler

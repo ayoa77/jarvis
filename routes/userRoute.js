@@ -36,7 +36,8 @@ router.get('/', function (req, res, next) {
 
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
-  req.checkBody('commitEther', `only numbers and decimals allowed <%= i18n.commitedEthereum-format-incorrect %>`).matches(/([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
+  //validator can be blank!!!
+  req.checkBody('commitEther', `only numbers and decimals allowed <%= req.i18n__.commitedEthereum-format-incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
   var errors = req.validationErrors();
   if (errors) {
     console.log(errors)

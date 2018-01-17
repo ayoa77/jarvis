@@ -53,8 +53,8 @@ exports.passwordResetGet = function (req, res, next) {
         };
 
 exports.passwordResetPost = function (req, res, next) {
-    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= i18n.password-format-incorrect %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
-    req.checkBody('confirm_password', `Passwords do not match.<%= i18n.passwords-dont-match %>`).equals(req.body.password);
+    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= req.i18n.__('passwords-format-incorrect') %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.checkBody('confirm_password', `Passwords do not match.<%= req.i18n.__('passwords-dont-match') %>`).equals(req.body.password);
     var errors = req.validationErrors();
     if (errors) {
         console.log(errors)

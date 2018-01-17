@@ -5,7 +5,7 @@ var userSchema = new Schema({
     email: { type: String, unique: true },
     password: String,
     name: String,
-    lang: String,
+    lang: { type: String, default: ' ' },
     country: String,
     commitEther: { type: String, default: ' ' },
     passwordResetToken: { type: String, default: '' },
