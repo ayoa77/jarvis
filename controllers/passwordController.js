@@ -53,6 +53,15 @@ exports.passwordResetGet = function (req, res, next) {
         };
 
 exports.passwordResetPost = function (req, res, next) {
+    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= i18n.password-format-incorrect %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.checkBody('confirm_password', `Passwords do not match.<%= i18n.passwords-dont-match %>`).equals(req.body.password);
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors)
+        res.send(errors);
+        return;
+    } else {
+
     delete req.body.confirm_password;
     // console.log(req)
     userSchema.findOne({ passwordResetToken: req.session.token }, function (err, user) {
@@ -73,4 +82,5 @@ exports.passwordResetPost = function (req, res, next) {
       
     }
 )};
+};
 
