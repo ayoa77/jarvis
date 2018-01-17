@@ -16,6 +16,7 @@ var options = {
 
 
 router.get('/', function (req, res, next) {
+  console.log(req.session.user.email)
 
   if (!req.session.user) {
     res.redirect('/login'); //tell the page to drop down the modal
@@ -63,12 +64,12 @@ router.post('/', function (req, res, next) {
         console.log(user);
           
         var transporter = nodemailer.createTransport(sgTransport(options));
-          var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Your Jarvis user was edited', text: `Hello ${user.name || user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
+          var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
               if (err) { return res.status(500).send({ msg: err.message }); }
-          res.status(200).send('A verification email has been sent to ' + user.email + '.');
+          res.status(200).send('You have successfully updated your account.');
 
-        res.redirect('/user');
+        // res.redirect('/user');
             
         })
       };

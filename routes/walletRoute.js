@@ -41,15 +41,17 @@ router.post('/', function (req, res, next) {
                     }
                     res.redirect('back');
                 }
-                console.log(wallet);
+                
                 //put flash message here
             });
-
-        var transporter = nodemailer.createTransport(sgTransport(options));
-        var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at http://' + req.headers.host + '.\n' };
-        transporter.sendMail(mailOptions, function (err) {
+            var transporter = nodemailer.createTransport(sgTransport(options));
+            consile.log("---------------------")
+            console.log(req.session.user.email)
+            consile.log("---------------------")
+            var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at http://' + req.headers.host + '.\n' };
+            transporter.sendMail(mailOptions, function (err) {
             if (err) { return res.status(500).send({ msg: err.message }); }
-            // res.status(200).send('A verification email has been sent to ' + user.email + '.');
+            // res.status(200).send('A verification email has been sent to ' + req.session..email + '.');
 
             res.redirect('/user');
         }
