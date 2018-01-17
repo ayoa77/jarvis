@@ -45,7 +45,7 @@ router.post('/', function (req, res, next){
     var user = new userSchema({
         name: req.body.name,
         country: req.body.country,
-        lang: req.locals.locale,
+        lang: res.locals.locale || ' ',
         email: req.body.email,
         password: hash,
         commitEther: '0',
