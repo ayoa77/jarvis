@@ -20,13 +20,6 @@ var options = {
 * GET /confirmation
 */
 exports.confirmationGet = function  (req, res, next) {
-<<<<<<< HEAD
-=======
-    // req.assert('email', 'Email is not valid').isEmail();
-    // req.assert('email', 'Email cannot be blank').notEmpty();
-    // req.sanitize('email').normalizeEmail({ remove_dots: false });
-    // req.assert('token', 'Token cannot be blank').notEmpty(); "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
->>>>>>> master
 
     // Check for validation errors    
     var errors = req.validationErrors();
