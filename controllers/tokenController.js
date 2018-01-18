@@ -7,6 +7,7 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
+var validator = require('express-validator')
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
@@ -19,15 +20,16 @@ var options = {
 * GET /confirmation
 */
 exports.confirmationGet = function  (req, res, next) {
-    // req.assert('email', 'Email is not valid').isEmail();
-    // req.assert('email', 'Email cannot be blank').notEmpty();
-    // req.assert('token', 'Token cannot be blank').notEmpty();
-    // req.sanitize('email').normalizeEmail({ remove_dots: false });
+    req.body.email = req.body.email.toLowerCase();
+    req.assert('email', 'Email is not valid').isEmail();
+    req.assert('email', 'Email cannot be blank').notEmpty();
+    req.sanitize('email').normalizeEmail({ remove_dots: false });
+    // req.assert('token', 'Token cannot be blank').notEmpty(); "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
 
     // Check for validation errors    
-    // var errors = req.validationErrors();
-    // if (errors) return res.status(400).send(errors);
-    // Delete cookie to make edits to user and to make sure they 
+    var errors = req.validationErrors();
+    if (errors) return res.status(400).send(errors);
+    // Delete cookie to make edits to user and to make sure they have to login again
     delete req.session.user;
     // Find a matching token
     console.log(req.params.id)
@@ -58,13 +60,13 @@ exports.confirmationGet = function  (req, res, next) {
 * POST /resend
 */
 exports.resendTokenPost = function  (req, res, next) {
-    // req.assert('email', 'Email is not valid').isEmail();
-    // req.assert('email', 'Email cannot be blank').notEmpty();
-    // req.sanitize('email').normalizeEmail({ remove_dots: false });
+    req.assert('email', 'Email is not valid').isEmail();
+    req.assert('email', 'Email cannot be blank').notEmpty();
+    req.sanitize('email').normalizeEmail({ remove_dots: false });
 
     // Check for validation errors    
-    // var errors = req.validationErrors();
-    // if (errors) return res.status(400).send(errors);
+    var errors = req.validationErrors();
+    if (errors) return res.status(400).send(errors);
 
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
@@ -83,7 +85,7 @@ exports.resendTokenPost = function  (req, res, next) {
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // res.status(200).send('A verification email has been sent to ' + user.email + '.');
-                res.render('verify', { title: 'verify', csrfToken: req.csrfToken(), message: 'A verification email has been sent to ' + user.email + '.'});
+                res.render('verify', { title: 'verify', message: 'A verification email has been sent to ' + user.email + '.', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
             });
         });
 

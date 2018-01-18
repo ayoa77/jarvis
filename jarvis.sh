@@ -97,7 +97,7 @@ echo "${yellow}-------------------Installing Redis-------------------${reset}"
 echo "${yellow}-------------------Installing Redis-------------------${reset}"
 echo "${yellow}-------------------Installing Redis-------------------${reset}"
 apt-get update && apt-get upgrade
-apt-get install software-properties-common
+apt-get install software-properties-common -y
 cat <<EOF >/etc/apt/sources.list.d/dotdeb.list
 deb http://ftp.utexas.edu/dotdeb/ stable all
 deb-src http://ftp.utexas.edu/dotdeb/ stable all
@@ -115,6 +115,7 @@ echo "${yellow}-------------------Building/Running Docker Image-----------------
 echo "${yellow}-------------------Building/Running Docker Image-------------------${reset}"
 docker build -t jarvis .
 docker run -d -p 3000:3000 jarvis
+service nginx restart
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"

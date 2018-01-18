@@ -17,7 +17,7 @@ var options = {
 // var flash = require('express-flash');
 
 exports.emailResetPasswordGet = function (req, res) {
-    res.render('emailResetPassword', { csrfToken: req.csrfToken() });
+    res.render('emailResetPassword', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 };
 
 
@@ -48,11 +48,20 @@ exports.emailResetPasswordPost = function (req, res) {
 
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
-        res.render('newPassword',{ csrfToken: req.csrfToken() });
+    res.render('newPassword', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
         console.log(req.body.token);
         };
 
 exports.passwordResetPost = function (req, res, next) {
+    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= req.i18n.__('passwords-format-incorrect') %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.checkBody('confirm_password', `Passwords do not match.<%= req.i18n.__('passwords-dont-match') %>`).equals(req.body.password);
+    var errors = req.validationErrors();
+    if (errors) {
+        console.log(errors)
+        res.send(errors);
+        return;
+    } else {
+
     delete req.body.confirm_password;
     // console.log(req)
     userSchema.findOne({ passwordResetToken: req.session.token }, function (err, user) {
@@ -73,4 +82,5 @@ exports.passwordResetPost = function (req, res, next) {
       
     }
 )};
+};
 

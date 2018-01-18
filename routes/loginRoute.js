@@ -9,7 +9,7 @@ var bcrypt = require('bcryptjs');
 router.get('/', function (req, res) {
     var lang = req.cookies.lang;
     if (!req.user) {
-        res.render('login', { lang: lang, csrfToken: req.csrfToken(), message: req.session.message });
+        res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
         console.log(req.session.message);
        req.session.message = 'undefined';
     } else {
@@ -21,7 +21,7 @@ router.get('/:id?', function (req, res, next) {
     var x;
     if (id == 'false') { x = 'Please Log in' };
     if (!req.user) {
-        res.render('login', { error: x, csrfToken: req.csrfToken(), message: req.session.message  });
+        res.render('login', { error: x, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
         console.log(req.session.message);
         delete req.session.message;
     } else {
@@ -30,9 +30,10 @@ router.get('/:id?', function (req, res, next) {
     }
 });
 router.post('/', function (req, res, next) {
+    req.body.email = req.body.email.toLowerCase();
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) {
-            res.render('login', { error: 'invalid email or password', csrfToken: req.csrfToken() });
+            res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.user = user;  //set-cookie: session = {email, passwords}
@@ -40,7 +41,7 @@ router.post('/', function (req, res, next) {
                 res.redirect('/user');
             } else {
     
-                res.render('login', { error: 'invalid email or password', csrfToken: req.csrfToken() });
+                res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
             }
         }
     });
