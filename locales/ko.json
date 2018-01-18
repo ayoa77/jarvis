@@ -1,0 +1,41 @@
+{
+	"Language": "Korean",
+	"Hello": "Hello",
+	"Hello %s, how are you today?": "Hello %s, how are you today?",
+	"weekend": "weekend",
+	"Hello %s, how are you today? How was your %s.": "Hello %s, how are you today? How was your %s.",
+	"Hi": "Hi",
+	"Howdy": "Howdy",
+	"%s cat": {
+		"one": "%s cat",
+		"other": "%s cats"
+	},
+	"There is one monkey in the %%s": {
+		"one": "There is one monkey in the %%s",
+		"other": "There are %d monkeys in the %%s"
+	},
+	"tree": "tree",
+	"%s dog": {
+		"one": "one dog",
+		"other": "[0] no dog|[2,5] some dogs|[6,11] many dogs|[12,36] dozens of dogs|a horde of %s dogs"
+	},
+	"index.1.decentralized_ai_platform": "index.1.decentralized_ai_platform",
+	"index.1.mailing_list": "index.1.mailing_list",
+	"index.2.what_is_it": "index.2.what_is_it",
+	"index.2.convergance": "index.2.convergance",
+	"index.2.ai_blockchain": "index.2.ai_blockchain",
+	"index.2.explanation": "index.2.explanation",
+	"index.2.read_whitepaper": "index.2.read_whitepaper",
+	"index.2.need_more": "index.2.need_more",
+	"index.3.rebalance": "index.3.rebalance",
+	"index.3.most_ai_development": "index.3.most_ai_development",
+	"index.3.decentralized_marketplace": "index.3.decentralized_marketplace",
+	"index.3.ai_combining": "index.3.ai_combining",
+	"index.4.gpu_miners": "index.4.gpu_miners",
+	"index.4.computation_power": "index.4.computation_power",
+	"index.4.knowledge_curators": "index.4.knowledge_curators",
+	"index.4.collect_maintain": "index.4.collect_maintain",
+	"index.4.machine_learning": "index.4.machine_learning",
+	"index.4.develop_data_analytics": "index.4.develop_data_analytics",
+	"index.4.app_developers": "index.4.app_developers"
+}

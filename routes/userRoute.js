@@ -37,8 +37,11 @@ router.get('/', function (req, res, next) {
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
   //validator can be blank!!!
-  req.checkBody('commitEther', `only numbers and decimals allowed <%= req.i18n__.commitedEthereum-format-incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
+  var errors = null;
+  if (req.body.commitEther) {
+  req.checkBody('commitEther', `only numbers and decimals allowed <%= req.i18n__.alerts.commitedEthereum_format_incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
   var errors = req.validationErrors();
+  };
   if (errors) {
     console.log(errors)
     res.send(errors);
@@ -47,11 +50,11 @@ router.post('/', function (req, res, next) {
 
   userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 
-
-  userSchema.update({ _id: user._id,  }, { $set:
+    userSchema.update({ _id: user._id,  }, { $set:
       {
         name: req.body.name || user.name ,
         lang: req.body.lang || user.lang ,
+        country: req.body.country || user.country,
         commitEther: req.body.commitEther || user.commitEther
       }
     }
@@ -72,7 +75,7 @@ router.post('/', function (req, res, next) {
 
         // res.redirect('/user');
             
-        })
+        });
       };
     });
   });

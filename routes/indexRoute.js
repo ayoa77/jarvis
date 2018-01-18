@@ -16,9 +16,12 @@ var md5 = require('md5');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
-  console.log(req.session);
-  console.log(res.locals.sessionFlash)
-  res.render('index', { title: 'Jarvis', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+  // console.log(req.session);
+  // console.log(res.locals.sessionFlash)
+  // console.log(req.i18n.__('Language'))
+  res.render('index', { title: 'Jarvis',
+  sessionFlash: res.locals.sessionFlash, 
+  csrfToken: req.csrfToken() });
 });
 
 module.exports = router;

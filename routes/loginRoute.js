@@ -10,8 +10,8 @@ router.get('/', function (req, res) {
     var lang = req.cookies.lang;
     if (!req.user) {
         res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-        console.log(req.session.message);
-       req.session.message = 'undefined';
+    //     console.log(req.session.message);
+    //    req.session.message = 'undefined';
     } else {
         res.redirect('/user');
     }

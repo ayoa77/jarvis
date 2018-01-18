@@ -25,8 +25,6 @@ var validator = require("express-validator");
 
 
 
-
-
 // MODELS
 fs.readdirSync(__dirname + '/models').forEach(function (filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
@@ -45,12 +43,8 @@ if ('development' == app.get('env')) {
   // dotenv.load({ path: '.env.prod' });
   console.log("you are running production Mongo");
   mongoose.connect(`mongodb://172.17.0.1/${process.env.MONGO_DB}?socketTimeoutMS=100000`);
-  
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
 };
-
-
-
 
 app.use(helmet());
 
@@ -157,6 +151,9 @@ app.route('/resetpassword/:id?')
 // Attach the i18n property to the express request object
 // And attach helper methods for use in templates
 i18n.expressBind(app, {
+  register: global,
+  // register: i18n,
+  extension: '.json',
   // setup some locales - other locales default to en silently
   locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
   // change the cookie name from 'locale' to 'lang'
@@ -165,7 +162,7 @@ i18n.expressBind(app, {
 
 // TODO ---- Find Users country via IP and compare with 
 
-// This is how you'd set a locale from req.cookies.
+// This is how you'd set a locale from the cookies.
 // Don't forget to set the cookie either on the client or in your Express app.
 app.use(function (req, res, next) {
   if (req.session && req.session.user && req.session.user.lang) {
@@ -174,24 +171,23 @@ app.use(function (req, res, next) {
     lang = user.lang;
    
     });
-    console.log('----------------------------------------------')
+    console.log('----------------------------------------------');
     // console.log(req.headers["accept-language"]);
     console.log('final language is: ' + lang);
-    console.log('----------------------------------------------')
+    console.log('----------------------------------------------');
   } else if(res.locals.locale != " "){
-    lang = res.locals.locale;
-    
-    // } else if (logic for country will go here){
-    }
-    
-    if (lang) {
-      
-    } else {
-      var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
-  lang = accepted_language;
-    console.log('None of [fr, es, en] is accepted');
-
+      lang = res.locals.locale;
+      // } else if (logic for country will go here and set lang to this accordingly){
   }
+    if (lang) {
+    } else if (req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN')) {
+        var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
+        lang = accepted_language;
+    } else {
+        console.log('None of these were accepted but will try to guess from other places in the request or default to default language');
+        req.i18n.setLocaleFromCookie();
+        lang = req.i18n.getLocale();
+    }
   // console.log(req.i18n);
   // console.log(req.cookies.locale) //=> 'de'
   // console.log(req.i18n.locale);
@@ -200,6 +196,13 @@ app.use(function (req, res, next) {
   req.i18n.setLocale(lang);
   res.locals.locale = lang;
 
+  next();
+});
+app.use(function (req, res, next) {
+  // express helper for natively supported engines
+  res.locals.__ = res.__ = function () {
+    return __.apply(req, arguments);
+  };
 
   next();
 });
@@ -230,10 +233,7 @@ app.get('/whitepaper', function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash });
 });
 app.get('/testing', function (req, res) {
-    console.log(res.locale); // en
-    console.log(req.locale); // ja
-    console.log(res.locals); // { locale: en, /* ... */ }
-  res.send(req.i18n.__('Language'));
+  res.send(req.i18n.__('1.Language'));
 });
 
 app.get('/logout', function (req, res, next) {
@@ -252,9 +252,6 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/accepted-languages', function (req, res) {
-
-});
 
 
 // error handler
