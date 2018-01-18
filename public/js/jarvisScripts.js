@@ -1,5 +1,7 @@
 $(document).ready(function() {
     initSlickSlider();
+    autoFooter();
+
   
     $( '.signin' ).click(function() {
       $( '.signup' ).removeClass('activeMode');
@@ -22,6 +24,17 @@ function handleFirstTab(e) {
 }
 
 window.addEventListener('keydown', handleFirstTab);
+
+
+// Keep the footer on the bottom of the User Page
+function autoFooter() {
+    console.log(`${$('body').height()} is the body, and ${$(window).height()} is the window.`);
+    if ($('body').height() < $(window).height()) {
+        console.log('hi dad');
+        let h = $(window).height() - ($('.navbar').height() + $('#user-selector').height() + $('#footer').height() + 38);
+        $('#footer').css('margin-top', h);
+    };
+}
 
 
 // Initialize the Slick Slider on the Index Page

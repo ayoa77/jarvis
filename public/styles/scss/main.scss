@@ -25,7 +25,11 @@ body:not(.user-is-tabbing) textarea:focus {
 // Site-Wide Resets
 
 a {
+  color: black;
   text-decoration: none !important;
+  &:hover {
+    color: black;
+  }
 }
 
 // Site-Wide Containers
@@ -407,6 +411,9 @@ body {
   }
 }
 
+#jar-video {
+  height: 300px;
+}
 
 .logo-white {
   height: 200px;
@@ -753,6 +760,57 @@ body {
   }
 }
 
+.brain-box {
+  height: 850px;
+  width: 100%;
+  max-width: 1000px;
+  
+  margin: 0 auto;
+  @include flexed;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+
+// User
+
+.user-nav-box {
+  height: 100px;
+  width: 300px;
+
+  margin: 10px 0;
+
+  background: #ccc;
+
+  border-radius: 5px;
+
+  &:first-child() {
+    margin-top: 0px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, .4);
+
+    transition: box-shadow .3s;
+  }
+
+  .row {
+    height: 100px;
+  }
+}
+
+.user-button-labels {
+  align-items: center;
+}
+
+.tiny-logo-mark {
+  height: 32px;
+  width: 32px;
+}
 
 // Footer
 #footer {
@@ -955,6 +1013,10 @@ body {
     font-size: 48px;
   }
 
+  #jar-video {
+    height: 500px;
+  }
+
   .logo-white {
     height: 250px;
     width: 250px;
@@ -1000,6 +1062,10 @@ body {
     max-width: 100%;
   }
 
+  .brain-box {
+    height: 250px;
+  }
+
 }
 
 @media (min-width: 992px) {
@@ -1013,6 +1079,10 @@ body {
     margin: 0 auto;
   }
 
+  #jar-video {
+    height: 600px;
+  }
+
   .logo-white {
     height: 300px;
     width: 300px;
@@ -1022,6 +1092,12 @@ body {
     height: 200px;
     opacity: .3;
   }
+
+  .brain-box {
+    height: 300px;
+  }
+
+
 
 }
 
@@ -1060,6 +1136,10 @@ body {
         z-index: 1;
         opacity: 1;
     }
+  }
+
+  .brain-box {
+    height: 350px;
   }
 
 }
