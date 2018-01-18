@@ -753,6 +753,20 @@ body {
   }
 }
 
+.brain-box {
+  height: 850px;
+  width: 100%;
+  max-width: 1000px;
+  
+  margin: 0 auto;
+  @include flexed;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
 
 // Footer
 #footer {
@@ -1000,6 +1014,10 @@ body {
     max-width: 100%;
   }
 
+  .brain-box {
+    height: 250px;
+  }
+
 }
 
 @media (min-width: 992px) {
@@ -1021,6 +1039,10 @@ body {
   .ftr-illustration-container {
     height: 200px;
     opacity: .3;
+  }
+
+  .brain-box {
+    height: 300px;
   }
 
 }
@@ -1060,6 +1082,10 @@ body {
         z-index: 1;
         opacity: 1;
     }
+  }
+
+  .brain-box {
+    height: 350px;
   }
 
 }
