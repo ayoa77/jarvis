@@ -20,10 +20,9 @@ var options = {
 * GET /confirmation
 */
 exports.confirmationGet = function  (req, res, next) {
-    req.body.email = req.body.email.toLowerCase();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
+    // req.assert('email', 'Email is not valid').isEmail();
+    // req.assert('email', 'Email cannot be blank').notEmpty();
+    // req.sanitize('email').normalizeEmail({ remove_dots: false });
     // req.assert('token', 'Token cannot be blank').notEmpty(); "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
 
     // Check for validation errors    
@@ -60,6 +59,7 @@ exports.confirmationGet = function  (req, res, next) {
 * POST /resend
 */
 exports.resendTokenPost = function  (req, res, next) {
+    req.body.email = req.body.email.toLowerCase();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({ remove_dots: false });

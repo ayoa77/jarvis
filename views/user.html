@@ -1,75 +1,124 @@
 <% include partials/_head.html %>
 <% include partials/_nav.html %>
+<div id="user-selector">
+    <div class="container-fluid">
+        <div class="row sh-blue-block sty-blue-block">
+            <div class="col-12">
+            <p class="big-text-alt text-center" style="color: white;">
+                <%= user.name || user.email %> 
+            </p>
+    
+            <p class="big-text-alt text-center" style="font-size: 60px; font-family: 'Aileron-Bold'; color: white;">
+                <%=wallet.jarvis %> JAR
+            </p>
+    
+            <p class="sub-text text-center" style="color: white;">
+                <%=wallet.ethereum %> ETH
+            </p>
 
-<div class="container-fluid">
-    <div class="row sh-splash sty-splash">
-        <div class="col-12">
-          <p class="big-text-alt text-center">
-              <%= user.name || user.email %> 
-          </p>
-  
-          <p class="big-text-alt text-center">
-              <%=wallet.jarvis %> JAR
-          </p>
-  
-          <p class="sub-text text-center">
-              <%=wallet.ethereum %> ETH
-          </p>
+            <!-- <p class="sub-text text-center">
+                commited Ether = <%= user.commitEther %>
+            </p>
 
-        <p class="sub-text text-center">
-             commited Ether = <%= user.commitEther %>
-        </p>
+            <p class="sub-text text-center">
+                Language = <%= user.lang %>
+            </p>
 
-           <p class="sub-text text-center">
-             Language = <%= user.lang %>
-        </p>
+            <p class="sub-text text-center">
+                Public Ethereum Wallet ID = <%= wallet.wallet %>
+            </p> -->
 
-          <p class="sub-text text-center">
-             Public Ethereum Wallet ID = <%= wallet.wallet %>
-        </p>
+            </div>
+        </div>
+    </div>
 
-       
-  
-          <br>
-          
-          
-          <form action="/user" method="POST">
-            <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
-     
-            <label for="name"> Name </label>
-            <input type="text" name="name"></input>
+    <div class="container">
+        <div id="space-filler" class="row sh-white-block sty-white-block">
+
+            <div class="col-12 col-sm-4 d-flex justify-content-center align-items-center">
+                <div class="user-nav-box">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <img src="./images/logo-mark.png" alt="tiny-logo" class="tiny-logo-mark">
+                        </div>
+                        <div class="col-7 d-flex user-button-labels">
+                            <p class="body-text" style="font-size: 18px;">Commit Ethereum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-4 d-flex justify-content-center align-items-center">
+                <div class="user-nav-box">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <p class="fa" style="font-size: 24px;">&#xf013;</p>
+                        </div>
+                        <div class="col-7 d-flex user-button-labels">
+                                <p class="body-text" style="font-size: 18px;">Edit User Settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-4 d-flex justify-content-center align-items-center">
+                <a href="/logout" class="user-nav-box">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <p class="fa" style="font-size: 24px;">&#xf011;</p>
+                        </div>
+                        <div class="col-7 d-flex user-button-labels">
+                                <p class="body-text" style="font-size: 18px;">Logout</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+            <!-- <form action="/user" method="POST">
+                <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
+         
+                <label for="name"> Name </label>
+                <input type="text" name="name"></input>
+                
+                <br>
+    
+                <label for="lang"> Language </label>
+                <input type="text" name="lang"></input>
+                
+                <br>
+                <label for="commitEther"> How much ether would you like to commit? </label>
+
+                <input type="text" name="commitEther"></input> 
+                
+                <br>
+                <button class="btn" type="submit"> Submit </button>
+            </form>
             
-            <br>
+            <form action="/wallet" method="POST">
+                <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
+               
+                <label for="wallet"> Ethereum Wallet ID </label>
+                <input type="text" name="wallet"></input>
+                
+                <br>
+                <button class="btn" type="submit"> Submit </button>
+    
+            </form>
+            <a href="/logout">Logout</a> -->
+        </div>
 
-            <label for="lang"> Language </label>
-            <input type="text" name="lang"></input>
-            
-            <br>
-            <label for="commitEther"> How much ether would you like to commit? </label>
-            <!-- make this one only accept decimals -->
-            <input type="text" name="commitEther"></input> 
-            
-            <!-- <input type="text", name="password" disabled="disabled"></input> -->
-            
-            <br>
-            <button class="btn" type="submit"> Submit </button>
-        </form>
-        
-        <form action="/wallet" method="POST">
-            <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
-           
-            <label for="wallet"> Ethereum Wallet ID </label>
-            <input type="text" name="wallet"></input>
-            
-            <br>
-            <button class="btn" type="submit"> Submit </button>
-
-        </form>
-        <a href="/logout">Logout</a>
-        
     </div>
 </div>
 
+</div>
+  
+          
+          
+
+    
 
 
 
