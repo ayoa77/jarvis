@@ -156,7 +156,6 @@ if ('development' == app.get('env')) {
     // ephemeral: true // delete this cookie when the browser is closed
   }));
 }
-// Route that creates a flash message using custom middleware
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
@@ -193,6 +192,7 @@ app.use(function (req, res, next) {
   req.i18n.setLocaleFromSessionVar();
   next();
 });
+// Route that creates a flash message using custom middleware
 
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
