@@ -109,6 +109,42 @@ i18n.expressBind(app, {
 
 
 app.use(helmet());
+app.use(function (req, res, next) {
+  // if there's a flash message in the session request, make it available in the response, then delete it
+  res.locals.sessionFlash = req.session.sessionFlash;
+  delete req.session.sessionFlash;
+  next();
+});
+
+//middleware for csrf
+app.use(csrf());
+//would like to put this on the user update
+app.use(function (req, res, next) {
+  if (req.session && req.session.user) {
+    userSchema.findOne({ email: req.session.user.email }, function (err, user) {
+      if (user) {
+        console.log(user);
+        req.user = user;
+        req.session.user.commitEther = user.commitEther || ' ';
+        req.session.user._id = user._id;
+        req.session.user.name = user.name;
+        req.session.user.country = user.country;
+        req.session.user.email = user.email;
+        res.locals.user = req.session.user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
+app.use(function (req, res, next) {
+  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
+  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
+  req.i18n.setLocaleFromSessionVar();
+  next();
+});
 
 app.use(validator());
 // view engine and express setup
@@ -157,42 +193,6 @@ if ('development' == app.get('env')) {
   }));
 }
 // Route that creates a flash message using custom middleware
-app.use(function (req, res, next) {
-  // if there's a flash message in the session request, make it available in the response, then delete it
-  res.locals.sessionFlash = req.session.sessionFlash;
-  delete req.session.sessionFlash;
-  next();
-});
-
-//middleware for csrf
-app.use(csrf());
-//would like to put this on the user update
-app.use(function (req, res, next) {
-  if (req.session && req.session.user) {
-    userSchema.findOne({ email: req.session.user.email }, function (err, user) {
-      if (user) {
-        console.log(user);
-        req.user = user;
-        req.session.user.commitEther = user.commitEther || ' ';
-        req.session.user._id = user._id;
-        req.session.user.name = user.name;
-        req.session.user.country = user.country;
-        req.session.user.email = user.email;
-        res.locals.user = req.session.user;
-      }
-      next();
-    });
-  } else {
-    next();
-  }
-});
-
-app.use(function (req, res, next) {
-  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
-  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
-  req.i18n.setLocaleFromSessionVar();
-  next();
-});
 
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
