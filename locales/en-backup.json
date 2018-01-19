@@ -69,7 +69,7 @@
 	"deepdive.2.unified_model_zoo": "JARVIS is designed to recognize physical objects and perceive contextual states and generate neural network models automatically to build a Unified Model Zoo for any pattern recognition task. Developer can define Intelligent Contract and leverage the Unified Model Zoo to build autonomous agent with cognitive intelligence running on blockchain.",
 	"deepdive.2.csg": "Common Sense Graph",
 	"deepdive.2.common_sense_graph": "Common senses are fundamental to any artificial intelligence. Through automatic knowledge curation process, JARVIS also creates a common sense graph, which is represented as a combination of linguistic corpus and fuzzy logic rules, for developer to build higher-level intelligence on. Further rules can be defined in Intelligent Contract based on the Common Senses Graph to enable smart decision making within the contract.",
-	"deepdive.3.JTA": "JARVIS Technology Architecture deepdive.",
+	"deepdive.3.JTA": "“Redesign Virtual Machine and Programming Language for AI”",
 	"deepdive.3.stark_thor": "Stark Virtual Machine and THOR Programming Language, Pluggable Consensus Engine",
 	"deepdive.3.application_layer": "Application Layer",
 	"deepdive.3.language_layer": "Language Layer",
