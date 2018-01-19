@@ -1,15 +1,12 @@
 {
-    "links.home": "Home",
-    "links.deep_dive": "Deep Dive",
-    "links.governance": "Governance",
-    "links.white_paper": "White Paper",
-    
-    "footer.privacy_policy": "Private Policy",
-    "footer.home": "Home",
-    
-    "advisors.1.advisors": "Advisors",
-    
-    "index.1.decentralized_ai_platform": "The Decentralized AI Platform",
+	"links.home": "Home",
+	"links.deep_dive": "Deep Dive",
+	"links.governance": "Governance",
+	"links.white_paper": "White Paper",
+	"footer.privacy_policy": "Private Policy",
+	"footer.home": "Home",
+	"advisors.1.advisors": "Advisors",
+	"index.1.decentralized_ai_platform": "The Decentralized AI Platform",
 	"index.1.mailing_list": "Join our mailing list to get the latest updates on JARVIS activities, token generation event, and platform release.",
 	"index.2.what_is_it": "WHAT IS IT?",
 	"index.2.convergance": "The Convergence of",
@@ -52,8 +49,7 @@
 	"index.7.charlene_role": "Advisor",
 	"index.7.youlin": "You-Lin Chen",
 	"index.7.youlin_role": "Research Scientist",
-    
-    "deepdive.1.dec_cog_intelligence": "JARVIS: The Decentralized Cognitive Intelligence",
+	"deepdive.1.dec_cog_intelligence": "JARVIS: The Decentralized Cognitive Intelligence",
 	"deepdive.1.mine_intelligence": "JARVIS is a blockchain network for Mining Intelligence and running Intelligent Contracts.",
 	"deepdive.1.data": "Data",
 	"deepdive.1.miners": "Miners",
@@ -80,8 +76,7 @@
 	"deepdive.3.pluggable_consensus_engine": "pluggable_consensus_engine",
 	"deepdive.3.thpl": "TH Programming Language",
 	"deepdive.3.intuitive_development": "provides a simple, clean, and intuitive development environment for any developer who wants to create Intelligent Contract in the JARVIS network.",
-    
-    "governance.1.strong_together": "We Are Stronger Together governance.",
+	"governance.1.strong_together": "We Are Stronger Together governance.",
 	"governance.1.great_power": "Greater Power Comes with Greater Responsibility",
 	"governance.1.decentralization": "JARVIS the very first decentralized AI platform combined with blockchain technology, to give AI power back to the people for a better future.Together with blockchain based technology, we can collectively explore and build nextgen AI models across the globe in a fully decentralized way.",
 	"governance.2.platform_intel": "JARVIS: The Platform for Intelligence ",
@@ -92,5 +87,6 @@
 	"governance.3.voting_power": "VOTING POWER STRUCTURE",
 	"governance.4.resource_allocation": "Resource Allocation",
 	"governance.4.spare_computing_resources": "We will use the spare computing resource to generate the desired",
-	"governance.4.first_decentralized_ai": "JARVIS the very first decentralized AI platform combined with blockchain technology, to give AI power back to the people for a better future.Together with blockchain based technology, we can collectively explore and build nextgen AI models across the globe in a fully decentralized way."
+	"governance.4.first_decentralized_ai": "JARVIS the very first decentralized AI platform combined with blockchain technology, to give AI power back to the people for a better future.Together with blockchain based technology, we can collectively explore and build nextgen AI models across the globe in a fully decentralized way.",
+	"1.Language": "1.Language"
 }

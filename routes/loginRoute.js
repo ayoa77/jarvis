@@ -7,7 +7,7 @@ var bcrypt = require('bcryptjs');
 // var flash = require('express-flash');
 
 router.get('/', function (req, res) {
-    var lang = req.cookies.lang;
+    var lang = req.session.locale;
     if (!req.user) {
         res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
     //     console.log(req.session.message);
@@ -37,7 +37,10 @@ router.post('/', function (req, res, next) {
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.user = user;  //set-cookie: session = {email, passwords}
+                req.session.cookie.expires = true;
+                req.session.cookie.maxAge = 24 * 60 * 60 * 1000;
                 delete req.session.user.password;
+                if (user.lang){req.session.locale = user.lang};
                 res.redirect('/user');
             } else {
     

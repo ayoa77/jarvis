@@ -71,6 +71,7 @@ router.post('/', function (req, res, next) {
           var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
               if (err) { return res.status(500).send({ msg: err.message }); }
+              
           res.status(200).send('You have successfully updated your account.');
 
         // res.redirect('/user');
