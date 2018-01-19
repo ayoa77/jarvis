@@ -755,7 +755,6 @@ body {
 
   border-bottom: 1px solid #ccc;
   margin: 20px auto 40px;
-  
 }
 
 .training-flow, .prediction-flow {
@@ -800,13 +799,13 @@ body {
 
 .architecture-box {
   width: 100%;
-  max-width: 300px;
+  max-width: 768px;
 
   img {
     height: auto;
     width: 100%;
 
-    padding: 20px 0;
+    padding: 10px 0 0;
   }
 }
 
@@ -825,7 +824,11 @@ body {
 }
 
 .thought-graphic {
-
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
   .logic {
 
   }
@@ -1117,10 +1120,6 @@ body {
 
   .title-box {
     padding: 20px 10px;
-  }
-
-  .architecture-box {
-    max-width: 100%;
   }
 
   .brain-box {
