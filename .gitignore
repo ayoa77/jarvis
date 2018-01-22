@@ -40,3 +40,4 @@ npm-debug.log
 
 *.css
 .vscode
+dump.rdb
