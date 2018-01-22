@@ -18,9 +18,9 @@
           <%= __('index.1.mailing_list') %>
       </p>
 
-      <div class="email-signup">
+      <!-- Mail Chimp Stuff  -->
 
-<!-- Mail Chimp Stuff  -->
+      <div class="email-signup">
 
         <form action="https://jarvis.us17.list-manage.com/subscribe/post?u=73bb213e8dabaa5213d3c88ae&amp;id=2f9a2ebcd1" 
               method="post"
@@ -49,6 +49,15 @@
 
 <div class="container">
 
+  <div class="row justify-content-center sh-white-block sty-white-block">
+
+      <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+        <iframe width="100%" id="jar-video" src="https://www.youtube.com/embed/wmuP8TS11f8" frameborder="0" allow="autoplay; encrypted-media"
+          allowfullscreen></iframe>
+      </div>
+
+  </div>
+
   <div class="row align-items-center sh-white-block sty-white-block">
     <div class="col-md-6 world-box"></div>
     <div class="col-md-6 world-box-col">
@@ -68,20 +77,6 @@
 
     </div>
   </div>
-
-    <div class="row justify-content-center sh-white-block sty-white-block">
-      <div class="col-12">
-        <p class="sub-text">Learn More</p>
-      </div>
-      <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-          <p class="question-text">
-            <%= __('index.2.need_more') %>
-          </p>
-        <iframe width="100%" id="jar-video" src="https://www.youtube.com/embed/QIlZXaG7jHk" frameborder="0" allow="autoplay; encrypted-media"
-          allowfullscreen></iframe>
-      </div>
-
-    </div>
   
 
 </div>
@@ -116,6 +111,7 @@
 
   </div>
 </div>
+
 <div class="container">
 
   <div class="row sh-white-block sty-white-block">
@@ -176,7 +172,7 @@
           <%= __('index.4.app_developers') %>
         </div>
         <div class="body-text text-center" style="margin-bottom: 10px;">
-            <%= __('index.4.develop_data_analytics') %>
+            <%= __('index.4.leverage_jarvis') %>
         </div>
       </div>
 
@@ -189,25 +185,26 @@
 
   <div class="row sh-blue-block sty-blue-block">
     <div class="col-12">
-      <div class="row unfluid">
+      <div class="row unfluid d-flex justify-content-center align-items-center">
 
-          <div class="col-md-6 col-xl-4">
+          <div class="col-12 col-sm-auto">
               <div class="logo-white"></div>
-            </div>
-            <div class="col-md-6 col-xl-8 world-box-col">
+          </div>
+
+          <div class="col-12 col-sm-auto world-box-col">
               <p class="big-text-alt text-center" style="color: white;">
-            <%= __('index.5.ai_token') %>
+                <%= __('index.5.ai_token') %>
               </p>
+
               <p class="body-text text-center" style="max-width: 400px; color: white; margin: 0 auto;">
-              <%= __('index.5.jarvis_introduction') %>
-
+                <%= __('index.5.jarvis_introduction') %>
               </p>
-            </div>
+          </div>
 
+        </div>
       </div>
-    </div>
+   </div>
 
-  </div>
 </div>
 
 <div class="container">
@@ -235,7 +232,7 @@
   
         <div class="row">
           <div class="col-12 col-md-6 col-lg-3 col-flexed">
-            <div class="icon video" style="margin-bottom: 20px;"></div>
+            <div class="icon video" style="margin-bottom: 15px; margin-top: 5px;"></div>
             <div class="little-title text-center" style="margin-bottom: 10px;">
                <%= __('index.6.video_analytics') %>
             </div>
@@ -265,7 +262,7 @@
         </div>
   
         <div class="col-12 col-md-6 col-lg-3 col-flexed">
-          <div class="icon id" style="margin-bottom: 20px;"></div>
+          <div class="icon flow" style="margin-bottom: 15px; margin-top: 5px;"></div>
           <div class="little-title text-center" style="margin-bottom: 10px;">
             <%= __('index.6.next_generation') %>
           </div>
@@ -290,83 +287,24 @@
           <p class="big-text-alt">
               <%= __('index.7.our_team') %>
           </p>
-          <p class="body-text">
-              <%= __('index.7.team_blurb') %>
-          </p>
 
       </div>
       
-      <div class="col-12">
-        <div id="slider" class="center">
+      <div class="col-12 d-lg-none">
 
-            <div>
-                <div class="employee-container">
-                    <div class="employee-photo">
-                      <img src="./images/team/kevin.jpg" alt="Kevin-Chen">
-                    </div>
-                    <div class="employee-info">
-                        <p class="employee-name"> <%= __('index.7.kevin') %></p>
-                        <p class="employee-title"><%= __('index.7.kevin_role') %></p>
-                    </div>
-                </div>  
-            </div>
+          <div id="slider" class="center">
+            <% include partials/_team.html %>
+          </div>
 
-            <div>
-                <div class="employee-container">
-                    <div class="employee-photo">
-                      <img src="./images/team/bart.jpg" alt="Bart-Yang">
-                    </div>
-                    <div class="employee-info">
-                        <p class="employee-name"><%= __('index.7.bart') %></p>
-                        <p class="employee-title"><%= __('index.7.bart_role') %></p>
-                    </div>
-                </div>  
-            </div>
+     </div>
 
-            <div>
-                <div class="employee-container">
-                    <div class="employee-photo">
-                      <img src="./images/team/spencer.jpg" alt="Spencer-Chen">
-                    </div>
-                    <div class="employee-info">
-                        <p class="employee-name"><%= __('index.7.spencer') %></p>
-                        <p class="employee-title"><%= __('index.7.spencer_role') %></p>
-                    </div>
-                </div>  
-            </div>
+     <div class= "col-12 d-none d-lg-block">
+          <% include partials/_team-no-slide.html %>
+     </div>
 
-            <div>
-                <div class="employee-container">
-                    <div class="employee-photo">
-                      <img src="./images/team/charlene.jpg" alt="Charlene-Twu">
-                    </div>
-                    <div class="employee-info">
-                      <p class="employee-name"><%= __('index.7.charlene') %></p>
-                      <p class="employee-title"><%= __('index.7.charlene_role') %></p>
-                    </div>
-                </div>  
-            </div>
-
-            <div>
-                <div class="employee-container">
-                    <div class="employee-photo">
-                      <img src="./images/team/you-lin.jpg" alt="You-Lin-Chen">
-                    </div>
-                    <div class="employee-info">
-                        <p class="employee-name"><%= __('index.7.youlin') %></p>
-                        <p class="employee-title"><%= __('index.7.youlin_role') %></p>
-                    </div>
-                </div>  
-            </div>
-
-
-        </div>
-
-    </div>
   </div>
-
-<% include partials/_advisors.html %>
-
+  
+  <!-- <% include partials/_advisors.html %> -->
 </div>
 
 <% include partials/_footer.html %>

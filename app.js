@@ -22,6 +22,7 @@ var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
+// var node_where  = require("node-where")
 
 
 
@@ -46,6 +47,67 @@ if ('development' == app.get('env')) {
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
 };
 
+// Attach the i18n property to the express request object
+// And attach helper methods for use in templates
+i18n.expressBind(app, {
+  register: global,
+  directory: "./middleware/locales",
+  // register: i18n,
+  extension: '.json',
+  // setup some locales - other locales default to en silently
+  locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
+  // change the cookie name from 'locale' to 'lang'
+  cookieName: 'locale'
+});
+
+// TODO ---- Find Users country via IP and compare with 
+
+// This is how you'd set a locale from the cookies.
+// Don't forget to set the cookie either on the client or in your Express app.
+// app.use(function (req, res, next) {
+//   if (req.session && req.session.user && req.session.user.lang) {
+//     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
+
+//       lang = user.lang;
+
+//     });
+//     console.log('----------------------------------------------');
+//     // console.log(req.headers["accept-language"]);
+//     console.log('final language is: ' + lang);
+//     console.log('----------------------------------------------');
+//   } else if (res.locals.locale != " ") {
+//     lang = res.locals.locale;
+//     // } else if (logic for country will go here and set lang to this accordingly){
+//   }
+//   if (lang) {
+//   } else if (req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN')) {
+//     var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
+//     lang = accepted_language;
+//   } else {
+//     console.log('None of these were accepted but will try to guess from other places in the request or default to default language');
+//     req.i18n.setLocaleFromCookie();
+//     lang = req.i18n.getLocale();
+//   }
+//   // console.log(req.i18n);
+//   // console.log(req.cookies.locale) //=> 'de'
+//   // console.log(req.i18n.locale);
+//   // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
+//   // req.i18n.setLocaleFromCookie();
+//   req.i18n.setLocale(lang);
+//   res.locals.locale = lang;
+
+//   next();
+// });
+// app.use(function (req, res, next) {
+//   // express helper for natively supported engines
+//   res.locals.__ = res.__ = function () {
+//     return __.apply(req, arguments);
+//   };
+
+//   next();
+// });
+
+
 app.use(helmet());
 
 app.use(validator());
@@ -68,14 +130,15 @@ if ('development' == app.get('env')) {
     }),
     cookieName: 'session',
     secret: '!MysecretisSchwiftyandYours?',
-    duration: 30 * 60 * 10000,
-    activeDuration: 5 * 60 * 1000,
+    // duration: 30 * 60 * 10000,
+    // activeDuration: 5 * 60 * 1000,
+    maxAge: 30 * 24 * 60 * 60000,
     httpOnly: true, // don't let browser JS access cookie ever
     secure: true, // only use cookies over https
-    ephemeral: true // delete this cookie when the browser is closed
+    // ephemeral: true // delete this cookie when the browser is closed
   }));
-}else if ('production' == app.get('env')) {
-  console.log("you are running production Redis");  
+} else if ('production' == app.get('env')) {
+  console.log("you are running production Redis");
   app.use(session({
     store: new RedisStore({
       host: '172.17.0.1',
@@ -85,14 +148,14 @@ if ('development' == app.get('env')) {
     }),
     cookieName: 'session',
     secret: '!MysecretisSchwiftyandYours?',
-    duration: 30 * 60 * 10000,
-    activeDuration: 5 * 60 * 1000,
+    // duration: 30 * 60 * 10000,
+    // activeDuration: 5 * 60 * 1000,
+    maxAge:  30 * 24 * 60 * 60000,
     httpOnly: true, // don't let browser JS access cookie ever
     secure: true, // only use cookies over https
-    ephemeral: true // delete this cookie when the browser is closed
+    // ephemeral: true // delete this cookie when the browser is closed
   }));
 }
-// Route that creates a flash message using custom middleware
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
@@ -102,32 +165,41 @@ app.use(function (req, res, next) {
 
 //middleware for csrf
 app.use(csrf());
-//middleware updating user throughout project
-  app.use(function(req, res, next) {
-    if (req.session && req.session.user) {
-      userSchema.findOne({ _id: req.session.user.id }, function (err, user) {
-        if (user) {
-          console.log(user);
-          req.user = user;
-          req.session.user.commitEther = user.commitEther || ' ' ;
-          req.session.user._id = user._id;
-          req.session.user.name = user.name;
-          req.session.user.country = user.country;
-          req.session.user.email = user.email;
-          res.locals.user = req.session.user;
-        }
-        next();
-      });
-    } else {
+//would like to put this on the user update
+app.use(function (req, res, next) {
+  if (req.session && req.session.user) {
+    userSchema.findOne({ email: req.session.user.email }, function (err, user) {
+      if (user) {
+        console.log(user);
+        req.user = user;
+        req.session.user.commitEther = user.commitEther || ' ';
+        req.session.user._id = user._id;
+        req.session.user.name = user.name;
+        req.session.user.country = user.country;
+        req.session.user.email = user.email;
+        res.locals.user = req.session.user;
+      }
       next();
-    }
-  });
+    });
+  } else {
+    next();
+  }
+});
+
+app.use(function (req, res, next) {
+  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
+  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
+  req.i18n.setLocaleFromSessionVar();
+  next();
+});
+// Route that creates a flash message using custom middleware
 
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
 var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
 var registerRoute = require('./routes/registerRoute');
+var languageRoute = require('./routes/languageRoute');
 var walletRoute = require('./routes/walletRoute');
 var tokenController = require('./controllers/tokenController');
 var passwordController = require('./controllers/passwordController');
@@ -139,73 +211,16 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
 app.use('/wallet', walletRoute);
+app.post('/language', languageRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
 app.route('/emailresetpassword')
-.get(passwordController.emailResetPasswordGet)
-.post(passwordController.emailResetPasswordPost);
+  .get(passwordController.emailResetPasswordGet)
+  .post(passwordController.emailResetPasswordPost);
 app.route('/resetpassword/:id?')
-.get(passwordController.passwordResetGet)
-.post(passwordController.passwordResetPost);
+  .get(passwordController.passwordResetGet)
+  .post(passwordController.passwordResetPost);
 
-// Attach the i18n property to the express request object
-// And attach helper methods for use in templates
-i18n.expressBind(app, {
-  register: global,
-  // register: i18n,
-  extension: '.json',
-  // setup some locales - other locales default to en silently
-  locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
-  // change the cookie name from 'locale' to 'lang'
-  cookieName: 'locale'
-});
-
-// TODO ---- Find Users country via IP and compare with 
-
-// This is how you'd set a locale from the cookies.
-// Don't forget to set the cookie either on the client or in your Express app.
-app.use(function (req, res, next) {
-  if (req.session && req.session.user && req.session.user.lang) {
-    userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
-    
-    lang = user.lang;
-   
-    });
-    console.log('----------------------------------------------');
-    // console.log(req.headers["accept-language"]);
-    console.log('final language is: ' + lang);
-    console.log('----------------------------------------------');
-  } else if(res.locals.locale != " "){
-      lang = res.locals.locale;
-      // } else if (logic for country will go here and set lang to this accordingly){
-  }
-    if (lang) {
-    } else if (req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN')) {
-        var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
-        lang = accepted_language;
-    } else {
-        console.log('None of these were accepted but will try to guess from other places in the request or default to default language');
-        req.i18n.setLocaleFromCookie();
-        lang = req.i18n.getLocale();
-    }
-  // console.log(req.i18n);
-  // console.log(req.cookies.locale) //=> 'de'
-  // console.log(req.i18n.locale);
-  // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
-  // req.i18n.setLocaleFromCookie();
-  req.i18n.setLocale(lang);
-  res.locals.locale = lang;
-
-  next();
-});
-app.use(function (req, res, next) {
-  // express helper for natively supported engines
-  res.locals.__ = res.__ = function () {
-    return __.apply(req, arguments);
-  };
-
-  next();
-});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -233,19 +248,25 @@ app.get('/whitepaper', function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash });
 });
 app.get('/testing', function (req, res) {
+  console.log("---------------------------")
+  console.log(req.session.locale)
+  console.log(req.i18n.getLocale())
+  console.log("---------------------------")
   res.send(req.i18n.__('1.Language'));
 });
-
+//LOGING OUT AND DESTROYING SESSION
 app.get('/logout', function (req, res, next) {
   req.session.destroy();
   res.redirect('/');
 });
+
+
 // robots.txt config
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("User-agent: *\nDisallow: /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");
 });
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -255,14 +276,14 @@ app.use(function(req, res, next) {
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', {sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+  res.render('error', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 
 app.listen(app.get('port'), () => {

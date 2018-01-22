@@ -144,7 +144,8 @@ body {
 
 .little-title {
   font-family: "Aileron-SemiBold";
-  font-size: 12px;
+  font-size: 15px;
+  color: #333;
 }
 
 
@@ -602,6 +603,55 @@ body {
   transition: all .2s;
 }
 
+.team-container {
+  height: 260px;
+  width: 200px;
+  margin-bottom: 30px;
+
+  position: relative;
+
+  background: white;
+}
+
+.team-photo {
+  height: 200px;
+  width: 100%;
+
+  img {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.team-info {
+  height: 60px;
+  width: 100%;
+
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .team-name {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+    font-family: "Aileron-Semibold";
+    color: #4F545A;
+  }
+
+  .team-title {
+    font-size: 12px;
+    font-family: "Aileron-Light";
+    color: #717578;
+  }
+}
+
+
+
 // Governance
 
 .uses-illustration-box {
@@ -705,7 +755,6 @@ body {
 
   border-bottom: 1px solid #ccc;
   margin: 20px auto 40px;
-  
 }
 
 .training-flow, .prediction-flow {
@@ -727,7 +776,7 @@ body {
 }
 
 .extra-info-container {
-  width: 150px;
+  width: 180px;
   display: flex;
 }
 
@@ -750,13 +799,13 @@ body {
 
 .architecture-box {
   width: 100%;
-  max-width: 300px;
+  max-width: 768px;
 
   img {
     height: auto;
     width: 100%;
 
-    padding: 20px 0;
+    padding: 10px 0 0;
   }
 }
 
@@ -771,6 +820,21 @@ body {
   img {
     height: 100%;
     width: auto;
+  }
+}
+
+.thought-graphic {
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .logic {
+
+  }
+
+  .common-sense {
+    
   }
 }
 
@@ -1056,10 +1120,6 @@ body {
 
   .title-box {
     padding: 20px 10px;
-  }
-
-  .architecture-box {
-    max-width: 100%;
   }
 
   .brain-box {

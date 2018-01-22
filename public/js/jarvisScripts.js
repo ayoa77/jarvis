@@ -28,9 +28,7 @@ window.addEventListener('keydown', handleFirstTab);
 
 // Keep the footer on the bottom of the User Page
 function autoFooter() {
-    console.log(`${$('body').height()} is the body, and ${$(window).height()} is the window.`);
     if ($('body').height() < $(window).height()) {
-        console.log('hi dad');
         let h = $(window).height() - ($('.navbar').height() + $('#user-selector').height() + $('#footer').height() + 38);
         $('#footer').css('margin-top', h);
     };
@@ -42,7 +40,7 @@ function autoFooter() {
 
   $('.center').slick({
     centerMode: true,
-    slidesToShow: 5,
+    slidesToShow: 7,
     responsive: [
       {
         breakpoint: 1920,
@@ -50,7 +48,7 @@ function autoFooter() {
           arrows: false,
           centerMode: true,
           centerPadding: '50px',
-          slidesToShow: 5,
+          slidesToShow: 5 ,
           speed: 100
         }
       },
