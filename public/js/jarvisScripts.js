@@ -3,11 +3,11 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    modalLoad("meh");
+    // modalLoad("meh");
 
-    $('.modal-container').on('click', function() {
-      modalClose();
-    });
+    // $('.modal-container').on('click', function() {
+    //   modalClose();
+    // });
 
  });
 
