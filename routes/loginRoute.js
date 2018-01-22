@@ -42,7 +42,7 @@ router.post('/', function (req, res, next) {
                 req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
                 delete req.session.user.password;
                 if (user.lang){req.session.locale = user.lang}
-                iplocation('211.220.194.0', function (error, result) {
+                iplocation(req.ip, function (error, result) {
                     console.log('-----------------------------------')
                     console.log(req.ip)
                     console.log('-----------------------------------')

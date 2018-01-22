@@ -31,9 +31,13 @@ gulp.task('styles', function(){
   return gulp.src(['./public/styles/scss/**/*.scss', '!./public/styles/scss/partials/**'])
     .pipe(sourcemaps.init({ largeFile: true }))
     .pipe(sass({
-    //   outputStyle: 'compressed',
-    //   sourceMap: true
+      outputStyle: 'compressed',
+      sourceMap: true
     }).on('error', sass.logError))
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
     // .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./public/styles/css/'))
     .pipe(browserSync.reload({stream:true}))
@@ -75,6 +79,15 @@ gulp.task('browser-sync', function () {
         notify: false,
     });
 });
+gulp.task('prefix', () =>
+    gulp.src('/public/main.css')
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
+    .pipe(gulp.dest('/public/main.css'))
+);
+
 gulp.task('no-wifi', ['nodemon'], function () {
     gulp.watch("public/styles/scss/**/*.scss", ['styles']);
     gulp.watch("public/js/partials/*.js", ['scripts']);
@@ -87,12 +100,3 @@ gulp.task('serve', ['nodemon', 'browser-sync'], function () {
     gulp.watch("views/**/*.html", ['bs-reload']);
     // gulp.watch(config.jade.watch, ['jade', browserSync.reload]);
 });
-
-// gulp.task('prefix', () =>
-//     gulp.src('/public/main.css')
-//     .pipe(autoprefixer({
-//         browsers: ['last 2 versions'],
-//         cascade: false
-//     }))
-//     .pipe(gulp.dest('/public/main.css'))
-// );

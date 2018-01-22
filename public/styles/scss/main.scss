@@ -32,6 +32,17 @@ a {
   }
 }
 
+// Social Media
+
+.fb, .tw, .in, .git, .rd {
+  font-family: "FontAwesome";
+  color: #ADAEAF;
+
+  &:hover {
+    color: #222;
+  }
+}
+
 // Site-Wide Containers
 
 body {
@@ -532,11 +543,10 @@ body {
 }
 
 #slider {
-  height: 320px;
-  margin: 0 0 20px;
+  height: 340px;
 
   .slick-track {
-    height: 300px;
+    height: 340px;
   }
 
   .slick-slide {
@@ -544,7 +554,7 @@ body {
   }
 
   .employee-container {
-    height: 260px;
+    height: 280px;
     width: 200px;
 
     opacity: .4;
@@ -563,11 +573,8 @@ body {
   }
 
   .employee-info {
-      height: 60px;
+      height: 55px;
       width: 100%;
-
-      position: absolute;
-      bottom: 0;
 
       display: flex;
       flex-direction: column;
@@ -589,6 +596,19 @@ body {
       }
   }
 
+  .employee-social {
+      height: 25px;
+    
+      font-family: "FontAwesome";
+    
+      display: flex;
+      justify-content: center;
+    
+      a {
+        margin: 0 5px;
+      }
+   }
+
   img {
     height: auto;
     width: 100%;
@@ -604,13 +624,27 @@ body {
 }
 
 .team-container {
-  height: 260px;
+  height: 280px;
   width: 200px;
   margin-bottom: 30px;
 
   position: relative;
 
+  opacity: .4;
+
   background: white;
+
+  transition: all .4s;
+
+  &:hover {
+    opacity: 1;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, .2);
+    transition: all .4s;
+    img {
+      filter: none;
+      -webkit-filter: none;
+    }
+  }
 }
 
 .team-photo {
@@ -620,15 +654,15 @@ body {
   img {
     height: auto;
     width: 100%;
+
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
   }
 }
 
 .team-info {
-  height: 60px;
+  height: 55px;
   width: 100%;
-
-  position: absolute;
-  bottom: 0;
 
   display: flex;
   flex-direction: column;
@@ -647,6 +681,19 @@ body {
     font-size: 12px;
     font-family: "Aileron-Light";
     color: #717578;
+  }
+}
+
+.team-social {
+  height: 25px;
+
+  font-family: "FontAwesome";
+
+  display: flex;
+  justify-content: center;
+
+  a {
+    margin: 0 5px;
   }
 }
 
@@ -755,7 +802,6 @@ body {
 
   border-bottom: 1px solid #ccc;
   margin: 20px auto 40px;
-  
 }
 
 .training-flow, .prediction-flow {
@@ -777,7 +823,7 @@ body {
 }
 
 .extra-info-container {
-  width: 150px;
+  width: 180px;
   display: flex;
 }
 
@@ -800,13 +846,13 @@ body {
 
 .architecture-box {
   width: 100%;
-  max-width: 300px;
+  max-width: 768px;
 
   img {
     height: auto;
     width: 100%;
 
-    padding: 20px 0;
+    padding: 10px 0 0;
   }
 }
 
@@ -825,7 +871,11 @@ body {
 }
 
 .thought-graphic {
-
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
   .logic {
 
   }
@@ -929,20 +979,14 @@ body {
     width: 40px;
     margin: 8px;
 
+    font-size: 30px;
+
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .fb, .tw, .in, .git, .rd {
-    font-family: "FontAwesome";
-    font-size: 30px;
-    color: #ADAEAF;
 
-    &:hover {
-      color: #222;
-    }
-  }
 }
 
 .ftr-tos {
@@ -1117,10 +1161,6 @@ body {
 
   .title-box {
     padding: 20px 10px;
-  }
-
-  .architecture-box {
-    max-width: 100%;
   }
 
   .brain-box {

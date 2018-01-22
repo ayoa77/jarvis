@@ -27,9 +27,9 @@
         </div>
 
         <div class="col-12" style="margin-top: 20px;">
-          <div class="row justify-content-center">
+          <div class="row justify-content-between">
 
-            <div class="d-flex justify-content-center col-12 col-sm-2 col-md-2" style="margin-bottom: 20px;">
+            <div class="d-flex justify-content-center col-12 col-sm-4" style="margin-bottom: 20px;">
 
               <div class="extra-info-container">
                 <div class="icon-tiny data"></div>
@@ -38,7 +38,7 @@
 
             </div>
 
-            <div class="d-flex justify-content-center col-12 col-sm-2 col-md-2" style="margin-bottom: 20px;">
+            <div class="d-flex justify-content-center col-12 col-sm-4" style="margin-bottom: 20px;">
 
                 <div class="extra-info-container">
                   <div class="icon-tiny gear"></div>
@@ -47,7 +47,7 @@
 
             </div>
 
-            <div class="d-flex justify-content-center col-12 col-sm-2 col-md-2" style="margin-bottom: 20px;">
+            <div class="d-flex justify-content-center col-12 col-sm-4" style="margin-bottom: 20px;">
 
                 <div class="extra-info-container">
                   <div class="icon-tiny window"></div>
@@ -56,7 +56,10 @@
 
             </div>
 
-            <div class="d-flex justify-content-center col-12 col-sm-2 col-md-2" style="margin-bottom: 20px;">
+          </div>
+          <div class="row justify-content-center">
+
+            <div class="d-flex justify-content-center col-12 col-sm-4" style="margin-bottom: 20px;">
 
                 <div class="extra-info-container">
                   <div class="icon-tiny bars"></div>
@@ -65,7 +68,7 @@
 
             </div>
 
-            <div class="d-flex justify-content-center col-12 col-sm-4 col-md-2" style="margin-bottom: 20px;">
+            <div class="d-flex justify-content-center col-12 col-sm-4" style="margin-bottom: 20px;">
 
                 <div class="extra-info-container">
                   <div class="icon-tiny iot"></div>
@@ -118,34 +121,28 @@
 
     <div class="row sh-grey-block sty-grey-block">
         <div class="col-12">
+          <div class="row unfluid">
+            <div class="col-12">
 
-            <div class="row unfluid">
-              <div class="col-md-6">
-                <p class="big-text-alt text-center-onoff">
-                        <%= __('technology.2.jarvis_do') %>
-                </p>
-              </div>
-      
-              <div class="col-md-6">
-                <p class="body-text text-center-onoff">
-                      <%= __('technology.2.big_hurdles') %>
-                </p>
-              </div>
+                <p class="big-text-alt text-center">
+                    <%= __('deepdive.2.jarvis_do') %>
+                 </p>
+
             </div>
-            
           </div>
+        </div>
 
-          <div class="col-12 col-sm-6" style="margin: 30px auto;">
-              <p class="body-text text-center">
-                <%= __('technology.2.patter_recognition') %>
-              </p>
-          </div>
+        <div class="col-12 col-sm-8" style="margin: 10px auto 30px;">
+            <p class="body-text text-center">
+              <%= __('deepdive.2.patter_recognition') %>
+            </p>
+        </div>
 
-          <div class="col-12 d-none d-md-block" style="margin-bottom: 30px;">
-              <div class="brain-box">
-                  <img src="./images/brain.png" alt="visual-logical-patterns" />
-              </div>
-          </div>
+        <div class="col-12 d-none d-md-block" style="margin-bottom: 30px;">
+            <div class="brain-box">
+                <img src="./images/brain.png" alt="visual-logical-patterns" />
+            </div>
+        </div>
 
 <!-- 
           <div class="col-12" style="margin-bottom: 30px;">
@@ -158,24 +155,32 @@
 
               <div class="row unfluid justify-content-center">
                 <div class="col-12 col-md-5 col-flexed">
-                  <div class="thought-graphic logic d-md-none" style="margin-bottom: 20px;">Butts</div>
-                  <div class="little-title text-center" style="font-size: 16px; margin-bottom: 20px;">
-                        <%= __('technology.2.umz') %>
+
+                  <div class="thought-graphic common-sense d-md-none" style="margin-bottom: 20px;">
+                      <img src="./images/common-sense-mobile.png" alt="Unified Model Zoo">
                   </div>
-                  <div class="body-text text-center" style="margin-bottom: 40px;">
-                        <%= __('technology.2.unified_model_zoo') %>
+
+                  <div class="little-title text-center-on-off" style="font-size: 16px; margin-bottom: 20px;">
+                        <%= __('deepdive.2.csg') %>
+                  </div>
+                  <div class="body-text text-center-on-off" style="margin-bottom: 20px;">
+                      <%= __('deepdive.2.common_sense_graph') %>
                   </div>
                 </div>
-        
-              <div class="col-12 col-md-5 col-flexed">
-                <div class="thought-graphic common-sense d-md-none" style="margin-bottom: 20px;">Butts</div>
-                <div class="little-title text-center" style="font-size: 16px; margin-bottom: 20px;">
-                      <%= __('technology.2.csg') %>
-                </div>
-                <div class="body-text text-center" style="margin-bottom: 20px;">
-                    <%= __('technology.2.common_sense_graph') %>
-                </div>
-              </div>
+
+                <div class="col-12 col-md-5 col-flexed">
+
+                    <div class="thought-graphic logic d-md-none" style="margin-bottom: 20px;">
+                        <img src="./images/model-zoo-mobile.png" alt="Unified Model Zoo">
+                    </div>
+  
+                    <div class="little-title text-center-on-off" style="font-size: 16px; margin-bottom: 20px;">
+                          <%= __('deepdive.2.umz') %>
+                    </div>
+                    <div class="body-text text-center-on-off" style="margin-bottom: 40px;">
+                          <%= __('deepdive.2.unified_model_zoo') %>
+                    </div>
+                  </div>
   
             </div>
     
@@ -188,16 +193,10 @@
 
     <div class="row sh-white-block sty-white-block">
 
-        <div class="col-md-6 align-items-center">
-            <p class="big-text-alt text-center-onoff">
-                <%= __('technology.3.JTA') %>
+        <div class="col-12 align-items-center" style="margin-bottom: 10px;">
+            <p class="big-text-alt text-center">
+                <%= __('deepdive.3.JTA') %>
             </p>
-        </div>
-    
-        <div class="col-md-6 valign">
-          <p class="body-text text-center-onoff" style="margin: 0 auto 20px;">
-              <%= __('technology.3.stark_thor') %>
-          </p>
         </div>
 
         <div class="col-12">
@@ -236,7 +235,7 @@
               </div>
             </div>
 
-        <!-- <div class="col-12">
+        <div class="col-12" style="margin-top: 20px;">
           <div class="row">
 
             <div class="col-12 col-md-4 col-flexed" style="margin-bottom: 20px;">
@@ -261,7 +260,7 @@
 
 
           </div>
-        </div> -->
+        </div>
 
     </div>
   
