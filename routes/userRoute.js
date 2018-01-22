@@ -16,7 +16,7 @@ var options = {
 
 
 router.get('/', function (req, res, next) {
-  console.log(req.session.user.email)
+  console.log(req.params.modal)
 
   if (!req.session.user) {
     res.redirect('/login'); //tell the page to drop down the modal
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
     walletSchema.findOne({ userID: req.session.user._id }, function (err, wallet) {
   // console.log(req.session.user)
   // console.log(wallet);
-      res.render('user', { title: 'User', user: user, wallet: wallet, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+      res.render('user', { title: 'User', user: user, wallet: wallet, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
     });
     });
   }
@@ -39,7 +39,7 @@ router.post('/', function (req, res, next) {
   //validator can be blank!!!
   var errors = null;
   if (req.body.commitEther) {
-  req.checkBody('commitEther', `only numbers and decimals allowed <%= req.i18n__.alerts.commitedEthereum_format_incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
+  req.checkBody('commitEther', `only numbers and decimals allowed <%= __.alerts.commitedEthereum_format_incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
   var errors = req.validationErrors();
   };
   if (errors) {

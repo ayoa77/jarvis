@@ -157,6 +157,12 @@ if ('development' == app.get('env')) {
   }));
 }
 app.use(function (req, res, next) {
+  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
+  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
+  req.i18n.setLocaleFromSessionVar();
+  next();
+});
+app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
   delete req.session.sessionFlash;
@@ -186,12 +192,6 @@ app.use(function (req, res, next) {
   }
 });
 
-app.use(function (req, res, next) {
-  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
-  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
-  req.i18n.setLocaleFromSessionVar();
-  next();
-});
 // Route that creates a flash message using custom middleware
 
 var indexRoute = require('./routes/indexRoute');
@@ -235,17 +235,17 @@ app.all('/session-flash', function (req, res, next) {
   res.redirect(301, '/');
 });
 
-app.get('/deepdive', function (req, res, next) {
-  res.render('deepDive', { title: 'Deep Dive', sessionFlash: res.locals.sessionFlash });
+app.get('/technology', function (req, res, next) {
+  res.render('deepDive', { title: 'Technology', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/faq', function (req, res, next) {
-  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash });
+  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/governance', function (req, res, next) {
-  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash });
+  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/whitepaper', function (req, res, next) {
-  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash });
+  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/testing', function (req, res) {
   console.log("---------------------------")
@@ -254,12 +254,17 @@ app.get('/testing', function (req, res) {
   console.log("---------------------------")
   res.send(req.i18n.__('1.Language'));
 });
+
+//LEAVING AFTER BEING PRESENTED WITH EULA,
+app.get('/leave', function (req, res, next) {
+  res.redirect('/');
+});
+
 //LOGING OUT AND DESTROYING SESSION
 app.get('/logout', function (req, res, next) {
   req.session.destroy();
   res.redirect('/');
 });
-
 
 // robots.txt config
 app.get('/robots.txt', function (req, res) {

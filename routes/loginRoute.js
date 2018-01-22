@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 var userSchema = mongoose.model('user', userSchema);
 var bcrypt = require('bcryptjs');
+var iplocation = require('iplocation')
 // var requireLogin = require('../middleware/requireLogin.js');
 // var flash = require('express-flash');
 
@@ -38,10 +39,22 @@ router.post('/', function (req, res, next) {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.user = user;  //set-cookie: session = {email, passwords}
                 req.session.cookie.expires = true;
-                req.session.cookie.maxAge = 24 * 60 * 60 * 1000;
+                req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
                 delete req.session.user.password;
-                if (user.lang){req.session.locale = user.lang};
+                if (user.lang){req.session.locale = user.lang}
+                iplocation('211.220.194.0', function (error, result) {
+                    console.log('-----------------------------------')
+                    console.log(req.ip)
+                    console.log('-----------------------------------')
+
+                    console.log(result)
+
+                    if(result.country = 'China' || 'Republic of Korea' || 'United States') {
+                        res.redirect('/user?modal=restricted-country')
+                    } else {
                 res.redirect('/user');
+                    }
+                })
             } else {
     
                 res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
