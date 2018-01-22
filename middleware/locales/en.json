@@ -4,7 +4,7 @@
 	"links.governance": "Governance",
 	"links.white_paper": "White Paper",
 	"footer.privacy_policy": "Private Policy",
-	"footer.home": "Home",
+	"footer.tou": "Terms of Use",
 	"advisors.1.advisors": "Advisors",
 	"index.1.decentralized_ai_platform": "The Decentralized AI Platform",
 	"index.1.mailing_list": "Join our mailing list to get the latest updates on JARVIS activities, token generation event, and platform release.",
@@ -94,5 +94,6 @@
 	"governance.4.first_decentralized_ai": "JARVIS the very first decentralized AI platform combined with blockchain technology, to give AI power back to the people for a better future.Together with blockchain based technology, we can collectively explore and build nextgen AI models across the globe in a fully decentralized way.",
 	"deepdive.1.umz": "Unified Model Zoo",
 	"deepdive.1.csg": "Common Sense Graph",
-	"links.deep_dive": "Technology"
+	"links.deep_dive": "Technology",
+	"footer.tou": "Terms of Use"
 }
