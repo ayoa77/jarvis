@@ -42,19 +42,22 @@ router.post('/', function (req, res, next) {
                 req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
                 delete req.session.user.password;
                 if (user.lang){req.session.locale = user.lang}
-                iplocation(req.ip, function (error, result) {
+                iplocation('72.229.28.185', function (error, result) {
                     console.log('-----------------------------------')
                     console.log(req.ip)
                     console.log('-----------------------------------')
-
+                    c = result.country_name
                     console.log(result)
 
-                    if(result.country = 'China' || 'Republic of Korea' || 'United States') {
-                        res.redirect('/user?modal=restricted-country')
+                    if(c != "United States" && c!= "China" && c!= "Republic of Korea") {
+                        console.log(result.country_name);
+                        res.redirect('/user');
                     } else {
-                res.redirect('/user');
+                        console.log(result.country_name);
+                        console.log('*******BAD COUNRTY***********')
+                        res.redirect('/user?modal=restricted-country')
                     }
-                })
+                });
             } else {
     
                 res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });

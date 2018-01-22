@@ -22,6 +22,7 @@ router.get('/', function (req, res, next) {
   //  req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en';
   res.render('index', { title: 'Jarvis',
   sessionFlash: res.locals.sessionFlash, 
+  modal: req.params.modal,
   csrfToken: req.csrfToken() });
 });
 
