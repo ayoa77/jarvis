@@ -1,6 +1,11 @@
 <% include partials/_head.html %>
 
+<% include partials/_modal.html %>
 <% include partials/_nav.html %>
+
+<div hidden>
+    <% include partials/_modalLoader.html %>
+</div>
 
 <div class="container-fluid">
 
@@ -52,7 +57,7 @@
   <div class="row justify-content-center sh-white-block sty-white-block">
 
       <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-        <iframe width="100%" id="jar-video" src="https://www.youtube.com/embed/wmuP8TS11f8" frameborder="0" allow="autoplay; encrypted-media"
+        <iframe width="100%" id="jar-video" src="https://www.youtube.com/embed/wmuP8TS11f8" frameborder="0" encrypted-media
           allowfullscreen></iframe>
       </div>
 
