@@ -200,7 +200,7 @@ var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
 var registerRoute = require('./routes/registerRoute');
 var languageRoute = require('./routes/languageRoute');
-var walletRoute = require('./routes/walletRoute');
+// var walletRoute = require('./routes/walletRoute');
 var tokenController = require('./controllers/tokenController');
 var passwordController = require('./controllers/passwordController');
 
@@ -210,7 +210,7 @@ app.use('/user', userRoute);
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
-app.use('/wallet', walletRoute);
+// app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
 app.get('/confirmation/:id?', tokenController.confirmationGet);
 app.post('/resend', tokenController.resendTokenPost);
@@ -248,12 +248,20 @@ app.get('/whitepaper', function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/testing', function (req, res) {
-  console.log("---------------------------")
-  console.log(req.session.locale)
-  console.log(req.i18n.getLocale())
-  console.log("---------------------------")
-  res.send(req.i18n.__('1.Language'));
+  console.log("---------------------------");
+  console.log(req.session.locale);
+  console.log(req.i18n.getLocale());
+  console.log("---------------------------");
+  // res.send(req.i18n.__('1.Language'));
+  res.render('testing');
 });
+
+app.post('/endpoint', function (req, res) {
+  var obj = {};
+  console.log('body: ' + JSON.stringify(req.body));
+  res.send(req.body);
+});
+
 
 //LEAVING AFTER BEING PRESENTED WITH EULA,
 app.get('/leave', function (req, res, next) {

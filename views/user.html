@@ -9,11 +9,11 @@
             </p>
     
             <p class="big-text-alt text-center" style="font-size: 60px; font-family: 'Aileron-Bold'; color: white;">
-                <%=wallet.jarvis %> JAR
+                <%=user.jarvis %> JAR
             </p>
     
             <p class="sub-text text-center" style="color: white;">
-                <%=wallet.ethereum %> ETH
+                <%=user.ethereum %> ETH
             </p>
 
             <!-- <p class="sub-text text-center">
@@ -25,7 +25,7 @@
             </p>
 
             <p class="sub-text text-center">
-                Public Ethereum Wallet ID = <%= wallet.wallet %>
+                Public Ethereum Wallet ID = <%= user.wallet %>
             </p> -->
 
             </div>
@@ -84,7 +84,10 @@
                 <input type="text" name="name"></input>
                 
                 <br>
-    
+                <label for="wallet"> Ethereum Wallet ID </label>
+                <input type="text" name="wallet"></input>
+
+                <br>
                 <label for="lang"> Language </label>
                 <input type="text" name="lang"></input>
                 
@@ -100,8 +103,6 @@
             <form action="/wallet" method="POST">
                 <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
                
-                <label for="wallet"> Ethereum Wallet ID </label>
-                <input type="text" name="wallet"></input>
                 
                 <br>
                 <button class="btn" type="submit"> Submit </button>

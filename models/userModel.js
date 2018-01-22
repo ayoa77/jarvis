@@ -11,6 +11,9 @@ var userSchema = new Schema({
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Date, default: Date.now() },
     status:{ type: String, enum: ['NEW', 'EMAIL', 'EULA']},
+    wallet: { type: String, unique: true },
+    jarvis: { type: String, default: "0" },
+    ethereum: { type: String, default: "0" }
 });
 
 mongoose.model('user', userSchema);

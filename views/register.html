@@ -1,5 +1,5 @@
 
-<form action = "/register", method = "POST">
+<form action = "/register" id = "registerForm" method = "POST">
     <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
     <label for="name"> Name </label>
@@ -18,3 +18,23 @@
     <button class ="btn" type = "submit"> Submit </button>
 
 </form>
+
+<script>
+    $(function () {
+            var frm = $('#registerForm');
+            frm.submit(function (ev) {
+                ev.preventDefault();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        alert('ok');
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    }
+                });
+            });
+        });
+</script>

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var userSchema = mongoose.model('user', userSchema);
-var walletSchema = mongoose.model('wallet', walletSchema);
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 
@@ -16,7 +15,7 @@ var options = {
 
 
 router.get('/', function (req, res, next) {
-  console.log(req.params.modal)
+  console.log(req.params.modal);
 
   if (!req.session.user) {
     res.redirect('/login'); //tell the page to drop down the modal
@@ -24,12 +23,10 @@ router.get('/', function (req, res, next) {
     res.render('verify', { title: 'Verify', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
   } else {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
-
-    walletSchema.findOne({ userID: req.session.user._id }, function (err, wallet) {
   // console.log(req.session.user)
   // console.log(wallet);
-      res.render('user', { title: 'User', user: user, wallet: wallet, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
-    });
+      res.render('user', { title: 'User', user: user, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
+
     });
   }
 });
@@ -37,6 +34,15 @@ router.get('/', function (req, res, next) {
 ///need to add edit logic to this
 router.post('/', function (req, res, next) {
   //validator can be blank!!!
+  if (req.body.wallet){
+  req.checkBody('wallet', `Please enter a properly formatted Ethereum wallet id<%= i18n.commitedEthereum-format-incorrect %>`).len(42);
+  var errors = req.validationErrors();
+  }
+  if (errors) {
+    console.log(errors)
+    res.send(errors);
+    return;
+  } else {
   var errors = null;
   if (req.body.commitEther) {
   req.checkBody('commitEther', `only numbers and decimals allowed <%= __.alerts.commitedEthereum_format_incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
@@ -81,6 +87,7 @@ router.post('/', function (req, res, next) {
     });
   });
 };
+  };
 });
   // userSchema.findOne({ email: req.session.user.email }, function (err, user) {
 
