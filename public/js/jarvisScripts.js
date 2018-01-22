@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    modalLoad("youtube");
+    // modalLoad("youtube");
 
     $('.modal-container').on('click', function() {
       modalClose();
