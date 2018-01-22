@@ -1,18 +1,50 @@
+// Ready Player One
 $(document).ready(function() {
+
     initSlickSlider();
     autoFooter();
+    modalLoad("meh");
 
+    $('.modal-container').on('click', function() {
+      modalClose();
+    });
+
+ });
+
+ // Modal Loader
+function modalLoad(content) {
   
-    $( '.signin' ).click(function() {
-      $( '.signup' ).removeClass('activeMode');
-      $( '.signin' ).addClass('activeMode');
+  $('.modal-container').load('/ #hi-mom');
+
+  $( '.modal-container' ).css({
+    top: 0,
+    height: "100vh",
+    width: "100vw",
+  });
+
+  setTimeout(function() {
+    $('.modal-container').css('background', 'rgba(0, 0, 0, .2)');
+    $('.modal-container').focus();
+  }, 50);
+  
+}
+
+function modalClose() {
+    
+    $('.modal-container').empty();
+    
+    $('.modal-container').css({
+      background: "rgba(0, 0, 0, 0)",
     });
     
-    $( '.signup' ).click(function() {
-      $( '.signin' ).removeClass('activeMode');
-      $( '.signup' ).addClass('activeMode');
-    });
- });
+    setTimeout(function() {
+      $('.modal-container').css({
+        top: "-50px",
+        height: "50px",
+        width: "50px",
+      });
+    }, 200);
+}
 
 
  // Check if User is a Keyboard Navigator to add/remove Chrome's default Focus
