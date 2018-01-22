@@ -3,18 +3,20 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    // modalLoad("meh");
+    modalLoad("youtube");
 
-    // $('.modal-container').on('click', function() {
-    //   modalClose();
-    // });
+    $('.modal-container').on('click', function() {
+      modalClose();
+    });
 
  });
+
+
 
  // Modal Loader
 function modalLoad(content) {
   
-  $('.modal-container').load('/ #hi-mom');
+  $('.modal-container').load(`/ .${content}`);
 
   $( '.modal-container' ).css({
     top: 0,
@@ -47,15 +49,19 @@ function modalClose() {
 }
 
 
- // Check if User is a Keyboard Navigator to add/remove Chrome's default Focus
-function handleFirstTab(e) {
+ // Listen to Tab and Escape Key Inputs
+function handleKeyDown(e) {
   if (e.keyCode === 9) { // the "I am a keyboard user" key
       document.body.classList.add('user-is-tabbing');
       window.removeEventListener('keydown', handleFirstTab);
   }
+
+    if (e.keyCode === 27) { // escape key maps to keycode `27`
+       modalClose();
+   }
 }
 
-window.addEventListener('keydown', handleFirstTab);
+window.addEventListener('keydown', handleKeyDown);
 
 
 // Keep the footer on the bottom of the User Page

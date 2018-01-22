@@ -198,9 +198,6 @@ body {
 // Modal
 
 .modal-container {
-  height: 50px;
-  width: 50px;
-  
   background: rgba(0, 0, 0, 0);
   
   position: fixed;
@@ -214,10 +211,11 @@ body {
   transition: background .2s;
 }
 
-#hi-mom { // Test
-  height: 200px;
-  width: 200px;
-  background: white;
+// Modal Calls
+
+.youtube {
+  width: 80%;
+  background: #222;
 
   display: flex;
   justify-content: center;
@@ -468,8 +466,10 @@ body {
       -webkit-filter: none;
     }
 
-    > img {
+    & > .team-photo {
       opacity: 1;
+
+      transition: all .4s;
     }
   }
 }
@@ -478,11 +478,13 @@ body {
   height: 200px;
   width: 100%;
 
+  opacity: .4;
+
+  transition: all .4s;
+
   img {
     height: auto;
     width: 100%;
-
-    opacity: .4;
 
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
