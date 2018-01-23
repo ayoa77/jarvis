@@ -43,6 +43,44 @@ a {
   }
 }
 
+// MailChimp Mailer
+
+#mc_embed_signup {
+  clear:left
+}
+
+.input-group {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex
+}
+
+.input-group input {
+  padding:10px 15px;
+
+  border-radius:4px 0 0 4px;
+  border:none;
+
+  font-size:12px;
+
+  flex:2
+}
+
+.input-group .button{
+  padding:10px 30px;
+  background:#16CAD1;
+
+  font-size:12px;
+  color:white;
+
+  border-radius:0 4px 4px 0;
+  border:none;
+
+  display:flex;
+  justify-content:center;
+  flex:1;
+}
+
 // Site-Wide Containers
 
 body {
@@ -198,28 +236,153 @@ body {
 // Modal
 
 .modal-container {
-  background: rgba(0, 0, 0, 0);
-  
+  height: 100vh;
+  width: 100vw;
+
+  display: none;
+
+  padding: 0;
+  margin: 0;
+
+  background: rgba(0, 0, 0, .2);
+
   position: fixed;
-  top: -50px;
-  z-index: 1000;
+  z-index: 20;
   
-  display: flex;
   justify-content: center;
   align-items: center;
-  
+
   transition: background .2s;
 }
 
-// Modal Calls
+.modal-box {
+  width: 50px;
+  height: 50px;
+  opacity: 0;
 
-.youtube {
+  background: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Modal Elements
+
+.modal-youtube {
   width: 80%;
   background: #222;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal-login {
+  height: 400px;
+  width: 600px;
+  
+  background: white;
+  
+  display: flex;
+}
+
+.modal-login-left, .modal-login-right {
+  width: 50%;
+  height: 100%;
+  flex: 1;
+}
+
+.modal-login-left {
+  background: linear-gradient(to top right, $blue50, $bluegreen);  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-login-right {
+  background: white;
+  box-shadow: -8px 0 10px 1px rgba(0, 0, 0, .1);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 250px;
+  height: 250px;
+  
+  background-image: url("./../../images/logo-white.png");
+  background-size: 100% 100%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.signin, .signup {
+  font-size: 24px;
+  color: #aaa;
+  
+  border-bottom: 1px solid #fff;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.or {
+  color: #aaa;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#loginForm input{
+  width: 200px;
+  
+  margin: 10px 0;
+  padding: 4px 5px;
+  
+  border: none;
+  border-bottom: 1px solid #aaa;
+  
+  font-size: 10px;
+}
+
+#loginForm button {
+  padding: 10px 16px;
+  margin: 25px 0 0 0;
+  
+  background-color: #4CAF50; /* Green */
+  border: none;
+  
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.active {
+  border-bottom: 1px solid #333;
+  color: #007ddf;
+  
+  transition: all .3s;
+}
+
+// Modal Calls 
+
+.text-loader:hover {
+    cursor: pointer;
+    color: #222;
 }
 
 // Index
