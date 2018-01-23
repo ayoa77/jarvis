@@ -1,40 +1,35 @@
 
-<form action = "/register" id = "registerForm" method = "POST">
+<form action='#' id ="registerForm" >
     <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
-    <label for="name"> Name </label>
-    <input type="text" name="name"></input>
+    <input type="text" name="name" ></input>
 
-    <label for="country"> Country </label>
-    <input type="text" name="country"></input>
-
-    <label for = "email"> Email </label>
-    <input type = "text" name = "email"></input>
+    <input type = "text" name="email" ></input>
     
-    <label for = "password"> Password </label>
-    <input type = "text" name = "password"></input>
+    <input type = "text" name="password" ></input>
 
-    <br>
-    <button class ="btn" type = "submit"> Submit </button>
-
+    
 </form>
+<br>
+<button class ="btn" type = "submit"> Submit </button>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" ></script>
 <script>
-    $(function () {
-            var frm = $('#registerForm');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (data) {
-                        alert('ok');
-                    },
-                    error: function (data) {
-                        console.log(data)
-                    }
-                });
+    $(document).ready(function(){
+  //     body = {}
+        $("button").on('click',function(){
+            body = ($("#registerForm").serialize());
+            console.log(body._csrf)
+                    $.ajax({
+                method: 'POST',
+                url: `/register`,
+                data: body,
+ //               contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                alert(data)
+             //   location.reload();
             });
-        });
+        })
+    })
 </script>

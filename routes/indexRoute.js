@@ -10,11 +10,13 @@ var mailchimp = new Mailchimp('5e0b4a1b50b66ae689fb23e520122405-us17');
 //LIVE API
 // var mailchimp = new Mailchimp('mail chimp api from jarvis');
 var md5 = require('md5');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', csrfProtection, function (req, res, next) {
    console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
   // console.log(req.session);
   // console.log(res.locals.sessionFlash)

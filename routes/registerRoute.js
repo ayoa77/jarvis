@@ -6,7 +6,9 @@ var tokenSchema = mongoose.model('token', tokenSchema);
 var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
-var sgTransport = require('nodemailer-sendgridv3-transport'); 
+var sgTransport = require('nodemailer-sendgridv3-transport');
+var csrf = require('csurf'); 
+var csrfProtection = csrf({ cookie: true });
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
     auth: {
@@ -15,7 +17,7 @@ var options = {
 };
 
 
-router.get('/', function (req, res, next){
+router.get('/', csrfProtection, function (req, res, next){
     // var lang = req.cookies.lang;
     if (!req.user) {
         error = ' ';
@@ -26,12 +28,13 @@ router.get('/', function (req, res, next){
     // res.redirect('/404')
 });
 router.post('/', function (req, res, next){
+    console.log(req.body);
     req.body.email = req.body.email.toLowerCase();
-    req.checkBody('email', `Email is not valid <%= i18n.password-format-incorrect %>` ).isEmail();
-    req.checkBody('country', `Country cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
-    req.checkBody('name', `Name cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
-    req.checkBody('email', `Email cannot be blank <%= i18n.password-format-incorrect %>`).notEmpty();
-    req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= i18n.password-format-incorrect %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.checkBody('email', __('error.email_format_incorrect')).isEmail();
+    // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
+    req.checkBody('name', __('error.name_blank')).notEmpty();
+    req.checkBody('email', __('error.email_blank')).notEmpty();
+    req.checkBody('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
     req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
 
     var errors = req.validationErrors();
@@ -44,43 +47,48 @@ router.post('/', function (req, res, next){
     var user = new userSchema({
         name: req.body.name,
         country: req.body.country,
-        lang: res.locals.locale || ' ',
+        lang: res.session.locale || ' ',
         email: req.body.email,
         password: hash,
         commitEther: '0',
         status: 'NEW'
     });
-
+    };
     user.save(function (err) {
         if (err) {
-            error = 'We have experienced an unknown error. Contact us if this persists.';
+            console.log(err);
+            error = __('error.default');
             if (err.code === 11000) {
-                error = 'That email is already taken :(';
+                error = __('error.duplicate_email');
             }
-            res.status(500).send(error);
+            console.log(error)
+            res.send(JSON.stringify(error));
+            return;
+
         } else {
 
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
             // Save the verification token
             token.save(function (err) {
-                if (err) { return res.status(500).send({ msg: err.message }); }
+                if (err) { return res.send({ msg: err.message }); }
             //sending token mailer
-            var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
-                var transporter = nodemailer.createTransport(sgTransport(options));
+            // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
+            var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
-                if (err) { return res.status(500).send({ msg: err.message }); }
-                res.status(200).send('A verification email has been sent to ' + user.email + '.');
+                if (err) { return res.send({ msg: err.message }); }
+                res.status(200).send(__('email.verification_email'));
+                // req.session.sessionFlash = {
+                //     type: 'success',
+                //     message: __('email.verification_email')
+                // }
 
-            res.redirect('/user');
-            // console.log('going to user');
             });
             });
-            };
+        };  
         });    
-    }    
-});
-
+    });    
+;   
 
 module.exports = router;

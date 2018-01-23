@@ -11,7 +11,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var client = redis.createClient();
-var flash = require('express-flash');
 var chalk = require('chalk');
 var bcrypt = require('bcryptjs');
 var RateLimit = require('express-rate-limit');
@@ -22,7 +21,6 @@ var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
-// var node_where  = require("node-where")
 
 
 
@@ -59,54 +57,6 @@ i18n.expressBind(app, {
   // change the cookie name from 'locale' to 'lang'
   cookieName: 'locale'
 });
-
-// TODO ---- Find Users country via IP and compare with 
-
-// This is how you'd set a locale from the cookies.
-// Don't forget to set the cookie either on the client or in your Express app.
-// app.use(function (req, res, next) {
-//   if (req.session && req.session.user && req.session.user.lang) {
-//     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
-
-//       lang = user.lang;
-
-//     });
-//     console.log('----------------------------------------------');
-//     // console.log(req.headers["accept-language"]);
-//     console.log('final language is: ' + lang);
-//     console.log('----------------------------------------------');
-//   } else if (res.locals.locale != " ") {
-//     lang = res.locals.locale;
-//     // } else if (logic for country will go here and set lang to this accordingly){
-//   }
-//   if (lang) {
-//   } else if (req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN')) {
-//     var accepted_language = req.acceptsLanguages('en', 'zh-TW', 'ja', 'ko', 'zh-CN');
-//     lang = accepted_language;
-//   } else {
-//     console.log('None of these were accepted but will try to guess from other places in the request or default to default language');
-//     req.i18n.setLocaleFromCookie();
-//     lang = req.i18n.getLocale();
-//   }
-//   // console.log(req.i18n);
-//   // console.log(req.cookies.locale) //=> 'de'
-//   // console.log(req.i18n.locale);
-//   // console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
-//   // req.i18n.setLocaleFromCookie();
-//   req.i18n.setLocale(lang);
-//   res.locals.locale = lang;
-
-//   next();
-// });
-// app.use(function (req, res, next) {
-//   // express helper for natively supported engines
-//   res.locals.__ = res.__ = function () {
-//     return __.apply(req, arguments);
-//   };
-
-//   next();
-// });
-
 
 app.use(helmet());
 
@@ -169,8 +119,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-//middleware for csrf
-app.use(csrf());
+// //middleware for csrf
+// app.use(csrf());
 //would like to put this on the user update
 app.use(function (req, res, next) {
   if (req.session && req.session.user) {
@@ -225,7 +175,6 @@ app.route('/resetpassword/:id?')
 app.set('port', process.env.PORT || 3000);
 
 
-// catch 404 and forward to error handler
 
 app.all('/session-flash', function (req, res, next) {
   req.session.sessionFlash = {
@@ -235,16 +184,16 @@ app.all('/session-flash', function (req, res, next) {
   res.redirect(301, '/');
 });
 
-app.get('/technology', function (req, res, next) {
+app.get('/technology', csrfProtection, function (req, res, next) {
   res.render('deepDive', { title: 'Technology', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
-app.get('/faq', function (req, res, next) {
+app.get('/faq', csrfProtection, function (req, res, next) {
   res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
-app.get('/governance', function (req, res, next) {
+app.get('/governance', csrfProtection, function (req, res, next) {
   res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
-app.get('/whitepaper', function (req, res, next) {
+app.get('/whitepaper', csrfProtection, function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 });
 app.get('/testing', function (req, res) {
@@ -279,6 +228,7 @@ app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("User-agent: *\nDisallow: /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");
 });
+// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -296,7 +246,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+  res.render('error', { sessionFlash: res.locals.sessionFlash });
 });
 
 app.listen(app.get('port'), () => {

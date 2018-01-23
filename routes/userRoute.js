@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.model('user', userSchema);
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
+var csrf = require('csurf')
+var csrfProtection = csrf({ cookie: true })
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
@@ -14,7 +16,7 @@ var options = {
 
 
 
-router.get('/', function (req, res, next) {
+router.get('/', csrfProtection, function (req, res, next) {
   console.log(req.params.modal);
 
   if (!req.session.user) {
@@ -32,7 +34,7 @@ router.get('/', function (req, res, next) {
 });
 
 ///need to add edit logic to this
-router.post('/', function (req, res, next) {
+router.post('/', csrfProtection, function (req, res, next) {
   //validator can be blank!!!
   if (req.body.wallet){
   req.checkBody('wallet', `Please enter a properly formatted Ethereum wallet id<%= i18n.commitedEthereum-format-incorrect %>`).len(42);
