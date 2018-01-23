@@ -3,59 +3,74 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    // modalLoad("meh");
-
-    // $('.modal-container').on('click', function() {
-    //   modalClose();
-    // });
 
  });
 
+$(document).on('click', '.signin', function(e) {
+    $( '.signup' ).removeClass('active');
+    $( '.signin' ).addClass('active');
+});
+
+$(document).on('click', '.signup', function(e) {
+  $( '.signin' ).removeClass('active');
+  $( '.signup' ).addClass('active');
+})
+
+
+
  // Modal Loader
 function modalLoad(content) {
-  
-  $('.modal-container').load('/ #hi-mom');
 
-  $( '.modal-container' ).css({
-    top: 0,
-    height: "100vh",
-    width: "100vw",
+  $(window).disablescroll();
+
+  $('.modal-container').css('display', 'flex');
+
+  $('.modal-box').velocity({
+    height: 'auto',
+    width: '100%',
+    opacity: '1',
+  }, {
+    duration: '200',
   });
 
-  setTimeout(function() {
-    $('.modal-container').css('background', 'rgba(0, 0, 0, .2)');
-    $('.modal-container').focus();
-  }, 50);
-  
+  $('.modal-box').load(`/ .${content}`);
 }
 
 function modalClose() {
     
-    $('.modal-container').empty();
-    
-    $('.modal-container').css({
-      background: "rgba(0, 0, 0, 0)",
-    });
-    
-    setTimeout(function() {
-      $('.modal-container').css({
-        top: "-50px",
-        height: "50px",
-        width: "50px",
-      });
-    }, 200);
+  $('.modal-box').empty();
+
+  $('.modal-box').velocity({
+    height: '50px',
+    width: '50px',
+    opacity: '0',
+  }, {
+    duration: '200',
+  });
+
+  setTimeout(function() {
+    $('.modal-container').css('display', 'none');
+  }, 200);
+
+  $(window).disablescroll('undo');
+
+
 }
 
 
- // Check if User is a Keyboard Navigator to add/remove Chrome's default Focus
-function handleFirstTab(e) {
+ // Listen to Tab and Escape Key Inputs
+function handleKeyDown(e) {
   if (e.keyCode === 9) { // the "I am a keyboard user" key
       document.body.classList.add('user-is-tabbing');
       window.removeEventListener('keydown', handleFirstTab);
   }
+
+    if (e.keyCode === 27) { // escape key maps to keycode `27`
+       modalClose();
+   }
 }
 
-window.addEventListener('keydown', handleFirstTab);
+window.addEventListener('keydown', handleKeyDown);
 
 
 // Keep the footer on the bottom of the User Page

@@ -1,30 +1,41 @@
 <!-- Login / Register -->
-<div class="modal-login-container">
+<div class="modal-login">
     <!-- Left Side - Logo -->
-    <div class="thing1">
+    <div class="modal-login-left">
         <div class = "logo"></div>
     </div>
 
     <!-- Right Side - Information -->
-    <div class="thing2">
+    <div class="modal-login-right">
         <div class="title-container">
         <div class="signin">Sign-In</div><span>&nbsp;&nbsp;</span>
         <span class="or">OR</span><span>&nbsp;&nbsp;</span>
         <div class="signup active">Sign-Up</div>
         </div>
+
+        <!-- <form id="loginForm" action="/login", method="POST" ></form> -->
         
-        <form id="signUpForm">
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="E-mail">
-        <input type="text" placeholder="Password">
-        <button>Sign-Up</button>
-        <a href="/leave">Leave</a> <!-- copy the sign up form from the register.html - this will be for the exit button, this will just redirect them to the home page -->
-            
+        <form id="loginForm" action="/login", method="POST" >
+            <input type="hidden", name="_csrf", value= <%=csrfToken %>> </input>
+            <input type="email", name="email" placeholder="E-Mail"></input>
+            <input type="password", name="password" placeholder="Password"></input>
+            <button type = "submit"> Submit </button>
         </form>
+        <a href="/emailresetpassword">Forgot Password?</a>
     </div>
 </div>
 
-<!-- Test -->
-<div id="hi-mom">
-    <p class="hi-mom">Hi Mom</p>
+<!-- YouTube Video -->
+<div class="modal-youtube">
+    <iframe width="100%" 
+            id="jar-video" 
+            src="https://www.youtube.com/embed/wmuP8TS11f8" 
+            frameborder="0" 
+            encrypted-media 
+            allowfullscreen>
+    </iframe>
+</div>
+
+<div class="hi-mom">
+
 </div>

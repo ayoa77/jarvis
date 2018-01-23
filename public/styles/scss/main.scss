@@ -35,7 +35,7 @@ a {
 // Social Media
 
 .fb, .tw, .in, .git, .rd {
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
   color: #ADAEAF;
 
   &:hover {
@@ -43,11 +43,49 @@ a {
   }
 }
 
+// MailChimp Mailer
+
+#mc_embed_signup {
+  clear:left
+}
+
+.input-group {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex
+}
+
+.input-group input {
+  padding:10px 15px;
+
+  border-radius:4px 0 0 4px;
+  border:none;
+
+  font-size:12px;
+
+  flex:2
+}
+
+.input-group .button{
+  padding:10px 30px;
+  background:#16CAD1;
+
+  font-size:12px;
+  color:white;
+
+  border-radius:0 4px 4px 0;
+  border:none;
+
+  display:flex;
+  justify-content:center;
+  flex:1;
+}
+
 // Site-Wide Containers
 
 body {
   background: white;
-  font-family: helvetica;
+  font-family: Aileron-Light;
 }
 
 .sh-splash {
@@ -102,7 +140,7 @@ body {
 // Typography
 
 .big-text {
-  font-family: "DINPro-Bold";
+  font-family: DINPro-Bold;
   font-size: 42px;
 
   margin: 0 0 12px;
@@ -111,7 +149,7 @@ body {
 .big-header-text {
   margin: 0 0 20px; 
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   color: #63686c;
   font-size: 36px;
   line-height: 38px;
@@ -120,14 +158,14 @@ body {
 .big-text-alt {
   margin: 0 0 20px; 
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   color: #59636e;
   font-size: 32px;
   line-height: 40px;
 }
 
 .sub-text {
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   font-size: 20px;
   line-height: 26px;
   color: #59636e;
@@ -138,7 +176,7 @@ body {
 .body-text {
   // max-width: 400px;
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   font-size: 14px;
   line-height: 28px;
 
@@ -148,13 +186,13 @@ body {
 .question-text {
   margin: 0 0 20px;
 
-  font-family: "Aileron-Regular";
+  font-family: Aileron;
   font-size: 12px;
   color: $gray;
 }
 
 .little-title {
-  font-family: "Aileron-SemiBold";
+  font-family: Aileron-SemiBold;
   font-size: 15px;
   color: #333;
 }
@@ -182,7 +220,7 @@ body {
 }
 
 .navbar-expand-md .navbar-nav .nav-link {
-  font-family: "Aileron";
+  font-family: Aileron;
   font-size: 18px;
   text-align: center;
 
@@ -198,30 +236,153 @@ body {
 // Modal
 
 .modal-container {
-  height: 50px;
-  width: 50px;
-  
-  background: rgba(0, 0, 0, 0);
-  
+  height: 100vh;
+  width: 100vw;
+
+  display: none;
+
+  padding: 0;
+  margin: 0;
+
+  background: rgba(0, 0, 0, .2);
+
   position: fixed;
-  top: -50px;
-  z-index: 1000;
+  z-index: 20;
   
-  display: flex;
   justify-content: center;
   align-items: center;
-  
+
   transition: background .2s;
 }
 
-#hi-mom { // Test
-  height: 200px;
-  width: 200px;
+.modal-box {
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+
   background: white;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+// Modal Elements
+
+.modal-youtube {
+  width: 80%;
+  background: #222;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-login {
+  height: 400px;
+  width: 600px;
+  
+  background: white;
+  
+  display: flex;
+}
+
+.modal-login-left, .modal-login-right {
+  width: 50%;
+  height: 100%;
+  flex: 1;
+}
+
+.modal-login-left {
+  background: linear-gradient(to top right, $blue50, $bluegreen);  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-login-right {
+  background: white;
+  box-shadow: -8px 0 10px 1px rgba(0, 0, 0, .1);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 250px;
+  height: 250px;
+  
+  background-image: url("./../../images/logo-white.png");
+  background-size: 100% 100%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.signin, .signup {
+  font-size: 24px;
+  color: #aaa;
+  
+  border-bottom: 1px solid #fff;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.or {
+  color: #aaa;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#loginForm input{
+  width: 200px;
+  
+  margin: 10px 0;
+  padding: 4px 5px;
+  
+  border: none;
+  border-bottom: 1px solid #aaa;
+  
+  font-size: 10px;
+}
+
+#loginForm button {
+  padding: 10px 16px;
+  margin: 25px 0 0 0;
+  
+  background-color: #4CAF50; /* Green */
+  border: none;
+  
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.active {
+  border-bottom: 1px solid #333;
+  color: #007ddf;
+  
+  transition: all .3s;
+}
+
+// Modal Calls 
+
+.text-loader:hover {
+    cursor: pointer;
+    color: #222;
 }
 
 // Index
@@ -233,13 +394,13 @@ body {
 }
 
 .whitepaper-link {
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   font-size: 12px;
   letter-spacing: 2px;
   color: $bluegreen;
 
   .right-arrow {
-    font-family: "FontAwesome";
+    font-family: FontAwesome;
     font-size: 12px;
   }
 
@@ -410,13 +571,13 @@ body {
         margin: 0 0 5px;
 
         font-size: 12px;
-        font-family: "Aileron-Semibold";
+        font-family: Aileron-SemiBold;
         color: #4F545A;
       }
 
       .employee-title {
         font-size: 12px;
-        font-family: "Aileron-Light";
+        font-family: Aileron-Light;
         color: #717578;
       }
   }
@@ -424,7 +585,7 @@ body {
   .employee-social {
       height: 25px;
     
-      font-family: "FontAwesome";
+      font-family: FontAwesome;
     
       display: flex;
       justify-content: center;
@@ -468,8 +629,10 @@ body {
       -webkit-filter: none;
     }
 
-    > img {
+    & > .team-photo {
       opacity: 1;
+
+      transition: all .4s;
     }
   }
 }
@@ -478,11 +641,13 @@ body {
   height: 200px;
   width: 100%;
 
+  opacity: .4;
+
+  transition: all .4s;
+
   img {
     height: auto;
     width: 100%;
-
-    opacity: .4;
 
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
@@ -504,13 +669,13 @@ body {
     margin: 0 0 5px;
 
     font-size: 12px;
-    font-family: "Aileron-Semibold";
+    font-family: Aileron-SemiBold;
     color: #4F545A;
   }
 
   .team-title {
     font-size: 12px;
-    font-family: "Aileron-Light";
+    font-family: Aileron-Light;
     color: #717578;
   }
 }
@@ -518,7 +683,7 @@ body {
 .team-social {
   height: 25px;
 
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
 
   display: flex;
   justify-content: center;
@@ -553,7 +718,7 @@ body {
 
   font-size: 12px;
   text-align: center;
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   letter-spacing: 1px;
   color: #594262;
 
@@ -571,7 +736,7 @@ body {
 
   font-size: 12px;
   text-align: left;
-  font-family: "Aileron";
+  font-family: Aileron;
   letter-spacing: 1px;
   color: #594262;
   line-height: 20px;
@@ -620,7 +785,7 @@ body {
 
   p {
     max-width: 768px;
-    font-family: "Aileron-Light";
+    font-family: Aileron-Light;
     font-size: 16px;
     line-height: 32px;
   }
@@ -637,7 +802,7 @@ body {
 
 .training-flow, .prediction-flow {
   margin: 30px 0 20px;
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   font-size: 14px;
   text-align: center;
   color: #58616c;
@@ -785,7 +950,7 @@ body {
 
   a {
     margin: 0 0 15px;
-    font-family: "Aileron";
+    font-family: Aileron;
     color: #4F545A;
 
     &:last-child {
@@ -828,7 +993,7 @@ body {
   align-items: center;
 
   a {
-    font-family: "Aileron";
+    font-family: Aileron;
     color: #ADAEAF;
 
     &:hover {
