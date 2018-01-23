@@ -35,7 +35,7 @@ a {
 // Social Media
 
 .fb, .tw, .in, .git, .rd {
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
   color: #ADAEAF;
 
   &:hover {
@@ -85,7 +85,7 @@ a {
 
 body {
   background: white;
-  font-family: helvetica;
+  font-family: Aileron-Light;
 }
 
 .sh-splash {
@@ -140,7 +140,7 @@ body {
 // Typography
 
 .big-text {
-  font-family: "DINPro-Bold";
+  font-family: DINPro-Bold;
   font-size: 42px;
 
   margin: 0 0 12px;
@@ -149,7 +149,7 @@ body {
 .big-header-text {
   margin: 0 0 20px; 
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   color: #63686c;
   font-size: 36px;
   line-height: 38px;
@@ -158,14 +158,14 @@ body {
 .big-text-alt {
   margin: 0 0 20px; 
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   color: #59636e;
   font-size: 32px;
   line-height: 40px;
 }
 
 .sub-text {
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   font-size: 20px;
   line-height: 26px;
   color: #59636e;
@@ -176,7 +176,7 @@ body {
 .body-text {
   // max-width: 400px;
 
-  font-family: "Aileron-Light";
+  font-family: Aileron-Light;
   font-size: 14px;
   line-height: 28px;
 
@@ -186,13 +186,13 @@ body {
 .question-text {
   margin: 0 0 20px;
 
-  font-family: "Aileron-Regular";
+  font-family: Aileron;
   font-size: 12px;
   color: $gray;
 }
 
 .little-title {
-  font-family: "Aileron-SemiBold";
+  font-family: Aileron-SemiBold;
   font-size: 15px;
   color: #333;
 }
@@ -220,7 +220,7 @@ body {
 }
 
 .navbar-expand-md .navbar-nav .nav-link {
-  font-family: "Aileron";
+  font-family: Aileron;
   font-size: 18px;
   text-align: center;
 
@@ -394,13 +394,13 @@ body {
 }
 
 .whitepaper-link {
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   font-size: 12px;
   letter-spacing: 2px;
   color: $bluegreen;
 
   .right-arrow {
-    font-family: "FontAwesome";
+    font-family: FontAwesome;
     font-size: 12px;
   }
 
@@ -571,13 +571,13 @@ body {
         margin: 0 0 5px;
 
         font-size: 12px;
-        font-family: "Aileron-Semibold";
+        font-family: Aileron-SemiBold;
         color: #4F545A;
       }
 
       .employee-title {
         font-size: 12px;
-        font-family: "Aileron-Light";
+        font-family: Aileron-Light;
         color: #717578;
       }
   }
@@ -585,7 +585,7 @@ body {
   .employee-social {
       height: 25px;
     
-      font-family: "FontAwesome";
+      font-family: FontAwesome;
     
       display: flex;
       justify-content: center;
@@ -669,13 +669,13 @@ body {
     margin: 0 0 5px;
 
     font-size: 12px;
-    font-family: "Aileron-Semibold";
+    font-family: Aileron-SemiBold;
     color: #4F545A;
   }
 
   .team-title {
     font-size: 12px;
-    font-family: "Aileron-Light";
+    font-family: Aileron-Light;
     color: #717578;
   }
 }
@@ -683,7 +683,7 @@ body {
 .team-social {
   height: 25px;
 
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
 
   display: flex;
   justify-content: center;
@@ -718,7 +718,7 @@ body {
 
   font-size: 12px;
   text-align: center;
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   letter-spacing: 1px;
   color: #594262;
 
@@ -736,7 +736,7 @@ body {
 
   font-size: 12px;
   text-align: left;
-  font-family: "Aileron";
+  font-family: Aileron;
   letter-spacing: 1px;
   color: #594262;
   line-height: 20px;
@@ -785,7 +785,7 @@ body {
 
   p {
     max-width: 768px;
-    font-family: "Aileron-Light";
+    font-family: Aileron-Light;
     font-size: 16px;
     line-height: 32px;
   }
@@ -802,7 +802,7 @@ body {
 
 .training-flow, .prediction-flow {
   margin: 30px 0 20px;
-  font-family: "Aileron-Bold";
+  font-family: Aileron-SemiBold;
   font-size: 14px;
   text-align: center;
   color: #58616c;
@@ -950,7 +950,7 @@ body {
 
   a {
     margin: 0 0 15px;
-    font-family: "Aileron";
+    font-family: Aileron;
     color: #4F545A;
 
     &:last-child {
@@ -993,7 +993,7 @@ body {
   align-items: center;
 
   a {
-    font-family: "Aileron";
+    font-family: Aileron;
     color: #ADAEAF;
 
     &:hover {
