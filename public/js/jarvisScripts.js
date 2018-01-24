@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
+    // modalLoad('modal-login');
 
  });
 
