@@ -19,7 +19,7 @@
             handleWheel : true,
             handleScrollbar: true,
             handleKeys : true,
-            scrollEventKeys : [32, 33, 34, 35, 36, 37, 38, 39, 40]
+            scrollEventKeys : [33, 34, 35, 36, 37, 38, 39, 40]
         }, options);
         
         this.$container = $container;
