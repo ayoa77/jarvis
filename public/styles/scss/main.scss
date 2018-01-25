@@ -34,7 +34,7 @@ a {
 
 // Social Media
 
-.fb, .tw, .in, .git, .rd {
+.tg, .tw, .in, .git, .rd {
   font-family: FontAwesome;
   color: #ADAEAF;
 
@@ -45,43 +45,7 @@ a {
 
 // MailChimp Mailer
 
-#mc_embed_signup {
-  clear:left
-}
 
-.input-group {
-  display: flex;
-
-  // box-shadow: 0px 3px 5px #000;
-}
-
-.input-group input {
-  padding: 8px 15px;
-
-  border-radius:4px 0 0 4px;
-  border:none;
-
-  background: #f1f1f1;
-
-  font-size:12px;
-
-  flex:2;
-}
-
-.input-group .button{
-  padding:10px 30px;
-  background:#16CAD1;
-
-  font-size:12px;
-  color:white;
-
-  border-radius:0 4px 4px 0;
-  border:none;
-
-  display:flex;
-  justify-content:center;
-  flex:1;
-}
 
 // Site-Wide Containers
 
@@ -96,7 +60,7 @@ body {
 }
 
 .sty-splash {
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   position: relative;
   background: linear-gradient(#fff, $blue10);
 }
@@ -143,7 +107,7 @@ body {
 
 .big-text {
   font-family: DINPro-Bold;
-  font-size: 42px;
+  font-size: $font-xl;
 
   margin: 0 0 12px;
 }
@@ -153,7 +117,7 @@ body {
 
   font-family: Aileron-Light;
   color: #63686c;
-  font-size: 36px;
+  font-size: $font-md;
   line-height: 38px;
 }
 
@@ -162,13 +126,13 @@ body {
 
   font-family: Aileron-Light;
   color: #59636e;
-  font-size: 32px;
+  font-size: $font-lg;
   line-height: 40px;
 }
 
 .sub-text {
   font-family: Aileron-Light;
-  font-size: 20px;
+  font-size: $font-sm;
   line-height: 26px;
   color: #59636e;
 
@@ -176,26 +140,22 @@ body {
 }
 
 .body-text {
-  // max-width: 400px;
-
   font-family: Aileron-Light;
-  font-size: 14px;
+  font-size: $font-xs;
   line-height: 28px;
-
-  // margin: 0 0 20px;
 }
 
 .question-text {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 
   font-family: Aileron;
-  font-size: 12px;
+  font-size: $font-xxs;
   color: $gray;
 }
 
 .little-title {
   font-family: Aileron-SemiBold;
-  font-size: 15px;
+  font-size: $font-xs;
   color: #333;
 }
 
@@ -227,11 +187,19 @@ body {
 
 .navbar-expand-md .navbar-nav .nav-link {
   font-family: Aileron;
-  font-size: 18px;
+  font-size: $font-sm;
   text-align: center;
 
   padding-right: .8rem;
   padding-left: .8rem;
+}
+
+.nav-item:first-child {
+  margin-top: 10px;
+}
+
+.nav-link {
+  margin-bottom: 10px;
 }
 
 .navbar-light .navbar-toggler {
@@ -335,7 +303,7 @@ body {
 }
 
 .signin, .signup {
-  font-size: 24px;
+  font-size: $font-sm;
   color: #aaa;
 
   padding: 0 0 4px;
@@ -349,7 +317,7 @@ body {
 }
 
 .or {
-  font-size: 14px;
+  font-size: $font-xs;
   color: #aaa;
 
   margin: 0 10px;
@@ -398,7 +366,7 @@ body {
   border: none;
   border-bottom: 1px solid #aaa;
   
-  font-size: 14px;
+  font-size: $font-xs;
 }
 
 #loginForm button, #registerForm button, #forgotPassForm button {
@@ -413,7 +381,7 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: $font-xs;
 
   transition: background .2s;
 
@@ -426,7 +394,7 @@ body {
   width: 100%;
   margin: 30px 0 0 0;
 
-  font-size: 14px;
+  font-size: $font-xs;
   text-align: center;
   &:hover {
     cursor: pointer;
@@ -454,19 +422,12 @@ body {
   display: flex;
   align-items: center;
 
-  transition: padding .2s;
+  transition: box-shadow .2s;
 
   &:hover {
     cursor: pointer;
 
-    padding: 30px;
-
-    justify-content: center;
-
-    &> .video-loader-text {
-      width: 0;
-      transition: width .2s;
-    }
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .2);
   }
 
   .play-icon {
@@ -475,7 +436,7 @@ body {
 
     padding-left: 13px;
 
-    font-size: 20px;
+    font-size: $font-sm;
     color: #ccc;
     
     border: 1px solid #ccc;
@@ -493,15 +454,13 @@ body {
     white-space: nowrap;
 
     font-family: Aileron;
-    font-size: 12px;
+    font-size: $font-xxs;
     color: #8B8D91;
     text-align: center;
     
     display: flex;
     justify-content: center;
     align-items: center;
-
-    transition: width .2s;
   }
 }
 
@@ -510,18 +469,18 @@ body {
 .cont-splash {
   max-width: 400px;
 
-  overflow: hidden;
+  margin-top: 25px;
 }
 
 .whitepaper-link {
   font-family: Aileron-SemiBold;
-  font-size: 12px;
+  font-size: $font-xxs;
   letter-spacing: 2px;
   color: $bluegreen;
 
   .right-arrow {
     font-family: FontAwesome;
-    font-size: 12px;
+    font-size: $font-xxs;
   }
 
   &:hover {
@@ -690,13 +649,14 @@ body {
       .employee-name {
         margin: 0 0 5px;
 
-        font-size: 12px;
+        font-size: $font-xxs;
         font-family: Aileron-SemiBold;
         color: #4F545A;
       }
 
       .employee-title {
         font-size: 12px;
+        text-align: center;
         font-family: Aileron-Light;
         color: #717578;
       }
@@ -741,13 +701,9 @@ body {
   transition: all .4s;
 
   &:hover {
+    cursor: pointer;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, .2);
     transition: all .4s;
-
-    img {
-      filter: none;
-      -webkit-filter: none;
-    }
 
     & > .team-photo {
       opacity: 1;
@@ -769,9 +725,6 @@ body {
     height: auto;
     width: 100%;
 
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-
     transition: all .4s;
   }
 }
@@ -788,13 +741,18 @@ body {
   .team-name {
     margin: 0 0 5px;
 
-    font-size: 12px;
+    text-align: center;
+
+    font-size: $font-xxs;
     font-family: Aileron-SemiBold;
     color: #4F545A;
   }
 
   .team-title {
     font-size: 12px;
+
+    text-align: center;
+
     font-family: Aileron-Light;
     color: #717578;
   }
@@ -836,7 +794,7 @@ body {
   margin: 20px auto;
   padding: 15px 0;
 
-  font-size: 12px;
+  font-size: $font-xs;
   text-align: center;
   font-family: Aileron-SemiBold;
   letter-spacing: 1px;
@@ -854,7 +812,7 @@ body {
 
   background: #fff;
 
-  font-size: 12px;
+  font-size: $font-xs;
   text-align: left;
   font-family: Aileron;
   letter-spacing: 1px;
@@ -906,7 +864,7 @@ body {
   p {
     max-width: 768px;
     font-family: Aileron-Light;
-    font-size: 16px;
+    font-size: $font-sm;
     line-height: 32px;
   }
 }
@@ -923,7 +881,7 @@ body {
 .training-flow, .prediction-flow {
   margin: 30px 0 20px;
   font-family: Aileron-SemiBold;
-  font-size: 14px;
+  font-size: $font-xs;
   text-align: center;
   color: #58616c;
 }
@@ -952,7 +910,7 @@ body {
 
   text-align: center;
   color: #4F545A;
-  font-size: 24px;
+  font-size: $font-md;
   line-height: 32px;
 
   display: flex;
@@ -1095,7 +1053,7 @@ body {
     width: 40px;
     margin: 8px;
 
-    font-size: 30px;
+    font-size: $font-md;
 
     display: flex;
     justify-content: center;
@@ -1106,7 +1064,7 @@ body {
 }
 
 .ftr-tos {
-  font-size: 12px;
+  font-size: $font-xs;
 
   display: flex;
   justify-content: center;
@@ -1126,7 +1084,7 @@ body {
   margin: 20px 0;
 
   font-family: DINPro-Bold;
-  font-size: 12px;
+  font-size: $font-xxs;
   color: #ADAEAF;
 
   display: flex;
@@ -1207,9 +1165,98 @@ body {
 
 @media (min-width: 768px) {
 
-  .big-header-text {
-    font-size: 60px;
+
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // vvv  NEW STUFF FOR TYPOGRAPHY  vvv
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+  .big-text {
+    font-size: $font-xxl;
     line-height: 60px;
+  }
+  
+  .big-header-text {
+    font-size: $font-md;
+    line-height: 38px;
+  }
+  
+  .big-text-alt {
+    font-size: $font-lg;
+    line-height: 40px;
+  }
+  
+  .sub-text {
+    font-size: $font-md;
+    line-height: 26px;
+  }
+  
+  .body-text {
+    font-size: $font-xs;
+    line-height: 32px;
+  }
+  
+  .question-text {
+    font-size: $font-xxs;
+  }
+  
+  .little-title {
+    font-size: $font-xs;
+  }
+
+  .navbar-expand-md .navbar-nav .nav-link {
+    font-size: $font-sm;
+   }
+  
+   .whitepaper-link {
+    font-family: Aileron-SemiBold;
+    font-size: $font-xxs;
+    letter-spacing: 2px;
+    color: $bluegreen;
+  
+    .right-arrow {
+      font-family: FontAwesome;
+      font-size: $font-xxs;
+    }
+  }
+  
+  .graph-info, .percentage-info {
+    font-size: $font-xs;
+    letter-spacing: 1px;
+  }
+  
+  .puzzle-info {
+    font-size: $font-xs;
+    line-height: 20px;
+  }
+  
+  .gradient-drop p {
+    max-width: 768px;
+    font-family: Aileron-Light;
+    font-size: $font-sm;
+    line-height: 32px;
+  }
+  
+  .training-flow, .prediction-flow {
+    font-size: $font-xs;
+  }
+  
+  .title-box {
+    font-size: $font-md;
+    line-height: 32px;
+  }
+  
+  .ftr-tos {
+    font-size: $font-xs;
+  }
+
+
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  // ^^^  NEW STUFF FOR TYPOGRAPHY  ^^^
+  // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  .nav-item:first-child {
+    margin-top: 0;
   }
 
   .big-text-alt {
@@ -1225,7 +1272,7 @@ body {
   }
 
   .navbar-expand-md .navbar-nav .nav-link {
-    font-size: 14px;
+    font-size: $font-xs;
     text-align: left;
   }
   
@@ -1233,10 +1280,6 @@ body {
   //   max-width: 540px;
   //   margin: 0 auto;
   // }
-
-  .big-text {
-    font-size: 48px;
-  }
 
   #jar-video {
     height: 400px;
