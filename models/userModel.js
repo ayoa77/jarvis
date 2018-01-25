@@ -11,6 +11,20 @@ var userSchema = new Schema({
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Date, default: Date.now() },
     status:{ type: String, enum: ['NEW', 'EMAIL', 'EULA']},
+    wallet: String,
+    jarvis: { type: String, default: "0" },
+    ethereum: { type: String, default: "0" }
 });
+
+userSchema.methods.isEmailAvailabe = function isEmailAvailable(email) {
+    return new Promise(function (resolve, reject) {
+        userSchema.findOne({ 'email': email }, function (err, results) {
+            if (err) {
+                return resolve(err);
+            }
+            reject(results);
+        });
+    });
+};
 
 mongoose.model('user', userSchema);
