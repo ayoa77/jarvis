@@ -34,10 +34,11 @@ router.post('/', function (req, res, next){
     // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
     req.checkBody('name', __('error.name_blank')).notEmpty();
     req.checkBody('email', __('error.email_blank')).notEmpty();
+    req.checkBody('email').isEmailAvailable();
     req.checkBody('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
     req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
 
-    var errors = req.validationErrors();
+    var errors = req.asyncValidationErrors();
     if (errors) {
         console.log(errors)
         res.send(errors);

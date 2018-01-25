@@ -60,7 +60,21 @@ i18n.expressBind(app, {
 
 app.use(helmet());
 
-app.use(validator());
+app.use(validator({
+  customValidators: {
+    isEmailAvailable: function (name) {
+      return new Promise(function (resolve, reject) {
+        userSchema.findOne({ 'email': email }, function (err, results) {
+          if (err) {
+            return resolve(err);
+          }
+          reject(results);
+        });
+      });
+    }
+  }
+
+}));
 // view engine and express setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
