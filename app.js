@@ -21,11 +21,6 @@ var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
-<<<<<<< HEAD
-=======
-
-// var node_where  = require("node-where")
->>>>>>> master
 
 
 
