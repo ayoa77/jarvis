@@ -9,12 +9,25 @@ var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 var csrf = require('csurf'); 
 var csrfProtection = csrf({ cookie: true });
+var validator = require("express-validator");
+var authenticate = require('../middleware/authmiddleware.js');
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
     auth: {
         api_key: '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'
     }
 };
+
+function isEmailAvailable(email) {
+    return new Promise(function (resolve, reject) {
+        userSchema.findOne({ 'email': email }, function (err, results) {
+            if (err) {
+                return resolve(err);
+            }
+            reject(results);
+        });
+    });
+}
 
 
 router.get('/', csrfProtection, function (req, res, next){
@@ -27,32 +40,17 @@ router.get('/', csrfProtection, function (req, res, next){
     }
     // res.redirect('/404')
 });
-router.post('/', function (req, res, next){
-    // This will validate the information written by the user to register   
-    req.body.email = req.body.email.toLowerCase();
-    req.check('email', __('error.email_format_incorrect')).isEmail();
-    req.check('name', __('error.name_blank')).notEmpty();
-    req.check('email', __('error.email_blank')).notEmpty();
-    req.check('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
-    req.check('email', __("error.duplicate_email")).isEmailAvailable();  //uses custom validator from app.js to check if an email is available 
+router.post('/', authenticate.register, function (req, res, next){
 
-     req.asyncValidationErrors().catch(function (errors) {
-        if (errors) {
-            console.log(errors)
-            return res.send(errors);
-     };
-     return req.body;
-    }).then( function(body) {
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
-        name: body.name,
-        country: body.country,
+        name: req.body.name,
         lang: req.session.locale || ' ',
-        email: body.email,
+        email: req.body.email,
         password: hash,
         commitEther: '0',
         status: 'NEW',
-        wallet: 'wallets'
+        wallet: 'blank'
     });
     user.save(function (err) {
         if (err) {
@@ -77,13 +75,11 @@ router.post('/', function (req, res, next){
                 // req.session.sessionFlash = {
                 //     type: 'success',
                 //     message: __('email.verification_email')
-                // }
             
             });
             });
         };  
-        });    
-});    
+        });        
 });     
 
 module.exports = router;

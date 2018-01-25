@@ -16,4 +16,15 @@ var userSchema = new Schema({
     ethereum: { type: String, default: "0" }
 });
 
+userSchema.methods.isEmailAvailabe = function isEmailAvailable(email) {
+    return new Promise(function (resolve, reject) {
+        userSchema.findOne({ 'email': email }, function (err, results) {
+            if (err) {
+                return resolve(err);
+            }
+            reject(results);
+        });
+    });
+};
+
 mongoose.model('user', userSchema);

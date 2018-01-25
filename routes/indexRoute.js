@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var mailingListSchema = mongoose.model('mailingList', mailingListSchema);
-// var flash = require('express-flash');
 var Mailchimp = require('mailchimp-api-v3');
 var validator = require('validator');
 //DEV API

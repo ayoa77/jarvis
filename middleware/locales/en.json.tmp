@@ -101,10 +101,10 @@
 	"index.7.max_role": "Co-Founder",
 	"index.7.chelsea": "Chelsea Chen",
 	"index.7.chelsea_role": "Business Development",
-	"error.email_format_incorrect": "error.email_format_incorrect",
+	"error.password_format_incorrect": "",
 	"error.name_blank": "error.name_blank",
+	"error.email_format_incorrect": "error.email_format_incorrect",
 	"error.email_blank": "error.email_blank",
-	"error.password_format_incorrect": "error.password_format_incorrect",
-	"error.duplicate_email": "error.duplicate_email",
-	"error.default": "error.default"
+	"error.password_blank": "error.password_blank",
+	"error.duplicate_email": "error.duplicate_email"
 }

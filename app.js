@@ -62,7 +62,7 @@ app.use(helmet());
 
 app.use(validator({
   customValidators: {
-    isEmailAvailable: function (name) {
+    isEmailAvailable: function (email) {
       return new Promise(function (resolve, reject) {
         userSchema.findOne({ 'email': email }, function (err, results) {
           if (err) {
@@ -73,7 +73,6 @@ app.use(validator({
       });
     }
   }
-
 }));
 // view engine and express setup
 app.set('views', path.join(__dirname, 'views'));

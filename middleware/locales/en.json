@@ -129,5 +129,6 @@
 	"index.7.max": "Max Chang",
 	"index.7.max_role": "Co-Founder",
 	"index.7.chelsea": "Chelsea Chen",
-	"index.7.chelsea_role": "Business Development"
+	"index.7.chelsea_role": "Business Development",
+	"error.password_format_incorrect": ""
 }
