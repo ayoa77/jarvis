@@ -1,31 +1,48 @@
-#mc_embed_signup {
-    clear: left;
-}
+// Mail-Chimp Styles
 
+#mc_embed_signup {
+    clear:left
+}
+  
 .input-group {
     display: flex;
 }
-
+  
 .input-group input {
-    padding: 10px 15px;
+    padding: 8px 15px;
 
-    border-radius: 4px 0 0 4px;
-    border: none;
+    border-radius:4px 0 0 4px;
+    border:none;
 
-    font-size: 12px;
-    flex: 2;
+    background: #f1f1f1;
+
+    font-size: $font-xxs;
+
+    flex:2;
 }
+  
+.email-signup {
+    width: 100%;
+}
+  
+.input-group .button{
+    padding:10px 30px;
+    background:#16CAD1;
 
-.input-group .button {
-    background: #16CAD1;
-    padding: 10px 30px;
-    
-    font-size: 12px;
-    color: white;
-    
-    border-radius: 0 4px 4px 0;
-    border: none;
-    
-    @include flexed;
-    flex: 1;
+    font-size: $font-xxs;
+    color:white;
+
+    border-radius:0 4px 4px 0;
+    border:none;
+
+    display:flex;
+    justify-content:center;
+    flex:1;
+
+    transition: background .2s;
+
+    &:hover {
+        cursor: pointer;
+        background:#10a0a5;
+    }
 }
