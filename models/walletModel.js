@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var walletSchema = new Schema({
 
-    wallet: { type: String, unique: true },
+    wallet: String,
     jarvis: { type: String, default: "0" },
     ethereum: { type: String, default: "0" },
 });

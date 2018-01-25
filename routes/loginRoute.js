@@ -9,7 +9,7 @@ var csrfProtection = csrf({ cookie: true });
 // var requireLogin = require('../middleware/requireLogin.js');
 // var flash = require('express-flash');
 
-router.get('/', function (req, res) {
+router.get('/', csrfProtection, function (req, res) {
     var lang = req.session.locale;
     if (!req.user) {
         res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });

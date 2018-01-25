@@ -54,7 +54,7 @@ i18n.expressBind(app, {
   extension: '.json',
   // setup some locales - other locales default to en silently
   locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
-  // change the cookie name from 'locale' to 'lang'
+  // change the cookie name from 'lang' to 'locale'
   cookieName: 'locale'
 });
 
@@ -133,31 +133,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// //middleware for csrf
-// app.use(csrf());
-//would like to put this on the user update
-app.use(function (req, res, next) {
-  if (req.session && req.session.user) {
-    userSchema.findOne({ email: req.session.user.email }, function (err, user) {
-      if (user) {
-        console.log(user);
-        req.user = user;
-        req.session.user.commitEther = user.commitEther || ' ';
-        req.session.user._id = user._id;
-        req.session.user.name = user.name;
-        req.session.user.country = user.country;
-        req.session.user.email = user.email;
-        res.locals.user = req.session.user;
-      }
-      next();
-    });
-  } else {
-    next();
-  }
-});
-
-// Route that creates a flash message using custom middleware
-
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
 var userRoute = require('./routes/userRoute');
@@ -215,15 +190,11 @@ app.get('/testing', function (req, res) {
   console.log(req.session.locale);
   console.log(req.i18n.getLocale());
   console.log("---------------------------");
-  // res.send(req.i18n.__('1.Language'));
-  res.render('testing');
+  res.send(req.i18n.__('1.Language'));
+  // res.render('testing');
 });
 
-app.post('/endpoint', function (req, res) {
-  var obj = {};
-  console.log('body: ' + JSON.stringify(req.body));
-  res.send(req.body);
-});
+
 
 
 //LEAVING AFTER BEING PRESENTED WITH EULA,

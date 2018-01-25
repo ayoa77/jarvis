@@ -30,31 +30,31 @@ router.get('/', csrfProtection, function (req, res, next){
 router.post('/', function (req, res, next){
     console.log(req.body);
     req.body.email = req.body.email.toLowerCase();
-    req.checkBody('email', __('error.email_format_incorrect')).isEmail();
+    req.check('email', __('error.email_format_incorrect')).isEmail();
     // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
-    req.checkBody('name', __('error.name_blank')).notEmpty();
-    req.checkBody('email', __('error.email_blank')).notEmpty();
-    req.checkBody('email').isEmailAvailable();
-    req.checkBody('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
-    req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
+    req.check('name', __('error.name_blank')).notEmpty();
+    req.check('email', __('error.email_blank')).notEmpty();
+    req.check('email', 'This email is already taken').isEmailAvailable();
+    req.check('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
 
-    var errors = req.asyncValidationErrors();
-    if (errors) {
-        console.log(errors)
-        res.send(errors);
-        return;
-    } else {
+     req.asyncValidationErrors().catch(function (errors) {
+        if (errors) {
+            console.log(errors)
+            return res.send(errors);
+     };
+     next();
+    });
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         name: req.body.name,
         country: req.body.country,
-        lang: res.session.locale || ' ',
+        lang: req.session.locale || ' ',
         email: req.body.email,
         password: hash,
         commitEther: '0',
-        status: 'NEW'
+        status: 'NEW',
+        wallet: 'wallets'
     });
-    };
     user.save(function (err) {
         if (err) {
             console.log(err);
@@ -62,9 +62,7 @@ router.post('/', function (req, res, next){
             if (err.code === 11000) {
                 error = __('error.duplicate_email');
             }
-            console.log(error)
-            res.send(JSON.stringify(error));
-            return;
+         
 
         } else {
 
@@ -74,12 +72,11 @@ router.post('/', function (req, res, next){
             token.save(function (err) {
                 if (err) { return res.send({ msg: err.message }); }
             //sending token mailer
-            // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.send({ msg: err.message }); }
-                res.status(200).send(__('email.verification_email'));
+                return  res.status(200).send(__('email.verification_email'));
                 // req.session.sessionFlash = {
                 //     type: 'success',
                 //     message: __('email.verification_email')
