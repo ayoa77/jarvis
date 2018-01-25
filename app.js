@@ -125,6 +125,7 @@ app.use(function (req, res, next) {
   req.i18n.setLocaleFromSessionVar();
   next();
 });
+
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
