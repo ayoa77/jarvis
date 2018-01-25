@@ -28,28 +28,27 @@ router.get('/', csrfProtection, function (req, res, next){
     // res.redirect('/404')
 });
 router.post('/', function (req, res, next){
-    console.log(req.body);
+    // This will validate the information written by the user to register   
     req.body.email = req.body.email.toLowerCase();
     req.check('email', __('error.email_format_incorrect')).isEmail();
-    // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
     req.check('name', __('error.name_blank')).notEmpty();
     req.check('email', __('error.email_blank')).notEmpty();
-    req.check('email', 'This email is already taken').isEmailAvailable();
     req.check('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    req.check('email', __("error.duplicate_email")).isEmailAvailable();  //uses custom validator from app.js to check if an email is available 
 
      req.asyncValidationErrors().catch(function (errors) {
         if (errors) {
             console.log(errors)
             return res.send(errors);
      };
-     next();
-    });
+     return req.body;
+    }).then( function(body) {
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
-        name: req.body.name,
-        country: req.body.country,
+        name: body.name,
+        country: body.country,
         lang: req.session.locale || ' ',
-        email: req.body.email,
+        email: body.email,
         password: hash,
         commitEther: '0',
         status: 'NEW',
@@ -57,13 +56,11 @@ router.post('/', function (req, res, next){
     });
     user.save(function (err) {
         if (err) {
-            console.log(err);
             error = __('error.default');
-            if (err.code === 11000) {
+        if (err.code === 11000) {
                 error = __('error.duplicate_email');
             }
-         
-
+            console.log(error);
         } else {
 
             //create new token
@@ -81,12 +78,12 @@ router.post('/', function (req, res, next){
                 //     type: 'success',
                 //     message: __('email.verification_email')
                 // }
-
+            
             });
             });
         };  
         });    
-    });    
-;   
+});    
+});     
 
 module.exports = router;
