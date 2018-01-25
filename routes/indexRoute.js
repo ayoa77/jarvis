@@ -10,17 +10,21 @@ var mailchimp = new Mailchimp('5e0b4a1b50b66ae689fb23e520122405-us17');
 //LIVE API
 // var mailchimp = new Mailchimp('mail chimp api from jarvis');
 var md5 = require('md5');
+langCheck = require('../middleware/langChecker.js');
 
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-   console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
+router.get('/', langCheck, function (req, res, next) {
+  //  console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
+  // console.log(lang)
   // console.log(req.session);
   // console.log(res.locals.sessionFlash)
   // console.log(req.i18n.__('Language'))
   //  req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en';
+  console.log(req.session.locale);
   res.render('index', { title: 'Jarvis',
+  lang:lang,
   sessionFlash: res.locals.sessionFlash, 
   modal: req.params.modal,
   csrfToken: req.csrfToken() });

@@ -50,16 +50,16 @@ if ('development' == app.get('env')) {
 
 // Attach the i18n property to the express request object
 // And attach helper methods for use in templates
-i18n.expressBind(app, {
-  register: global,
-  directory: "./middleware/locales",
-  // register: i18n,
-  extension: '.json',
-  // setup some locales - other locales default to en silently
-  locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
-  // change the cookie name from 'locale' to 'lang'
-  cookieName: 'locale'
-});
+// i18n.expressBind(app, {
+//   register: global,
+//   directory: "./middleware/locales",
+//   // register: i18n,
+//   extension: '.json',
+//   // setup some locales - other locales default to en silently
+//   locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
+//   // change the cookie name from 'locale' to 'lang'
+//   cookieName: 'locale'
+// });
 
 // TODO ---- Find Users country via IP and compare with 
 
