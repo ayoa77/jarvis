@@ -50,7 +50,7 @@ if ('development' == app.get('env')) {
 // And attach helper methods for use in templates
 
 i18n.expressBind(app, {
-  directory: "./middleware/locales",
+  directory: "./middleware/backups/locales",
 
   extension: '.json',
   // setup some locales - other locales default to en silently
