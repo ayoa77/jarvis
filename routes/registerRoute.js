@@ -27,55 +27,94 @@ router.get('/', csrfProtection, function (req, res, next){
     }
     // res.redirect('/404')
 });
-router.post('/', function (req, res, next){
-    console.log(req.body);
-    req.body.email = req.body.email.toLowerCase();
-    req.checkBody('email', __('error.email_format_incorrect')).isEmail();
-    // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
-    req.checkBody('name', __('error.name_blank')).notEmpty();
-    req.checkBody('email', __('error.email_blank')).notEmpty();
-    req.checkBody('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
-    req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
+router.post('/',  (req, res, next)=>{
+    var input = req.body
+    // req.body.email = req.body.email.toLowerCase();
+    // req.checkBody('email', __('error.email_format_incorrect')).isEmail();
+    // // req.checkBody('country', `Country cannot be blank <%= __('error.Language')__.error.password-format-incorrect %>`).notEmpty();
+    // req.checkBody('name', __('error.name_blank')).notEmpty();
+    // req.checkBody('email', __('error.email_blank')).notEmpty();
+    // req.checkBody('password', __('error.password_format_incorrect')).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
+    // req.sanitizeBody('email').normalizeEmail({ remove_dots: false });
+//checking to see if body passes validations
+    // req.asyncValidationErrors().catch(err => {
+    //     if (err) {
+    //         console.log(err)
+    //         return res.send(err);
+    //     }
+    // req.checkBody({
 
-    var errors = req.validationErrors();
-    if (errors) {
-        console.log(errors)
-        res.send(errors);
-        return;
-    } else {
-    var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    var user = new userSchema({
-        name: req.body.name,
-        country: req.body.country,
-        lang: res.session.locale || ' ',
-        email: req.body.email,
-        password: hash,
-        commitEther: '0',
-        status: 'NEW'
-    });
-    };
-    user.save(function (err) {
+    //     'name': {
+    //         notEmpty: true,
+    //         errorMessage: 'Username is required'
+    //     },
+
+    //     'email': {
+    //         notEmpty: true,
+    //         isEmail: {
+    //             errorMessage: 'Invalid Email Address'
+    //         },
+    //         errorMessage: 'Email is required'
+    //     },
+
+    //     'password': {
+    //         notEmpty: true,
+    //         errorMessage: 'Password is required'
+    //     },
+    // });
+    // req.check('email', 'This username is already taken').isEmailAvailable();
+    // check('password', __('error.password_format_incorrect'))
+    //     .isLength({ min: 5 })
+    //     .matches(/\d/)
+    // req.asyncValidationErrors().catch(function (errors) {
+    //     if (errors) {
+    //         return res.send({
+    //             success: false,
+    //             errors: errors
+    //         });
+    //     };
+    // });
+    // next();
+
+        var hash = bcrypt.hashSync(input.password, bcrypt.genSaltSync(10));
+        var user = new userSchema({
+            name: input.name,
+            country: input.country,
+            lang: req.session.locale || ' ',
+            email: input.email,
+            password: hash,
+            commitEther: '0',
+            status: 'NEW'
+        });
+        console.log('got here');
+    user.save()
+    .catch(err => {
         if (err) {
             console.log(err);
             error = __('error.default');
             if (err.code === 11000) {
                 error = __('error.duplicate_email');
             }
-            console.log(error)
+            console.log(error);
             res.send(JSON.stringify(error));
             return;
-
-        } else {
-
-            //create new token
-            var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+            
+        }
+    })
+    
+    //create new token
+    var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') })
             // Save the verification token
-            token.save(function (err) {
-                if (err) { return res.send({ msg: err.message }); }
+            token.save().catch(err => {
+                if (err) { return res.send({ msg: err.message }); 
+            }
+        })
             //sending token mailer
             // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
-            var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+            var transporter = nodemailer.createTransport(sgTransport(options))
+            console.log('got here')
+          
             transporter.sendMail(mailOptions, function (err) {
                 if (err) { return res.send({ msg: err.message }); }
                 res.status(200).send(__('email.verification_email'));
@@ -83,12 +122,8 @@ router.post('/', function (req, res, next){
                 //     type: 'success',
                 //     message: __('email.verification_email')
                 // }
+            });
+            });
 
-            });
-            });
-        };  
-        });    
-    });    
-;   
 
 module.exports = router;

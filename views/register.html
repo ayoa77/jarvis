@@ -19,7 +19,6 @@
   //     body = {}
         $("button").on('click',function(){
             body = ($("#registerForm").serialize());
-            console.log(body._csrf)
                     $.ajax({
                 method: 'POST',
                 url: `/register`,

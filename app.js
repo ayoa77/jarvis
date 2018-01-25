@@ -21,11 +21,7 @@ var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
-<<<<<<< HEAD
-=======
-
-// var node_where  = require("node-where")
->>>>>>> master
+var middleware = require('./middleware/middleware.js');
 
 
 
@@ -64,8 +60,22 @@ i18n.expressBind(app, {
 });
 
 app.use(helmet());
+//setting custom validator for emails
+app.use(validator({
+  customValidators: {
+    isEmailAvailable: function (username) {
+      return new Promise(function (resolve, reject) {
+        userSchema.findOne({ 'email': email }, function (err, results) {
+          if (err) {
+            return resolve(err);
+          }
+          reject(results);
+        });
+      });
+    }
+  }
 
-app.use(validator());
+}));
 // view engine and express setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
@@ -160,10 +170,11 @@ var tokenController = require('./controllers/tokenController');
 var passwordController = require('./controllers/passwordController');
 
 
+
 app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/login', loginRoute);
-app.use('/register', registerRoute);
+app.use('/register', middleware.register, registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
