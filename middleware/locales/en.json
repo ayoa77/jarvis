@@ -122,15 +122,12 @@
 	"technology.3.pluggable_consensus_engine": "is designed and adopted in SVM which allows different consensus mechanisms (eg. DPoS or DAG based PBFT algorithms) to be used for different types of replicated states.",
 	"technology.3.thpl": "THOR",
 	"technology.3.intuitive_development": "is a contract-oriented, high-level, multi-paradigm programming language to ease the development of decentralized AI applications and make intelligent contract simple, clean, and intuitive.",
-	"technology.1.umz": "technology.1.umz",
-	"technology.1.csg": "technology.1.csg",
-	"error.default": "Sorry, something went wrong. Please try again, or contact us if this problem persists",
-	"error.email_format_incorrect": "This is not a valid email",
-	"error.email_blank": "Your email cannot be blank.",
-	"error.password_format_incorrect": "Password cannot be blank, must be be between 6 and 20 characters, and have at least one number",
-	"error.name_blank": "Your name cannot be blank",
-	"error.duplicate_email": "This email is already taken, please login to your account, or use a different email",
-	"email.verification_email": "A verification email has been sent, please click on the link in your email."
-	
-
+	"technology.1.umz": "Unified Model Zoo",
+	"technology.1.csg": "Common Sense Graph",
+	"index.7.mu-chi": "Mu-Chi Sung",
+	"index.7.mu-chi_role": "CTO",
+	"index.7.max": "Max Chang",
+	"index.7.max_role": "Co-Founder",
+	"index.7.chelsea": "Chelsea Chen",
+	"index.7.chelsea_role": "Business Development"
 }

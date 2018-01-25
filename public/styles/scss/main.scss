@@ -50,20 +50,22 @@ a {
 }
 
 .input-group {
-  display:-webkit-box;
-  display:-ms-flexbox;
-  display:flex
+  display: flex;
+
+  // box-shadow: 0px 3px 5px #000;
 }
 
 .input-group input {
-  padding:10px 15px;
+  padding: 8px 15px;
 
   border-radius:4px 0 0 4px;
   border:none;
 
+  background: #f1f1f1;
+
   font-size:12px;
 
-  flex:2
+  flex:2;
 }
 
 .input-group .button{
@@ -219,6 +221,10 @@ body {
   }
 }
 
+.nav-item:hover {
+  cursor: pointer;
+}
+
 .navbar-expand-md .navbar-nav .nav-link {
   font-family: Aileron;
   font-size: 18px;
@@ -303,11 +309,16 @@ body {
 .modal-login-right {
   background: white;
   box-shadow: -8px 0 10px 1px rgba(0, 0, 0, .1);
+  padding: 60px 0;
   
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.signin, .signup, .or, .login-forgot-pass, button {
+  font-family: Aileron;
 }
 
 .logo {
@@ -321,15 +332,16 @@ body {
 .title-container {
   display: flex;
   align-items: center;
-  
-  margin-bottom: 20px;
 }
 
 .signin, .signup {
   font-size: 24px;
   color: #aaa;
+
+  padding: 0 0 4px;
   
   border-bottom: 1px solid #fff;
+
   
   &:hover {
     cursor: pointer;
@@ -337,7 +349,10 @@ body {
 }
 
 .or {
+  font-size: 14px;
   color: #aaa;
+
+  margin: 0 10px;
 }
 
 #loginForm {
@@ -345,7 +360,36 @@ body {
   flex-direction: column;
 }
 
-#loginForm input{
+.form-box {
+  height: 250px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.login-box, .register-box, .forgot-pass-box {
+  height: 250px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: margin .2s;
+}
+
+#loginForm {
+  margin-top: 30px;
+}
+
+#loginForm, #registerForm, #forgotPassForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginForm input, #registerForm input, #forgotPassForm input {
   width: 200px;
   
   margin: 10px 0;
@@ -354,14 +398,15 @@ body {
   border: none;
   border-bottom: 1px solid #aaa;
   
-  font-size: 10px;
+  font-size: 14px;
 }
 
-#loginForm button {
+#loginForm button, #registerForm button, #forgotPassForm button {
+  width: 150px;
   padding: 10px 16px;
-  margin: 25px 0 0 0;
+  margin: 15px 0 0;
   
-  background-color: #4CAF50; /* Green */
+  background: $blue50;
   border: none;
   
   color: white;
@@ -369,20 +414,95 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+
+  transition: background .2s;
+
+  &:hover {
+    background: $bluegreen;
+  }
+}
+
+.login-forgot-pass {
+  width: 100%;
+  margin: 30px 0 0 0;
+
+  font-size: 14px;
+  text-align: center;
+  &:hover {
+    cursor: pointer;
+    color: #222;
+  }
 }
 
 .active {
   border-bottom: 1px solid #333;
-  color: #007ddf;
+  color: $blue50;
   
   transition: all .3s;
 }
 
 // Modal Calls 
+.video-loader {
+  width: 200px;
+  max-width: 200px;
 
-.text-loader:hover {
+  margin: 40px auto 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+
+  transition: padding .2s;
+
+  &:hover {
     cursor: pointer;
-    color: #222;
+
+    padding: 30px;
+
+    justify-content: center;
+
+    &> .video-loader-text {
+      width: 0;
+      transition: width .2s;
+    }
+  }
+
+  .play-icon {
+    height: 40px;
+    width: 40px;
+
+    padding-left: 13px;
+
+    font-size: 20px;
+    color: #ccc;
+    
+    border: 1px solid #ccc;
+    border-radius: 100%;
+
+    display: flex;
+    align-items: center;
+  }
+
+  .video-loader-text {
+    height: 40px;
+    width: 140px;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    font-family: Aileron;
+    font-size: 12px;
+    color: #8B8D91;
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: width .2s;
+  }
 }
 
 // Index
@@ -410,7 +530,7 @@ body {
 }
 
 #jar-video {
-  height: 300px;
+  height: 170px;
 }
 
 .logo-white {
@@ -1079,6 +1199,10 @@ body {
     min-height: 300px;
   }
 
+  #jar-video {
+    height: 200px;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -1115,7 +1239,7 @@ body {
   }
 
   #jar-video {
-    height: 500px;
+    height: 400px;
   }
 
   .logo-white {
@@ -1177,7 +1301,7 @@ body {
   }
 
   #jar-video {
-    height: 600px;
+    height: 500px;
   }
 
   .logo-white {
@@ -1237,6 +1361,14 @@ body {
 
   .brain-box {
     height: 350px;
+  }
+
+  .modal-youtube {
+    width: 60%;
+  }
+
+  #jar-video {
+    height: 600px;
   }
 
 }
