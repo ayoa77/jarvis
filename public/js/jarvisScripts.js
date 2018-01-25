@@ -3,21 +3,40 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    // modalLoad('modal-login');
+    // modalLoad('modal-login');  // Modal Tester
+
+    $('.modal-container').click(function(e) {
+      if(e.target !== e.currentTarget) {  // prevents child from inheriting parent click handling
+        return;
+      } else {
+        modalClose();
+      }
+    });
 
  });
 
+
+// Login Modal Selector
 $(document).on('click', '.signin', function(e) {
     $( '.signup' ).removeClass('active');
     $( '.signin' ).addClass('active');
+
+    $('.login-box').css('margin-top', '0px');
 });
 
 $(document).on('click', '.signup', function(e) {
   $( '.signin' ).removeClass('active');
   $( '.signup' ).addClass('active');
-})
 
+  $('.login-box').css('margin-top', '-250px');
+});
 
+$(document).on('click', '.login-forgot-pass', function(e) {
+  $( '.signin' ).removeClass('active');
+  $( '.signup' ).removeClass('active');
+
+  $('.login-box').css('margin-top', '-500px');
+});
 
  // Modal Loader
 function modalLoad(content) {
@@ -54,8 +73,6 @@ function modalClose() {
   }, 200);
 
   $(window).disablescroll('undo');
-
-
 }
 
 
