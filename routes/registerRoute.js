@@ -18,16 +18,6 @@ var options = {
     }
 };
 
-function isEmailAvailable(email) {
-    return new Promise(function (resolve, reject) {
-        userSchema.findOne({ 'email': email }, function (err, results) {
-            if (err) {
-                return resolve(err);
-            }
-            reject(results);
-        });
-    });
-}
 
 
 router.get('/', csrfProtection, function (req, res, next){
@@ -40,7 +30,7 @@ router.get('/', csrfProtection, function (req, res, next){
     }
     // res.redirect('/404')
 });
-router.post('/', authenticate.register, function (req, res, next){
+router.post('/', authenticate.register, csrfProtection, function (req, res, next){
 
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
@@ -49,8 +39,7 @@ router.post('/', authenticate.register, function (req, res, next){
         email: req.body.email,
         password: hash,
         commitEther: '0',
-        status: 'NEW',
-        wallet: 'blank'
+        status: 'NEW'
     });
     user.save(function (err) {
         if (err) {

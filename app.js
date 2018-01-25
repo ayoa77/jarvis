@@ -121,7 +121,7 @@ if ('development' == app.get('env')) {
   }));
 }
 app.use(function (req, res, next) {
-  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr') || 'en' }
+  if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh-CN', 'jp', 'kr') || 'en' }
   if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
   // req.i18n.setLocaleFromSessionVar();
   next();
