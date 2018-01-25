@@ -6,6 +6,8 @@ var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
+langCheck = require('../middleware/langChecker.js');
+
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
@@ -16,7 +18,7 @@ var options = {
 
 
 
-router.get('/', csrfProtection, function (req, res, next) {
+router.get('/', csrfProtection, langCheck, function (req, res, next) {
   console.log(req.params.modal);
 
   if (!req.session.user) {
@@ -27,14 +29,14 @@ router.get('/', csrfProtection, function (req, res, next) {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)
   // console.log(wallet);
-      res.render('user', { title: 'User', user: user, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
+      res.render('user', { title: 'User', user: user, lang:lang, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
 
     });
   }
 });
 
 ///need to add edit logic to this
-router.post('/', csrfProtection, function (req, res, next) {
+router.post('/', csrfProtection,  function (req, res, next) {
   //validator can be blank!!!
   if (req.body.wallet){
   req.checkBody('wallet', `Please enter a properly formatted Ethereum wallet id<%= i18n.commitedEthereum-format-incorrect %>`).len(42);

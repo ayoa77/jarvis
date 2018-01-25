@@ -6,10 +6,12 @@ var bcrypt = require('bcryptjs');
 var iplocation = require('iplocation');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+langCheck = require('../middleware/langChecker.js');
+
 // var requireLogin = require('../middleware/requireLogin.js');
 // var flash = require('express-flash');
 
-router.get('/', csrfProtection, function (req, res) {
+router.get('/', csrfProtection, langCheck, function (req, res) {
     var lang = req.session.locale;
     if (!req.user) {
         res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
@@ -19,7 +21,7 @@ router.get('/', csrfProtection, function (req, res) {
         res.redirect('/user');
     }
 });
-router.get('/:id?', csrfProtection, function (req, res, next) {
+router.get('/:id?', csrfProtection, langCheck, function (req, res, next) {
     var id = req.params.id;
     var x;
     if (id == 'false') { x = 'Please Log in' };

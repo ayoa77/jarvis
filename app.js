@@ -22,6 +22,7 @@ var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
 
+langCheck = require('./middleware/langChecker.js');
 
 
 // MODELS
@@ -173,19 +174,19 @@ app.all('/session-flash', function (req, res, next) {
   res.redirect(301, '/');
 });
 
-app.get('/technology', csrfProtection, function (req, res, next) {
-  res.render('deepDive', { title: 'Technology', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+app.get('/technology', csrfProtection, langCheck, function (req, res, next) {
+  res.render('deepDive', { title: 'Technology', sessionFlash: res.locals.sessionFlash, lang:lang,csrfToken: req.csrfToken() });
 });
-app.get('/faq', csrfProtection, function (req, res, next) {
-  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+app.get('/faq', csrfProtection, langCheck, function (req, res, next) {
+  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/governance', csrfProtection, function (req, res, next) {
-  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+app.get('/governance', csrfProtection, langCheck, function (req, res, next) {
+  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/whitepaper', csrfProtection, function (req, res, next) {
-  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
+  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/testing', function (req, res) {
+app.get('/testing', langCheck, function (req, res) {
   console.log("---------------------------");
   console.log(req.session.locale);
   console.log(req.i18n.getLocale());
