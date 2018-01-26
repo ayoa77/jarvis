@@ -41,11 +41,11 @@ module.exports.register = function (req, res, next) {
             console.log(errors);
             return res.send({
                 errors: errors
-                            });
+            });
                 } else {
     
                 next();
-            }
-            });
+                }
+    });
             next();
 };
