@@ -33,7 +33,7 @@ module.exports.register = function (req, res, next) {
 
     req.check('password', lang.errorpassword_format_incorrect)
         .isLength({ min: 5 })
-        .matches(/\d/)
+        .matches(/\d/);
 
     req.asyncValidationErrors().catch(function (errors) {
 
@@ -42,9 +42,10 @@ module.exports.register = function (req, res, next) {
             return res.send({
                 errors: errors
                             });
-                };
+                } else {
     
                 next();
+            }
             });
             next();
 };

@@ -51,7 +51,7 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
     user.save(function (err) {
         if (err) {return res.send(lang.errordefault);
         } else {
-            console.log('saving user')
+            console.log('saving user');
 
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
@@ -68,8 +68,8 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
                     //     message: lang.emailverification_email
                     
                 });
-                return  res.status(200).send(lang.emailverification_email);
             });
+            return  res.status(200).send(lang.emailverification_email);
         };  
         });        
 });     
