@@ -252,17 +252,27 @@ body {
 }
 
 .modal-login {
-  height: 400px;
-  width: 600px;
+  height: 420px;
+  width: 300px;
   
   background: white;
   
   display: flex;
+  flex-direction: column;
+}
+
+.modal-login-decoration {
+  width: 100%;
+  height: 20px;
+
+  background: linear-gradient(to top right, $blue50, $bluegreen);  
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .modal-login-left, .modal-login-right {
-  width: 50%;
-  height: 100%;
+  height: 400px;
   flex: 1;
 }
 
@@ -406,6 +416,84 @@ body {
   color: $blue50;
   
   transition: all .3s;
+}
+
+
+.modal-team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-team-wrapper {
+  width: 325px;
+
+  background: white;
+
+  box-shadow: 0px 5px 20px #888;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-team-photo {
+  height: 300px;
+  width: 300px;
+
+  padding: 20px;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.modal-team-container {
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.modal-team-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-team-info {
+    flex: 1;
+    align-self: flex-start;
+
+    .modal-team-title {
+      font-family: Aileron;
+      font-size: $font-xs;
+      color: #aaa;
+    }
+
+    .modal-team-name {
+      font-family: DINPro-Bold;
+      font-size: $font-lg;
+    }
+}
+
+.modal-team-social {
+  margin: 20px 0;
+
+  .tw, .in, .git, .fb {
+    font-size: $font-md;
+  }
+  a {
+    margin: 0 8px;
+  }
+}
+
+.modal-team-biography {
+  font-family: Aileron-Light;
+  font-size: $font-xxs;
+  line-height: 22px;
 }
 
 // Modal Calls 
@@ -1329,6 +1417,34 @@ body {
     height: 250px;
   }
 
+  .modal-login {
+    height: 400px;
+    width: 600px;
+
+    flex-direction: row;
+  }
+
+  .modal-team-wrapper {
+    height: 380px;
+    width: 768px;
+    flex-direction: row;
+  }
+
+  .modal-team-contact {
+    flex-direction: row;
+  }
+
+  .modal-team-social {
+    margin: 0;
+  }
+
+  .modal-team-biography {
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+
+  
+
 }
 
 @media (min-width: 992px) {
@@ -1359,7 +1475,6 @@ body {
   .brain-box {
     height: 300px;
   }
-
 
 
 }
