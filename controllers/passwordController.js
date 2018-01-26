@@ -7,6 +7,8 @@ var crypto = require('crypto');
 var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgridv3-transport');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {

@@ -6,7 +6,7 @@
 	"footer.privacy_policy": "Private Policy",
 	"footer.home": "Home",
 	"advisors.1.advisors": "Advisors",
-	"index.1.decentralized_ai_platform": "The Decentralized AI Platform",
+	"index.1.decentralized_ai_platform": "The Chinese AI Platform",
 	"index.1.mailing_list": "Join our mailing list to get the latest updates on JARVIS activities, token generation event, and platform release.",
 	"index.2.what_is_it": "WHAT IS IT?",
 	"index.2.convergance": "The Convergence of",
@@ -92,16 +92,7 @@
 	"governance.4.resource_allocation": "Resource Allocation",
 	"governance.4.spare_computing_resources": "We will use the spare computing resource to generate the desired",
 	"governance.4.first_decentralized_ai": "JARVIS the very first decentralized AI platform combined with blockchain technology, to give AI power back to the people for a better future.Together with blockchain based technology, we can collectively explore and build nextgen AI models across the globe in a fully decentralized way.",
-	"1.language": "Korean",
+	"1.language": "Beijing",
 	"links.deep_dive": "links.deep_dive",
-	"footer.tou": "footer.tou",
-	"technology.1.umz": "technology.1.umz",
-	"technology.1.csg": "technology.1.csg",
-	"deepdive.2.jarvis_do": "deepdive.2.jarvis_do",
-	"deepdive.2.patter_recognition": "deepdive.2.patter_recognition",
-	"deepdive.2.csg": "deepdive.2.csg",
-	"deepdive.2.common_sense_graph": "deepdive.2.common_sense_graph",
-	"deepdive.2.umz": "deepdive.2.umz",
-	"deepdive.2.unified_model_zoo": "deepdive.2.unified_model_zoo",
-	"deepdive.3.JTA": "deepdive.3.JTA"
+	"footer.tou": "footer.tou"
 }
