@@ -66,10 +66,15 @@ app.use(validator({
     isEmailAvailable: function (email) {
       return new Promise(function (resolve, reject) {
         userSchema.findOne({ 'email': email }, function (err, results) {
-          if (err) {
-            return resolve(err);
+          if(email == '') {
+            reject(results);
           }
-          reject(results);
+          else if (results != null) {
+            console.log(results)
+            reject(results);
+            console.log(err);
+          }
+          return resolve(err);
         });
       });
     }

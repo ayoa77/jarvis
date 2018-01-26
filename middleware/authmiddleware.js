@@ -1,52 +1,50 @@
 //express validator middleware for register route
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
-var mongoose = require('mongoose');
-var userSchema = mongoose.model('user', userSchema);
+// var mongoose = require('mongoose');
+// var userSchema = mongoose.model('user', userSchema);
+
 
 module.exports.register = function (req, res, next) {
-    
-
     req.checkBody({
 
         'name': {
             notEmpty: true,
-            errorMessage: __('error.name_blank')
+            errorMessage: lang.errorname_blank
         },
 
         'email': {
             notEmpty: true,
             isEmail: {
-                errorMessage: __('error.email_format_incorrect')
+                errorMessage: lang.erroremail_format_incorrect
             },
-            errorMessage: __('error.email_blank')
+            errorMessage: lang.erroremail_blank
         },
 
         'password': {
             notEmpty: true,
-            errorMessage: __('error.password_blank')
+            errorMessage: lang.errorpassword_blank
         },
 
 
     });
 
-    req.check('email', __('error.duplicate_email')).isEmailAvailable();
+    req.check('email', lang.errorduplicate_email).isEmailAvailable();
 
-    check('password', __('error.password_format_incorrect'))
+    req.check('password', lang.errorpassword_format_incorrect)
         .isLength({ min: 5 })
         .matches(/\d/)
 
     req.asyncValidationErrors().catch(function (errors) {
 
         if (errors) {
-        console.log(errors);
-         res.send(errors);
-         return;
-        };
-        next();
-    });
-
-   
-
-
-}
+            console.log(errors);
+            return res.send({
+                errors: errors
+                            });
+                };
+    
+                next();
+            });
+            next();
+};
