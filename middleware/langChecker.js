@@ -8,16 +8,16 @@ zhTW = require('./locales/zh-TW.json');
 function langChecker(req, res, next) {
   // console.log(en)
   if (req.session.locale == 'zh-TW'){
-    lang = zhTW;
+    lang = en;
     
   }else if(req.session.locale == 'ja'){
-    lang = ja;
+    lang = en;
 
   }else if(req.session.locale == 'ko'){
-    lang = ko;
+    lang = en;
     
   }else if(req.session.locale == 'zh-CN'){
-    lang = zhCN;
+    lang = en;
     
   }else{
     lang = en;
