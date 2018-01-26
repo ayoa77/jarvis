@@ -114,7 +114,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '50px',
           slidesToShow: 5 ,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -124,7 +124,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '50px',
           slidesToShow: 5,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -134,7 +134,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '120px',
           slidesToShow: 3,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -144,7 +144,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '30px',
           slidesToShow: 3,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -154,7 +154,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '80px',
           slidesToShow: 1,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -164,7 +164,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '60px',
           slidesToShow: 1,
-          speed: 100
+          speed: 80
         }
       },
       {
@@ -174,7 +174,7 @@ function autoFooter() {
           centerMode: true,
           centerPadding: '35px',
           slidesToShow: 1,
-          speed: 100
+          speed: 80
       }
     }
     ]
