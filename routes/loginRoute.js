@@ -6,6 +6,7 @@ var bcrypt = require('bcryptjs');
 var iplocation = require('iplocation');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+var promise = require('bluebird');
 langCheck = require('../middleware/langChecker.js');
 
 // var requireLogin = require('../middleware/requireLogin.js');
@@ -35,7 +36,10 @@ router.get('/:id?', csrfProtection, langCheck, function (req, res, next) {
     }
 });
 router.post('/', csrfProtection, function (req, res, next) {
-    req.body.email = req.body.email.toLowerCase();
+    
+    req.body.email = req.body.email.toLowerCase()
+    redirect = '',
+    promise.all([
     userSchema.findOne({ email: req.body.email }, function (err, user) {
         if (!user) {
             res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
@@ -50,16 +54,28 @@ router.post('/', csrfProtection, function (req, res, next) {
                     c = result.country_name
                     // if(user.status == 'EULA'){res.redirect('/user')};
                     if(c != "United States" && c!= "China" && c!= "Republic of Korea") {
-                        res.redirect('/user');
+                        redirect = '/user'
                     } else {
-                        res.redirect('/user?modal=restricted-country')
+                        redirect = '/user?modal=restricted-country';
                     }
                 });
             } else {
-                res.send('modal-login');
+                redirect = '/user?modal=modal-login';
+                reject(redirect)
             }
         }
-    });
+    }),
+    ]).then(function (value) {
+        console.log('user logged in')
+       res.redirect(redirect);
+    })
+        .catch(function errors(err) {
+
+            console.log(err);
+            console.log("error acheived probably login");
+
+            res.send(err);
+        })
 });
 
 module.exports = router;

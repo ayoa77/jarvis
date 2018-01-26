@@ -34,8 +34,10 @@ router.get('/', langCheck, csrfProtection, function (req, res, next){
 });
 router.post('/', langCheck, authenticate.register, function (req, res, next){
     req.body.password = req.body.password.toLowerCase()
-    console.log('saving user')
-    console.log(req.body)
+    const userRegister = new Promise(function (resolve, reject) {
+        var error = [];
+    console.log('saving user');
+    console.log(req.body);
     
 
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -49,29 +51,54 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
     });
     console.log('saving user')
     user.save(function (err) {
-        if (err) {return res.send(lang.errordefault);
+        if (err) {
+            error = lang.errordefault;
+        if (err.code === 11000) {
+                error = lang.errorduplicate_email;
+            }
+            error.push(error);
+            console.log(error);
         } else {
-            console.log('saving user');
+            console.log('saving user')
 
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
             // Save the verification token
             token.save(function (err) {
-                if (err) { return res.send(lang.errordefault) }
+                if (err) { error.push(lang.errordefault) }
             //sending token mailer
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
-                // if (err) { return res.send(lang.errordefault); }
-                // req.session.sessionFlash = {
-                    //     type: 'success',
-                    //     message: lang.emailverification_email
-                    
+                 if (err) {error.push(lang.errorMailerProblem)}
+                 // req.session.sessionFlash = {
+                     //     type: 'success',
+                     //     message: lang.emailverification_email
+                     
+                    });
                 });
-            });
-            return  res.status(200).send(lang.emailverification_email);
-        };  
+                return  res.status(200).send(lang.emailverification_email);
+            };  
         });        
-});     
+        if(error.length == 0) {
+            resolve(error);
+        } else {
+            reject(error);
+        }
+});   
+userRegister
+.then(function registered(response){
+    console.log(response)
+    return res.send(response);
+})
+.catch(function errors(err){
+    console.log(err)
+        })
+.then(() => res.redirect('user'));
+
+
+
+
+});
 
 module.exports = router;

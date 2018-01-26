@@ -77,7 +77,7 @@
         </div>
     </div>
 
-            <!-- <form action="/user" method="POST">
+            <form action="#" id="editUser" method="POST">
                 <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
          
                 <label for="name"> Name </label>
@@ -96,19 +96,10 @@
 
                 <input type="text" name="commitEther"></input> 
                 
-                <br>
-                <button class="btn" type="submit"> Submit </button>
             </form>
+            <br>
+            <button class="btn" type="submit"> Submit </button>
             
-            <form action="/wallet" method="POST">
-                <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
-               
-                
-                <br>
-                <button class="btn" type="submit"> Submit </button>
-    
-            </form>
-            <a href="/logout">Logout</a> -->
         </div>
 
     </div>
@@ -118,6 +109,27 @@
   
           
           
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        //     body = {}
+        $("button").on('click', function () {
+            body = ($("#registerForm").serialize());
+            console.log(body)
+            $.ajax({
+                method: 'POST',
+                url: `/user`,
+                data: body,
+                //               contentType: "application/json",
+                dataType: "json"
+            }).done(function (data) {
+                alert(data)
+                //   location.reload();
+            });
+        })
+    })
+
+</script>
 
     
 

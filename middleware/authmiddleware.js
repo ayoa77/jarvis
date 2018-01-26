@@ -1,11 +1,14 @@
 //express validator middleware for register route
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
+var promise = require('bluebird');
 // var mongoose = require('mongoose');
 // var userSchema = mongoose.model('user', userSchema);
 
 
 module.exports.register = function (req, res, next) {
+    // const userValidate = new Promise(function(resolve, reject) {
+    promise.all([
     req.checkBody({
 
         'name': {
@@ -27,25 +30,25 @@ module.exports.register = function (req, res, next) {
         },
 
 
-    });
+    }),
 
-    req.check('email', lang.errorduplicate_email).isEmailAvailable();
+    req.check('email', lang.errorduplicate_email).isEmailAvailable(),
 
     req.check('password', lang.errorpassword_format_incorrect)
         .isLength({ min: 5 })
-        .matches(/\d/);
+        .matches(/\d/),
 
-    req.asyncValidationErrors().catch(function (errors) {
-
-        if (errors) {
-            console.log(errors);
-            return res.send({
-                errors: errors
-            });
-                } else {
+    req.asyncValidationErrors()]).then(function (value){
+        console.log('saving user -> send to user/verification page from here')
+        next();
+    })
+    .catch(function errors(err){
     
-                next();
-                }
-    });
-            next();
-};
+        console.log(err);
+        console.log("got here");
+
+        res.send(err);
+    })
+    // 
+    
+    };

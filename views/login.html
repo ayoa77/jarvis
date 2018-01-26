@@ -17,9 +17,31 @@
         <input type="password", name="password"> </input>
         <br>
         
-        <button type = "submit"> Submit </button>
       </form>
+      <button type = "submit"> Submit </button>
       <a href="/emailresetpassword">Forgot Password?</a>
       <a href="/register">Register</a>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+  $(document).ready(function () {
+    //     body = {}
+    $("button").on('click', function () {
+      body = ($("#loginForm").serialize());
+      console.log(body)
+      $.ajax({
+        method: 'POST',
+        url: `/login`,
+        data: body,
+        //               contentType: "application/json",
+        dataType: "json"
+      }).done(function (data) {
+        alert(data)
+        //   location.reload();
+      });
+    })
+  })
+
+</script>
