@@ -50,11 +50,11 @@
       })
         .done(function (data) {
           console.log(data)
-          if (typeof data === 'string' || data.redirect instanceof String) {
+          if (typeof data === 'string' || data instanceof String) {
             alert(JSON.stringify(data));
-            //location.href = location.protocol + '//' + data.redirect
+            location.href = location.protocol + '//' + data.redirect
           } else {
-            alert(JSON.stringify(data.message));
+            alert(JSON.stringify(data));
       //      location.reload();
           };
         });

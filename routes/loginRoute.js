@@ -16,8 +16,6 @@ router.get('/', csrfProtection, langCheck, function (req, res) {
     var lang = req.session.locale;
     if (!req.user) {
         res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-    //     console.log(req.session.message);
-    //    req.session.message = 'undefined';
     } else {
         res.redirect('/user');
     }
@@ -28,22 +26,19 @@ router.get('/:id?', csrfProtection, langCheck, function (req, res, next) {
     if (id == 'false') { x = 'Please Log in' };
     if (!req.user) {
         res.render('login', { error: x, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-        console.log(req.session.message);
-        delete req.session.message;
     } else {
         res.redirect('/user');
 
     }
 });
 router.post('/', csrfProtection, function (req, res, next) {
-    
-    req.body.email = req.body.email.toLowerCase()
-    redirect = '',
-    promise.all([
+    req.body.email = req.body.email.toLowerCase();
+    data = {};
+
+    const userVerifcation = new Promise(function (resolve, reject) {
     userSchema.findOne({ email: req.body.email }, function (err, user) {
-        if (!user) {
-            res.render('login', { error: 'invalid email or password', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-        } else {
+        if (!user) { reject(lang.errorNoEmailFound); 
+            } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 req.session.user = user;  //set-cookie: session = {email, passwords}
                 req.session.cookie.expires = true;
@@ -51,34 +46,44 @@ router.post('/', csrfProtection, function (req, res, next) {
                 delete req.session.user.password;
                 if (user.lang){req.session.locale = user.lang}
                 iplocation(req.ip, function (error, result) {
-                    c = result.country_name
+                    c = result.country_name;
                     // if(user.status == 'EULA'){res.redirect('/user')};
                     if(c != "United States" && c!= "China" && c!= "Republic of Korea") {
-                        redirect = '/user'
+                        data.message = 'successful login'
+                        data.redirect = req.headers.host  + '/user';
+                        resolve(data);
                     } else {
-                        redirect = '/user?modal=restricted-country';
+                        data.message = 'successful login, with restricted,country modal popping up'
+                        data.redirect = req.headers.host + '/user?modal=restricted-country';
+                        resolve(data);
                     }
                 });
             } else {
-                err = new Error("lang.emailPassMismatch");
-                redirect = '/user?modal=modal-login';
-            
+                err = new Error(lang.errorEmailPassMismatch);
+                reject(err);
             }
         }
-    }),
-    //figure out what's going on here with the login callbacks
-    ]).then(function (value) {
-        console.log(redirect);
-    //    res.redirect(redirect);
     })
-        .catch(function errors(err) {
+})
 
-            console.log(err);
-            console.log("email mismatch");
+    //figure out what's going on here with the login callbacks
 
-            return res.send(err);
-        })
-        .then(() => res.redirect(redirect));
-});
+        userVerifcation
+        .then(data => {
+        console.log('success from verification route')
+        console.log(data);
+        res.send(data);
+    // }).then(tokenResult => {
+    //     var data = {};
+    //     data.redirect = req.headers.host + '/user'
+    //     data.message = lang.messageVerifyEmailSent
+    //     console.log('success from route')
+    //     res.send(data)
+    }).catch((err => {
+        console.log(err)
+        console.log('error from route')
+        res.send(err);
+    })
+)});
 
 module.exports = router;

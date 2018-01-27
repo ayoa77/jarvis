@@ -140,5 +140,6 @@
 	"errorAlreadyVerified": "This account has already been verified, please login.",
 	"errorDefault" : "Sorry, something went wrong, please try again or contact us if the problem persists.",
 	"messageEmailVerified": "Your emailed has been verifed. Please login to finish this process.",
-	"messageVerifyEmailSent": "A verification email has been sent to your email."
+	"messageVerifyEmailSent": "A verification email has been sent to your email.",
+	"errorEmailPassMismatch": "This email and password combination is not correct, please try again, or click on forgot password."
 }
