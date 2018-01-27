@@ -89,12 +89,14 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
 userRegister
 .then(function registered(response){
     console.log(response)
-    return res.send(response);
+    req.body.redirect = req.headers.host + '/user'
+
+    // return res.send(response);
 })
 .catch(function errors(err){
     console.log(err)
         })
-.then(() => res.redirect('user'));
+// .then(() => res.redirect('user'));
 
 
 

@@ -60,22 +60,25 @@ router.post('/', csrfProtection, function (req, res, next) {
                     }
                 });
             } else {
+                err = new Error("lang.emailPassMismatch");
                 redirect = '/user?modal=modal-login';
-                reject(redirect)
+            
             }
         }
     }),
+    //figure out what's going on here with the login callbacks
     ]).then(function (value) {
-        console.log('user logged in')
-       res.redirect(redirect);
+        console.log(redirect);
+    //    res.redirect(redirect);
     })
         .catch(function errors(err) {
 
             console.log(err);
-            console.log("error acheived probably login");
+            console.log("email mismatch");
 
-            res.send(err);
+            return res.send(err);
         })
+        .then(() => res.redirect(redirect));
 });
 
 module.exports = router;

@@ -11,13 +11,13 @@
     
 </form>
 <br>
-<button class ="btn" type = "submit"> Submit </button>
+<button class ="btn" id="registerButton"type = "submit"> Submit </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" ></script>
 <script>
     $(document).ready(function(){
   //     body = {}
-        $("button").on('click',function(){
+        $("#registerButton").on('click',function(){
             body = ($("#registerForm").serialize());
             console.log(body)
                     $.ajax({
@@ -27,8 +27,14 @@
  //               contentType: "application/json",
                 dataType: "json"
             }).done(function (data) {
-                alert(data)
-             //   location.reload();
+                 if (data.redirect) {
+                     console.log(data.redirect)
+                window.location.replace(data.redirect)
+                alert(JSON.stringify(data));
+                 }else{
+                alert(JSON.stringify(data));
+                location.reload();
+                }
             });
         })
     })
