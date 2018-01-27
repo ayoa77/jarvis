@@ -1,6 +1,7 @@
 // Ready Player One
 $(document).ready(function() {
 
+    teamList();
     initSlickSlider();
     autoFooter();
     // modalLoad('modal-login');  // Modal Tester
@@ -13,6 +14,24 @@ $(document).ready(function() {
       }
     });
 
+    // Modal Pop-up Click for employee container and team container
+    // Must not engage modalLoad() when they click on social media icons
+    $('.team-selector').click(function(e) {
+        let socialClick = $(this).children('.social-selector')[0];
+        let check = false;
+        
+        for (i=0; i<socialClick.children.length; i++) {
+          if (e.target == socialClick.children[i]) {
+            check = true;
+          }
+        };
+      
+        if (check == true) {
+          return;
+        } else {
+          modalLoad(`modal-team.${this.classList[2]}`);
+        };
+    });
  });
 
 
@@ -76,7 +95,7 @@ function modalClose() {
 }
 
 
- // Listen to Tab and Escape Key Inputs
+// Listen to Tab and Escape Key Inputs
 function handleKeyDown(e) {
   if (e.keyCode === 9) { // the "I am a keyboard user" key
       document.body.classList.add('user-is-tabbing');
@@ -182,4 +201,32 @@ function autoFooter() {
 
 }
 
- 
+function teamList() {
+
+  // team.language.name  (ex.  team.en.max)
+
+  const team = {
+    "en": {
+
+        "muChi": {
+          "name": "Mu-Chi Sung",
+          "photoURL": "#",
+          "role": "CTO",
+          "social": {
+              "twitter": "#",
+              "linkedIn": "#",
+              "github": "#",
+          }
+        },
+
+    },  // End of English
+
+    "zh": {
+
+    }  // End of Chinese
+      
+  }
+  
+  
+
+}
