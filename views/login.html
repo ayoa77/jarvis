@@ -18,7 +18,7 @@
         <br>
         
       </form>
-      <button type = "submit"> Submit </button>
+      <button id="loginButton" action = "submit"> Submit </button>
       <a href="/emailresetpassword">Forgot Password?</a>
       <a href="/register">Register</a>
   </div>
@@ -28,7 +28,7 @@
 <script>
   $(document).ready(function () {
     //     body = {}
-    $("button").on('click', function () {
+    $("#loginButton").on('click', function () {
       body = ($("#loginForm").serialize());
       console.log(body)
       $.ajax({
@@ -39,9 +39,44 @@
         dataType: "json"
       }).done(function (data) {
         alert(data)
-        //   location.reload();
+           location.reload();
       });
     })
   })
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js">
+</script>
+<script>
+  $(document).ready(function () {
+    $("#registerButton").on('click', function () {
+      body = ($("#registerForm").serialize());
+      console.log(body)
+      $.ajax({
+        method: 'POST',
+        url: `/register`,
+        data: body
+        //               contentType: "application/json",
+        // dataType: "json"
+      })
+        .done(function (data) {
+          console.log('---------------------------')
+          console.log(data)
+          console.log('---------------------------')
+
+          if (typeof data === 'string' || data instanceof String) {
+            console.log(data)
+            console.log(location.protocol + '//' + data)
+            alert('You have successfully registered, click on the link in the email we have sent you to verify your account.');
+            location.href = location.protocol + '//' + data
+          } else {
+            //             .fail( function(data){
+            alert(JSON.stringify(data));
+            location.reload();
+          };
+        });
+    })
+  });
 
 </script>

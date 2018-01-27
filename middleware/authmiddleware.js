@@ -39,13 +39,13 @@ module.exports.register = function (req, res, next) {
         .matches(/\d/),
 
     req.asyncValidationErrors()]).then(function (value){
-        console.log('saving user -> send to user/verification page from here')
+        console.log('succeeded in authmiddleware')
         next();
     })
     .catch(function errors(err){
     
         console.log(err);
-        console.log("got here");
+        console.log("failed in authmiddleware");
 
         res.send(err);
     })

@@ -33,9 +33,9 @@ router.get('/', langCheck, csrfProtection, function (req, res, next){
     // res.redirect('/404')
 });
 router.post('/', langCheck, authenticate.register, function (req, res, next){
-    req.body.password = req.body.password.toLowerCase()
+    req.body.email = req.body.email.toLowerCase()
     const userRegister = new Promise(function (resolve, reject) {
-        var error = [];
+        var error;
     console.log('saving user');
     console.log(req.body);
     
@@ -52,51 +52,54 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
     console.log('saving user')
     user.save(function (err) {
         if (err) {
-            error = lang.errordefault;
+            error = new Error(lang.errorDefault);
         if (err.code === 11000) {
-                error = lang.errorduplicate_email;
+                error = new Error(lang.errorduplicate_email);
             }
-            error.push(error);
             console.log(error);
         } else {
-            console.log('saving user')
-
+            console.log('adding user to cookie')
+            req.session.user = user;  //set-cookie: session = {email, passwords}
+            req.session.cookie.expires = true;
+            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
+            delete req.session.user.password;
+            console.log('added');
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
             // Save the verification token
             token.save(function (err) {
-                if (err) { error.push(lang.errordefault) }
+                if (err) { error = new Error(lang.errorDefault) }
             //sending token mailer
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
-                 if (err) {error.push(lang.errorMailerProblem)}
+                 if (err) {error = new Error (lang.errorMailerProblem)}
                  // req.session.sessionFlash = {
                      //     type: 'success',
                      //     message: lang.emailverification_email
                      
+                     if(!error) {
+                         resolve(req.headers.host + '/user');
+                     } else {
+                         reject(error);
+                     }
                     });
                 });
-                return  res.status(200).send(lang.emailverification_email);
             };  
         });        
-        if(error.length == 0) {
-            resolve(error);
-        } else {
-            reject(error);
-        }
 });   
 userRegister
-.then(function registered(response){
+.then(function (response){
     console.log(response)
-    req.body.redirect = req.headers.host + '/user'
-
-    // return res.send(response);
+    console.log('success from route')
+  res.send(response);
 })
 .catch(function errors(err){
     console.log(err)
+    console.log('error from route')
+    res.send(err);
         })
-// .then(() => res.redirect('user'));
+//  .then((response) => res.redirect('user'));
 
 
 

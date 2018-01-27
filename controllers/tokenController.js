@@ -10,6 +10,7 @@ var sgTransport = require('nodemailer-sendgridv3-transport');
 var validator = require('express-validator');
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
+var promise = require('bluebird');
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
@@ -58,35 +59,67 @@ exports.confirmationGet = function  (req, res, next) {
 */
 
 exports.resendTokenPost = function  (req, res, next) {
+    var error;
     req.body.email = req.body.email.toLowerCase();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
+    const userFinder = new Promise(function (resolve, reject) {
+        
+        userSchema.findOne({ email: req.body.email }, function (err, user) {
+            if (!user) { reject(lang.errorNoEmailFound);}
+            console.log('got there')
+            if (user && user.status != 'NEW') {reject(new Error(lang.errorAlreadyVerifiedAccount));
+        }else{ resolve(user)}
+        });
+    });
 
-    // Check for validation errors    
-    var errors = req.validationErrors();
-    if (errors) return res.status(400).send(errors);
+    function tokenSender(user){
+        return new Promise(
+            function (resolve, reject) {
 
-    userSchema.findOne({ email: req.body.email }, function (err, user) {
-        if (!user) return res.status(400).send({ msg: 'We were unable to find a user with that email.' });
-        if (user.isVerified) return res.status(400).send({ msg: 'This account has already been verified. Please log in.' });
-
+           
+            if (!user) { reject(lang.errorNoEmailFound)
+            }else{
         // Create a verification token, save it, and send email
         var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
 
         // Save the token
         token.save(function (err) {
-            if (err) { return res.status(500).send({ msg: err.message }); }
-
+            if (err) { reject(new Error(lang.errorDefault))}
             // Send the email
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
             transporter.sendMail(mailOptions, function (err) {
-                if (err) { return res.status(500).send({ msg: err.message }); }
+                if (err) {  reject(new Error(lang.errorDefault)) }
                 // res.status(200).send('A verification email has been sent to ' + user.email + '.');
-                res.render('verify', { title: 'verify', message: 'A verification email has been sent to ' + user.email + '.', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-            });
-        });
+                    if (!error) {
+                        var data = {};
+                        data.redirect = req.headers.host + '/user'
+                        data.message = lang.messageVerifyEmailSent
+                        resolve(data);
+                    } else {
+                        reject(error);
+                        }
+                    })
+                });
+            }
+        }) 
+    }  
 
-    });
-};
+
+
+    userFinder
+        .then(user=> {
+            console.log('success from user route')
+             tokenSender(user);
+        }).then(tokenResult=> {
+            var data = {};
+            data.redirect = req.headers.host + '/user'
+            data.message = lang.messageVerifyEmailSent
+            console.log('success from route')
+            res.send (data)
+        }).catch((err => {
+            console.log(err)
+            console.log('error from route')
+            res.send(err);
+        })
+    
+    )};

@@ -136,5 +136,9 @@
 	"erroremail_blank" : "Your email cannot be blank.",
 	"errorpassword_blank" : "Your password cannot be blank.",
 	"errorduplicate_email" : "This email has already been taken, please sign in or try a different email.",
-	"errordefault" : "Sorry, something went wrong, please try again or contact us if the problem persists."
+	"errorNoEmailFound" : "We were unable to find your information using this email, please try again.",
+	"errorAlreadyVerified": "This account has already been verified, please login.",
+	"errorDefault" : "Sorry, something went wrong, please try again or contact us if the problem persists.",
+	"messageEmailVerified": "Your emailed has been verifed. Please login to finish this process.",
+	"messageVerifyEmailSent": "A verification email has been sent to your email."
 }

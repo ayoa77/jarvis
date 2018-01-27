@@ -106,7 +106,7 @@
 	"technology1intelligent_contract": "Jarvis invents Intelligent Contract to address the limitation of EVM Smart Contract and to enable the development of smart applications.",
 	"technology2jarvis_do": "What does JARVIS do?",
 	"technology2big_hurdles": "Tackle the Biggest Hurdles in AI to achieve Artificial General Intelligence (AGI).",
-	"technology2patter_recognition": "Our brain excels at pattern recognition and common senses but our machine intelligence today fails both tasks miserably. JARVIS aims to solve that by automatically generating massive amount of Proof-of- Intelligence tasks with genetic programming approach.",
+	"technology2pattern_recognition": "Our brain excels at pattern recognition and common senses but our machine intelligence today fails both tasks miserably. JARVIS aims to solve that by automatically generating massive amount of Proof-of- Intelligence tasks with genetic programming approach.",
 	"technology2umz": "Unified Model Zoo",
 	"technology2unified_model_zoo": "JARVIS is designed to recognize physical objects and perceive contextual states and generate neural network models automatically to build a Unified Model Zoo for any pattern recognition task. Developer can define Intelligent Contract and leverage the Unified Model Zoo to build autonomous agent with cognitive intelligence running on blockchain.",
 	"technology2csg": "Common Sense Graph",
@@ -130,5 +130,14 @@
 	"index7max_role": "Co-Founder",
 	"index7chelsea": "Chelsea Chen",
 	"index7chelsea_role": "Business Development",
-	"errorpassword_format_incorrect": ""
+	"errorpassword_format_incorrect": "Sorry, your password must be six or more characters and contain atleast one number.",
+	"errorname_blank": "Your name cannot be blank.",
+	"erroremail_format_incorrect": "Sorry, this does not seem to be a valid email.",
+	"erroremail_blank": "Your email cannot be blank.",
+	"errorpassword_blank": "Your password cannot be blank.",
+	"errorduplicate_email": "This email has already been taken, please sign in or try a different email.",
+	"errorNoEmailFound": "We were unable to find your information using this email, please try again.",
+	"errorAlreadyVerified": "This account has already been verified, please login.",
+	"errorDefault": "Sorry, something went wrong, please try again or contact us if the problem persists.",
+	"messageEmailVerified": "Your emailed has been verifed. Please login to finish this process."
 }
