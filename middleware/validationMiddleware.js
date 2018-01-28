@@ -35,7 +35,7 @@ module.exports.register = function (req, res, next) {
     req.check('email', lang.errorDuplicateEmail).isEmailAvailable(),
 
     req.check('password', lang.errorpassword_format_incorrect)
-        .isLength({ min: 5 })
+        .isLength({ min: 6 })
         .matches(/\d/),
 
     req.asyncValidationErrors(true)]).then(function (value){
@@ -69,7 +69,7 @@ console.log('got it')
         }),
 
         req.check('password', lang.errorpassword_format_incorrect)
-            .isLength({ min: 5 })
+            .isLength({ min: 6 })
             .matches(/\d/),
 
             // req.checkBody('confirm_password', `Passwords do not match.<%= req.i18n.__('passwords-dont-match') %>`).equals(req.body.password);
@@ -93,9 +93,9 @@ console.log('got it')
 module.exports.userEdit = function (req, res, next) {
     console.log('got it')
     promise.all([
-        req.checkBody('wallet', lang.errorCommitedEthereumFormatIncorrect).len(42),
+        req.checkBody('wallet', lang.errorCommitedEthereumFormatIncorrect).optional({ checkFalsy: true }).len(42),
 
-        req.checkBody('commitEther', lang.errorWalletFormatIncorrect).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/),
+        req.checkBody('commitEther', lang.errorWalletFormatIncorrect).optional({ checkFalsy: true }).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/),
 
 
         req.asyncValidationErrors(true)]).then(function (value) {

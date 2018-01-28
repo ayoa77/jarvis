@@ -55,6 +55,12 @@ router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, n
       if (err) {
         reject(lang.errorDefault);
       } else {
+
+        // setting up cookie with user
+        // req.session.user = user;  //set-cookie: session = {email, passwords}
+        // req.session.cookie.expires = true;
+        // req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
+        //Not sure why this isn't passing my user through...
         resolve(user);
       } 
       });
@@ -72,7 +78,7 @@ router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, n
         console.log(user);
           
         var transporter = nodemailer.createTransport(sgTransport(options));
-        var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: lang.messageUserEdited, text: `${lang.emailHello} + ' ' + ${req.session.user.name || req.session.user.email},\n\n` + lang.emailNoRequest + ' \nhttp:\/\/' + req.headers.host + '.\n' };
+        var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: lang.messageUserEdited, text: lang.emailHello + ' ' + `${req.session.user.name || req.session.user.email},\n\n` + ' ' + lang.messageUserEdited + '. ' + lang.emailNoRequest + ' \nhttp:\/\/' + req.headers.host + '.\n' };
           transporter.sendMail(mailOptions, function (err) {
             if (err) { reject(lang.errorDefault) } else {
 
@@ -95,9 +101,9 @@ userSetter
     console.log('success from user route')
     userEditedMailer(user);
   }).then(data => {
-    // var data = {};
-    // data.redirect = req.headers.host + '/user'
-    // data.message = lang.messageUserEdited
+    var data = {};
+    data.redirect = req.headers.host + '/user'
+    data.message = lang.messageUserEdited
     console.log('success from route')
     res.send(data)
   }).catch(err => {
