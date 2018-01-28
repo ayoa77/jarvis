@@ -12,7 +12,7 @@ var csrfProtection = csrf({ cookie: true });
 var validator = require("express-validator");
 //custome middle ware
 var langCheck = require('../middleware/langChecker.js');
-var authenticate = require('../middleware/authmiddleware.js');
+var validationMiddleware = require('../middleware/validationMiddleware.js');
 // send grid api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
 var options = {
     auth: {
@@ -24,22 +24,20 @@ var options = {
 
 router.get('/', langCheck, csrfProtection, function (req, res, next){
     // var lang = req.cookies.lang;
-    if (!req.user) {
-        error = ' ';
-        res.render('register', { error: error, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+    if (!req.session.user) {
+        res.render('register', {sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
     } else {
         res.redirect('/user');
     }
     // res.redirect('/404')
 });
-router.post('/', langCheck, authenticate.register, function (req, res, next){
+
+router.post('/', langCheck, validationMiddleware.register, function (req, res, next){
     req.body.email = req.body.email.toLowerCase()
     const userRegister = new Promise(function (resolve, reject) {
-        var error;
-    console.log('saving user');
-    console.log(req.body);
-    
-
+        var error; //setting up error variable to be delivered if any errors occur during promise
+   
+        // setting up new user with variables
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new userSchema({
         name: req.body.name,
@@ -52,58 +50,60 @@ router.post('/', langCheck, authenticate.register, function (req, res, next){
     console.log('saving user')
     user.save(function (err) {
         if (err) {
-            error = new Error(lang.errorDefault);
+            error = lang.errorDefault;
         if (err.code === 11000) {
-                error = new Error(lang.errorduplicate_email);
+                error = lang.errorDuplicateEmail;
             }
             console.log(error);
         } else {
-            console.log('adding user to cookie')
-            req.session.user = user;  //set-cookie: session = {email, passwords}
-            req.session.cookie.expires = true;
-            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
-            delete req.session.user.password;
-            console.log('added');
+            req.session.user = user;  //setting cookie: session = {email, passwords}
+            req.session.cookie.expires = true;  // will not delete cookie on browser close
+            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // 1 month cookie
+            delete req.session.user.password;  // deleting password from cookie
+
             //create new token
             var token = new tokenSchema({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
+            
             // Save the verification token
             token.save(function (err) {
-                if (err) { error = new Error(lang.errorDefault) }
-            //sending token mailer
+                if (err) { error = lang.errorDefault }
+           
+                //setting up mailer
             var transporter = nodemailer.createTransport(sgTransport(options));
-            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: 'Account Verification Token', text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
-            transporter.sendMail(mailOptions, function (err) {
-                 if (err) {error = new Error (lang.errorMailerProblem)}
-                 // req.session.sessionFlash = {
-                     //     type: 'success',
-                     //     message: lang.emailverification_email
-                     
-                     if(!error) {
-                         resolve(req.headers.host + '/user');
-                     } else {
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailAccountVerificationToken, text: lang.emailHello + ',\n\n' + lang.emailPleaseVerifyAccount + ' \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
+          
+            //stopping mailer if any errors have occured else sending mailer
+                if(error) {reject(error) } else {
+          
+                transporter.sendMail(mailOptions, function (err) {
+                if (err) {error = lang.errorMailerProblem;}
+          
+                //testing to see if errors all passed and moving on after mailer sent
+                    if(!error) {
+                        var data = {};
+                        data.redirect = req.headers.host + '/user';
+                        data.message = lang.messageVerifyEmailSent;
+                        resolve(data);
+                    } else {
                          reject(error);
                      }
-                    });
                 });
-            };  
-        });        
+                }
+            });
+        };  
+    });        
 });   
-userRegister
-.then(function (response){
-    console.log(response)
-    console.log('success from route')
-  res.send(response);
-})
-.catch(function errors(err){
-    console.log(err)
-    console.log('error from route')
-    res.send(err);
-        })
-//  .then((response) => res.redirect('user'));
-
-
-
-
+    userRegister
+    .then(function (response){
+        // console.log(response)
+        // console.log('success from route')
+    res.send(response);
+    })
+    .catch(function errors(err){
+        // console.log(err)
+        // console.log('error from route')
+        res.send(err);
+    });
 });
 
 module.exports = router;

@@ -1,10 +1,5 @@
 <div class = "container">
   <div class = "row">
-      <br>
-        <% if (typeof message != 'undefined'){ %>
-          <h1><%#= message %></h1>
-          <% } %>
-      <br>
       
       <form action="/login", method="POST" id= "loginForm">
         <input type="hidden", name="_csrf", value= <%=csrfToken %>> </input>
@@ -27,25 +22,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script>
   $(document).ready(function () {
-    //     body = {}
     $("#loginButton").on('click', function () {
       body = ($("#loginForm").serialize());
       console.log(body)
       $.ajax({
         method: 'POST',
         url: `/login`,
-        data: body,
-        //               contentType: "application/json",
-      //  dataType: "json"
-      })
+        data: body
+            })
         .done(function (data) {
           console.log(data)
           if (typeof data.redirect === 'string' || data.redirect instanceof String) {
             alert(JSON.stringify(data.message));
             location.href = location.protocol + '//' + data.redirect
           } else {
-            alert(JSON.stringify(data.message));
-            //      location.reload();
+            alert(JSON.stringify(data));
           };
         });
     })

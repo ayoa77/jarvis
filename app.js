@@ -23,6 +23,7 @@ var i18n = require('i18n-2');
 var validator = require("express-validator");
 
 langCheck = require('./middleware/langChecker.js');
+validationMiddleware = require('./middleware/validationMiddleware.js');
 
 
 // MODELS
@@ -157,14 +158,14 @@ app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
-app.get('/confirmation/:id?', tokenController.confirmationGet);
+app.get('/confirmation/:id?', langCheck, tokenController.confirmationGet);
 app.post('/resend',langCheck, tokenController.resendTokenPost);
 app.route('/emailresetpassword')
-  .get(passwordController.emailResetPasswordGet)
-  .post(passwordController.emailResetPasswordPost);
+  .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)
+  .post(langCheck, passwordController.emailResetPasswordPost);
 app.route('/resetpassword/:id?')
-  .get(passwordController.passwordResetGet)
-  .post(passwordController.passwordResetPost);
+  .get(csrfProtection, langCheck, passwordController.passwordResetGet)
+  .post(langCheck, validationMiddleware.password, passwordController.passwordResetPost);
 
 app.set('port', process.env.PORT || 3000);
 

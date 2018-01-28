@@ -10,12 +10,6 @@
     <a href = "/faq">FAQ</a>
     <a href = "/governance">Governance</a>
     <a href = "/whitepaper">White Paper</a>
-      <br>
-        <% if (typeof message != 'undefined'){ %>
-          <h1><%= message %></h1>
-          <% } %>
-      <br>
-
 
     <form action="/resend"  id="sendVerificationForm" method="POST">
       <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
@@ -40,7 +34,6 @@
   $(document).ready(function () {
     $("#verifyButton").on('click', function () {
       body = ($("#sendVerificationForm").serialize());
-      console.log(body)
       $.ajax({
         method: 'POST',
         url: `/resend`,
@@ -49,9 +42,8 @@
         // dataType: "json"
       })
         .done(function (data) {
-          console.log(data)
-          if (typeof data === 'string' || data instanceof String) {
-            alert(JSON.stringify(data));
+          if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+            alert(JSON.stringify(data.message));
             location.href = location.protocol + '//' + data.redirect
           } else {
             alert(JSON.stringify(data));
