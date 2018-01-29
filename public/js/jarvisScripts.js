@@ -1,7 +1,6 @@
 // Ready Player One
 $(document).ready(function() {
 
-    teamList();
     initSlickSlider();
     autoFooter();
     // modalLoad('modal-login');  // Modal Tester
@@ -32,6 +31,15 @@ $(document).ready(function() {
           modalLoad(`modal-team.${this.classList[2]}`);
         };
     });
+
+    // Language Selector
+  $(".dropdown-menu li a").click(function(){
+
+    $(".language-selector-button").text($(this).text());
+    $(".language-selector-button").val($(this).text());
+
+  });
+
  });
 
 
@@ -56,6 +64,7 @@ $(document).on('click', '.login-forgot-pass', function(e) {
 
   $('.login-box').css('margin-top', '-500px');
 });
+
 
  // Modal Loader
 function modalLoad(content) {
@@ -198,35 +207,5 @@ function autoFooter() {
     }
     ]
   });
-
-}
-
-function teamList() {
-
-  // team.language.name  (ex.  team.en.max)
-
-  const team = {
-    "en": {
-
-        "muChi": {
-          "name": "Mu-Chi Sung",
-          "photoURL": "#",
-          "role": "CTO",
-          "social": {
-              "twitter": "#",
-              "linkedIn": "#",
-              "github": "#",
-          }
-        },
-
-    },  // End of English
-
-    "zh": {
-
-    }  // End of Chinese
-      
-  }
-  
-  
 
 }
