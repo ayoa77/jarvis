@@ -19,7 +19,8 @@ var csrfProtection = csrf({ cookie: true });
 
 /* GET home page. */
 router.get('/', csrfProtection,langCheck, function (req, res, next) {
-   console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
+console.log(req.session)
+  //  console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
   res.render('index', { title: 'Jarvis',
   lang:lang,
   sessionFlash: res.locals.sessionFlash, 

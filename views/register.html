@@ -1,4 +1,9 @@
 
+<% include partials/_head.html %>
+
+    <% include partials/_modal.html %>
+        <% include partials/_nav.html %>
+
 <form action='#' id ="registerForm" >
     <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
@@ -9,36 +14,8 @@
     <input type = "text" name="password" ></input>
 
     
+    <button class ="btn" id="registerButton"> Submit </button>
 </form>
 <br>
-<button class ="btn" id="registerButton" action = "submit"> Submit </button>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" ></script>
-<script>
-    $(document).ready(function(){
-        $("#registerButton").on('click',function(){
-            body = ($("#registerForm").serialize());
-            console.log(body)
-                    $.ajax({
-                method: 'POST',
-                url: `/register`,
-                // dataType: "json"
-                data: body
- //               contentType: "application/json",
-            })
-            .done(function (data) {
-                console.log(data)
-                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                     console.log(data)
-                     console.log(location.protocol + '//' + data.redirect )
-                     alert(data.message);
-                    location.href = location.protocol + '//' + data.redirect 
-                 }else{
 
-                    alert(JSON.stringify(data));
-                    // location.reload();
-                };
-            });
-        })
-         });
-</script>

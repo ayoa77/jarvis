@@ -25,7 +25,7 @@ var options = {
 router.get('/', langCheck, csrfProtection, function (req, res, next){
     // var lang = req.cookies.lang;
     if (!req.session.user) {
-        res.render('register', {sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+        res.render('register', {sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken(), title: 'Jarvis' });
     } else {
         res.redirect('/user');
     }

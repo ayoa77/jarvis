@@ -1,75 +1,152 @@
 $(document).ready(function () {
-    $(function () {
-        var frm = $('#registerForm');
-        frm.submit(function (ev) {
-            ev.preventDefault();
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                dataType: "jsonp",
-                data: frm.serialize(),
-                success: function (data) {
-                    alert('ok');
-                },
-                error: function (data) {
-                    console.log(data)
-                }
-            });
+    //ajax the startup setter
+    $(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/startup',
+            data: 'starting up'
+        })
+        .done(function (data) {
+            console.log(data);
         });
     });
 
-    $(function () {
-        var frm = $('#loginForm');
-        frm.submit(function (ev) {
+    //ajax login 
+    $(document).on('click', '#loginButton', function (ev) {
+        ev.preventDefault();
+        body = ($("#loginForm").serialize());
+        console.log(body)
+        $.ajax({
+            method: 'POST',
+            url: `/login`,
+            data: body
+            })
+            .done(function (data) {
+                console.log(data)
+                if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                    alert(JSON.stringify(data.message));
+                    location.href = location.protocol + '//' + data.redirect
+                } else {
+                    alert(JSON.stringify(data));
+                }
+            });
+    });
+
+        //ajax register
+        $(document).on('click', '#registerButton', function(ev) {
             ev.preventDefault();
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                dataType: "jsonp",
-                data: frm.serialize(),
-                success: function (data) {
-                    alert('ok');
-                },
-                error: function (data) {
-                    console.log(data)
+            body = ($("#registerForm").serialize());
+            console.log(body)
+                    $.ajax({
+                method: 'POST',
+                url: `/register`,
+                data: body
+                })
+            .done(function (data) {
+                console.log(data)
+                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                     console.log(data);
+                     console.log(location.protocol + '//' + data.redirect )
+                     alert(data.message);
+                    location.href = location.protocol + '//' + data.redirect 
+                 }else{
+
+                    alert(JSON.stringify(data));
+                    // location.reload();
                 }
             });
         });
-    });
-    $(function () {
-        var frm = $('#verificationForm');
-        frm.submit(function (ev) {
+        
+        // send email for password reset
+        $(document).on('click', '#emailResetButton', function (ev) {
             ev.preventDefault();
+            body = ($("#forgotPassForm").serialize());
+            console.log(body)
             $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                dataType: "jsonp",
-                data: frm.serialize(),
-                success: function (data) {
-                    alert('ok');
-                },
-                error: function (data) {
+                method: 'POST',
+                url: `/emailresetpassword`,
+                data: body
+            })
+            .done(function (data) {
+                console.log(data)
+                if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                    alert(JSON.stringify(data.message));
+                    location.href = location.protocol + '//' + data.redirect;
+                    //location.reload
+                } else {
+                    alert(JSON.stringify(data));
+                };
+            });
+        })
+        
+        // Ajax reset password
+        $(document).on('click', '#passwordResetButton', function (ev) {
+            ev.preventDefault();
+            body = ($("#passwordResetForm").serialize());
+            console.log(body)
+            $.ajax({
+                method: 'POST',
+                url: `/resetpassword`,
+                data: body
+
+                })
+                .done(function (data) {
                     console.log(data)
+                    if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                        alert(JSON.stringify(data.message));
+                        location.href = location.protocol + '//' + data.redirect
+                    } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+                        alert(JSON.stringify(data.message));
+                        location.href = location.protocol + '//' + data.failure
+                    } else {
+                        alert(JSON.stringify(data));
+                    }
+                });
+        })
+
+        //ajax send verification email
+        $(document).on('click', '#verifyButton', function (ev) {
+            ev.preventDefault();
+                body = ($("#sendVerificationForm").serialize());
+                $.ajax({
+                    method: 'POST',
+                    url: `/resend`,
+                    data: body
+                    // contentType: "application/json",
+                    // dataType: "json"
+                })
+                .done(function (data) {
+                    if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                        alert(JSON.stringify(data.message));
+                        location.href = location.protocol + '//' + data.redirect
+                    } else {
+                        alert(JSON.stringify(data));
+                        //      location.reload();
+                    }
+                });
+            });
+                //ajax user editor
+        $(document).on('click', '#editUserButton', function (ev) {
+            ev.preventDefault();
+            body = ($("#editUserForm").serialize());
+            console.log(body)
+            $.ajax({
+                method: 'POST',
+                url: `/user`,
+                data: body
+            })
+            .done(function (data) {
+                console.log(data)
+                if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                    alert(JSON.stringify(data.message));
+                    location.href = location.protocol + '//' + data.redirect
+                } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+                    alert(JSON.stringify(data.message));
+                    location.href = location.protocol + '//' + data.failure
+                } else {
+                    alert(JSON.stringify(data));
                 }
             });
-        });
-    });
-    $(function () {
-        var frm = $('#editUserForm');
-        frm.submit(function (ev) {
-            ev.preventDefault();
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                dataType: "jsonp",
-                data: frm.serialize(),
-                success: function (data) {
-                    alert('ok');
-                },
-                error: function (data) {
-                    console.log(data)
-                }
-            });
-        });
-    });
+
+        })   
 });

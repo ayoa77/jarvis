@@ -1,4 +1,5 @@
 <% include partials/_head.html %>
+<% include partials/_modal.html %>
 <% include partials/_nav.html %>
 <div id="user-selector">
     <div class="container-fluid">
@@ -89,10 +90,10 @@
                 <br>
                 <label for="commitEther"> How much ether would you like to commit? </label>
                 <input type="text" name="commitEther"></input> 
+                <br>
+                <button class="btn" id="editUserButton" action="submit"> Submit </button>
                 
             </form>
-            <br>
-            <button class="btn" id="editUserButton" action="submit"> Submit </button>
             
         </div>
 
@@ -100,41 +101,5 @@
 </div>
 
 </div>
-  
-          
-          
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#editUserButton").on('click', function () {
-            body = ($("#editUserForm").serialize());
-            console.log(body)
-            $.ajax({
-                method: 'POST',
-                url: `/user`,
-                data: body
-
-            })
-                .done(function (data) {
-                    console.log(data)
-                    if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                        alert(JSON.stringify(data.message));
-                        location.href = location.protocol + '//' + data.redirect
-                    } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                        alert(JSON.stringify(data.message));
-                        location.href = location.protocol + '//' + data.failure
-                    } else {
-                        alert(JSON.stringify(data));
-                    }
-                });
-                
-            })    
-        })
-
-</script>
-
-    
-
-
 
 <% include partials/_footer.html %>

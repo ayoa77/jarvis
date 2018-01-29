@@ -21,6 +21,11 @@ var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var i18n = require('i18n-2');
 var validator = require("express-validator");
+var iplocation = require('iplocation');
+var nodemailer = require('nodemailer');
+var promise = require('bluebird')
+
+
 
 langCheck = require('./middleware/langChecker.js');
 validationMiddleware = require('./middleware/validationMiddleware.js');
@@ -126,6 +131,11 @@ if ('development' == app.get('env')) {
     // ephemeral: true // delete this cookie when the browser is closed
   }));
 }
+
+// app.use(function (req,res,next) {
+
+
+// })
 app.use(function (req, res, next) {
   if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh-CN', 'jp', 'kr') || 'en' }
   if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
@@ -190,13 +200,33 @@ app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/testing', langCheck, function (req, res) {
-  console.log("---------------------------");
-  console.log(req.session.locale);
-  console.log(req.i18n.getLocale());
-  console.log("---------------------------");
-  res.send(req.i18n.__('1.Language'));
+  iplocation('56.70.97.8')
+    .then(result => {  
+      console.log(result.country_name);
+      res.send(JSON.stringify);
+    })
+    .catch(err => {
+      console.error(err)
+    })
   // res.render('testing');
 });
+
+//AJAXING Location look up
+app.post('/startup', function (req, res, next) {
+  // req.session.loc = null;
+    if (!req.session.loc) {
+  iplocation(req.ip)
+    .then(result => {
+      req.session.loc = result.country_name
+      console.log(req.ip)
+      res.send(req.session.loc);
+    })
+      .catch(err => {
+        console.error(err)
+        res.send(err)
+      })  
+    }else{res.send('ok')}
+  });
 
 //LEAVING AFTER BEING PRESENTED WITH EULA,
 app.get('/leave', function (req, res, next) {

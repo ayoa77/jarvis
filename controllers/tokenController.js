@@ -43,7 +43,6 @@ exports.confirmationGet = function  (req, res, next) {
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
                 // res.status(200).send("The account has been verified. Please log in.");
-                req.session.message = "The account has been verified. To complete this process, please log in."
                 res.redirect('/login');
             });
         });

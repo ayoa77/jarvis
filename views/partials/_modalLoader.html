@@ -2,7 +2,7 @@
 <div class="modal-login">
     <!-- Left Side - Logo -->
     <div class="d-none d-md-flex modal-login-left">
-        <div class = "logo"></div>
+        <div class="logo"></div>
     </div>
 
     <!-- Right Side - Information -->
@@ -15,8 +15,6 @@
             <span class="or">OR</span>
             <div class="signup">Sign-Up</div>
         </div>
-
-        <!-- <form id="loginForm" action="/login", method="POST" ></form> -->
         
 
         <div class="form-box">
@@ -26,33 +24,31 @@
                         <input type="hidden", name="_csrf", value= <%=csrfToken %>> </input>
                         <input type="email", name="email" placeholder="E-Mail"></input>
                         <input type="password", name="password" placeholder="Password"></input>
-                        <button type = "submit"> Submit </button>
+                        <button id="loginButton" type="submit"> Submit </button>
                     </form>
             
             <a class="login-forgot-pass">Forgot Password?</a>
             </div>
 
             <div class="register-box">
-                    <form id = "registerForm" action = "/register", method = "POST">
-                        <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
-                    
+                    <form id="registerForm" action="/register", method="POST">
+                        <input type="hidden" name="_csrf" , value=<%=csrfToken %>> </input>
                         <input type="text" name="name" placeholder="Name"></input>
-                        <input type="text" name="country" placeholder="Country"></input>
-                        <input type = "text" name = "email" placeholder="E-Mail"></input>
-                        <input type = "text" name = "password" placeholder="Password"></input>
+                        <input type="text" name="email" placeholder="E-Mail"></input>
+                        <input type="password" name="password" placeholder="Password"></input>
                     
-                        <button action = "submit"> Submit </button>
+                        <button id="registerButton" action="submit"> Submit </button>
                     
                     </form>
             </div>
 
             <div class="forgot-pass-box">
                     <form id="forgotPassForm" action="/emailresetpassword" , method="POST">
-                        <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
+                        <input type="hidden" name="_csrf" , value= <%=csrfToken %>> </input>
                     
-                        <input type="email" , name="email" placeholder="E-Mail">    
+                        <input type="email" name="email" placeholder="E-Mail">    
                     
-                        <button type="submit"> Submit </button>
+                        <button id="emailResetButton" type="submit"> Submit </button>
                     </form>
             </div>
 
@@ -437,4 +433,123 @@
         </div>
 
     </div> 
+</div>
+
+<!-- Password Reset -->
+<div class="modal-pass-reset">
+        <!-- Left Side - Logo -->
+        <div class="d-none d-md-flex modal-login-left">
+            <div class="logo"></div>
+        </div>
+
+        <!-- Right Side - Information -->
+        <div class="d-flex d-sm-none modal-login-decoration">
+        </div>
+
+        <div class="modal-login-right">
+            <div class="title-container">
+                <div class="signin active">Password Reset</div>
+            </div>
+            
+            <div class="form-box">
+                <div class="pass-reset-box">
+                    <form action="/resetpassword" id="passwordResetForm" method="POST">
+        <input type="hidden" , name="_csrf" , value= <%=csrfToken %>> </input>
+
+        <label>password 
+            <input name="password" id="password" type="password"/>
+        </label>
+    <br>
+        <label>confirm password:
+            <input type="password" name="password2" id="password2"/> 
+        <span id='message'></span>
+    </label>
+        
+    <button id="passwordResetButton" action="submit"> Submit </button>
+    
+</form>
+            
+                </div>
+            </div>
+        
+        </div>
+</div>
+
+<!-- Email Verification -->
+<div class="modal-email-verify">
+    <!-- Left Side - Logo -->
+    <div class="d-none d-md-flex modal-login-left">
+        <div class="logo"></div>
+    </div>
+
+    <!-- Right Side - Information -->
+    <div class="d-flex d-sm-none modal-login-decoration">
+    </div>
+
+    <div class="modal-login-right">
+        <div class="title-container">
+            <div class="signin active">Email Verify</div>
+        </div>
+
+        <div class="form-box">
+            <div class="email-verify-box">
+                    <form action="/resend" id="sendVerificationForm" method="POST">
+                        <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
+                        <p>resend verification email </p>
+                        <label for="email"> Email </label>
+                        <input type="text" name="email"></input>
+
+                        <br>
+                        <p>You will only have one hour to verify your email, please click on the email that we will send you
+                            or return here to verify again. </p>
+                        <button class="btn" id="verifyButton" action="submit"> Send </button>
+
+                    </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- User Edit -->
+<div class="modal-user-edit">
+    <!-- Left Side - Logo -->
+    <div class="d-none d-md-flex modal-login-left">
+        <div class="logo"></div>
+    </div>
+
+    <!-- Right Side - Information -->
+    <div class="d-flex d-sm-none modal-login-decoration">
+    </div>
+
+    <div class="modal-login-right">
+        <div class="title-container">
+            <div class="signin active">Modify User</div>
+        </div>
+
+        <div class="form-box">
+            <div class="user-edit-box">
+                            <form action="#" id="editUserForm" method="POST">
+                                <input type="hidden" , name="_csrf" , value=< %=csrfToken %>> </input>
+
+                                <label for="name"> Name </label>
+                                <input type="text" name="name"></input>
+
+                                <br>
+                                <label for="wallet"> Ethereum Wallet ID </label>
+                                <input type="text" name="wallet"></input>
+                                <br>
+                                <label for="commitEther"> How much ether would you like to commit? </label>
+                                <input type="text" name="commitEther"></input>
+                                <br>
+                                <button class="btn" id="editUserButton" action="submit"> Submit </button>
+
+                            </form>
+                
+
+            </div>
+        </div>
+
+    </div>
 </div>

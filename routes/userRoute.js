@@ -70,7 +70,7 @@ router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, n
     return new Promise(function (resolve, reject) {
       // shouldn't get here if there is not user, but testing just to be safe.
       if (!user) {
-        reject(lang.errorNoEmailFound);
+        reject(lang.errorNoUserFound);
       } else {
 
         // req.session.user = user;

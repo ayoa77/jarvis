@@ -19,27 +19,4 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<script>
-  $(document).ready(function () {
-    $("#loginButton").on('click', function () {
-      body = ($("#loginForm").serialize());
-      console.log(body)
-      $.ajax({
-        method: 'POST',
-        url: `/login`,
-        data: body
-            })
-        .done(function (data) {
-          console.log(data)
-          if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-            alert(JSON.stringify(data.message));
-            location.href = location.protocol + '//' + data.redirect
-          } else {
-            alert(JSON.stringify(data));
-          };
-        });
-    })
-  })
 
-</script>
