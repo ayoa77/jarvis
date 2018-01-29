@@ -5,45 +5,29 @@ X Register
 X email confirmation
 X Login with csrf
 X Logout button
-- password reset
-- form Validator
-- research more about mongoose and mongodb
+X password reset
+X form Validator
+X research more about mongoose and mongodb
 X test and make sure database is working
-- setup mongoose security ie - login and password
+X setup mongoose security ie - login and password
 X talk to Alex about the database
-- setup image uploading for kyc on user page(temporary)
-- reasearch and setup helmet (easymode)
-- finish setting up routes 
-- Governance, WhitePaper, FAQ, DeepDive, medium blog route
-- README
-- Docker
-- https/http2 - lets encrypt
-- nginx to gzip/brotli
-- CDN - Aryaka?
-- SEO Optimization
-- RBT.txt
-- Sitemap
-- Gcloud deploy
-
-paymentSchema
-- userId
-- input dummy data
-- walletId:[{ type: Schema.Types.ObjectId, ref: 'wallet' }],
-
-
-userSchema
-- id - number
-- email - string
-- password(salted) - string
-- status:{ type: String, enum: ['NEW', 'EMAIL', 'APPROVED'], default: 'NEW'}	
-
-
-walletSchema
-- userid - number userRelation:[{ type: Schema.Types.ObjectId, ref: 'user' }],
-- id - number
-- jarvis - String
-- ethereum - String
-
-kycSchema
-- userid - number userRelation:[{ type: Schema.Types.ObjectId, ref: 'user' }],
-- images - [String]
+X setup image uploading for kyc on user page(temporary)
+X reasearch and setup helmet (easymode)
+X finish setting up routes 
+X Governance, WhitePaper, FAQ, DeepDive, medium blog route
+X README
+X Docker
+X https/http2 - lets encrypt
+X nginx to gzip/brotli
+X CDN - Aryaka?
+X SEO Optimization
+X RBT.txt
+X AWS deploy
+- Sitemap (needs updated pull a sitemap generator from one of alex's repos)
+- register route text for email
+- look around site for text that will need to be translated
+- move forms from current locations to either the index or to the partial...may just add to the bottom of the partial
+* AJAX *
+- edit user route verifications
+- password reset verifications
+- 

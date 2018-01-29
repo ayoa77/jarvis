@@ -7,6 +7,7 @@ var sgTransport = require('nodemailer-sendgridv3-transport');
 var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
 langCheck = require('../middleware/langChecker.js');
+validationMiddleware = require('../middleware/validationMiddleware.js')
 
 
 // api key https://sendgrid.com/docs/Classroom/Send/api_keys.html
@@ -36,28 +37,10 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
 });
 
 ///need to add edit logic to this
-router.post('/', csrfProtection,  function (req, res, next) {
-  //validator can be blank!!!
-  if (req.body.wallet){
-  req.checkBody('wallet', `Please enter a properly formatted Ethereum wallet id<%= i18n.commitedEthereum-format-incorrect %>`).len(42);
-  var errors = req.validationErrors();
-  }
-  if (errors) {
-    console.log(errors)
-    res.send(errors);
-    return;
-  } else {
-  var errors = null;
-  if (req.body.commitEther) {
-  req.checkBody('commitEther', `only numbers and decimals allowed <%= __.alerts.commitedEthereum_format_incorrect %>`).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/);
-  var errors = req.validationErrors();
-  };
-  if (errors) {
-    console.log(errors)
-    res.send(errors);
-    return;
-  } else {
+router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, next) {
+  var error;
 
+  const userSetter = new Promise(function (resolve, reject) {
   userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 
     userSchema.update({ _id: user._id,  }, { $set:
@@ -70,28 +53,64 @@ router.post('/', csrfProtection,  function (req, res, next) {
     }
   ).exec(function (err, user) {
       if (err) {
-        console.log(err);
-        res.status(500).send(err);
+        reject(lang.errorDefault);
       } else {
+
+        // setting up cookie with user
+        // req.session.user = user;  //set-cookie: session = {email, passwords}
+        // req.session.cookie.expires = true;
+        // req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
+        //Not sure why this isn't passing my user through...
+        resolve(user);
+      } 
+      });
+    });
+  });
+  function userEditedMailer(user) {
+    return new Promise(function (resolve, reject) {
+      // shouldn't get here if there is not user, but testing just to be safe.
+      if (!user) {
+        reject(lang.errorNoEmailFound);
+      } else {
+
         // req.session.user = user;
         console.log(req.body);
         console.log(user);
           
         var transporter = nodemailer.createTransport(sgTransport(options));
-          var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: 'Your Jarvis user was edited', text: `Hello ${req.session.user.name || req.session.user.email},\n\n` + 'If you did not make this request, please contact us immediately by visiting us at ' + req.headers.host + '.\n' };
-            transporter.sendMail(mailOptions, function (err) {
-              if (err) { return res.status(500).send({ msg: err.message }); }
-              
-          res.status(200).send('You have successfully updated your account.');
+        var mailOptions = { from: 'noreply@jarvis.ai', to: req.session.user.email, subject: lang.messageUserEdited, text: lang.emailHello + ' ' + `${req.session.user.name || req.session.user.email},\n\n` + ' ' + lang.messageUserEdited + '. ' + lang.emailNoRequest + ' \nhttp:\/\/' + req.headers.host + '.\n' };
+          transporter.sendMail(mailOptions, function (err) {
+            if (err) { reject(lang.errorDefault) } else {
 
-        // res.redirect('/user');
-            
-        });
-      };
+              if (!error) {
+                var data = {};
+                data.redirect = req.headers.host + '/user'
+                data.message = lang.messageUserEdited
+                resolve(data);
+              } else {
+                reject(error);
+              }
+            }
+          });      
+        };
     });
-  });
-};
   };
+
+userSetter
+  .then(user => {
+    console.log('success from user route')
+    userEditedMailer(user);
+  }).then(data => {
+    var data = {};
+    data.redirect = req.headers.host + '/user'
+    data.message = lang.messageUserEdited
+    console.log('success from route')
+    res.send(data)
+  }).catch(err => {
+    console.log(err)
+    console.log('error from route')
+    res.send(err);
+  });
 });
   // userSchema.findOne({ email: req.session.user.email }, function (err, user) {
 

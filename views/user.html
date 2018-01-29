@@ -77,7 +77,7 @@
         </div>
     </div>
 
-            <form action="#" id="editUser" method="POST">
+            <form action="#" id="editUserForm" method="POST">
                 <input type="hidden", name="_csrf" , value= <%=csrfToken %>> </input>
          
                 <label for="name"> Name </label>
@@ -86,19 +86,13 @@
                 <br>
                 <label for="wallet"> Ethereum Wallet ID </label>
                 <input type="text" name="wallet"></input>
-
-                <br>
-                <label for="lang"> Language </label>
-                <input type="text" name="lang"></input>
-                
                 <br>
                 <label for="commitEther"> How much ether would you like to commit? </label>
-
                 <input type="text" name="commitEther"></input> 
                 
             </form>
             <br>
-            <button class="btn" type="submit"> Submit </button>
+            <button class="btn" id="editUserButton" action="submit"> Submit </button>
             
         </div>
 
@@ -112,22 +106,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script>
     $(document).ready(function () {
-        //     body = {}
-        $("button").on('click', function () {
-            body = ($("#registerForm").serialize());
+        $("#editUserButton").on('click', function () {
+            body = ($("#editUserForm").serialize());
             console.log(body)
             $.ajax({
                 method: 'POST',
                 url: `/user`,
-                data: body,
-                //               contentType: "application/json",
-                dataType: "json"
-            }).done(function (data) {
-                alert(data)
-                //   location.reload();
-            });
+                data: body
+
+            })
+                .done(function (data) {
+                    console.log(data)
+                    if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                        alert(JSON.stringify(data.message));
+                        location.href = location.protocol + '//' + data.redirect
+                    } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+                        alert(JSON.stringify(data.message));
+                        location.href = location.protocol + '//' + data.failure
+                    } else {
+                        alert(JSON.stringify(data));
+                    }
+                });
+                
+            })    
         })
-    })
 
 </script>
 
