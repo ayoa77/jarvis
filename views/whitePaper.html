@@ -1,16 +1,61 @@
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <a href = "/">Home</a>
-    <a href = "/technology">Deep Dive</a>
-    <a href = "/faq">FAQ</a>
-    <a href = "/governance">Governance</a>
-    <a href = "/whitepaper">White Paper</a>
-   
-    
-  </body>
-</html>
+<% include partials/_head.html %>
+<% include partials/_nav.html %>
+
+<div class="container">
+
+  <div class="row whitepaper-header">
+
+    <div class="col-12 col-sm-6 d-flex align-items-center">
+        <div class="dropdown">
+            <button class="language-selector-button dropdown-toggle" type="button" data-toggle="dropdown">Language
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">English</a></li>
+              <li><a href="#">简中</a></li>
+              <li><a href="#">繁中</a></li>
+              <li><a href="#">日本</a></li>
+              <li><a href="#">한국</a></li>
+            </ul>
+          </div>
+    </div>
+
+    <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center">
+      <div class="row" style="width: 100%;">
+        <div class="col language-button">
+          <div class="lang-down english">
+            EN
+          </div>
+        </div>
+        <div class="col language-button">
+          <div class="lang-down sim-chinese">
+            简中
+          </div>
+        </div>
+        <div class="col language-button">
+          <div class="lang-down trad-chinese">
+            繁中
+          </div>
+        </div>
+        <div class="col language-button">
+          <div class="lang-down japanese">
+            日本
+          </div>
+        </div>
+        <div class="col language-button">
+          <div class="lang-down korean">
+            한국
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row whitepaper-pdf-container">
+
+  </div>
+
+</div>
+
+
+<% include partials/_footer.html %>
