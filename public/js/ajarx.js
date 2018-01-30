@@ -2,6 +2,7 @@ $(document).ready(function () {
     $(function () {
         var url = window.location.href;
         var modal = url.match(/#modal=([^\?]+)/)[1];
+
         console.log(modal);
         if (modal == "email-verify") { modalLoad("modal-email-verify"); }
         if (modal == "pass-reset") { modalLoad("modal-pass-reset"); }
