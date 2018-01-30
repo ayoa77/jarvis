@@ -55,11 +55,7 @@ exports.emailResetPasswordPost = function (req, res) {
                 if (!error) {
                     var data = {};
                     data.redirect = req.headers.host + '/',
-                    data.message = lang.messagePasswordResetEmailSent
-                    req.session.sessionFlash = {
-                        type: 'message',
-                        message: data.message
-                    };                      
+                    data.message = lang.messagePasswordResetEmailSent                    
                     resolve(data);
                 } else {
                     reject(error);
@@ -78,6 +74,10 @@ exports.emailResetPasswordPost = function (req, res) {
                 var data = {};
                 data.redirect = req.headers.host + '/'
                 data.message = lang.messagePasswordResetEmailSent
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: lang.messagePasswordResetEmailSent
+                };         
                 console.log('success from route')
                 res.send(data)
             }).catch(err => {

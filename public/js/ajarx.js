@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(function () {
         var url = window.location.href;
-        var modal = url.match(/#modal=([^\?]+)/);
+        var modal = url.match(/#modal=[^\?]+/);
         console.log(modal);
         if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
         if (modal == "#modal=pass-reset") { modalLoad("modal-pass-reset"); }

@@ -172,8 +172,8 @@ app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
 app.get('/confirmation/:ids?', langCheck, tokenController.confirmationGet);
-app.post('/modal/email-verify',langCheck, tokenController.resendTokenPost);
-app.route('/emailresetpassword/:id?/modal/:modal?')
+app.post('/verify',langCheck, tokenController.resendTokenPost);
+app.route('/emailresetpassword')
   .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)
   .post(langCheck, passwordController.emailResetPasswordPost);
 app.route('/resetpassword/:id?')

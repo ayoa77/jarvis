@@ -12,9 +12,8 @@ langCheck = require('../middleware/langChecker.js');
 
 
 router.get('/', csrfProtection, langCheck, function (req, res) {
-    var lang = req.session.locale;
     if (!req.session.user) {
-        res.render('login', { lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+        res.render('index', { title: 'Jarvis', lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
     } else {
         res.redirect('/user');
     }
@@ -24,7 +23,8 @@ router.get('/:id?', csrfProtection, langCheck, function (req, res, next) {
     var x;
     if (id == 'false') { x = 'Please Log in' };
     if (!req.session.user) {
-        res.render('login', { error: x, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+        
+        res.render('index', { title: 'Jarvis', lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
     } else {
         res.redirect('/user');
 
