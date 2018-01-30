@@ -21,7 +21,8 @@ var options = {
 
 router.get('/', csrfProtection, langCheck, function (req, res, next) {
   console.log(req.params.modal);
-
+  console.log(req.session);
+  console.log("********************************************")
   if (!req.session.user) {
     res.redirect('/login#modal=login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
