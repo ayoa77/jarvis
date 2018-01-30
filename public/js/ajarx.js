@@ -1,4 +1,28 @@
 $(document).ready(function () {
+    $(function () {
+        var url = window.location.href;
+        var modal = url.match(/#modal=([^\?]+)/)[1];
+        console.log(modal);
+        if (modal == "email-verify") { modalLoad("modal-email-verify"); }
+        if (modal == "pass-reset") { modalLoad("modal-pass-reset"); }
+        if (modal == "user-edit") { modalLoad("modal-user-edit"); }
+        if (modal == "login") { modalLoad("modal-login"); }
+        if (modal == "restricted-country") {modalLoad("modal-restricted-country")};
+    });
+    // $(window).bind('hashchange', (function () {
+        // window.addEventListener('popstate', (function () {
+            
+    window.addEventListener('popstate', (function () {
+        var url = window.location.href;
+        var modal = url.match(/#modal=([^\?]+)/)[1];
+        console.log(modal);
+        // if (modal == "email-verify") { modalLoad("modal-email-verify"); }
+        // if (modal == "pass-reset") {modalLoad("modal-pass-reset"); }
+        // if (modal == "user-edit") {modalLoad("modal-user-edit"); }
+        // if (modal == "login") {modalLoad("modal-login"); 
+        // if (modal == "restricted-country") { modalLoad("modal-restricted-country") };
+    }));
+    
     //ajax the startup setter
     $(function() {
         $.ajax({
@@ -7,7 +31,7 @@ $(document).ready(function () {
             data: 'starting up'
         })
         .done(function (data) {
-            console.log(data);
+            console.log("ok");
         });
     });
 
@@ -110,7 +134,7 @@ $(document).ready(function () {
                 body = ($("#sendVerificationForm").serialize());
                 $.ajax({
                     method: 'POST',
-                    url: `/resend`,
+                    url: `//modal/email-verify`,
                     data: body
                     // contentType: "application/json",
                     // dataType: "json"

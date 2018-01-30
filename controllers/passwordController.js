@@ -47,15 +47,19 @@ exports.emailResetPasswordPost = function (req, res) {
             } else {
             // Send email
             var transporter = nodemailer.createTransport(sgTransport(options));
-            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '.\n' };
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '#modal=pass-reset' };
 
              transporter.sendMail(mailOptions, function (err) {
                  if (err) { reject(lang.errorDefault) } else {
 
                 if (!error) {
                     var data = {};
-                    data.redirect = req.headers.host + '/'
-                    data.message = lang.messagePasswordResetEmailSent 
+                    data.redirect = req.headers.host + '/',
+                    data.message = lang.messagePasswordResetEmailSent
+                    req.session.sessionFlash = {
+                        type: 'message',
+                        message: data.message
+                    };                      
                     resolve(data);
                 } else {
                     reject(error);
@@ -87,8 +91,14 @@ exports.emailResetPasswordPost = function (req, res) {
 
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
-    res.render('newPassword', { sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
-        };
+    res.render('index', {
+        title: 'Jarvis',
+        lang: lang,
+        sessionFlash: res.locals.sessionFlash,
+        csrfToken: req.csrfToken()
+    });
+};
+
 
 exports.passwordResetPost = function (req, res, next) {
     // req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= req.i18n.__('passwords-format-incorrect') %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
@@ -108,8 +118,12 @@ exports.passwordResetPost = function (req, res, next) {
         console.log(req.session.token);
         if (!user) { reject(lang.errorNoUserFound); } else {
             if (user.passwordResetExpires < Date.now()) { 
-                data.failure = req.headers.host + '/emailresetpassword';
-                data.message = lang.messagePasswordTokenExpired; 
+                data.failure = req.headers.host + '/emailresetpassword#modal=login';
+                data.message = lang.messagePasswordTokenExpired;
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: lang.messagePasswordTokenExpired
+                }; 
                 reject(data); } else {
         var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
         delete req.body.password;

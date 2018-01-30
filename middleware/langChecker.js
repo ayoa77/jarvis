@@ -23,7 +23,7 @@ function langChecker(req, res, next) {
     lang = en;
   }
 
-  next()  
+  next();  
 }
 
 module.exports = langChecker;

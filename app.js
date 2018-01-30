@@ -25,17 +25,16 @@ var iplocation = require('iplocation');
 var nodemailer = require('nodemailer');
 var promise = require('bluebird')
 
-
-
+// Custom Middleware
 langCheck = require('./middleware/langChecker.js');
 validationMiddleware = require('./middleware/validationMiddleware.js');
-
 
 // MODELS
 fs.readdirSync(__dirname + '/models').forEach(function (filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
 });
-// connect to mongoose - 
+
+// connect to MONGOOSE - 
 var userSchema = mongoose.model('user', userSchema);
 
 // Connect to the db and load env...make sure to uncomment the necessary ones once everyone has the necessary .env.dev file
@@ -52,21 +51,10 @@ if ('development' == app.get('env')) {
   // mongoose.connect('mongodb://jarvisAdmin:jarvisPass@localhost/jarvis?authSource=admin')
 };
 
-// Attach the i18n property to the express request object
-// And attach helper methods for use in templates
-
-// i18n.expressBind(app, {
-//   directory: "./middleware/backups/locales",
-
-//   extension: '.json',
-//   // setup some locales - other locales default to en silently
-//   locales: ['en', 'zh-TW', 'zh-CN', 'ja', 'ko'],
-//   // change the cookie name from 'lang' to 'locale'
-//   cookieName: 'locale'
-// });
-
+//MIDDLEWARE - helmet for security
 app.use(helmet());
 
+//MIDDLEWARE - validator for forms // we may be able to just place this in the index and the user routes
 app.use(validator({
   customValidators: {
     isEmailAvailable: function (email) {
@@ -86,7 +74,8 @@ app.use(validator({
     }
   }
 }));
-// view engine and express setup
+
+// VIEW ENGINE AND EXPRESS SETUP
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
@@ -95,6 +84,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//SETTING UP REDIS
 if ('development' == app.get('env')) {
   app.use(session({
     store: new RedisStore({
@@ -129,13 +119,20 @@ if ('development' == app.get('env')) {
     httpOnly: true, // don't let browser JS access cookie ever
     secure: true, // only use cookies over https
     // ephemeral: true // delete this cookie when the browser is closed
-  }));
-}
+  })
+);}
+// FINISHED SETTING UP REDIS
 
-// app.use(function (req,res,next) {
 
+// Possible
+// app.param('id', function (request, response, next, id) {
+//   req.session.token = req.params.id;
+//     next();
+// });  
 
 // })
+
+// ATTACHING LANGUAGE TO REDIS COOKIE
 app.use(function (req, res, next) {
   if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh-CN', 'jp', 'kr') || 'en' }
   if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
@@ -143,6 +140,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+// ATTACHING CUSTOM FLASH MESSAGES TO SESSION
 app.use(function (req, res, next) {
   // if there's a flash message in the session request, make it available in the response, then delete it
   res.locals.sessionFlash = req.session.sessionFlash;
@@ -150,6 +148,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+// SETTING ROUTES AND CONTROLLERS
 var indexRoute = require('./routes/indexRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
 var userRoute = require('./routes/userRoute');
@@ -161,15 +160,17 @@ var tokenController = require('./controllers/tokenController');
 var passwordController = require('./controllers/passwordController');
 
 
+app.use('/:modal?', indexRoute);
 app.use('/', indexRoute);
 app.use('/user', userRoute);
-app.use('/login', loginRoute);
+app.use('/login', loginRoute); 
+app.use('/login', loginRoute); 
 app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
 app.get('/confirmation/:id?', langCheck, tokenController.confirmationGet);
-app.post('/resend',langCheck, tokenController.resendTokenPost);
+app.post('/modal/email-verify',langCheck, tokenController.resendTokenPost);
 app.route('/emailresetpassword')
   .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)
   .post(langCheck, passwordController.emailResetPasswordPost);
@@ -183,7 +184,7 @@ app.all('/session-flash', function (req, res, next) {
   req.session.sessionFlash = {
     type: 'success',
     message: 'This is a flash message using custom middleware and express-session.'
-  }
+  };
   res.redirect(301, '/');
 });
 
@@ -203,7 +204,7 @@ app.get('/testing', langCheck, function (req, res) {
   iplocation('56.70.97.8')
     .then(result => {  
       console.log(result.country_name);
-      res.send(JSON.stringify);
+      res.send(JSON.stringify(result.country_name));
     })
     .catch(err => {
       console.error(err)
@@ -218,11 +219,11 @@ app.post('/startup', function (req, res, next) {
   iplocation(req.ip)
     .then(result => {
       req.session.loc = result.country_name
-      console.log(req.ip)
+      // console.log(req.session.loc)
       res.send(req.session.loc);
     })
       .catch(err => {
-        console.error(err)
+        // console.error(err)
         res.send(err)
       })  
     }else{res.send('ok')}
@@ -251,13 +252,13 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// error handler
+// ERROR HANDLER
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+// render the error page
   res.status(err.status || 500);
   res.render('error', { sessionFlash: res.locals.sessionFlash });
 });
