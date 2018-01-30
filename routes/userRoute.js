@@ -24,9 +24,9 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
   console.log(req.session);
   console.log("********************************************")
   if (!req.session.user) {
-    res.redirect('/login#modal=login'); //tell the page to drop down the modal
+    res.redirect('/#modal=login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
-    res.render('verify', { title: 'Verify', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+    res.redirect('/', { title: 'Jarvis', lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
   } else {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)
