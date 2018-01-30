@@ -551,6 +551,65 @@ body {
   line-height: 22px;
 }
 
+.modal-restricted-country {
+  width: 320px;
+  height: 250px;
+
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px #999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#restrictedCountryForm {
+  margin: 10px 0 0;
+  #restrictedAgree {
+    width: 130px;
+    padding: 10px 16px;
+    margin: 15px 0 0;
+    
+    background: $blue50;
+    border: none;
+    
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: $font-xs;
+  
+    transition: background .2s;
+  
+    &:hover {
+      background: $bluegreen;
+    }
+  }
+
+  #restrictedDisagree {
+    width: 130px;
+    padding: 10px 16px;
+    margin: 15px 0 0;
+    
+    background: rgb(255, 82, 82);
+    border: none;
+    
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: $font-xs;
+  
+    transition: background .2s;
+  
+    &:hover {
+      background: rgb(252, 108, 108);
+    }
+  }
+}
+
 // Modal Calls 
 .video-loader {
   width: 200px;
