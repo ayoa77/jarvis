@@ -41,3 +41,4 @@ npm-debug.log
 *.css
 .vscode
 dump.rdb
+gs-lang-file.js
