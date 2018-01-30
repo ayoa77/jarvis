@@ -23,7 +23,7 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
   console.log(req.params.modal);
 
   if (!req.session.user) {
-    res.redirect('/login'); //tell the page to drop down the modal
+    res.redirect('/login#modal=login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
     res.render('verify', { title: 'Verify', sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
   } else {

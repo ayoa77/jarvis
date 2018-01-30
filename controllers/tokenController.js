@@ -24,8 +24,7 @@ var options = {
 */
 exports.confirmationGet = function  (req, res, next) {
     // Find a matching token
-    // console.log(req.params.id)
-    tokenSchema.findOne({ token: req.params.id }, function (err, token) {
+    tokenSchema.findOne({ token: req.params.ids }, function (err, token) {
         if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token may have expired.' });
         
         // If we found a token, find a matching user
@@ -43,7 +42,7 @@ exports.confirmationGet = function  (req, res, next) {
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
                 // res.status(200).send("The account has been verified. Please log in.");
-                res.redirect('/login');
+                res.redirect('/login#modal=email-verify');
             });
         });
     });
