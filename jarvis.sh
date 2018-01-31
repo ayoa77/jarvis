@@ -49,7 +49,7 @@ echo "${yellow}-------------------Installing MongoDB-------------------${reset}"
 echo "${yellow}-------------------Installing MongoDB-------------------${reset}"
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
 echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.6 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-apt-get update
+apt-get update -y
 apt-get install mongodb-org -y
 service mongod start
 mongo < mongoInit.js
@@ -63,8 +63,7 @@ echo "${yellow}-------------------Installing NginX-------------------${reset}"
 echo "${yellow}-------------------Installing NginX-------------------${reset}"
 echo "${yellow}-------------------Installing NginX-------------------${reset}"
 apt-get install nginx -y
-cp ./nginx ./nginx-backup
-mv ./nginx /etc/nginx/sites-available/default
+cp ./nginx /etc/nginx/sites-available/default
 echo "${green}-------------------Done Installing NginX-------------------${reset}"
 echo "${green}-------------------Done Installing NginX-------------------${reset}"
 echo "${green}-------------------Done Installing NginX-------------------${reset}"
@@ -96,7 +95,8 @@ echo "${green}-------------------Done Installing Docker-------------------${rese
 echo "${yellow}-------------------Installing Redis-------------------${reset}"
 echo "${yellow}-------------------Installing Redis-------------------${reset}"
 echo "${yellow}-------------------Installing Redis-------------------${reset}"
-apt-get update && apt-get upgrade
+apt-get update -y 
+apt-get upgrade -y
 apt-get install software-properties-common -y
 cat <<EOF >/etc/apt/sources.list.d/dotdeb.list
 deb http://ftp.utexas.edu/dotdeb/ stable all
@@ -114,7 +114,7 @@ echo "${yellow}-------------------Building/Running Docker Image-----------------
 echo "${yellow}-------------------Building/Running Docker Image-------------------${reset}"
 echo "${yellow}-------------------Building/Running Docker Image-------------------${reset}"
 docker build -t jarvis .
-docker run -d -p 3000:3000 jarvis
+docker run --restart unless-stopped -d -p 3000:3000 jarvis
 service nginx restart
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
