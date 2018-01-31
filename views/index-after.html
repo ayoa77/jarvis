@@ -1,0 +1,288 @@
+<% include partials/_head.html %>
+
+<% include partials/_modal.html %>
+<% include partials/_nav.html %>
+
+<div hidden>
+    <% include partials/_modalLoader.html %>
+</div>
+
+<div class="container-fluid">
+  <div class="row sh-splash sty-splash">
+    <div class="col-12 cont-splash d-flex flex-column align-items-center">
+      <p class="big-text text-center" style="color:#4F545A;">
+          JARVIS.AI
+      </p>
+
+      <p class="sub-text text-center" >
+          <%= lang.index1decentralized_ai_platform %>
+      </p>
+
+      <p class="body-text text-center" style="color: #8B8D91; margin-bottom: 20px;">
+          The Token generation event for the round A is live now and ends in:
+      </p>
+
+      <div id="sketch-holder"></div>
+
+      <!-- Mail Chimp Stuff  -->
+
+      
+      <div class="video-loader" onclick="modalLoad('modal-youtube')" >
+        <div class="play-icon fa">&#xf04b;</div>
+        <div class="video-loader-text">
+          VIEW OUR VIDEO
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-12 pattern-splash"></div>
+  </div>
+
+</div>
+
+<div class="container">
+
+  <div class="row align-items-center sh-white-block sty-white-block">
+    <div class="col-md-6 world-box"></div>
+    <div class="col-md-6 world-box-col">
+      <p class="question-text">
+        <%= lang.index2what_is_it %>
+      </p>
+
+      <p class="big-text-alt" style="margin-bottom: 20px;">
+       <%= lang.index2convergance %><br /> <%= lang.index2ai_blockchain %>
+      </p>
+
+      <p class="body-text" style="margin-bottom: 20px;">
+          <%= lang.index2explanation %>         
+      </p>
+
+      <a target="_blank" href="https://hackmd.io/s/rJAMAs-Bf" class="whitepaper-link"> <%= lang.index2read_whitepaper %> &nbsp;&nbsp;<span class="right-arrow">&#xf178;</span></a>
+
+    </div>
+  </div>
+  
+
+</div>
+
+<div class="container-fluid">
+
+  <div class="row sh-grey-block sty-grey-block">
+
+      <div class="col-12 unfluid">
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <p class="big-text-alt">
+                <%= lang.index3rebalance %>
+            </p>
+          </div>
+
+          <div class="col-md-6 valign">
+            <p class="body-text">
+                <%= lang.index3most_ai_development %>
+            </p>
+          </div>
+
+        </div>
+  
+      </div>
+
+      <div class="col-12">
+        <div class="radial-illustration-box" style="margin-top: 20px;"></div>
+      </div>
+
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="row sh-white-block sty-white-block">
+    <div class="col-12">
+
+      <div class="row unfluid bottom-spacer">
+        <div class="col-md-6">
+          <p class="big-text-alt text-center-onoff"> 
+              <%= lang.index3decentralized_marketplace %>
+          </p>
+        </div>
+
+        <div class="col-md-6 valign">
+          <p class="body-text text-center-onoff">
+              <%= lang.index3ai_combining %>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-12">
+
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 col-flexed">
+          <div class="icon fan-shadow" style="margin-bottom: 20px;"></div>
+          <div class="little-title text-center" style="margin-bottom: 10px;">
+            <%= lang.index4gpu_miners %>
+          </div>
+          <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+            <%= lang.index4computation_power %>
+          </div>
+        </div>
+
+      <div class="col-12 col-md-6 col-lg-3 col-flexed">
+        <div class="icon hd" style="margin-bottom: 20px;"></div>
+        <div class="little-title text-center" style="margin-bottom: 10px;">
+          <%= lang.index4knowledge_curators %>
+        </div>
+        <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+          <%= lang.index4collect_maintain %>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 col-flexed">
+        <div class="icon bars" style="margin-bottom: 20px;"></div>
+        <div class="little-title text-center" style="margin-bottom: 10px;">
+          <%= lang.index4machine_learning %>
+        </div>
+        <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+          <%= lang.index4develop_data_analytics %>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 col-flexed">
+        <div class="icon lappy" style="height: 55px; width: 55px; margin-bottom: 15px;"></div>
+        <div class="little-title text-center" style="margin-bottom: 10px;">
+          <%= lang.index4app_developers %>
+        </div>
+        <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+          <%= lang.index4leverage_jarvis %>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  <div class="row sh-blue-block sty-blue-block">
+    <div class="col-12">
+      <div class="row unfluid d-flex justify-content-center align-items-center">
+
+          <div class="col-12 col-sm-auto">
+              <div class="logo-white"></div>
+          </div>
+
+          <div class="col-12 col-sm-auto world-box-col">
+              <p class="big-text-alt text-center" style="color: white;">
+                <%= lang.index5ai_token %>
+              </p>
+
+              <p class="body-text text-center" style="max-width: 400px; color: white; margin: 0 auto;">
+                <%= lang.index5jarvis_introduction %>
+              </p>
+          </div>
+
+        </div>
+      </div>
+   </div>
+
+</div>
+
+<div class="container">
+
+  <div class="row sh-white-block sty-white-block">
+        <div class="col-12" style="margin-bottom: 20px;">
+
+          <p class="big-text-alt text-center" style="margin-bottom: 10px;">
+              <%= lang.index6applications %>
+          </p>
+          <p class="body-text text-center" style="margin-bottom: 20px;">
+                    <%= lang.index6build_anything %>
+          </p>
+
+        </div>
+  
+      <div class="col-12">
+  
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3 col-flexed">
+            <div class="icon video" style="margin-bottom: 15px; margin-top: 5px;"></div>
+            <div class="little-title text-center" style="margin-bottom: 10px;">
+               <%= lang.index6video_analytics %>
+            </div>
+            <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+              <%= lang.index6ai_technologies %>
+            </div>
+          </div>
+  
+        <div class="col-12 col-md-6 col-lg-3 col-flexed">
+          <div class="icon cubes" style="height: 55px; width: 55px; margin-bottom: 15px;"></div>
+          <div class="little-title text-center" style="margin-bottom: 20px;">
+              <%= lang.index6smarter_iot %>
+          </div>
+          <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+            <%= lang.index6train_iot_models %>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3 col-flexed">
+          <div class="icon md" style="height: 55px; width: 55px; margin-bottom: 15px;"></div>
+          <div class="little-title text-center" style="margin-bottom: 10px;">
+              <%= lang.index6medical_imaging %>
+          </div>
+          <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+            <%= lang.index6medicinal_applications %>
+            </div>
+        </div>
+  
+        <div class="col-12 col-md-6 col-lg-3 col-flexed">
+          <div class="icon flow" style="margin-bottom: 15px; margin-top: 5px;"></div>
+          <div class="little-title text-center" style="margin-bottom: 10px;">
+            <%= lang.index6next_generation %>
+          </div>
+          <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
+            <%= lang.index6user_interface %>
+          </div>
+        </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+
+</div>
+
+<div class="container-fluid">
+
+  <div class="row sh-grey-block sty-grey-block">
+      <div class="col-12 unfluid bottom-spacer">
+        
+          <p class="big-text-alt">
+              <%= lang.index7our_team %>
+          </p>
+
+      </div>
+      
+      <div class="col-12 d-lg-none">
+
+          <div id="slider" class="center">
+            <% include partials/_team.html %>
+          </div>
+
+     </div>
+
+     <div class= "col-12 d-none d-lg-block">
+          <% include partials/_team-no-slide.html %>
+     </div>
+
+  </div>
+  
+  <% include partials/_advisors.html %>
+</div>
+
+<% include partials/_footer.html %>
