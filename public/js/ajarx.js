@@ -49,14 +49,9 @@ $(document).ready(function () {
                 // console.log(data)
                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                     // alert(JSON.stringify(data.message));
-                    location.href = location.protocol + '//' + data.redirect
+                    location.href = location.protocol + '//' + data.redirect;
                 } else {
-                    $('.error-handling').css('height', '100px');
-                    $('.error-handling').text(data);
-                    setTimeout(function() {
-                        $('.error-handling').css('height', '0px');
-                        $('.error-handling').text("");
-                    }, 3000)
+                    errorHandle(data);
                     // alert(JSON.stringify(data));
                 }
             });
@@ -78,10 +73,11 @@ $(document).ready(function () {
                     console.log(data);
                     console.log(location.protocol + '//' + data.redirect )
                     alert(data.message);
+                    
                 location.href = location.protocol + '//' + data.redirect 
                 }else{
-
-                alert(JSON.stringify(data));
+                    errorHandle(data.message);
+                // alert(JSON.stringify(data));
                 // location.reload();
             }
         });
@@ -100,11 +96,13 @@ $(document).ready(function () {
         .done(function (data) {
             console.log(data)
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                alert(JSON.stringify(data.message));
+                errorHandle(data.message);
+                // alert(JSON.stringify(data.message));
                 location.href = location.protocol + '//' + data.redirect;
                 //location.reload
             } else {
-                alert(JSON.stringify(data));
+                errorHandle(data);
+                // alert(JSON.stringify(data));
             };
         });
     })
@@ -123,13 +121,16 @@ $(document).ready(function () {
             .done(function (data) {
                 console.log(data)
                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                    alert(JSON.stringify(data.message));
+                    // alert(JSON.stringify(data.message));
+                    errorHandle(data.message);
                     location.href = location.protocol + '//' + data.redirect
                 } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                    alert(JSON.stringify(data.message));
+                    // alert(JSON.stringify(data.message));
+                    errorHandle(data.message);
                     location.href = location.protocol + '//' + data.failure
                 } else {
-                    alert(JSON.stringify(data));
+                    errorHandle(data);
+                    // alert(JSON.stringify(data));
                 }
             });
     })
@@ -149,10 +150,12 @@ $(document).ready(function () {
 
         .done(function (data) {
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                alert(JSON.stringify(data.message));
+                // alert(JSON.stringify(data.message));
+                errorHandle(data.message);
                 location.href = location.protocol + '//' + data.redirect
             } else {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
+                errorHandle(data);
                 //      location.reload();
             }
         });
@@ -172,15 +175,28 @@ $(document).ready(function () {
         .done(function (data) {
             console.log(data)
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                alert(JSON.stringify(data.message));
+                // alert(JSON.stringify(data.message));
+                errorHandle(data.message);
                 location.href = location.protocol + '//' + data.redirect
             } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                alert(JSON.stringify(data.message));
+                // alert(JSON.stringify(data.message));
+                errorHandle(data.message);
                 location.href = location.protocol + '//' + data.failure
             } else {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
+                errorHandle(data);
             }
         });
 
     })   
 });
+
+
+function errorHandle(data) {
+    $('.error-handling').css('height', '80px');
+    $('.error-handling').text(data);
+    setTimeout(function() {
+        $('.error-handling').css('height', '0px');
+        $('.error-handling').text("");
+    }, 3000)
+}

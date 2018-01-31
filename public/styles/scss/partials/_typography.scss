@@ -1,36 +1,44 @@
 // Fonts - Headers - DINPro
 @font-face {
-  font-family: DINPro-Bold;
-  src: url("./../../../fonts/DinPro/DINPro-Bold.ttf");
+  font-family: 'DINPro-Bold';
+  // src: url("./../../../fonts/DinPro/DINPro-Bold.ttf"); // dev
+  src: url("./../../fonts/DinPro/DINPro-Bold.ttf");   // prod
 }
 
 @font-face {
-  font-family: DINPro-Light;
-  src: url("./../../../fonts/DinPro/DINPro-Light.ttf");
+  font-family: 'DINPro-Light';
+  // src: url("./../../../fonts/DinPro/DINPro-Light.ttf");
+  src: url("./../../fonts/DinPro/DINPro-Light.ttf");
+  
 }
 
 
 
 // Fonts - Body - Aileron
 @font-face {
-  font-family: Aileron;
-  src: url("./../../../fonts/Aileron/Aileron-Regular.otf");
+  font-family: 'Aileron';
+  // src: url("./../../../fonts/Aileron/Aileron-Regular.otf");
+  src: url("./../../fonts/Aileron/Aileron-Regular.otf");
+  
 }
 
 @font-face {
-  font-family: Aileron-Light;
-  src: url("./../../../fonts/Aileron/Aileron-Light.otf");
+  font-family: 'Aileron-Light';
+  // src: url("./../../../fonts/Aileron/Aileron-Light.otf");
+  src: url("./../../fonts/Aileron/Aileron-Light.otf");  
 }
 
 @font-face {
-  font-family: Aileron-Bold;
-  src: url("../../../../fonts/Aileron/Aileron-SemiBold.otf");
+  font-family: 'Aileron-Bold';
+  // src: url("../../../../fonts/Aileron/Aileron-SemiBold.otf");
+  src: url("../../../fonts/Aileron/Aileron-SemiBold.otf");  
 }
 
 // Fonts - Icons - FontAwesome
 @font-face {
-  font-family: FontAwesome;
-  src: url('./../../../fonts/font-awesome-4.7.0 2/fonts/FontAwesome.otf');
+  font-family: 'FontAwesome';
+  // src: url('./../../../fonts/font-awesome-4.7.0 2/fonts/FontAwesome.otf');
+  src: url('./../../fonts/font-awesome-4.7.0 2/fonts/FontAwesome.otf');  
 }
 
 // Text Classes

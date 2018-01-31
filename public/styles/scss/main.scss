@@ -35,7 +35,7 @@ a {
 // Social Media
 
 .tg, .tw, .in, .git, .rd {
-  font-family: FontAwesome;
+  font-family: 'FontAwesome';
   color: #ADAEAF;
 
   &:hover {
@@ -51,7 +51,7 @@ a {
 
 body {
   background: white;
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
 }
 
 .sh-splash {
@@ -106,7 +106,7 @@ body {
 // Typography
 
 .big-text {
-  font-family: DINPro-Bold;
+  font-family: 'DINPro-Bold';
   font-size: $font-xl;
 
   margin: 0 0 12px;
@@ -115,7 +115,7 @@ body {
 .big-header-text {
   margin: 0 0 20px; 
 
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   color: #63686c;
   font-size: $font-md;
   line-height: 38px;
@@ -124,14 +124,14 @@ body {
 .big-text-alt {
   margin: 0 0 20px; 
 
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   color: #59636e;
   font-size: $font-lg;
   line-height: 40px;
 }
 
 .sub-text {
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   font-size: $font-sm;
   line-height: 26px;
   color: #59636e;
@@ -140,7 +140,7 @@ body {
 }
 
 .body-text {
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   font-size: $font-xs;
   line-height: 28px;
 }
@@ -148,13 +148,13 @@ body {
 .question-text {
   margin: 0 0 10px;
 
-  font-family: Aileron;
+  font-family: 'Aileron';
   font-size: $font-xxs;
   color: $gray;
 }
 
 .little-title {
-  font-family: Aileron-SemiBold;
+  font-family: 'Aileron-SemiBold';
   font-size: $font-xs;
   color: #333;
   white-space: nowrap;
@@ -185,7 +185,7 @@ body {
 }
 
 .navbar-expand-md .navbar-nav .nav-link {
-  font-family: Aileron;
+  font-family: 'Aileron';
   font-size: $font-sm;
   text-align: center;
 
@@ -252,7 +252,8 @@ body {
   align-items: center;
 }
 
-.modal-login-wrapper, .modal-email-verify, .modal-user-edit, .modal-pass-reset {
+.modal-login-wrapper, .modal-email-verify-wrapper, 
+.modal-user-edit-wrapper, .modal-pass-reset-wrapper {
   height: 420px;
   width: 300px;
   
@@ -296,7 +297,7 @@ body {
 }
 
 .signin, .signup, .or, .login-forgot-pass, button {
-  font-family: Aileron;
+  font-family: 'Aileron';
 }
 
 .logo {
@@ -365,7 +366,7 @@ body {
 .modal-title {
   margin: 0 0 20px;
   font-size: $font-md;
-  font-family: Aileron;
+  font-family: 'Aileron';
   color: $blue50;
 }
 
@@ -458,7 +459,7 @@ body {
 .verification-resend {
   margin: 20px 0;
 
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   font-size: $font-xs;
 
   color: #aaa;
@@ -530,13 +531,13 @@ body {
     align-self: flex-start;
 
     .modal-team-title {
-      font-family: Aileron;
+      font-family: 'Aileron';
       font-size: $font-xs;
       color: #aaa;
     }
 
     .modal-team-name {
-      font-family: DINPro-Bold;
+      font-family: 'DINPro-Bold';
       font-size: $font-lg;
     }
 }
@@ -553,7 +554,7 @@ body {
 }
 
 .modal-team-biography {
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
   font-size: $font-xxs;
   line-height: 22px;
 }
@@ -661,7 +662,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
 
-    font-family: Aileron;
+    font-family: 'Aileron';
     font-size: $font-xxs;
     color: #8B8D91;
     text-align: center;
@@ -681,13 +682,13 @@ body {
 }
 
 .whitepaper-link {
-  font-family: Aileron-SemiBold;
+  font-family: 'Aileron-SemiBold';
   font-size: $font-xxs;
   letter-spacing: 2px;
   color: $bluegreen;
 
   .right-arrow {
-    font-family: FontAwesome;
+    font-family: 'FontAwesome';
     font-size: $font-xxs;
   }
 
@@ -858,14 +859,14 @@ body {
         margin: 0 0 5px;
 
         font-size: $font-xxs;
-        font-family: Aileron-SemiBold;
+        font-family: 'Aileron-SemiBold';
         color: #4F545A;
       }
 
       .employee-title {
         font-size: 12px;
         text-align: center;
-        font-family: Aileron-Light;
+        font-family: 'Aileron-Light';
         color: #717578;
       }
   }
@@ -873,7 +874,7 @@ body {
   .employee-social {
       height: 25px;
     
-      font-family: FontAwesome;
+      font-family: 'FontAwesome';
     
       display: flex;
       justify-content: center;
@@ -952,7 +953,7 @@ body {
     text-align: center;
 
     font-size: $font-xxs;
-    font-family: Aileron-SemiBold;
+    font-family: 'Aileron-SemiBold';
     color: #4F545A;
   }
 
@@ -961,7 +962,7 @@ body {
 
     text-align: center;
 
-    font-family: Aileron-Light;
+    font-family: 'Aileron-Light';
     color: #717578;
   }
 }
@@ -969,7 +970,7 @@ body {
 .team-social {
   height: 25px;
 
-  font-family: FontAwesome;
+  font-family: 'FontAwesome';
 
   display: flex;
   justify-content: center;
@@ -1004,7 +1005,7 @@ body {
 
   font-size: $font-xs;
   text-align: center;
-  font-family: Aileron-SemiBold;
+  font-family: 'Aileron-SemiBold';
   letter-spacing: 1px;
   color: #594262;
 
@@ -1022,7 +1023,7 @@ body {
 
   font-size: $font-xs;
   text-align: left;
-  font-family: Aileron;
+  font-family: 'Aileron';
   letter-spacing: 1px;
   color: #594262;
   line-height: 20px;
@@ -1088,7 +1089,7 @@ body {
 
 .training-flow, .prediction-flow {
   margin: 30px 0 20px;
-  font-family: Aileron-SemiBold;
+  font-family: 'Aileron-SemiBold';
   font-size: $font-xs;
   text-align: center;
   color: #58616c;
@@ -1300,7 +1301,7 @@ body {
 
   a {
     margin: 0 0 15px;
-    font-family: Aileron;
+    font-family: 'Aileron';
     color: #4F545A;
 
     &:last-child {
@@ -1343,7 +1344,7 @@ body {
   align-items: center;
 
   a {
-    font-family: Aileron;
+    font-family: 'Aileron';
     color: #ADAEAF;
 
     &:hover {
@@ -1355,7 +1356,7 @@ body {
 .ftr-copyright {
   margin: 20px 0;
 
-  font-family: DINPro-Bold;
+  font-family: 'DINPro-Bold';
   font-size: $font-xxs;
   color: #ADAEAF;
 
@@ -1406,7 +1407,7 @@ body {
   border: none;
   margin-bottom: 20px;
 
-  font-family: Aileron-Light;
+  font-family: 'Aileron-Light';
 
   .card-header {
     height: 80px;
@@ -1506,13 +1507,13 @@ body {
    }
   
    .whitepaper-link {
-    font-family: Aileron-SemiBold;
+    font-family: 'Aileron-SemiBold';
     font-size: $font-xxs;
     letter-spacing: 2px;
     color: $bluegreen;
   
     .right-arrow {
-      font-family: FontAwesome;
+      font-family: 'FontAwesome';
       font-size: $font-xxs;
     }
   }
@@ -1529,7 +1530,7 @@ body {
   
   .gradient-drop p {
     max-width: 768px;
-    font-family: Aileron-Light;
+    font-family: 'Aileron-Light';
     font-size: $font-sm;
     line-height: 32px;
   }
@@ -1639,7 +1640,7 @@ body {
     text-align: center;
     font-size: $font-xs;
     line-height: 24px;
-    font-family: Aileron-Light;
+    font-family: 'Aileron-Light';
     color: white;
 
     display: flex;
@@ -1649,7 +1650,8 @@ body {
     transition: height .3s;
   }
 
-  .modal-login-wrapper, .modal-email-verify, .modal-user-edit, .modal-pass-reset {
+  .modal-login-wrapper, .modal-email-verify-wrapper, 
+  .modal-user-edit-wrapper, .modal-pass-reset-wrapper {
     height: 400px;
     width: 600px;
 
