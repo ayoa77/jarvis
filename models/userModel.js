@@ -6,7 +6,7 @@ var userSchema = new Schema({
     password: String,
     name: String,
     lang: { type: String, default: ' ' },
-    country: String,
+    // country: String,
     commitEther: { type: String, default: ' ' },
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Date, default: Date.now() },

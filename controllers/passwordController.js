@@ -89,17 +89,13 @@ exports.emailResetPasswordPost = function (req, res) {
 
 };
 
+//FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
-    res.render('index', {
-        title: 'Jarvis',
-        lang: lang,
-        sessionFlash: res.locals.sessionFlash,
-        csrfToken: req.csrfToken()
-    });
+    res.render('/#modal=pass-reset');
 };
 
-
+//FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
 exports.passwordResetPost = function (req, res, next) {
     // req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= req.i18n.__('passwords-format-incorrect') %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
     // req.checkBody('confirm_password', `Passwords do not match.<%= req.i18n.__('passwords-dont-match') %>`).equals(req.body.password);
@@ -116,9 +112,17 @@ exports.passwordResetPost = function (req, res, next) {
     userSchema.findOne({ passwordResetToken: req.session.token }, function (err, user) {
         delete req.session.token;
         console.log(req.session.token);
-        if (!user) { reject(lang.errorNoUserFound); } else {
+        if (!user) {
+            data.failure = req.headers.host + '/#modal=login';
+            data.message = lang.errorNoUserFound;
+            req.session.sessionFlash = {
+                type: 'error',
+                message: lang.errorNoUserFound
+            }
+            reject(lang.errorNoUserFound); 
+        } else {
             if (user.passwordResetExpires < Date.now()) { 
-                data.failure = req.headers.host + '/emailresetpassword#modal=login';
+                data.failure = req.headers.host + '/#modal=login';
                 data.message = lang.messagePasswordTokenExpired;
                 req.session.sessionFlash = {
                     type: 'message',
@@ -132,8 +136,8 @@ exports.passwordResetPost = function (req, res, next) {
             // console.log(user)
             if (!err) {
                 var data = {};
-                data.redirect = req.headers.host + '/login';
-                data.message = lang.messageVerifyEmailSent;
+                data.redirect = req.headers.host + '/#modal=login';
+                data.message = lang.messageResetSuccessful;
                 resolve(data);
             } else {
                 reject(lang.errorDefault);

@@ -172,7 +172,7 @@ app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
 app.get('/confirmation/:ids?', langCheck, tokenController.confirmationGet);
-app.post('/verify',langCheck, tokenController.resendTokenPost);
+app.post('/resend',langCheck, tokenController.resendTokenPost);
 app.route('/emailresetpassword')
   .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)
   .post(langCheck, passwordController.emailResetPasswordPost);
@@ -216,9 +216,9 @@ app.get('/testing', langCheck, function (req, res) {
 
 //AJAXING Location look up
 app.post('/startup', function (req, res, next) {
-  // req.session.loc = null;
-    if (!req.session.loc) {
-  iplocation(req.ip)
+ req.session.loc = null;
+    if (!req.session.loc || req.session.loc == '') {
+      iplocation(req.ip)
     .then(result => {
       req.session.loc = result.country_name
       // console.log(req.session.loc)
@@ -228,11 +228,16 @@ app.post('/startup', function (req, res, next) {
         // console.error(err)
         res.send(err)
       })  
-    }else{res.send('ok')}
+    }else{res.send(req.session.loc)}
   });
 
 //LEAVING AFTER BEING PRESENTED WITH EULA,
 app.get('/leave', function (req, res, next) {
+  delete req.session.user;
+  req.session.sessionFlash = {
+    type: 'error',
+    message: lang.messageKYCRejected
+  };
   res.redirect('/');
 });
 

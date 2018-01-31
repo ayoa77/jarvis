@@ -31,7 +31,7 @@ $(document).ready(function () {
             data: 'starting up'
         })
         .done(function (data) {
-            console.log("ok");
+            console.log(data);
         });
     });
 
@@ -134,7 +134,7 @@ $(document).ready(function () {
                 body = ($("#sendVerificationForm").serialize());
                 $.ajax({
                     method: 'POST',
-                    url: `//modal/email-verify`,
+                    url: `/resend`,
                     data: body
                     // contentType: "application/json",
                     // dataType: "json"
