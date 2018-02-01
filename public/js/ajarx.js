@@ -96,11 +96,11 @@ $(document).ready(function () {
                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                     console.log(data);
                     console.log(location.protocol + '//' + data.redirect )
-                    alert(data.message);
+                    alert(data);
                     
                 location.href = location.protocol + '//' + data.redirect 
                 }else{
-                    errorHandle(data.message);
+                    errorHandle(data);
                 // alert(JSON.stringify(data));
                 // location.reload();
             }
@@ -146,11 +146,11 @@ $(document).ready(function () {
                 console.log(data)
                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                     // alert(JSON.stringify(data.message));
-                    errorHandle(data.message);
+                    errorHandle(data);
                     location.href = location.protocol + '//' + data.redirect
                 } else if (typeof data.failure === 'string' || data.failure instanceof String) {
                     // alert(JSON.stringify(data.message));
-                    errorHandle(data.message);
+                    errorHandle(data);
                     location.href = location.protocol + '//' + data.failure
                 } else {
                     errorHandle(data);
@@ -199,12 +199,12 @@ $(document).ready(function () {
             console.log(data)
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                 // alert(JSON.stringify(data.message));
-                errorHandle(data.message);
-                location.href = location.protocol + '//' + data.redirect;
+                errorHandle(data);
+                location.href = location.protocol + '//' + data.redirect
             } else if (typeof data.failure === 'string' || data.failure instanceof String) {
                 // alert(JSON.stringify(data.message));
-                errorHandle(data.message);
-                location.href = location.protocol + '//' + data.failure;
+                errorHandle(data);
+                location.href = location.protocol + '//' + data.failure
             } else {
                 // alert(JSON.stringify(data));
                 errorHandle(data);
@@ -216,8 +216,18 @@ $(document).ready(function () {
 
 
 function errorHandle(data) {
+
+    let output = data;
+
+    if (data instanceof Object) {
+        let err = data[Object.keys(data)[0]];
+        output = err.msg;
+    }
+
     $('.error-handling').css('height', '80px');
-    $('.error-handling').text(data);
+    setTimeout(function() {
+        $('.error-handling').text(output);
+    }, 150)
     setTimeout(function() {
         $('.error-handling').css('height', '0px');
         $('.error-handling').text("");
