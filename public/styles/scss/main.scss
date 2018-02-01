@@ -1106,7 +1106,7 @@ body {
 }
 
 .extra-info-container {
-  width: 180px;
+  width: 200px;
   display: flex;
 }
 
@@ -1676,8 +1676,9 @@ body {
     margin-top: 20px;
   }
 
-  
-
+  .extra-info-container {
+    width: 100%;
+  }
 }
 
 @media (min-width: 992px) {
