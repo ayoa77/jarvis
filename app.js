@@ -153,6 +153,7 @@ app.use(function (req, res, next) {
 });
 
 var indexRoute = require('./routes/indexRoute');
+var indexAfterRoute = require('./routes/indexAfterRoute');
 var mailingListRoute = require('./routes/mailingListRoute');
 var userRoute = require('./routes/userRoute');
 var loginRoute = require('./routes/loginRoute');
@@ -164,6 +165,7 @@ var passwordController = require('./controllers/passwordController');
 
 
 app.use('/', indexRoute);
+app.use('/after', indexAfterRoute)
 app.use('/user', userRoute);
 app.use('/login', loginRoute); 
 app.use('/login/modal/:modal?', loginRoute); 

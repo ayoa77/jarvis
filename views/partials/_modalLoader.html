@@ -1,5 +1,7 @@
 <!-- Login / Register -->
 <div class="modal-login">
+    <div class="modal-login-wrapper">
+
     <!-- Left Side - Logo -->
     <div class="d-none d-md-flex modal-login-left">
         <div class="logo"></div>
@@ -27,7 +29,7 @@
                         <button id="loginButton" type="submit"> Submit </button>
                     </form>
             
-            <a class="login-forgot-pass">Forgot Password?</a>
+            <div class="login-forgot-pass">Forgot Password?</div>
             </div>
 
             <div class="register-box">
@@ -55,6 +57,8 @@
         </div>
             
     </div>
+    </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- YouTube Video -->
@@ -85,8 +89,8 @@
                 </div>
 
                 <div class="modal-team-social">
-                    <a href="#" class="tw">&#xf099;</a>
-                    <a href="#" class="in">&#xf0e1;</a>
+                    <!-- <a href="#" class="tw">&#xf099;</a> -->
+                    <!-- <a href="#" class="in">&#xf0e1;</a> -->
                     <a href="https://github.com/jarvis4u" class="git">&#xf09b;</a>
                 </div>
             </div>
@@ -162,8 +166,8 @@
                 </div>
 
                 <div class="modal-team-social">
-                    <a href="#" class="tw">&#xf099;</a>
-                    <a href="#" class="in">&#xf0e1;</a>
+                    <!-- <a href="#" class="tw">&#xf099;</a> -->
+                    <!-- <a href="#" class="in">&#xf0e1;</a> -->
                 </div>
             </div>
 
@@ -339,8 +343,8 @@
                 </div>
 
                 <div class="modal-team-social">
-                    <a href="#" class="tw">&#xf099;</a>
-                    <a href="#" class="in">&#xf0e1;</a>
+                    <!-- <a href="#" class="tw">&#xf099;</a> -->
+                    <!-- <a href="#" class="in">&#xf0e1;</a> -->
                 </div>
             </div>
 
@@ -437,6 +441,7 @@
 
 <!-- Password Reset -->
 <div class="modal-pass-reset">
+    <div class="modal-pass-reset-wrapper">
         <!-- Left Side - Logo -->
         <div class="d-none d-md-flex modal-login-left">
             <div class="logo"></div>
@@ -468,78 +473,88 @@
             </div>
         
         </div>
+    </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- Email Verification -->
 <div class="modal-email-verify">
+    <div class="modal-email-verify-wrapper">
     <!-- Left Side - Logo -->
-    <div class="d-none d-sm-flex modal-login-left">
-        <div class="logo"></div>
-    </div>
-
-    <!-- Right Side - Information -->
-    <div class="d-flex d-sm-none modal-login-decoration">
-    </div>
-
-    <div class="modal-login-right">
-        <div class="title-container">
-            <div class="modal-title">Activate Account</div>
+        <div class="d-none d-sm-flex modal-login-left">
+            <div class="logo"></div>
         </div>
 
-        <div class="form-box">
-            <div class="email-verify-box">
-                    <form action="#" id="sendVerificationForm" method="POST">
-                        <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
-                        
-                        <input type="text" name="email" placeholder="E-mail"></input>
+        <!-- Right Side - Information -->
+        <div class="d-flex d-sm-none modal-login-decoration">
+        </div>
 
-                        <button id="verifyButton" action="submit"> Send </button>
-                        <p class="verification-resend" href="#">Resend Verification Email</p>
-                                                
-                    </form>
-
+        <div class="modal-login-right">
+            <div class="title-container">
+                <div class="modal-title">Email Verify</div>
             </div>
-        </div>
 
+            <div class="form-box">
+                <div class="email-verify-box">
+                        <form action="/resend" id="sendVerificationForm" method="POST">
+                            <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
+                            
+                            <input type="text" name="email" placeholder="E-mail"></input>
+
+                            <button id="verifyButton" action="submit"> Send </button>
+                            <a class="verification-resend" href="#">Resend Verification</a>
+                            <p class="verify-warning text-center">You will only have one hour to verify your email.</p>
+                                                    
+                        </form>
+
+                </div>
+            </div>
+
+        </div>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- User Edit -->
 <div class="modal-user-edit">
+    <div class="modal-user-edit-wrapper">
+
     <!-- Left Side - Logo -->
-    <div class="d-none d-sm-flex modal-login-left">
-        <div class="logo"></div>
-    </div>
-
-    <!-- Right Side - Information -->
-    <div class="d-flex d-sm-none modal-login-decoration">
-    </div>
-
-    <div class="modal-login-right">
-        <div class="title-container">
-            <div class="modal-title">Modify User</div>
+        <div class="d-none d-sm-flex modal-login-left">
+            <div class="logo"></div>
         </div>
 
-        <div class="form-box">
-            <div class="user-edit-box">
-                <form action="#" id="editUserForm" method="POST">
-                    <input type="hidden" , name="_csrf" , value=< %=csrfToken %>> </input>
+        <!-- Right Side - Information -->
+        <div class="d-flex d-sm-none modal-login-decoration">
+        </div>
 
-                    <input type="text" name="name" placeholder="Name"></input>
-
-                    <input type="text" name="wallet" placeholder="Ethereum Wallet ID"></input>
-
-                    <input type="text" name="commitEther" placeholder="Commited Ether"></input>
-                    <br>
-                    <button id="editUserButton" action="submit"> Submit </button>
-
-                </form>
-    
-
+        <div class="modal-login-right">
+            <div class="title-container">
+                <div class="modal-title">Modify User</div>
             </div>
-        </div>
 
+            <div class="form-box">
+                <div class="user-edit-box">
+                    <form action="#" id="editUserForm" method="POST">
+                        <input type="hidden" , name="_csrf" , value=< %=csrfToken %>> </input>
+
+                        <input type="text" name="name" placeholder="Name"></input>
+
+                        <input type="text" name="wallet" placeholder="Ethereum Wallet ID"></input>
+
+                        <input type="text" name="commitEther" placeholder="Commited Ether"></input>
+                        <br>
+                        <button id="editUserButton" action="submit"> Submit </button>
+
+                    </form>
+        
+
+                </div>
+            </div>
+
+        </div>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <div class="modal-restricted-country">
