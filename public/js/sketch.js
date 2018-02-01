@@ -1,4 +1,7 @@
-let ed = new Date(2018, 8-1, 13-1);  // Months start at 0 and the timer caluclates to Midnight
+// Months start at 0 and the timer caluclates to Midnight
+// use month - 1 and day - 1 to get an accurate count down
+
+let ed = new Date(2018, 8-1, 13-1);  
 
 function setup() {
   pixelDensity(2.0);
@@ -31,13 +34,22 @@ function draw() {
   
   textSize(24);
   textAlign(CENTER);
+  textFont('DINPro-Light');
   noStroke();
-  fill(0);
+  fill(48, 188, 200);
   
-  text(Math.round(timer.days.text), 47, 43);
-  text(Math.round(timer.hours.text), 122, 43);
-  text(Math.round(timer.minutes.text), 197, 43);
-  text(Math.round(timer.seconds.text), 272, 43);
+  text(Math.round(timer.days.text), 47, 37);
+  text(Math.round(timer.hours.text), 122, 37);
+  text(Math.round(timer.minutes.text), 197, 37);
+  text(Math.round(timer.seconds.text), 272, 37);
+
+  textSize(10);
+  textAlign(CENTER);
+  fill(125);
+  text("DAYS", 47, 52);
+  text("HOURS", 122, 52);
+  text("MINS", 197, 52);
+  text("SECS", 272, 52);
 }
 
 function getTimer() {
