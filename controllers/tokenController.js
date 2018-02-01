@@ -25,16 +25,38 @@ var options = {
 exports.confirmationGet = function  (req, res, next) {
     // Find a matching token //// AJAX THIS STUFF AJ TODO
     data = {};
-    console.log($_GET['id'])
 
     tokenSchema.findOne({ token: req.params.id }, function (err, token) {
-        if (!token) return res.send({ type: 'not-verified', msg: '' });
-        
+        if (!token) {
+
+            req.session.sessionFlash = {
+                type: 'message',
+                message: lang.errorNoUserFound
+            },
+                res.redirect('/#modal=email-verify');
+            return;
+        }
         // If we found a token, find a matching user
         userSchema.findOne({ _id: token._userId }, function (err, user) {
-            if (!user) return res.status(400).send({ msg: 'We were unable to find a user for this token.' });
-            if (user.status != 'NEW') return res.status(400).send({ type: 'already-verified', msg: 'This user has already been verified.' });
-            
+            if (!user) 
+                {
+
+                    req.session.sessionFlash = {
+                        type: 'message',
+                        message: lang.errorNoUserFound
+                    },
+                        res.redirect('/#modal=email-verify');
+                    return;
+                }
+            if (user.status != 'NEW'){ 
+
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: lang.errorAlreadyVerified
+                },       
+              res.redirect('/#modal=login');
+              return;
+            }
             
             // Verify and save the user
             console.log(user);
@@ -45,7 +67,8 @@ exports.confirmationGet = function  (req, res, next) {
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
                 // res.status(200).send("The account has been verified. Please log in.");
-                res.redirect('/#modal=email-verify');
+                res.redirect('/#modal=login');
+
             });
         });
     });
@@ -90,8 +113,8 @@ exports.resendTokenPost = function  (req, res, next) {
 
                 if (!error) {
                         var data = {};
-                        data.redirect = req.headers.host + '/user'
-                        data.message = lang.messageVerifyEmailSent
+                        data.redirect = req.headers.host + '/user';
+                        data.message = lang.messageVerifyEmailSent;
                         console.log(data)
                         resolve(data);
                     } else {
@@ -101,7 +124,7 @@ exports.resendTokenPost = function  (req, res, next) {
             }
         });
             }
-            }) 
+            }); 
     }  
 
 
@@ -113,8 +136,8 @@ exports.resendTokenPost = function  (req, res, next) {
         }).then(data=> {
             console.log(data)
             var data = {};
-            data.redirect = req.headers.host + '/user'
-            data.message = lang.messageVerifyEmailSent
+            data.redirect = req.headers.host + '/user';
+            data.message = lang.messageVerifyEmailSent;
             console.log('success from route')
             res.send (data)
         }).catch((err => {

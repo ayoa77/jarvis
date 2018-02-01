@@ -94,11 +94,9 @@ $(document).ready(function () {
         .done(function (data) {
             console.log(data)
                 if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                    console.log(data);
-                    console.log(location.protocol + '//' + data.redirect )
-                    alert(data);
+                // console.log(location.protocol + '//' + data.redirect )
                     
-                location.href = location.protocol + '//' + data.redirect 
+                location.href = location.protocol + '//' + data.redirect; 
                 }else{
                     errorHandle(data);
                 // alert(JSON.stringify(data));
@@ -123,7 +121,7 @@ $(document).ready(function () {
                 errorHandle(data.message);
                 // alert(JSON.stringify(data.message));
                 location.href = location.protocol + '//' + data.redirect;
-                //location.reload
+                // location.reload()
             } else {
                 errorHandle(data);
                 // alert(JSON.stringify(data));
@@ -135,7 +133,7 @@ $(document).ready(function () {
     $(document).on('click', '#passwordResetButton', function (ev) {
         ev.preventDefault();
         body = ($("#passwordResetForm").serialize());
-        console.log(body)
+        console.log(body);
         $.ajax({
             method: 'POST',
             url: `/resetpassword`,
@@ -166,7 +164,7 @@ $(document).ready(function () {
         body = ($("#sendVerificationForm").serialize());
         $.ajax({
             method: 'POST',
-            url: `//modal/email-verify`,
+            url: `/resend`,
             data: body
             // contentType: "application/json",
             // dataType: "json"
@@ -174,7 +172,7 @@ $(document).ready(function () {
         .done(function (data) {
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                 // alert(JSON.stringify(data.message));
-                errorHandle(data.message);
+                errorHandle(data);
                 location.href = location.protocol + '//' + data.redirect;
             } else {
                 // alert(JSON.stringify(data));
@@ -221,7 +219,7 @@ function errorHandle(data) {
 
     if (data instanceof Object) {
         let err = data[Object.keys(data)[0]];
-        output = err.msg;
+        output = err.msg || err.message;
     }
 
     $('.error-handling').css('height', '80px');

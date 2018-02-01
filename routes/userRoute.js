@@ -31,7 +31,7 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)
   // console.log(wallet);
-      res.render('user', { title: 'User', user: user, lang:lang, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
+      res.render('user', { title: 'User', user: req.session.user, lang:lang, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
 
     });
   }
@@ -40,7 +40,7 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
 ///need to add edit logic to this
 router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, next) {
   var error;
-
+l
   const userSetter = new Promise(function (resolve, reject) {
   userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 

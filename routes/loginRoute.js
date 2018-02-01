@@ -45,7 +45,7 @@ router.post('/', csrfProtection, function (req, res, next) {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 
                 //country variable
-                c = req.session.loc
+                c = req.session.loc;
                 
                 // setting up cookie with user
                 req.session.user = user;  //set-cookie: session = {email, passwords}

@@ -193,16 +193,16 @@ app.all('/session-flash', function (req, res, next) {
 });
 
 app.get('/technology', csrfProtection, langCheck, function (req, res, next) {
-  res.render('deepDive', { title: 'Technology', sessionFlash: res.locals.sessionFlash, lang:lang,csrfToken: req.csrfToken() });
+  res.render('deepDive', { title: 'Technology', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang,csrfToken: req.csrfToken() });
 });
 app.get('/faq', csrfProtection, langCheck, function (req, res, next) {
-  res.render('faq', { title: 'FAQ', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('faq', { title: 'FAQ', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/governance', csrfProtection, langCheck, function (req, res, next) {
-  res.render('governance', { title: 'Governance', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('governance', { title: 'Governance', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
-  res.render('whitePaper', { title: 'White Paper', sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('whitePaper', { title: 'White Paper',user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/testing', langCheck, function (req, res) {
   iplocation('56.70.97.8')
@@ -233,7 +233,7 @@ app.post('/startup', function (req, res, next) {
     }else{res.send(req.session.loc)}
   });
 
-//LEAVING AFTER BEING PRESENTED WITH EULA,
+//LEAVING AFTER BEING PRESENTED WITH EULA I THINK WE CAN MOVE THIS TO AN ALERT BOX ABOUT BEING NAVIGATED AWAY FROM THEIR USER PAGE
 app.get('/leave', function (req, res, next) {
   delete req.session.user;
   req.session.sessionFlash = {
@@ -245,7 +245,7 @@ app.get('/leave', function (req, res, next) {
 
 //LOGING OUT AND DESTROYING SESSION
 app.get('/logout', function (req, res, next) {
-  req.session.destroy();
+  delete req.session.user;
   res.redirect('/');
 });
 
@@ -274,7 +274,7 @@ app.use(function (err, req, res, next) {
 
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
-  console.log('  Press CTRL-C to stop\n');
+  console.log(' Press CTRL-C to stop\n');
 });
 
 

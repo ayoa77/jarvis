@@ -27,10 +27,10 @@
             </li>
 
             <li class="nav-item">
-                <% if (true || user) { %>
+                <% if (!user) { %>
                     <a class="nav-link" onclick="modalLoad('modal-login')">Login</a>
                 <% } else { %>
-                    <a class="nav-link" onclick="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 <% } %>
             </li>
             <!-- <li class="nav-item">
@@ -38,21 +38,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user">User</a>
-            </li>
+            </li> -->
 
        
         </ul>
     </div>
 </nav>
-<!-- <p>To preview an error FLASH message type in a non-email and then submit - Too preview a message FLASH message, type in a working email! </p>
-<p></p> -->
-
-<!-- Nathan - here is the error on reload stuff...
-the only one I'm passing for now will have the type/class "message" and the message is -
-"This token has expired, please navigate to forgot your password and restart the process." -->
-    <% if ( sessionFlash && sessionFlash.message) { %>
+    <!-- <% if ( sessionFlash && sessionFlash.message) { %>
         <div class="<%= sessionFlash.type %>">
             <strong></strong>
-            <%= sessionFlash.message %>
+            <%#= sessionFlash.message %>
         </div>
-        <% } %>
+        <% } %> -->

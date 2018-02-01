@@ -58,7 +58,11 @@
             
     </div>
     </div>
-    <div class="error-handling"></div>
+    <div class="error-handling">
+            <% if ( sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message %>
+        <% } %>
+    </div>
 </div>
 
 <!-- YouTube Video -->
@@ -474,7 +478,11 @@
         
         </div>
     </div>
-    <div class="error-handling"></div>
+    <div class="error-handling">
+            <% if ( sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message %>
+        <% } %>
+    </div>
 </div>
 
 <!-- Email Verification -->
@@ -491,7 +499,7 @@
 
         <div class="modal-login-right">
             <div class="title-container">
-                <div class="modal-title">Email Verify</div>
+                <div class="modal-title">Verify Email</div>
             </div>
 
             <div class="form-box">
@@ -502,8 +510,7 @@
                             <input type="text" name="email" placeholder="E-mail"></input>
 
                             <button id="verifyButton" action="submit"> Send </button>
-                            <a class="verification-resend" href="#">Resend Verification</a>
-                            <p class="verify-warning text-center">You will only have one hour to verify your email.</p>
+                            <p class="verify-warning text-center">Use this if you are unable to find your Account Activation email.</p>
                                                     
                         </form>
 
@@ -512,7 +519,11 @@
 
         </div>
     </div>
-    <div class="error-handling"></div>
+    <div class="error-handling">
+            <% if ( sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message %>
+        <% } %>
+    </div>
 </div>
 
 <!-- User Edit -->
@@ -554,7 +565,11 @@
 
         </div>
     </div>
-    <div class="error-handling"></div>
+    <div class="error-handling">
+            <% if ( sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message %>
+        <% } %>
+    </div>
 </div>
 
 <div class="modal-restricted-country">

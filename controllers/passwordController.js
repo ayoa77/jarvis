@@ -19,7 +19,6 @@ var options = {
 // var flash = require('express-flash');
 
 exports.emailResetPasswordGet = function (req, res) {
-    res.render('emailResetPassword', {lang:lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 };
 
 
@@ -53,9 +52,10 @@ exports.emailResetPasswordPost = function (req, res) {
                  if (err) { reject(lang.errorDefault) } else {
 
                 if (!error) {
+                    //data has to be set after the resolving of the promise here
                     var data = {};
-                    data.redirect = req.headers.host + '/',
-                    data.message = lang.messagePasswordResetEmailSent                    
+                    // data.redirect = req.headers.host + '/#modal=login',
+                    // data.message = lang.messagePasswordResetEmailSent                    
                     resolve(data);
                 } else {
                     reject(error);
@@ -68,21 +68,21 @@ exports.emailResetPasswordPost = function (req, res) {
     
         userSetter
             .then(user => {
-                console.log('success from user route')
+                console.log('success from user route');
                 passwordTokenSender(user);
             }).then(data => {
                 var data = {};
-                data.redirect = req.headers.host + '/'
-                data.message = lang.messagePasswordResetEmailSent
+                data.redirect = req.headers.host + '/#modal=login',
+                data.message = lang.messagePasswordResetEmailSent,
                 req.session.sessionFlash = {
                     type: 'message',
                     message: lang.messagePasswordResetEmailSent
-                };         
-                console.log('success from route')
-                res.send(data)
+                },         
+                console.log('success from route');
+                res.send(data);
             }).catch(err => {
-                console.log(err)
-                console.log('error from route')
+                console.log(err);
+                console.log('error from route');
                 res.send(err);
             });
 

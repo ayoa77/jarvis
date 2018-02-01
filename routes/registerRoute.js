@@ -47,7 +47,7 @@ router.post('/', langCheck, validationMiddleware.register, function (req, res, n
         commitEther: '0',
         status: 'NEW'
     });
-    console.log('saving user')
+    console.log('saving user');
     user.save(function (err) {
         if (err) {
             error = lang.errorDefault;
@@ -81,11 +81,14 @@ router.post('/', langCheck, validationMiddleware.register, function (req, res, n
                 //testing to see if errors all passed and moving on after mailer sent
                     if(!error) {
                         var data = {};
-                        data.redirect = req.headers.host + '/user';
-                        data.message = lang.messageVerifyEmailSent;
+                        data.redirect = req.headers.host + '/#modal=email-verify';
+                        req.session.sessionFlash = {
+                            type: 'message',
+                            message: lang.messageVerifyEmailSent
+                        }; 
                         resolve(data);
                     } else {
-                         reject(error);
+                        reject(error);
                      }
                 });
                 }
@@ -95,8 +98,13 @@ router.post('/', langCheck, validationMiddleware.register, function (req, res, n
 });   
     userRegister
     .then(function (response){
-        // console.log(response)
-        // console.log('success from route')
+        console.log(response)
+        req.session.sessionFlash = {
+            type: 'message',
+            message: lang.messageVerifyEmailSent
+        }; 
+        console.log(req.session.sessionFlash);
+        console.log('success from route');
     res.send(response);
     })
     .catch(function errors(err){

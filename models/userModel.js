@@ -10,7 +10,7 @@ var userSchema = new Schema({
     commitEther: { type: String, default: ' ' },
     passwordResetToken: { type: String, default: '' },
     passwordResetExpires: { type: Date, default: Date.now() },
-    status:{ type: String, enum: ['NEW', 'EMAIL', 'EULA']},
+    status:{ type: String, enum: ['NEW', 'EMAIL', 'KYC', 'COMPLETE']},
     wallet: String,
     jarvis: { type: String, default: "0" },
     ethereum: { type: String, default: "0" }
