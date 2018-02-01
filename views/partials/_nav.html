@@ -23,14 +23,14 @@
                 <a class="nav-link" href="/governance"><%= lang.linksgovernance%></a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" target="_blank" href="https://hackmd.io/s/rJAMAs-Bf"><%= lang.linkswhite_paper%></a>
+                <a class="nav-link" href="/whitepaper"><%= lang.linkswhite_paper%></a>
             </li>
 
             <li class="nav-item">
                 <% if (true || user) { %>
-                    <a class="nav-link" onclick="modalLoad('modal-login')">Login</a>
+                    <a class="nav-link" href="#modal=login">Login</a>
                 <% } else { %>
-                    <a class="nav-link" onclick="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 <% } %>
             </li>
             <!-- <li class="nav-item">
@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user">User</a>
-            </li>
+            </li> -->
 
        
         </ul>
@@ -50,9 +50,18 @@
 <!-- Nathan - here is the error on reload stuff...
 the only one I'm passing for now will have the type/class "message" and the message is -
 "This token has expired, please navigate to forgot your password and restart the process." -->
-    <% if ( sessionFlash && sessionFlash.message) { %>
-        <div class="<%= sessionFlash.type %>">
-            <strong></strong>
-            <%= sessionFlash.message %>
-        </div>
+
+        
+        <% if ( sessionFlash && sessionFlash.message) { %>
+            <div class="<%= sessionFlash.type %>">
+                <%= successFlash(sessionFlash.message) %>
+            </div>
+        <% } %>
+
+        <% function successFlash(data) {  %>
+
+        <%   document.querySelector('.error-handling').style.height = '80px';  %>
+        <%   setTimeout(function() {  %>
+        <%      document.querySelector('.error-handling').innerHTML(data); %>
+        <%   }, 150) %>
         <% } %>

@@ -1,7 +1,7 @@
 // Months start at 0 and the timer caluclates to Midnight
-// use month - 1 and day - 1 to get an accurate count down
+// use month - 1 to get an accurate count down
 
-let ed = new Date(2018, 8-1, 13-1);  
+let ed = new Date(2018, 2-1, 1);  
 
 function setup() {
   pixelDensity(2.0);
@@ -13,7 +13,44 @@ function setup() {
 function draw() {
   let timer = getTimer();
   clear();
+
+  if (timer.days.text <= 0 && timer.hours.text <= 0 && (timer.minutes.text) <= 0 && (timer.seconds.text) <= 0) {
+    let zeroTime = {
+      "days": {
+        "text": 0,
+        "remain": 0,
+        "map": -89
+      },
+      "hours": {
+        "text": 0,
+        "remain": 0,
+        "map": -89
+      },
+      "minutes": {
+        "text": 0,
+        "remain": 0,
+        "map": -89
+      },
+      "seconds": {
+        "text": 0,
+        "remain": 0,
+        "map": -89
+      },
+      "milli": {
+        "text": -89
+      }
+    };
+
+    shapeCreator(zeroTime);
+
+  } else {
+    shapeCreator(timer);
+  }
   
+
+}
+
+function shapeCreator(timer) {
   stroke(220);
   strokeWeight(1);
   fill(255);
