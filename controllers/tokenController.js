@@ -25,6 +25,8 @@ var options = {
 exports.confirmationGet = function  (req, res, next) {
     // Find a matching token //// AJAX THIS STUFF AJ TODO
     data = {};
+    console.log($_GET['id'])
+
     tokenSchema.findOne({ token: req.params.id }, function (err, token) {
         if (!token) return res.send({ type: 'not-verified', msg: '' });
         
