@@ -85,22 +85,32 @@ function modalLoad(content) {
 }
 
 function modalClose() {
-    
-  $('.modal-box').empty();
 
-  $('.modal-box').velocity({
-    height: '50px',
-    width: '50px',
-    opacity: '0',
-  }, {
-    duration: '200',
-  });
+    let url = window.location.href;
+    let modal = url.match(/#modal=[^\?]+/);
 
-  setTimeout(function() {
-    $('.modal-container').css('display', 'none');
-  }, 200);
+    if (modal == null) modal = [];  // Makes sure that modal has a value that is an array so it can close properly.
 
-  $(window).disablescroll('undo');
+    if (modal[0] == "#modal=restricted-country" || modal[0] == "#modal=pass-reset") {
+      return;
+    } else {
+      $('.modal-box').empty();
+
+      $('.modal-box').velocity({
+        height: '50px',
+        width: '50px',
+        opacity: '0',
+      }, {
+        duration: '200',
+      });
+
+      setTimeout(function() {
+        $('.modal-container').css('display', 'none');
+      }, 200);
+
+      $(window).disablescroll('undo');
+    }
+
 }
 
 
@@ -117,7 +127,6 @@ function handleKeyDown(e) {
 }
 
 window.addEventListener('keydown', handleKeyDown);
-
 
 // Keep the footer on the bottom of the User Page
 function autoFooter() {
