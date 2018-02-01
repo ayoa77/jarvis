@@ -44,33 +44,9 @@
         </ul>
     </div>
 </nav>
-<<<<<<< HEAD
     <!-- <% if ( sessionFlash && sessionFlash.message) { %>
         <div class="<%= sessionFlash.type %>">
             <strong></strong>
             <%#= sessionFlash.message %>
         </div>
         <% } %> -->
-=======
-<!-- <p>To preview an error FLASH message type in a non-email and then submit - Too preview a message FLASH message, type in a working email! </p>
-<p></p> -->
-
-<!-- Nathan - here is the error on reload stuff...
-the only one I'm passing for now will have the type/class "message" and the message is -
-"This token has expired, please navigate to forgot your password and restart the process." -->
-
-        
-        <% if ( sessionFlash && sessionFlash.message) { %>
-            <div class="<%= sessionFlash.type %>">
-                <%= successFlash(sessionFlash.message) %>
-            </div>
-        <% } %>
-
-        <% function successFlash(data) {  %>
-
-        <%   document.querySelector('.error-handling').style.height = '80px';  %>
-        <%   setTimeout(function() {  %>
-        <%      document.querySelector('.error-handling').innerHTML(data); %>
-        <%   }, 150) %>
-        <% } %>
->>>>>>> master
