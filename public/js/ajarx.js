@@ -37,27 +37,27 @@ $(document).ready(function () {
 
 
     //ajax get for email verification
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '/confirmation/:id?',
-            data: { id: id }
-        })
-        .done(function (data) {
-            console.log(data)
-            if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                alert(JSON.stringify(data.message));
-                location.href = location.protocol + '//' + data.redirect
-                location.reload()
-            } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                alert(JSON.stringify(data.message));
-                location.href = location.protocol + '//' + data.failure
-                location.reload();
-            } else {
-                alert(JSON.stringify(data));
-            }
-        });    
-    });
+    // $(function () {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/confirmation/:id?',
+    //         data: data
+    //             })
+    //     .done(function (data) {
+    //         console.log(data)
+    //         if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+    //             alert(JSON.stringify(data.message));
+    //             location.href = location.protocol + '//' + data.redirect
+    //             location.reload()
+    //         } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+    //             alert(JSON.stringify(data.message));
+    //             location.href = location.protocol + '//' + data.failure
+    //             location.reload();
+    //         } else {
+    //             alert(JSON.stringify(data));
+    //         }
+    //     });    
+    // });
 
     //ajax login 
     $(document).on('click', '#loginButton', function (ev) {
@@ -127,66 +127,20 @@ $(document).ready(function () {
             } else {
                 errorHandle(data);
                 // alert(JSON.stringify(data));
-            };
+            }
         });
-    })
+    });
         
     // Ajax reset password
     $(document).on('click', '#passwordResetButton', function (ev) {
         ev.preventDefault();
         body = ($("#passwordResetForm").serialize());
-        console.log(body);
+        console.log(body)
         $.ajax({
             method: 'POST',
             url: `/resetpassword`,
             data: body
 
-        })
-            .done(function (data) {
-                console.log(data)
-                if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                    alert(JSON.stringify(data.message));
-                    location.href = location.protocol + '//' + data.redirect
-                    location.reload()
-                } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                    alert(JSON.stringify(data.message));
-                    location.href = location.protocol + '//' + data.failure
-                    location.reload();
-                } else {
-                    alert(JSON.stringify(data));
-                }
-            });
-
-        //ajax send verification email
-        $(document).on('click', '#verifyButton', function (ev) {
-            ev.preventDefault();
-                body = ($("#sendVerificationForm").serialize());
-                $.ajax({
-                    method: 'POST',
-                    url: `/resend`,
-                    data: body
-                    // contentType: "application/json",
-                    // dataType: "json"
-                })
-                .done(function (data) {
-                    if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                        alert(JSON.stringify(data.message));
-                        location.href = location.protocol + '//' + data.redirect
-                    } else {
-                        alert(JSON.stringify(data));
-                        //      location.reload();
-                    }
-                });
-            });
-                //ajax user editor
-        $(document).on('click', '#editUserButton', function (ev) {
-            ev.preventDefault();
-            body = ($("#editUserForm").serialize());
-            console.log(body)
-            $.ajax({
-                method: 'POST',
-                url: `/user`,
-                data: body
             })
             .done(function (data) {
                 console.log(data)
@@ -217,12 +171,11 @@ $(document).ready(function () {
             // contentType: "application/json",
             // dataType: "json"
         })
-
         .done(function (data) {
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                 // alert(JSON.stringify(data.message));
                 errorHandle(data.message);
-                location.href = location.protocol + '//' + data.redirect
+                location.href = location.protocol + '//' + data.redirect;
             } else {
                 // alert(JSON.stringify(data));
                 errorHandle(data);
@@ -247,11 +200,11 @@ $(document).ready(function () {
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                 // alert(JSON.stringify(data.message));
                 errorHandle(data.message);
-                location.href = location.protocol + '//' + data.redirect
+                location.href = location.protocol + '//' + data.redirect;
             } else if (typeof data.failure === 'string' || data.failure instanceof String) {
                 // alert(JSON.stringify(data.message));
                 errorHandle(data.message);
-                location.href = location.protocol + '//' + data.failure
+                location.href = location.protocol + '//' + data.failure;
             } else {
                 // alert(JSON.stringify(data));
                 errorHandle(data);
@@ -268,5 +221,5 @@ function errorHandle(data) {
     setTimeout(function() {
         $('.error-handling').css('height', '0px');
         $('.error-handling').text("");
-    }, 3000)
+    }, 3000);
 }
