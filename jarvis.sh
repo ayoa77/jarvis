@@ -104,8 +104,8 @@ deb-src http://ftp.utexas.edu/dotdeb/ stable all
 EOF
 wget https://www.dotdeb.org/dotdeb.gpg
 apt-key add dotdeb.gpg
-apt-get update
-apt-get install redis-server
+apt-get update -y
+apt-get install redis-server -y
 echo "${green}-------------------Done Installing Redis-------------------${reset}"
 echo "${green}-------------------Done Installing Redis-------------------${reset}"
 echo "${green}-------------------Done Installing Redis-------------------${reset}"
