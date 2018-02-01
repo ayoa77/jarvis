@@ -23,9 +23,10 @@ var options = {
 * GET /confirmation
 */
 exports.confirmationGet = function  (req, res, next) {
-    // Find a matching token
-    tokenSchema.findOne({ token: req.params.ids }, function (err, token) {
-        if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token may have expired.' });
+    // Find a matching token //// AJAX THIS STUFF AJ TODO
+    data = {};
+    tokenSchema.findOne({ token: req.params.id }, function (err, token) {
+        if (!token) return res.send({ type: 'not-verified', msg: '' });
         
         // If we found a token, find a matching user
         userSchema.findOne({ _id: token._userId }, function (err, user) {
@@ -42,7 +43,7 @@ exports.confirmationGet = function  (req, res, next) {
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
                 // res.status(200).send("The account has been verified. Please log in.");
-                res.redirect('/login#modal=email-verify');
+                res.redirect('/#modal=email-verify');
             });
         });
     });
@@ -89,6 +90,7 @@ exports.resendTokenPost = function  (req, res, next) {
                         var data = {};
                         data.redirect = req.headers.host + '/user'
                         data.message = lang.messageVerifyEmailSent
+                        console.log(data)
                         resolve(data);
                     } else {
                         reject(error);
@@ -107,9 +109,10 @@ exports.resendTokenPost = function  (req, res, next) {
             console.log('success from user route')
              tokenSender(user);
         }).then(data=> {
-            // var data = {};
-            // data.redirect = req.headers.host + '/user'
-            // data.message = lang.messageVerifyEmailSent
+            console.log(data)
+            var data = {};
+            data.redirect = req.headers.host + '/user'
+            data.message = lang.messageVerifyEmailSent
             console.log('success from route')
             res.send (data)
         }).catch((err => {

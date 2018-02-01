@@ -14,14 +14,14 @@ $(document).ready(function () {
             
     window.addEventListener('popstate', (function () {
         var url = window.location.href;
-        // var modal = url.match(/#modal=([^\?]+)/)[1];
-        // console.log(modal);
-        // if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
-        // if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
-        // if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
-        // if (modal == "#modal=login") {modalLoad("modal-login"); 
-        // if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
-    }));
+        var modal = url.match(/#modal=[^\?]+/);
+        console.log(modal);
+        if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
+        if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
+        if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
+        if (modal == "#modal=login") {modalLoad("modal-login"); 
+        if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
+    }}));
     
     //ajax the startup setter
     $(function() {
@@ -33,6 +33,30 @@ $(document).ready(function () {
         .done(function (data) {
             console.log(data);
         });
+    });
+
+
+    //ajax get for email verification
+    $(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/confirmation/:id?',
+            data: { id: id }
+        })
+        .done(function (data) {
+            console.log(data)
+            if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+                alert(JSON.stringify(data.message));
+                location.href = location.protocol + '//' + data.redirect
+                location.reload()
+            } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+                alert(JSON.stringify(data.message));
+                location.href = location.protocol + '//' + data.failure
+                location.reload();
+            } else {
+                alert(JSON.stringify(data));
+            }
+        });    
     });
 
     //ajax login 
@@ -119,9 +143,11 @@ $(document).ready(function () {
                     if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                         alert(JSON.stringify(data.message));
                         location.href = location.protocol + '//' + data.redirect
+                        location.reload()
                     } else if (typeof data.failure === 'string' || data.failure instanceof String) {
                         alert(JSON.stringify(data.message));
                         location.href = location.protocol + '//' + data.failure
+                        location.reload();
                     } else {
                         alert(JSON.stringify(data));
                     }

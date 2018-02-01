@@ -23,7 +23,7 @@ var i18n = require('i18n-2');
 var validator = require("express-validator");
 var iplocation = require('iplocation');
 var nodemailer = require('nodemailer');
-var promise = require('bluebird')
+var promise = require('bluebird');
 
 
 
@@ -171,7 +171,7 @@ app.use('/register', registerRoute);
 app.post('/mailerSignUp', mailingListRoute);
 // app.use('/wallet', walletRoute);
 app.post('/language', languageRoute);
-app.get('/confirmation/:ids?', langCheck, tokenController.confirmationGet);
+app.get('/confirmation/:id?', langCheck, tokenController.confirmationGet);
 app.post('/resend',langCheck, tokenController.resendTokenPost);
 app.route('/emailresetpassword')
   .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)

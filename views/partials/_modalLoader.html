@@ -483,19 +483,18 @@
 
     <div class="modal-login-right">
         <div class="title-container">
-            <div class="modal-title">Email Verify</div>
+            <div class="modal-title">Activate Account</div>
         </div>
 
         <div class="form-box">
             <div class="email-verify-box">
-                    <form action="/resend" id="sendVerificationForm" method="POST">
+                    <form action="#" id="sendVerificationForm" method="POST">
                         <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
                         
                         <input type="text" name="email" placeholder="E-mail"></input>
 
                         <button id="verifyButton" action="submit"> Send </button>
-                        <a class="verification-resend" href="#">Resend Verification</a>
-                        <p class="verify-warning text-center">You will only have one hour to verify your email.</p>
+                        <p class="verification-resend" href="#">Resend Verification Email</p>
                                                 
                     </form>
 

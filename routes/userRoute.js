@@ -26,7 +26,7 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
   if (!req.session.user) {
     res.redirect('/#modal=login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
-    res.redirect('/', { title: 'Jarvis', lang: lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+    res.redirect('/#modal=email-verify');
   } else {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)

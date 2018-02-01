@@ -92,7 +92,7 @@ exports.emailResetPasswordPost = function (req, res) {
 //FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
 exports.passwordResetGet = function (req, res, next) {
     req.session.token = req.params.id;
-    res.render('/#modal=pass-reset');
+    res.redirect('/#modal=pass-reset');
 };
 
 //FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
@@ -119,7 +119,7 @@ exports.passwordResetPost = function (req, res, next) {
                 type: 'error',
                 message: lang.errorNoUserFound
             }
-            reject(lang.errorNoUserFound); 
+            reject(data); 
         } else {
             if (user.passwordResetExpires < Date.now()) { 
                 data.failure = req.headers.host + '/#modal=login';
