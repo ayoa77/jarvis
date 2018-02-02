@@ -17,7 +17,7 @@ function langChecker(req, res, next) {
     lang = en;
     
   }else if(req.session.locale == 'zh-CN'){
-    lang = en;
+    lang = zhCN;
     
   }else{
     lang = en;
