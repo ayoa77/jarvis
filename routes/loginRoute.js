@@ -124,12 +124,12 @@ router.post('/', csrfProtection, function (req, res, next) {
 
         userVerifcation
         .then(data => {
-        console.log('success from verification route')
+        console.log('success from verification route');
         console.log(data);
         res.send(data);
     }).catch((err => {
         console.log(err)
-        console.log('error from verification route')
+        console.log('error from verification route');
         res.send(err);
     })
 )});

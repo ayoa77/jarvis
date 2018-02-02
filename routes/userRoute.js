@@ -32,8 +32,8 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
   } else {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)
-  // console.log(wallet);
-      res.render('user', { title: 'User', user: req.session.user, lang:lang, sessionFlash: res.locals.sessionFlash, modal: req.params.modal, csrfToken: req.csrfToken() });
+  console.log(req.session.wallet);
+      res.render('user', { title: 'User', user: user, lang:lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
 
     });
   }
@@ -42,7 +42,6 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
 ///need to add edit logic to this
 router.post('/',langCheck, validationMiddleware.userEdit,  function (req, res, next) {
   var error;
-l
   const userSetter = new Promise(function (resolve, reject) {
   userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
 
@@ -51,7 +50,9 @@ l
         name: req.body.name || user.name ,
         lang: req.body.lang || user.lang ,
         country: req.body.country || user.country,
-        commitEther: req.body.commitEther || user.commitEther
+        commitEther: req.body.commitEther || user.commitEther,
+        wallet: req.body.wallet || user.wallet
+        
       }
     }
   ).exec(function (err, user) {
@@ -105,13 +106,13 @@ userSetter
     userEditedMailer(user);
   }).then(data => {
     var data = {};
-    data.redirect = req.headers.host + '/user'
+    data.redirect = req.headers.host + '/user',
     data.message = lang.messageUserEdited
-    console.log('success from route')
+    console.log('success from route');
     res.send(data)
   }).catch(err => {
     console.log(err)
-    console.log('error from route')
+    console.log('error from route');
     res.send(err);
   });
 });

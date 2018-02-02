@@ -66,6 +66,7 @@ exports.confirmationGet = function  (req, res, next) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
+                req.session.sessionFlash = {type: "message", message: lang.messageEmailVerified}
                 // res.status(200).send("The account has been verified. Please log in.");
                 res.redirect('/#modal=login');
 
@@ -147,3 +148,91 @@ exports.resendTokenPost = function  (req, res, next) {
         }))
     
 };
+
+
+
+// exports.confirmationGet = function (req, res, next) {
+//     var error;
+//     // Find a matching token //// AJAX THIS STUFF AJ TODO
+//     // console.log(req.query.id)
+//     console.log(req.params.id)
+//     const tokenFinder = new Promise(function (resolve, reject) {
+
+//         tokenSchema.findOne({ token: req.params.id }, function (err, token) {
+//             if (!token) {
+//                 error = lang.errorNoUserFound;
+//                 // console.log(req.params.id)
+
+//                 // req.session.sessionFlash = {
+//                 //     type: 'message',
+//                 //     message: lang.errorNoUserFound
+//                 // },
+//                 //     res.redirect('/#modal=email-verify');
+//                 // return;
+//             } else { resolve(token) };
+//         });
+//     });
+//     function userVerifier(token) {
+//         return new Promise(
+//             function (resolve, reject) {
+
+
+//                 // If we found a token, find a matching user
+//                 userSchema.findOne({ _id: token._userId }, function (err, user) {
+//                     if (!user) {
+//                         error = lang.errorNoUserFound
+//                     } else {
+
+//                         // req.session.sessionFlash = {
+//                         //     type: 'message',
+//                         //     message: lang.errorNoUserFound
+//                         // },
+//                         //     res.redirect('/#modal=email-verify');
+//                         // return;
+
+
+//                         // Verify and save the user
+//                         console.log(user);
+//                         user.status = 'EMAIL'
+//                         user.save(function (err) {
+//                             console.log(user);
+//                             if (err) {
+//                                 error = lang.errorDefault;
+//                             } else {
+//                                 data = {}
+
+//                                 if (error) {
+//                                     data.failure = req.headers.host + '/#modal=email-verify';
+//                                     data.message = error;
+//                                     req.session.sessionFlash = { type: "error", message: error };
+//                                 }
+//                                 // Delete cookie to make edits to user and to make sure they have to login again
+//                                 delete req.session.user;
+//                                 req.session.sessionFlash = { type: "message", message: lang.messageEmailVerified }
+//                                 // res.status(200).send("The account has been verified. Please log in.");
+//                                 resolve(data);
+//                             }
+//                         })
+//                     };
+//                 });
+//             });
+//     };
+
+//     tokenFinder
+//         .then(user => {
+//             console.log('success from token route')
+//             userVerifier(token);
+//         }).then(data => {
+//             console.log(data)
+//             var data = {};
+//             req.session.sessionFlash = { type: "message", message: lang.messageEmailVerified }
+//             data.redirect = req.headers.host + '/user';
+//             data.message = lang.messageVerifyEmailSent;
+//             console.log('success from route');
+//             res.send(data)
+//         }).catch((err => {
+//             console.log(err)
+//             console.log('error from route');
+//             res.send(err);
+//         }))
+// }

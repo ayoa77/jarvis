@@ -48,7 +48,7 @@ exports.emailResetPasswordPost = function (req, res) {
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '#modal=pass-reset' };
 
-            //  transporter.sendMail(mailOptions, function (err) {
+             transporter.sendMail(mailOptions, function (err) {
                  if (err) { reject(lang.errorDefault) } else {
 
                 if (!error) {
@@ -61,7 +61,7 @@ exports.emailResetPasswordPost = function (req, res) {
                     reject(error);
                 }
                  }
-            //  });
+             });
             }
         })
     }
@@ -97,14 +97,7 @@ exports.passwordResetGet = function (req, res, next) {
 
 //FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
 exports.passwordResetPost = function (req, res, next) {
-    // req.checkBody('password', `Password cannot be blank, must be between 6 and 20 characters, and have at least one number <%= req.i18n.__('passwords-format-incorrect') %>`).notEmpty().len(5, 20).matches(/^(?=.*\d)/); 
-    // req.checkBody('confirm_password', `Passwords do not match.<%= req.i18n.__('passwords-dont-match') %>`).equals(req.body.password);
-    // var errors = req.validationErrors();
-    // if (errors) {
-    //     console.log(errors)
-    //     res.send(errors);
-    //     return;
-    // } else {
+
     var data = {}
     delete req.body.password2;
     const passwordReset = new Promise(function (resolve, reject) {
@@ -138,6 +131,10 @@ exports.passwordResetPost = function (req, res, next) {
                 var data = {};
                 data.redirect = req.headers.host + '/#modal=login';
                 data.message = lang.messageResetSuccessful;
+                req.session.sessionFlash = {
+                    type: 'message',
+                    message: lang.messageResetSuccessful
+                }; 
                 resolve(data);
             } else {
                 reject(lang.errorDefault);

@@ -108,7 +108,7 @@
 	"errorpassword_blank": "Your password cannot be blank.",
 	"errorDuplicateEmail": "This email has already been taken, please sign in or try a different email.",
 	"errorNoEmailFound": "We were unable to find your information using this email, please try again.",
-	"errorNoUserFound": "We were unable to find your account with this information, please navigate to forgot password again, or contact us if the problem persists.",
+	"errorNoUserFound": "We were unable to find your account with this information, please try again, or contact us if the problem persists.",
 	"errorAlreadyVerified": "This account has already been verified, please login.",
 	"errorDefault": "Sorry, something went wrong, please try again or contact us if the problem persists.",
 	"errorMailerProblem": "Sorry, there was a problem with our email, please try again or contact us if the problem persists.",

@@ -551,16 +551,14 @@
 
             <div class="form-box">
                 <div class="user-edit-box">
-                    <form action="#" id="editUserForm" method="POST">
+                    <form action="#" id="editUserForm" class="editUserForm" method="POST">
                         <input type="hidden" , name="_csrf" , value=< %=csrfToken %>> </input>
 
                         <input type="text" name="name" placeholder="Name"></input>
 
                         <input type="text" name="wallet" placeholder="Ethereum Wallet ID"></input>
-
-                        <input type="text" name="commitEther" placeholder="Commited Ether"></input>
                         <br>
-                        <button id="editUserButton" action="submit"> Submit </button>
+                        <button id="editUserButton" class="editUserButton" action="submit"> Submit </button>
 
                     </form>
         
@@ -613,12 +611,12 @@
 
             <div class="form-box">
                 <div class="commit-eth-box">
-                    <form action="#" id="commitEthForm" method="POST">
+                    <form action="/user" id="commitEthForm" class="editUserButton" method="POST">
                         <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
                         <input type="text" name="commitEther" placeholder="Commited Ether"></input>
                         <br>
-                        <button id="commitEthButton" action="submit"> Submit </button>
+                        <button id="userEditButton" class="editUserButton" action="submit"> Submit </button>
 
                     </form>
         

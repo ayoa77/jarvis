@@ -93,9 +93,9 @@ console.log('got it')
 module.exports.userEdit = function (req, res, next) {
     console.log('got it')
     promise.all([
-        req.checkBody('wallet', lang.errorCommitedEthereumFormatIncorrect).optional({ checkFalsy: true }).len(42),
+        req.checkBody('wallet', lang.errorWalletFormatIncorrect).optional({ checkFalsy: true }).len(42),
 
-        req.checkBody('commitEther', lang.errorWalletFormatIncorrect).optional({ checkFalsy: true }).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/),
+        req.checkBody('commitEther', lang.errorCommitedEthereumFormatIncorrect).optional({ checkFalsy: true }).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/),
 
 
         req.asyncValidationErrors(true)]).then(function (value) {
