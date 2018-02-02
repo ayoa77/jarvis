@@ -216,6 +216,7 @@ $(document).ready(function () {
 });
 
 // Handles Errors in the Modal
+
 function errorHandle(data) {
 
     let output = data;
@@ -225,24 +226,11 @@ function errorHandle(data) {
         output = err.msg || err.message;
     }
 
-    $('.error-handling').css('height', '80px');
+    $('.error-handling').css({
+        'height': '80px',
+        'background': 'tomato',
+        'padding': '0 20px'
+    });
 
-    setTimeout(function() {
-        $('.error-handling').text(output);
-    }, 150)
-    setTimeout(function() {
-        $('.error-handling').css('height', '0px');
-        $('.error-handling').text("");
-    }, 3000);
+    $('.error-handling').text(output);
 }
-
-function successHandle() {
-    console.log('working!');
-    $('.success-handling').css('height', '80px');
-};
-
-// Handles Messages in the Modal
-$(document).on('DOMNodeInserted DOMNodeRemoved', ".success-handling", function() {
-    console.log('working!');
-    // $('success-handing').css('height', '80px');
-});

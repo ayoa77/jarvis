@@ -268,6 +268,24 @@ body {
   flex-direction: column;
 }
 
+.error-handling { 
+  width: 300px;
+  height: auto;
+  padding: 0;
+
+  border-radius: 0 0 5px 5px;
+
+  text-align: center;
+  font-size: $font-xxs;
+  line-height: 20px;
+  font-family: 'Aileron-Light';
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal-login-decoration {
   width: 100%;
   height: 20px;
@@ -1679,46 +1697,6 @@ body {
 
   .error-handling {
     width: 600px;
-    height: 0px;
-    padding: 0 20px;
-
-    background: tomato;
-
-    border-radius: 0 0 5px 5px;
-
-    text-align: center;
-    font-size: $font-xs;
-    line-height: 24px;
-    font-family: 'Aileron-Light';
-    color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: height .3s;
-  }
-
-  .success-handling {
-    width: 600px;
-    height: 0px;
-    padding: 0 20px;
-
-    background: lightskyblue;
-
-    border-radius: 0 0 5px 5px;
-
-    text-align: center;
-    font-size: $font-xs;
-    line-height: 24px;
-    font-family: 'Aileron-Light';
-    color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: height .3s;
   }
 
   .modal-login-wrapper, .modal-email-verify-wrapper, 
