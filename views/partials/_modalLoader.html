@@ -8,8 +8,7 @@
     </div>
 
     <!-- Right Side - Information -->
-    <div class="d-flex d-md-none modal-login-decoration">
-    </div>
+    <div class="d-flex d-md-none modal-login-decoration"></div>
 
     <div class="modal-login-right">
         <div class="title-container">
@@ -632,13 +631,19 @@
 
 <!-- Language Modal -->
 <div class="modal-language">
+    <div class="d-flex modal-login-decoration" style="border-radius: 5px 5px 0 0;"></div>
 
     <div class="title-container">
         <div class="modal-title">Select Language</div>
     </div>
 
-    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
-    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
-    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
+    <form id="languageSelectForm" action="/language" method='POST'>
+        <input type="hidden"  name="_csrf"  value= <%#= csrfToken %> </input>
+        <button name="lang" value="en">English</button>
+        <button name="lang" value="zh-CN">中文（简体）</button>
+        <button name="lang" value="zh-TW">中文（繁體)</button>
+        <button name="lang" value="ko">한국어</button>
+        <button name="lang" value="ja">日本語</button>
+    </form>
         
 </div>

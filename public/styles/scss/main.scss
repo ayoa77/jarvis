@@ -566,7 +566,7 @@ body {
   line-height: 22px;
 }
 
-.modal-restricted-country {
+.modal-restricted-country, .modal-language {
   width: 320px;
   height: 250px;
 
@@ -621,6 +621,48 @@ body {
   
     &:hover {
       background: rgb(252, 108, 108);
+    }
+  }
+}
+
+.modal-language {
+  height: 300px;
+  justify-content: space-between;
+  
+  .modal-title {
+    margin: 0;
+  }
+}
+
+#languageSelectForm {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    display: block;
+    height: 30px;
+    width: 200px;
+  
+    margin: 0 0 7px;
+
+    font-family: 'Aileron-Light';
+    font-size: $font-xs;
+    line-height: 28px;
+    color: white;
+
+    background: $blue50;
+
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: $bluegreen;
+      cursor: pointer;
     }
   }
 }
