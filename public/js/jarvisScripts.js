@@ -84,6 +84,7 @@ function modalLoad(content) {
   $('.modal-box').load(`/ .${content}`);
 }
 
+// Modal Close
 function modalClose() {
 
     let url = window.location.href;
@@ -110,7 +111,6 @@ function modalClose() {
 
       $(window).disablescroll('undo');
     }
-
 }
 
 

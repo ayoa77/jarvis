@@ -57,11 +57,13 @@
             
     </div>
     </div>
-    <div class="error-handling">
-            <% if ( sessionFlash && sessionFlash.message) { %>
+    <div class="success-handling">
+        <% if ( sessionFlash && sessionFlash.message) { %>
+            <div onload="successHandle()"></div>
             <%= sessionFlash.message %>
         <% } %>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- YouTube Video -->
@@ -477,11 +479,13 @@
         
         </div>
     </div>
-    <div class="error-handling">
-            <% if ( sessionFlash && sessionFlash.message) { %>
+    <div class="success-handling">
+        <% if ( sessionFlash && sessionFlash.message) { %>
+            <div onload="successHandle()" style='height: 0px'></div>
             <%= sessionFlash.message %>
         <% } %>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- Email Verification -->
@@ -518,11 +522,12 @@
 
         </div>
     </div>
-    <div class="error-handling">
-            <% if ( sessionFlash && sessionFlash.message) { %>
+    <div class="success-handling">
+        <% if ( sessionFlash && sessionFlash.message) { %>
             <%= sessionFlash.message %>
         <% } %>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- User Edit -->
@@ -564,11 +569,12 @@
 
         </div>
     </div>
-    <div class="error-handling">
-            <% if ( sessionFlash && sessionFlash.message) { %>
+    <div class="success-handling">
+        <% if ( sessionFlash && sessionFlash.message) { %>
             <%= sessionFlash.message %>
         <% } %>
     </div>
+    <div class="error-handling"></div>
 </div>
 
 <!-- Restricted Country Modal -->
@@ -621,11 +627,12 @@
 
         </div>
     </div>
-    <div class="error-handling">
-            <% if ( sessionFlash && sessionFlash.message) { %>
+    <div class="success-handling">
+        <% if ( sessionFlash && sessionFlash.message) { %>
             <%= sessionFlash.message %>
         <% } %>
     </div>
+    <div class="error-handling"></div>
 </div>
     
 
