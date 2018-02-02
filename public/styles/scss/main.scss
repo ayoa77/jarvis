@@ -210,6 +210,29 @@ body {
 }
 
 
+// Language Selection
+.lang-selector-button {
+  height: 100px;
+  width: 100px;
+
+  position: relative;
+  z-index: 19;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .globe {
+    font-size: $font-md;
+    color: grey;
+  }
+}
+
+
 // Modal
 
 .modal-container {
@@ -496,6 +519,7 @@ body {
 
 .verify-warning {
   font-size: $font-xxs;
+  margin: 20px 0 0;
   line-height: 20px;
   color: #999;
 }
@@ -682,6 +706,14 @@ body {
       background: $bluegreen;
       cursor: pointer;
     }
+  }
+}
+
+#languageSelectForm button.disable-button{
+  background: #aaa;
+  &:hover {
+    background: #aaa;
+    cursor: default;
   }
 }
 
@@ -1277,7 +1309,7 @@ body {
 // White Paper 
 
 .whitepaper-header {
-  height: 100px;
+  height: 200px;
 
   border-bottom: 1px solid #eee;
 }
@@ -1319,8 +1351,16 @@ body {
   flex: 1;
 }
 
+.language-title, .download-title {
+  font-family: "Aileron-Light";
+  font-size: $font-xs;
+  margin: 0 0 10px;
+}
+
 .english, .sim-chinese, .trad-chinese, .japanese, .korean {
   height: 40px;
+  width: 50px;
+
   border-radius: 5px;
   background: #eee;
   margin: 2px;
@@ -1335,6 +1375,11 @@ body {
 .lang-down:hover {
   cursor: pointer;
   box-shadow: none;
+}
+
+.lang-disable {
+  box-shadow: none;
+  color: grey;
 }
 
 // Footer
