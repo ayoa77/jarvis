@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
-    // modalLoad('modal-restricted-country');  // Modal Tester
+    // modalLoad('modal-language');  // Modal Tester
 
     $('.modal-container').click(function(e) {
       if(e.target !== e.currentTarget) {  // prevents child from inheriting parent click handling
