@@ -507,7 +507,7 @@
             </div>
 
             <div class="form-box">
-                <div class="email-verify-box">
+                <div class="email-verify-box" style="height: 100%;">
                         <form action="/resend" id="sendVerificationForm" method="POST">
                             <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
                             
@@ -612,7 +612,7 @@
             </div>
 
             <div class="form-box">
-                <div class="commit-eth-box">
+                <div class="commit-eth-box" style="height: 100%;">
                     <form action="#" id="commitEthForm" method="POST">
                         <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
@@ -649,9 +649,9 @@
         <input type="hidden"  name="_csrf"  value= <%#= csrfToken %> </input>
         <button name="lang" value="en">English</button>
         <button name="lang" value="zh-CN">中文（简体）</button>
-        <button name="lang" value="zh-TW">中文（繁體)</button>
-        <button name="lang" value="ko">한국어</button>
-        <button name="lang" value="ja">日本語</button>
+        <button class = "disable-button" name="lang" value="zh-TW" disabled>中文（繁體)</button>
+        <button class = "disable-button" name="lang" value="ko" disabled>한국어</button>
+        <button class = "disable-button" name="lang" value="ja" disabled>日本語</button>
     </form>
         
 </div>
