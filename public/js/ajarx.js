@@ -21,9 +21,9 @@ $(document).ready(function () {
         if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
         if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
         if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
-        if (modal == "#modal=login") {modalLoad("modal-login"); 
+        if (modal == "#modal=login") {modalLoad("modal-login")}; 
         if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
-    }}));
+    }));
     
     //ajax the startup setter
     $(function() {
@@ -120,7 +120,8 @@ $(document).ready(function () {
         .done(function (data) {
             console.log(data)
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                errorHandle(data.message);
+                // errorHandle(data.redirect);
+                console.log(data)
                 // alert(JSON.stringify(data.message));
                 location.href = location.protocol + '//' + data.redirect;
                 // location.reload()
@@ -189,7 +190,7 @@ $(document).ready(function () {
     $(document).on('click', '#editUserButton', function (ev) {
         ev.preventDefault();
         body = ($("#editUserForm").serialize());
-        console.log(body)
+        console.log(body);
         $.ajax({
             method: 'POST',
             url: `/user`,

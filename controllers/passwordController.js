@@ -48,7 +48,7 @@ exports.emailResetPasswordPost = function (req, res) {
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '#modal=pass-reset' };
 
-             transporter.sendMail(mailOptions, function (err) {
+            //  transporter.sendMail(mailOptions, function (err) {
                  if (err) { reject(lang.errorDefault) } else {
 
                 if (!error) {
@@ -61,7 +61,7 @@ exports.emailResetPasswordPost = function (req, res) {
                     reject(error);
                 }
                  }
-             });
+            //  });
             }
         })
     }

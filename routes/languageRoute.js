@@ -2,13 +2,12 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var userSchema = mongoose.model('user', userSchema);
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: true });
 
-router.post('/language', csrfProtection, function (req, res) {
+router.post('/language', function (req, res) {
     back = req.header('Referer') || '/';
 
     if (req.session && req.session.user){
+        console.log(req.session)
         console.log(req.body.lang)
 
         userSchema.findOne({ email: req.session.user.email }, function (err, user) {
