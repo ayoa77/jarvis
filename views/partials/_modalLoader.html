@@ -57,13 +57,14 @@
             
     </div>
     </div>
-    <div class="success-handling">
+
+    <div class="error-handling">
         <% if ( sessionFlash && sessionFlash.message) { %>
-            <div onload="successHandle()"></div>
-            <%= sessionFlash.message %>
+            <p style='height: 80px; width: 100%; border-radius: 0 0 5px 5px; background: #148AAE; display: flex; justify-content: center; align-items: center; padding: 0 20px;'>
+                <%= sessionFlash.message %>
+            </p>
         <% } %>
     </div>
-    <div class="error-handling"></div>
 </div>
 
 <!-- YouTube Video -->
