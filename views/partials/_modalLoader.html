@@ -94,7 +94,7 @@
 
                 <div class="modal-team-social">
                     <!-- <a href="#" class="tw">&#xf099;</a> -->
-                    <!-- <a href="#" class="in">&#xf0e1;</a> -->
+                    <a href="https://www.linkedin.com/in/nctusdk/" class="in">&#xf0e1;</a>
                     <a href="https://github.com/jarvis4u" class="git">&#xf09b;</a>
                 </div>
             </div>
@@ -572,16 +572,73 @@
     </div>
 </div>
 
+<!-- Restricted Country Modal -->
 <div class="modal-restricted-country">
     <div class="title-container">
-        <div class="modal-title">Last Step</div>
+        <div class="modal-title">Participation Declaration</div>
     </div>
-    <div class="body-text text-center">
-        Are you a citizen of a country that restricts participation in ICOs?
+    <div class="body-text text-center" style="margin: 0 10px;">
+        I am a citizen of a country that <strong>does not</strong> restrict participation in ICOs.
     </div>
 
     <form action="#" id="restrictedCountryForm" method="POST">
-        <a href='/leave' id="restrictedAgree" url= "/leave" action="/leave"> I am not </a>
-        <button id="restrictedDisagree" action="submit"> I am </button>
+        <button id="restrictedAgree" action="submit">Agree</button>
+        <a href='/leave' id="restrictedDisagree" url= "/leave" action="/leave">Disagree</a>
     </form>
+</div>
+
+
+<!-- Commit Ethereum Modal -->
+<div class="modal-commit-eth">
+    <div class="modal-commit-eth-wrapper">
+
+    <!-- Left Side - Logo -->
+        <div class="d-none d-sm-flex modal-login-left">
+            <div class="logo"></div>
+        </div>
+
+        <!-- Right Side - Information -->
+        <div class="d-flex d-sm-none modal-login-decoration"></div>
+
+        <div class="modal-login-right">
+            <div class="title-container">
+                <div class="modal-title">Commit Ethereum</div>
+            </div>
+
+            <div class="form-box">
+                <div class="commit-eth-box">
+                    <form action="#" id="commitEthForm" method="POST">
+                        <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
+
+                        <input type="text" name="commitEther" placeholder="Commited Ether"></input>
+                        <br>
+                        <button id="commitEthButton" action="submit"> Submit </button>
+
+                    </form>
+        
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="error-handling">
+            <% if ( sessionFlash && sessionFlash.message) { %>
+            <%= sessionFlash.message %>
+        <% } %>
+    </div>
+</div>
+    
+
+<!-- Language Modal -->
+<div class="modal-language">
+
+    <div class="title-container">
+        <div class="modal-title">Select Language</div>
+    </div>
+
+    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
+    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
+    <a class="body-text text-center" href="#" style="margin: 0 10px;">English</a>
+        
 </div>

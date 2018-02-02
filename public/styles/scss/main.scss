@@ -143,6 +143,10 @@ body {
   font-family: 'Aileron-Light';
   font-size: $font-xs;
   line-height: 28px;
+
+  strong {
+    font-family: 'Aileron-SemiBold';
+  }
 }
 
 .question-text {
@@ -253,7 +257,8 @@ body {
 }
 
 .modal-login-wrapper, .modal-email-verify-wrapper, 
-.modal-user-edit-wrapper, .modal-pass-reset-wrapper {
+.modal-user-edit-wrapper, .modal-pass-reset-wrapper,
+.modal-commit-eth-wrapper {
   height: 420px;
   width: 300px;
   
@@ -382,7 +387,7 @@ body {
   transition: margin .2s;
 }
 
-.pass-reset-box, .email-verify-box, .user-edit-box {
+.pass-reset-box, .email-verify-box, .user-edit-box, .commit-eth-box {
   width: 100%;
 
   display: flex;
@@ -396,7 +401,7 @@ body {
 }
 
 #loginForm, #registerForm, #forgotPassForm, #passwordResetForm,
-#sendVerificationForm, #editUserForm {
+#sendVerificationForm, #editUserForm, #commitEthForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -404,7 +409,8 @@ body {
 }
 
 #loginForm input, #registerForm input, #forgotPassForm input, 
-#passwordResetForm input, #sendVerificationForm input, #editUserForm input {
+#passwordResetForm input, #sendVerificationForm input, #editUserForm input,
+#commitEthForm input {
   width: 200px;
   
   margin: 10px 0;
@@ -417,7 +423,8 @@ body {
 }
 
 #loginForm button, #registerForm button, #forgotPassForm button, 
-#passwordResetForm button, #sendVerificationForm button, #editUserForm button {
+#passwordResetForm button, #sendVerificationForm button, #editUserForm button,
+#commitEthForm button {
   width: 150px;
   padding: 10px 16px;
   margin: 15px 0 0;
@@ -1651,7 +1658,8 @@ body {
   }
 
   .modal-login-wrapper, .modal-email-verify-wrapper, 
-  .modal-user-edit-wrapper, .modal-pass-reset-wrapper {
+  .modal-user-edit-wrapper, .modal-pass-reset-wrapper,
+  .modal-commit-eth-wrapper {
     height: 400px;
     width: 600px;
 
