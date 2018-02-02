@@ -6,9 +6,9 @@ $(document).ready(function () {
         if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
         if (modal == "#modal=pass-reset") { modalLoad("modal-pass-reset"); }
         if (modal == "#modal=user-edit") { modalLoad("modal-user-edit"); }
-        if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
+        if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth") };
         if (modal == "#modal=login") { modalLoad("modal-login"); }
-        if (modal == "#modal=restricted-country") {modalLoad("modal-restricted-country")};
+        if (modal == "#modal=restricted-country") {modalLoad("modal-restricted-country") };
     });
     // $(window).bind('hashchange', (function () {
         // window.addEventListener('popstate', (function () {
@@ -17,12 +17,12 @@ $(document).ready(function () {
         var url = window.location.href;
         var modal = url.match(/#modal=[^\?]+/);
         console.log(modal);
-        if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
-        if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
-        if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
-        if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
-        if (modal == "#modal=login") {modalLoad("modal-login")}; 
-        if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
+        // if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
+        // if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
+        // if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
+        // if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
+        // if (modal == "#modal=login") {modalLoad("modal-login")}; 
+        // if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
     }));
     
     //ajax the startup setter
@@ -124,7 +124,7 @@ $(document).ready(function () {
                 console.log(data)
                 // alert(JSON.stringify(data.message));
                 location.href = location.protocol + '//' + data.redirect;
-                // location.reload()
+                location.reload()
             } else {
                 errorHandle(data);
                 // alert(JSON.stringify(data));

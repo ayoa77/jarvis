@@ -25,9 +25,9 @@ var options = {
 exports.confirmationGet = function  (req, res, next) {
     // Find a matching token //// AJAX THIS STUFF AJ TODO
     data = {};
-
     tokenSchema.findOne({ token: req.params.id }, function (err, token) {
         if (!token) {
+            console.log(req.params.id)
 
             req.session.sessionFlash = {
                 type: 'message',
