@@ -20,10 +20,10 @@ $(document).ready(function () {
         console.log(modal);
         if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
         // if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
-        if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
-        if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
+        // if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
+        // if (modal == "#modal=commit-eth") {modalLoad("modal-commit-eth")};
         if (modal == "#modal=language") {modalLoad("modal-language")};                
-        if (modal == "#modal=login") {modalLoad("modal-login")}; 
+        // if (modal == "#modal=login") {modalLoad("modal-login")}; 
         // if (modal == "#modal=restricted-country") { modalLoad("modal-restricted-country") };
     }));
     
