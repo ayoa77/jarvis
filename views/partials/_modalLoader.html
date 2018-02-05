@@ -102,16 +102,7 @@
             </div>
 
             <div class="modal-team-biography">
-                    Mu Chi is a serial technology entrepreneur. 
-                    He has been working in GPU computing industry 
-                    since 2006 and started companies to build anything 
-                    GPU-related from parallel algorithms to distributed 
-                    systems to smart IoT powered by artificial intelligence. 
-                    He received M.S. and B.S. in Computer Science from 
-                    Chiao-Tung University in Taiwan, and was invited as 
-                    speaker for NetGames 2010, GTC 2012. He also won 
-                    several start-up competitions including Taiwan YEF in 
-                    2006, China Dark Horse Contest in 2014.
+                    <%= lang.index7muchi_bio %>
             </div>
 
         </div>
@@ -141,14 +132,7 @@
             </div>
 
             <div class="modal-team-biography">
-                    Yao Lee is a serial entrepreneur and angel 
-                    investor that has worked extensively in diverse 
-                    domains within the crypto industry from 7nm Mining 
-                    ASIC development, 2nd gen crypto exchange, all the 
-                    way to crypto fund management. He has several 
-                    pending patents in applications for blockchain 
-                    and has a passion for changing the world for the 
-                    better.
+                    <%= lang.index7yaolee_bio %>
             </div>
 
         </div>
@@ -178,11 +162,7 @@
             </div>
 
             <div class="modal-team-biography">
-                Max is all about great ideas and accurate execution. 
-                He has a successful career in product development and 
-                marketing, also created smart products sold in more than 
-                54 countries. Max is planning some AI and IOT 
-                applications with blockchain technology.
+                    <%= lang.index7max_bio %>
             </div>
 
         </div>
@@ -211,12 +191,7 @@
             </div>
 
             <div class="modal-team-biography">
-                    Kevin is a hands-on cross industry and cross border 
-                    technology development executive. He offers over 
-                    thirteen years of experience working with blue chip 
-                    companies and startups in the USA, China, and Singapore. 
-                    His expertise is in market strategy , business model 
-                    execution and digital delivery.
+                    <%= lang.index7kevin_bio %>
             </div>
 
         </div>
@@ -246,16 +221,7 @@
             </div>
 
             <div class="modal-team-biography">
-                Bart Yang is a cross-functional hardware engineering 
-                developer specializing in both enterprise server and 
-                Education-tech Internet of thing (IOT) product. After 
-                graduating from National Taiwan University, he 
-                participated in both enterprises x86 server and 
-                ARM-based server development team in Pegatron Corporation. 
-                At IOT field, Bart did research and develop 
-                Education-tech IOT product for kids and Hyperactive 
-                children. Now he focus on Blockchain-based high computing 
-                power product and Blockchain-based applied product as well.
+                    <%= lang.index7bart_bio %>
             </div>
 
         </div>
@@ -285,12 +251,7 @@
             </div>
 
             <div class="modal-team-biography">
-                    Spencer is a professional firmware engineer and 
-                    supply chain manager in electronic industry. Spencer 
-                    developed many IOT applications and electronic consumer 
-                    products. Spencer has a master degree in Electronic 
-                    Engineering of Telecommunications from New Jersey 
-                    institute of Technology.
+                    <%= lang.index7spencer_bio %>
             </div>
 
         </div>
@@ -320,12 +281,7 @@
             </div>
 
             <div class="modal-team-biography">
-                You-Lin Chen received his BS, MS, and PhD degrees in Computer 
-                Science from National Chiao Tung University where his researches 
-                included mobile computing and wireless networks.
-                After that, he investigated strategies and technologies regarding 
-                stream computing, IoT, and cognitive computing at Industrial 
-                Technology Research Institute and Delta Electronics.
+                    <%= lang.index7youlin_bio %>
             </div>
 
         </div>
@@ -355,13 +311,7 @@
             </div>
 
             <div class="modal-team-biography">
-                Chelsea is the chief of business development in Japan. 
-                She has 5 years of domestic and international business 
-                leadership and operation experience. With respect to 
-                education, Chelsea holds an M.I.S (Master of International Studies) 
-                from Tokyo University of Foreign Studies as well as B.S. and 
-                B.A. degree in applied chemistry and English literature from 
-                Tianjin University of Agriculture.
+                    <%= lang.index7chelsea_bio %>
             </div>
 
         </div>
@@ -391,15 +341,7 @@
             </div>
 
             <div class="modal-team-biography">
-                Charlene Twu is a former BCG consultant focused on providing 
-                solutions to global financial institutions including Fubon, 
-                BNP Paribas, ANZ, and CTBC bank. She also has over 10 years’ 
-                experience in government affairs, public relations, compliance, 
-                regulatory affairs, marketing, market research and business 
-                development in the pharmaceutical sector. Charlene has deep 
-                connections with the Taiwan government and local media. 
-                She earned her MBA at NTU and bachelor’s degree from University 
-                of California, Berkeley and is an avid crypto currency investor.
+                    <%= lang.index7charlene_bio %>
             </div>
 
         </div>
@@ -429,15 +371,7 @@
             </div>
 
             <div class="modal-team-biography">
-                Mr. Nash Wu is a Rotarian and an active investor in the 
-                crypto blockchain space. He is a co-founder of Global Cause 
-                Initiative, an international charity program based on 
-                blockchain technologies. Previously, he was an executive 
-                in a global EMS supply chains company. Prior to that, he 
-                worked as a data-mining consultant, private equities analyst, 
-                and an engineer. David earned his MBA in Finance from Indiana 
-                University Bloomington, and BS in Civil Engineering from 
-                University of California, Berkeley.
+                    <%= lang.index7nashwu_bio %>
             </div>
 
         </div>
@@ -547,7 +481,7 @@
 
         <div class="modal-login-right">
             <div class="title-container">
-                <div class="modal-title">Modify User</div>
+                <div class="modal-title">Edit User Information</div>
             </div>
 
             <div class="form-box">
@@ -643,14 +577,14 @@
     <div class="d-flex modal-login-decoration" style="border-radius: 5px 5px 0 0;"></div>
 
     <div class="title-container">
-        <div class="modal-title">Select Language</div>
+        <div class="modal-title"><%= lang.whitepaper1language %></div>
     </div>
 
     <form id="languageSelectForm" action="/language" method='POST'>
         <input type="hidden"  name="_csrf"  value= <%#= csrfToken %> </input>
         <button name="lang" value="en">English</button>
+        <button name="lang" value="zh-TW">中文（繁體)</button>
         <button name="lang" value="zh-CN">中文（简体）</button>
-        <button class = "disable-button" name="lang" value="zh-TW" disabled>中文（繁體)</button>
         <button class = "disable-button" name="lang" value="ko" disabled>한국어</button>
         <button class = "disable-button" name="lang" value="ja" disabled>日本語</button>
     </form>
