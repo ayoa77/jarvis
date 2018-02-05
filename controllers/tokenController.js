@@ -109,22 +109,23 @@ exports.resendTokenPost = function  (req, res, next) {
             // Send email
             var transporter = nodemailer.createTransport(sgTransport(options));
             var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailAccountVerificationToken, text: lang.emailHello + ',\n\n' + lang.emailPleaseVerifyAccount + ' \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n' };
-            // transporter.sendMail(mailOptions, function (err) {
+            transporter.sendMail(mailOptions, function (err) {
                 if (err) {reject(lang.errorDefault)}
 
                 if (!error) {
                         var data = {};
                         data.redirect = req.headers.host + '/user';
                         data.message = lang.messageVerifyEmailSent;
+                        req.session.sessionFlash = { type: "message", message: lang.messageEmailVerified }
                         console.log(data)
                         resolve(data);
                     } else {
                         reject(error);
                     }
-            // })
+            });
             }
         });
-            }
+        }
             }); 
     }  
 
@@ -137,6 +138,7 @@ exports.resendTokenPost = function  (req, res, next) {
         }).then(data=> {
             console.log(data)
             var data = {};
+            // req.session.sessionFlash = { type: "message", message: lang.messageEmailVerified }
             data.redirect = req.headers.host + '/user';
             data.message = lang.messageVerifyEmailSent;
             console.log('success from route')
