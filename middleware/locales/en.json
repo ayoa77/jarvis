@@ -80,7 +80,7 @@
 	"technology1poi": "Proof of Intelligence", 
 	"technology1proof_of_intelligence": "Instead of wasting valuable computing power on consensus through Proof-of-Work (PoW), computation providers are solving valuable AI jobs through what we call Proof-of-Intelligence (PoI).", 
 	"technology1data_curators": "Intelligent Contract", 
-	"technology1intelligent_contract": "Jarvis invents Intelligent Contract to address the limitation of EVM Smart Contract and to enable the development of smart applications.", 
+	"technology1intelligent_contract": "JARVIS invents Intelligent Contract to address the limitation of EVM Smart Contract and to enable the development of smart applications.", 
 	"technology2jarvis_do": "What does JARVIS do?", 
 	"technology2big_hurdles": "Tackle the Biggest Hurdles in AI to achieve Artificial General Intelligence (AGI).", 
 	"technology2patter_recognition": "Our brain excels at pattern recognition and common senses but our machine intelligence today fails both tasks miserably. JARVIS aims to solve that by automatically generating massive amount of Proof-of- Intelligence tasks with genetic programming approach.", 
@@ -151,6 +151,6 @@
 	"errorCommitedEthereumFormatIncorrect": "Please only type numbers and decimals", 
 	"errorWalletFormatIncorrect": "Sorry, this does not seem to be a valid wallet id, please try again.", 
 	"errorAlreadyVerifiedAccount": "This account is already verified, please login.", 
-	"messageUserEdited": "Your Jarvis user was successfully edited", 
+	"messageUserEdited": "Your JARVIS user was successfully edited", 
 	"emailNoRequest": "If you did not make this request, please contact us immediately by visiting us at"
 	}
