@@ -56,8 +56,8 @@
 
             <div class="input-group">
               <input type="hidden" , name="_csrf" , value=<%=csrfToken %> </input>
-              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail Address" required>
-              <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<%= lang.index1mailaddress %>" required>
+              <div class="clear"><input type="submit" value="<%= lang.index1subscribe %>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
             </div>
 
         </form>
@@ -67,7 +67,7 @@
       <div class="video-loader" onclick="modalLoad('modal-youtube')" >
         <div class="play-icon fa">&#xf04b;</div>
         <div class="video-loader-text">
-          VIEW OUR VIDEO
+          <%= lang.index1watchvideo %>
         </div>
       </div>
 
@@ -258,7 +258,7 @@
   
         <div class="col-12 col-md-6 col-lg-3 col-flexed">
           <div class="icon cubes" style="height: 55px; width: 55px; margin-bottom: 15px;"></div>
-          <div class="little-title text-center" style="margin-bottom: 20px;">
+          <div class="little-title text-center" style="margin-bottom: 10px;">
               <%= lang.index6smarter_iot %>
           </div>
           <div class="body-text text-center" style="margin-bottom: 20px; line-height: 26px;">
