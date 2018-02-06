@@ -139,7 +139,7 @@ if ('development' == app.get('env')) {
 
 // })
 app.use(function (req, res, next) {
-  if (req.session && req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
+  if (req.session && req.session.user && req.session.user.lang != ' ') { req.session.locale = req.session.user.lang }
   if (!req.session.locale) { req.session.locale = req.acceptsLanguages('en', 'zh-TW', 'zh-CN', 'jp', 'kr') || 'en' }
   // req.i18n.setLocaleFromSessionVar();
   next();

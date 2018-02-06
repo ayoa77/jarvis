@@ -18,15 +18,26 @@ router.post('/language', function (req, res) {
                     lang: req.body.lang || user.lang,
                 }
             }
-            ).exec(function (err, user) {
-                if (err) {
-                    console.log(err);
-                    res.status(500).send(err);
-                } else {
-                    // req.session.user = user;
-                    console.log(user);
-                    req.session.locale = req.body.lang,
-                    req.session.user.lang = req.body.lang
+        ).exec(function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                console.log("***********************************")
+
+                // req.session.user = user;
+                console.log(user);
+                
+                console.log("MADE ITTTT")
+
+                req.session.locale = req.body.lang,
+                
+                req.session.user.lang = req.body.lang
+                req.session.save();
+                console.log(req.session.locale)
+                console.log(req.session.user)
+
+
 
                 };
             });
@@ -34,7 +45,11 @@ router.post('/language', function (req, res) {
     } else {
         req.session.locale = req.body.lang
     }
-
+    // console.log("***********************************")
+    // console.log(req.session.user.lang)
+    // console.log(req.session.locale)
+    // console.log(req.session.locale)
+    // console.log("***********************************")
     res.redirect(back);
 });
 
