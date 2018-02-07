@@ -177,7 +177,8 @@ $(document).ready(function () {
         .done(function (data) {
             if (typeof data.redirect === 'string' || data.redirect instanceof String) {
                 // alert(JSON.stringify(data.message));
-                location.href = location.protocol + '//' + data.redirect;
+                // location.href = location.protocol + '//' + data.redirect;
+                location.reload();
             } else {
                 // alert(JSON.stringify(data));
                 errorHandle(data);

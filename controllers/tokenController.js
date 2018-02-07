@@ -138,7 +138,7 @@ exports.resendTokenPost = function  (req, res, next) {
         }).then(data=> {
             console.log(data)
             var data = {};
-            // req.session.sessionFlash = { type: "message", message: lang.messageEmailVerified }
+            req.session.sessionFlash = { type: "keep", message: lang.messageVerifyEmailSent }
             data.redirect = req.headers.host + '/user';
             data.message = lang.messageVerifyEmailSent;
             console.log('success from route')

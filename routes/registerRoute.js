@@ -100,7 +100,7 @@ router.post('/', langCheck, validationMiddleware.register, function (req, res, n
     .then(function (response){
         console.log(response)
         req.session.sessionFlash = {
-            type: 'message',
+            type: 'keep',
             message: lang.messageVerifyEmailSent
         }; 
         console.log(req.session.sessionFlash);
