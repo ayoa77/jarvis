@@ -30,7 +30,7 @@ exports.confirmationGet = function  (req, res, next) {
             console.log(req.params.id)
 
             req.session.sessionFlash = {
-                type: 'message',
+                type: 'keep',
                 message: lang.errorNoUserFound
             },
                 res.redirect('/#modal=email-verify');
@@ -42,7 +42,7 @@ exports.confirmationGet = function  (req, res, next) {
                 {
 
                     req.session.sessionFlash = {
-                        type: 'message',
+                        type: 'keep',
                         message: lang.errorNoUserFound
                     },
                         res.redirect('/#modal=email-verify');
@@ -51,7 +51,7 @@ exports.confirmationGet = function  (req, res, next) {
             if (user.status != 'NEW'){ 
 
                 req.session.sessionFlash = {
-                    type: 'message',
+                    type: 'keep',
                     message: lang.errorAlreadyVerified
                 },       
               res.redirect('/#modal=login');
@@ -66,7 +66,7 @@ exports.confirmationGet = function  (req, res, next) {
                 if (err) { return res.status(500).send({ msg: err.message }); }
                 // Delete cookie to make edits to user and to make sure they have to login again
                 delete req.session.user;
-                req.session.sessionFlash = {type: "message", message: lang.messageEmailVerified}
+                req.session.sessionFlash = {type: "keep", message: lang.messageEmailVerified}
                 // res.status(200).send("The account has been verified. Please log in.");
                 res.redirect('/#modal=login');
 

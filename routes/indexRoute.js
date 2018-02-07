@@ -19,6 +19,9 @@ var csrfProtection = csrf({ cookie: true });
 
 /* GET home page. */
 router.get('/', csrfProtection,langCheck, function (req, res, next) {
+  if (res.locals.sessionFlash && res.locals.sessionFlash.type == "keep"){
+    req.session.sessionFlash = { type: 'message', message: res.locals.sessionFlash.message}
+  }
 // console.log(req.session)
 console.log(res.locals.sessionFlash)
   //  console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
