@@ -523,7 +523,7 @@
 
     <form action="#" id="restrictedCountryForm" method="POST">
         <!-- <button id="restrictedAgree" action="submit">Agree</button> -->
-        <a href="/user" id='restrictedCountryForm'>Agree</a>
+        <a href="/user" id='restrictedAgree'>Agree</a>
         <a href='/leave' id="restrictedDisagree" url= "/leave" action="/leave">Disagree</a>
     </form>
 </div>
@@ -548,7 +548,7 @@
 
             <div class="form-box">
                 <div class="commit-eth-box" style="height: 100%;">
-                    <form action="/user" id="commitEthForm" class="editUserButton" method="POST">
+                    <form action="/user" id="commitEthForm" class="editUserForm" method="POST">
                         <input type="hidden" , name="_csrf" , value=<%=csrfToken %>> </input>
 
                         <input type="text" name="commitEther" placeholder="Commited Ether"></input>
