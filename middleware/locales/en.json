@@ -161,5 +161,11 @@
 	"errorWalletFormatIncorrect": "Sorry, this does not seem to be a valid wallet id, please try again.", 
 	"errorAlreadyVerifiedAccount": "This account is already verified, please login.", 
 	"messageUserEdited": "Your Jarvis user was successfully edited", 
-	"emailNoRequest": "If you did not make this request, please contact us immediately by visiting us at"
-	}
+	"emailNoRequest": "If you did not make this request, please contact us immediately by visiting us at", 
+	"faq1question": "", 
+	"faq1answer": "", 
+	"faq2question": "", 
+	"faq2answer": "", 
+	"faq3question": "", 
+	"faq3answer": ""
+}
