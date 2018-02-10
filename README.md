@@ -1,5 +1,7 @@
 Jarvis Read Me
 =======
+Temporary Testing Server: 172.104.79.53:3000
+Live Server: jarvis.ai
 ## VM Setup
 
 1. **Setup hostname**  
