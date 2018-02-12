@@ -1,6 +1,13 @@
 @import "partials/_variables";
 @import "partials/_mixins";
+
 @import "partials/_typography";
+@import "partials/_lang-en";
+// @import "partials/_lang-zhCH";
+// @import "partials/_lang-zhTW";
+// @import "partials/_lang-ja";
+// @import "partials/_lang-ko";
+
 @import "partials/_placeholders";
 @import "partials/_mailchimp";
 
@@ -48,11 +55,6 @@ a {
 
 
 // Site-Wide Containers
-
-body {
-  background: white;
-  font-family: 'Aileron-Light';
-}
 
 .sh-splash {
   padding: 0 0;
@@ -103,67 +105,6 @@ body {
   }
 }
 
-// Typography
-
-.big-text {
-  font-family: 'DINPro-Bold';
-  font-size: $font-xl;
-
-  margin: 0 0 12px;
-}
-
-.big-header-text {
-  margin: 0 0 20px; 
-
-  font-family: 'Aileron-Light';
-  color: #63686c;
-  font-size: $font-md;
-  line-height: 38px;
-}
-
-.big-text-alt {
-  margin: 0 0 20px; 
-
-  font-family: 'Aileron-Light';
-  color: #59636e;
-  font-size: $font-lg;
-  line-height: 40px;
-}
-
-.sub-text {
-  font-family: 'Aileron-Light';
-  font-size: $font-sm;
-  line-height: 26px;
-  color: #59636e;
-
-  margin: 0 0 14px;
-}
-
-.body-text {
-  font-family: 'Aileron-Light';
-  font-size: $font-xs;
-  line-height: 28px;
-
-  strong {
-    font-family: 'Aileron-SemiBold';
-  }
-}
-
-.question-text {
-  margin: 0 0 10px;
-
-  font-family: 'Aileron';
-  font-size: $font-xxs;
-  color: $gray;
-}
-
-.little-title {
-  font-family: 'Aileron-SemiBold';
-  font-size: $font-xs;
-  color: #333;
-  white-space: nowrap;
-}
-
 // Navigation
 
 .navbar {
@@ -186,15 +127,6 @@ body {
 
 .nav-item:hover {
   cursor: pointer;
-}
-
-.navbar-expand-md .navbar-nav .nav-link {
-  font-family: 'Aileron';
-  font-size: $font-sm;
-  text-align: center;
-
-  padding-right: .8rem;
-  padding-left: .8rem;
 }
 
 .nav-item:first-child {
@@ -291,24 +223,6 @@ body {
   flex-direction: column;
 }
 
-.error-handling { 
-  width: 300px;
-  height: auto;
-  padding: 0;
-
-  border-radius: 0 0 5px 5px;
-
-  text-align: center;
-  font-size: $font-xxs;
-  line-height: 20px;
-  font-family: 'Aileron-Light';
-  color: white;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .modal-login-decoration {
   width: 100%;
   height: 20px;
@@ -340,10 +254,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-}
-
-.signin, .signup, .or, .login-forgot-pass, button {
-  font-family: 'Aileron';
 }
 
 .logo {
@@ -407,13 +317,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.modal-title {
-  margin: 0 0 20px;
-  font-size: $font-md;
-  font-family: 'Aileron';
-  color: $blue50;
 }
 
 .login-box, .register-box, .forgot-pass-box {
@@ -504,19 +407,6 @@ body {
   }
 }
 
-.verification-resend {
-  margin: 20px 0;
-
-  font-family: 'Aileron-Light';
-  font-size: $font-xs;
-
-  color: #aaa;
-
-  &:hover {
-    color: #333;
-  }
-}
-
 .verify-warning {
   font-size: $font-xxs;
   margin: 20px 0 0;
@@ -575,22 +465,6 @@ body {
   align-items: center;
 }
 
-.modal-team-info {
-    flex: 1;
-    align-self: flex-start;
-
-    .modal-team-title {
-      font-family: 'Aileron';
-      font-size: $font-xs;
-      color: #aaa;
-    }
-
-    .modal-team-name {
-      font-family: 'DINPro-Bold';
-      font-size: $font-lg;
-    }
-}
-
 .modal-team-social {
   margin: 20px 0;
 
@@ -600,12 +474,6 @@ body {
   a {
     margin: 0 8px;
   }
-}
-
-.modal-team-biography {
-  font-family: 'Aileron-Light';
-  font-size: $font-xxs;
-  line-height: 22px;
 }
 
 .modal-restricted-country, .modal-language {
@@ -676,99 +544,11 @@ body {
   }
 }
 
-#languageSelectForm {
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  button {
-    display: block;
-    height: 30px;
-    width: 200px;
-  
-    margin: 0 0 7px;
-
-    font-family: 'Aileron-Light';
-    font-size: $font-xs;
-    line-height: 28px;
-    color: white;
-
-    background: $blue50;
-
-    border: none;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-      background: $bluegreen;
-      cursor: pointer;
-    }
-  }
-}
-
 #languageSelectForm button.disable-button{
   background: #aaa;
   &:hover {
     background: #aaa;
     cursor: default;
-  }
-}
-
-// Modal Calls 
-.video-loader {
-  width: 200px;
-  max-width: 200px;
-
-  margin: 40px auto 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
-  display: flex;
-  align-items: center;
-
-  transition: box-shadow .2s;
-
-  &:hover {
-    cursor: pointer;
-
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, .2);
-  }
-
-  .play-icon {
-    height: 40px;
-    width: 40px;
-
-    padding-left: 13px;
-
-    font-size: $font-sm;
-    color: #ccc;
-    
-    border: 1px solid #ccc;
-    border-radius: 100%;
-
-    display: flex;
-    align-items: center;
-  }
-
-  .video-loader-text {
-    height: 40px;
-    width: 140px;
-
-    overflow: hidden;
-    white-space: nowrap;
-
-    font-family: 'Aileron';
-    font-size: $font-xxs;
-    color: #8B8D91;
-    text-align: center;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 
@@ -778,22 +558,6 @@ body {
   max-width: 400px;
 
   margin-top: 25px;
-}
-
-.whitepaper-link {
-  font-family: 'Aileron-SemiBold';
-  font-size: $font-xxs;
-  letter-spacing: 2px;
-  color: $bluegreen;
-
-  .right-arrow {
-    font-family: 'FontAwesome';
-    font-size: $font-xxs;
-  }
-
-  &:hover {
-    color:$blue50;
-  }
 }
 
 #jar-video {
@@ -915,80 +679,6 @@ body {
   color: #aaa;
 }
 
-#slider {
-  height: 340px;
-
-  .slick-track {
-    height: 340px;
-  }
-
-  .slick-slide {
-    transform: translateY(7%);
-  }
-
-  .employee-container {
-    height: 280px;
-    width: 200px;
-
-    opacity: .4;
-
-    margin: 0 auto;
-    position: relative;
-
-    background: white;
-
-    transition: all .2s;
-  }
-
-  .employee-photo {
-      height: 200px;
-      width: 100%;
-  }
-
-  .employee-info {
-      height: 55px;
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .employee-name {
-        margin: 0 0 5px;
-
-        font-size: $font-xxs;
-        font-family: 'Aileron-SemiBold';
-        color: #4F545A;
-      }
-
-      .employee-title {
-        font-size: 12px;
-        text-align: center;
-        font-family: 'Aileron-Light';
-        color: #717578;
-      }
-  }
-
-  .employee-social {
-      height: 25px;
-    
-      font-family: 'FontAwesome';
-    
-      display: flex;
-      justify-content: center;
-    
-      a {
-        margin: 0 5px;
-      }
-   }
-
-  img {
-    height: auto;
-    width: 100%;
-  }
-}
-
 #slider .slick-current .employee-container {
   transform: scale(1.15);
   z-index: 20;
@@ -1037,35 +727,6 @@ body {
   }
 }
 
-.team-info {
-  height: 55px;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .team-name {
-    margin: 0 0 5px;
-
-    text-align: center;
-
-    font-size: $font-xxs;
-    font-family: 'Aileron-SemiBold';
-    color: #4F545A;
-  }
-
-  .team-title {
-    font-size: 12px;
-
-    text-align: center;
-
-    font-family: 'Aileron-Light';
-    color: #717578;
-  }
-}
-
 .team-social {
   height: 25px;
 
@@ -1097,40 +758,6 @@ body {
   height: auto;
 }
 
-.graph-info, .percentage-info {
-  width: 70%;
-  margin: 20px auto;
-  padding: 15px 0;
-
-  font-size: $font-xs;
-  text-align: center;
-  font-family: 'Aileron-SemiBold';
-  letter-spacing: 1px;
-  color: #594262;
-
-  border: 2px solid #eee;
-  border-radius: 5px;
-}
-
-.puzzle-info {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 15px 20px;
-
-  background: #fff;
-
-  font-size: $font-xs;
-  text-align: left;
-  font-family: 'Aileron';
-  letter-spacing: 1px;
-  color: #594262;
-  line-height: 20px;
-
-  border: 1px solid #aaa;
-  border-radius: 5px;
-}
-
 .resource-illustration-box {
   width: 100%;
   min-height: 200px;
@@ -1146,37 +773,6 @@ body {
 
 // Deep-Dive
 
-.gradient-drop {
-  width: 100%;
-  padding: 0 20px 50px;
-
-  position: relative;
-
-  background: linear-gradient(#fafafa,  #fff, #fff);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-  .deco-line {
-    width: 100%;
-    height: 1px;
-    
-    margin: 0 0 50px;
-    padding: 0;
-
-    background: linear-gradient(to right, rgba(180, 180, 180, 0), rgba(180, 180, 180, 1), rgba(180, 180, 180, 0));
-  }
-
-  p {
-    max-width: 768px;
-    font-family: Aileron-Light;
-    font-size: $font-sm;
-    line-height: 32px;
-  }
-}
-
 .title-deco-line {
   max-width: 200px;
   width: 100%;
@@ -1184,14 +780,6 @@ body {
 
   border-bottom: 1px solid #ccc;
   margin: 20px auto 40px;
-}
-
-.training-flow, .prediction-flow {
-  margin: 30px 0 20px;
-  font-family: 'Aileron-SemiBold';
-  font-size: $font-xs;
-  text-align: center;
-  color: #58616c;
 }
 
 .flow-illustration-box {
@@ -1352,12 +940,6 @@ body {
   flex: 1;
 }
 
-.language-title, .download-title {
-  font-family: "Aileron-Light";
-  font-size: $font-xs;
-  margin: 0 0 10px;
-}
-
 .english, .sim-chinese, .trad-chinese, .japanese, .korean {
   height: 40px;
   width: 50px;
@@ -1406,27 +988,6 @@ body {
   }
 }
 
-.ftr-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    margin: 0 0 15px;
-    font-family: 'Aileron';
-    color: #4F545A;
-
-    &:last-child {
-      margin-bottom: 30px;
-    }
-
-    &:hover {
-      color: #222;
-    }
-  }
-}
-
 .ftr-social-media {
   height: auto;
   margin: 0 0 30px;
@@ -1447,35 +1008,6 @@ body {
   }
 
 
-}
-
-.ftr-tos {
-  font-size: $font-xs;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    font-family: 'Aileron';
-    color: #ADAEAF;
-
-    &:hover {
-      color: #222;
-    }
-  }
-}
-
-.ftr-copyright {
-  margin: 20px 0;
-
-  font-family: 'DINPro-Bold';
-  font-size: $font-xxs;
-  color: #ADAEAF;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .ftr-illustration-container {
@@ -1513,42 +1045,6 @@ body {
   }
 
 }
-
-// FAQs
-
-.card {
-  border: none;
-  margin-bottom: 20px;
-
-  font-family: 'Aileron-Light';
-
-  .card-header {
-    height: 80px;
-    width: 100%; 
-    border-bottom: none;
-  }
-
-  .card-body {
-    line-height: 26px;
-  }
-
-  h5 {
-    height: 100%;
-    width: 100%;
-  }
-
-  h5 a {
-    height: 100%;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-  }
-}
-
-
-
-
 
 @media (min-width: 375px) {
 
@@ -1619,18 +1115,6 @@ body {
     font-size: $font-sm;
    }
   
-   .whitepaper-link {
-    font-family: 'Aileron-SemiBold';
-    font-size: $font-xxs;
-    letter-spacing: 2px;
-    color: $bluegreen;
-  
-    .right-arrow {
-      font-family: 'FontAwesome';
-      font-size: $font-xxs;
-    }
-  }
-  
   .graph-info, .percentage-info {
     font-size: $font-xs;
     letter-spacing: 1px;
@@ -1639,13 +1123,6 @@ body {
   .puzzle-info {
     font-size: $font-xs;
     line-height: 20px;
-  }
-  
-  .gradient-drop p {
-    max-width: 768px;
-    font-family: 'Aileron-Light';
-    font-size: $font-sm;
-    line-height: 32px;
   }
   
   .training-flow, .prediction-flow {
