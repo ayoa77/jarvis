@@ -161,5 +161,11 @@
 	"errorWalletFormatIncorrect": "你輸入的錢包位址無效，請重新輸入", 
 	"errorAlreadyVerifiedAccount": "此帳號已經過驗證，請登錄。", 
 	"messageUserEdited": "您的用戶資料已編輯完成", 
-	"emailNoRequest": "如果您沒有提出這個要求，請立即跟我們聯繫"
+	"emailNoRequest": "如果您沒有提出這個要求，請立即跟我們聯繫", 
+	"faq1question": "", 
+	"faq1answer": "", 
+	"faq2question": "", 
+	"faq2answer": "", 
+	"faq3question": "", 
+	"faq3answer": ""
 }
