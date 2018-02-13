@@ -95,7 +95,7 @@ module.exports.userEdit = function (req, res, next) {
     promise.all([
         req.checkBody('wallet', lang.errorWalletFormatIncorrect).optional({ checkFalsy: true }).len(42),
 
-        req.checkBody('commitEther', lang.errorCommitedEthereumFormatIncorrect).optional({ checkFalsy: true }).matches(/^$|([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)|([0-9]+)/),
+        req.checkBody('commitEther', lang.errorCommitedEthereumFormatIncorrect).optional({ checkFalsy: true }).matches(/^[1-9][\.\d]*(,\d+)?$/),
 
 
         req.asyncValidationErrors(true)]).then(function (value) {
@@ -108,7 +108,7 @@ module.exports.userEdit = function (req, res, next) {
             console.log("failed in authmiddleware");
 
             res.send(err);
-        })
+        });
     // 
 
 };

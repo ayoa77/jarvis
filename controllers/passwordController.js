@@ -91,8 +91,26 @@ exports.emailResetPasswordPost = function (req, res) {
 
 //FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
 exports.passwordResetGet = function (req, res, next) {
-    req.session.token = req.params.id;
-    res.redirect('/#modal=pass-reset');
+    console.log(req.params.id)
+
+    userSchema.findOne({ passwordResetToken: req.params.id }, function (err, user) {
+        if (!user) {
+            req.session.sessionFlash = {
+                type: 'keep',
+                message: lang.errorNoUserFound
+            };
+            res.redirect('/#modal=login');
+        } else if (user.passwordResetExpires < Date.now()) {
+            req.session.sessionFlash = {
+                type: 'keep',
+                message: lang.messagePasswordTokenExpired
+            }; 
+            res.redirect('/#modal=login');
+        }else{
+            req.session.token = req.params.id;
+            res.redirect('/#modal=pass-reset');
+        }
+    });
 };
 
 //FORM WITH TWO PASSWORD FIELDS TO CHANGE PASSWORD
@@ -132,8 +150,8 @@ exports.passwordResetPost = function (req, res, next) {
                 data.redirect = req.headers.host + '/#modal=login';
                 data.message = lang.messageResetSuccessful;
                 req.session.sessionFlash = {
-                    type: 'message',
-                    message: lang.messageResetSuccessful
+                    type: 'keep',
+                    message: lang.messagePasswordResetSuccessful
                 }; 
                 resolve(data);
             } else {

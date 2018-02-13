@@ -126,6 +126,7 @@
     "emailPleaseResetPassword": "請按連結重設密碼",
     "messagePasswordResetEmailSent": "重置密碼的通行證已經寄至您的信箱",
     "messagePasswordTokenExpired": "此通行證已過期，請至忘記密碼中重新啟動",
+    "messageResetSuccessful": "Your password was successfuly reset, please login to complete the process.",
     "errorCommitedEthereumFormatIncorrect": "請輸入數字",
     "errorWalletFormatIncorrect": "你輸入的錢包位址無效，請重新輸入",
     "errorAlreadyVerifiedAccount": "此帳號已經過驗證，請登錄。",
