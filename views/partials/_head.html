@@ -15,6 +15,21 @@
     <link rel='stylesheet' href='/styles/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/styles/css/reset.css' />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>  
+
+
+    <% if (locale == 'zh-CN') { %>
+      <link rel='stylesheet' href='/styles/css/lang-zhCN.css' />
+    <% } else if (locale == 'zh-TW') { %>
+      <link rel='stylesheet' href='/styles/css/lang-zhTW.css' />
+    <% } else if (locale == 'ja') { %>
+      <link rel='stylesheet' href='/styles/css/lang-ja.css' />
+    <% } else if (locale == 'ko') { %>
+      <link rel='stylesheet' href='/styles/css/lang-ko.css' />
+    <% } else { %>
+      <link rel='stylesheet' href='/styles/css/lang-en.css' />
+    <% } %>
+
+
     <link rel='stylesheet' href='/styles/css/main.css' />
 
     <!-- Javascript -->

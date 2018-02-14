@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     initSlickSlider();
     autoFooter();
+    langChecker();
     // modalLoad('modal-language');  // Modal Tester
 
     $('.modal-container').click(function(e) {
@@ -64,6 +65,12 @@ $(document).on('click', '.login-forgot-pass', function(e) {
 
   $('.login-box').css('margin-top', '-500px');
 });
+
+
+// Language Checker
+function langChecker() {
+  
+}
 
 
  // Modal Loader
