@@ -30,6 +30,7 @@ router.get('/', csrfProtection,langCheck, function (req, res, next) {
   lang:lang,
   sessionFlash: res.locals.sessionFlash, 
   user: req.session.user,
+  locale: req.session.locale,
   csrfToken: req.csrfToken() });
 
 });

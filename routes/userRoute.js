@@ -33,7 +33,7 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
   // console.log(req.session.user)
   console.log(req.session.wallet);
-      res.render('user', { title: 'User', user: user, lang:lang, sessionFlash: res.locals.sessionFlash, csrfToken: req.csrfToken() });
+      res.render('user', { title: 'User', user: user, lang:lang, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, csrfToken: req.csrfToken() });
 
     });
   }
