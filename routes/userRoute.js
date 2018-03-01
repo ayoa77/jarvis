@@ -24,10 +24,10 @@ router.get('/', csrfProtection, langCheck, function (req, res, next) {
   console.log(req.session);
   console.log("********************************************")
   if (!req.session.user) {
-    req.session.sessionFlash = {type: "message", message: "Please login to access your account."};
+    // req.session.sessionFlash = {type: "message", message: "Please login to access your account."};
     res.redirect('/#modal=login'); //tell the page to drop down the modal
   } else if (typeof req.session.user != 'undefined' && req.session.user.status == 'NEW') {
-    req.session.sessionFlash = { type: "message", message: "Please activate your account by resendending your activation email, or by navigating to your email and clicking on the link." };
+    // req.session.sessionFlash = { type: "message", message: "Please activate your account by resendending your activation email, or by navigating to your email and clicking on the link." };
     res.redirect('/#modal=email-verify');
   } else {
     userSchema.findOne({ _id: req.session.user._id }, function (err, user) {
