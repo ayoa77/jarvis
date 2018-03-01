@@ -194,16 +194,16 @@ app.all('/session-flash', function (req, res, next) {
 });
 
 app.get('/technology', csrfProtection, langCheck, function (req, res, next) {
-  res.render('deepDive', { title: 'Technology', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang,csrfToken: req.csrfToken() });
+  res.render('deepDive', { title: 'Technology', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang,csrfToken: req.csrfToken() });
 });
 app.get('/faq', csrfProtection, langCheck, function (req, res, next) {
-  res.render('faq', { title: 'FAQ', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('faq', { title: 'FAQ', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, locale: req.session.locale, csrfToken: req.csrfToken() });
 });
 app.get('/governance', csrfProtection, langCheck, function (req, res, next) {
-  res.render('governance', { title: 'Governance', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('governance', { title: 'Governance', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
-  res.render('whitePaper', { title: 'White Paper',user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, csrfToken: req.csrfToken() });
+  res.render('whitePaper', { title: 'White Paper',user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
 app.get('/testing', langCheck, function (req, res) {
   iplocation('56.70.97.8')
