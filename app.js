@@ -253,7 +253,8 @@ app.get('/logout', function (req, res, next) {
 // robots.txt config
 app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
-  res.send("User-agent: *\nDisallow: /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");
+  res.send("Disallow: *");
+  // /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");
 });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
