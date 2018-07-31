@@ -9,7 +9,6 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
 var nodemon = require('gulp-nodemon');
-var nodeInspector = require('gulp-node-inspector');
 
 
 
