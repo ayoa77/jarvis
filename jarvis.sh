@@ -114,7 +114,7 @@ echo "${yellow}-------------------Building/Running Docker Image-----------------
 echo "${yellow}-------------------Building/Running Docker Image-------------------${reset}"
 echo "${yellow}-------------------Building/Running Docker Image-------------------${reset}"
 docker build -t jarvis .
-docker run --restart unless-stopped -d -p 3000:3000 jarvis
+docker run --restart unless-stopped -d -p 7000:7000 jarvis
 service nginx restart
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
 echo "${green}-------------------Done Building/Running Docker Image-------------------${reset}"
