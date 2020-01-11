@@ -281,3 +281,18 @@ app.listen(app.get('port'), () => {
 
 
 module.exports = app;
+
+
+function cracklePop(multipleOne = 3, multipleTwo = 5, max = 100) {
+  for (let i = 1; i <= max; i++) {
+    if (i % multipleOne === 0 && i % multipleTwo === 0 ){
+      console.log("CracklePop");
+    } else if (i % multipleOne === 0) {
+      console.log("Crackle");
+    } else if (i % multipleTwo === 0) {
+      console.log("Pop");
+    } else {
+      console.log(i);
+    }
+  }
+};
