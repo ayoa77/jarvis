@@ -2,7 +2,7 @@ $(document).ready(function () {
     $(function () {
         var url = window.location.href;
         var modal = url.match(/#modal=[^\?]+/);
-        console.log(modal);
+        // console.log(modal);
         if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
         if (modal == "#modal=pass-reset") { modalLoad("modal-pass-reset"); }
         if (modal == "#modal=user-edit") { modalLoad("modal-user-edit"); }
@@ -17,7 +17,7 @@ $(document).ready(function () {
     window.addEventListener('popstate', (function () {
         var url = window.location.href;
         var modal = url.match(/#modal=[^\?]+/);
-        console.log(modal);
+        // console.log(modal);
         if (modal == "#modal=email-verify") { modalLoad("modal-email-verify"); }
         if (modal == "#modal=pass-reset") {modalLoad("modal-pass-reset"); }
         if (modal == "#modal=user-edit") {modalLoad("modal-user-edit"); }
@@ -41,28 +41,27 @@ $(document).ready(function () {
 
 
     //ajax get for email verification
-    $(function () {
-        $.ajax({
-            type: 'GET',
-            url: '/confirmation/:id?',
-            // data: { "id": window.location.href.match(/[^\?]+/)}
-            data: data    
-            })
-        .done(function (data) {
-            console.log(data)
-            if (typeof data.redirect === 'string' || data.redirect instanceof String) {
-                alert(JSON.stringify(data.message));
-                location.href = location.protocol + '//' + data.redirect
-                location.reload()
-            } else if (typeof data.failure === 'string' || data.failure instanceof String) {
-                alert(JSON.stringify(data.message));
-                location.href = location.protocol + '//' + data.failure
-                location.reload();
-            } else {
-                alert(JSON.stringify(data));
-            }
-        });    
-    });
+    // $(function () {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/confirmation/:id?',
+    //         // data: { "id": window.location.href.match(/[^\?]+/)}
+    //         // data: data    
+    //         })
+    //     .done(function (data) {
+    //         if (typeof data.redirect === 'string' || data.redirect instanceof String) {
+    //             // alert(JSON.stringify(data.message));
+    //             location.href = location.protocol + '//' + data.redirect
+    //             location.reload();
+    //         } else if (typeof data.failure === 'string' || data.failure instanceof String) {
+    //             // alert(JSON.stringify(data.message));
+    //             location.href = location.protocol + '//' + data.failure
+    //             location.reload();
+    //         } else {
+    //             // alert(JSON.stringify(data));
+    //         }
+    //     });    
+    // });
 
     //ajax login 
     $(document).on('click', '#loginButton', function (ev) {
