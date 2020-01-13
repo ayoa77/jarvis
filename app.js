@@ -193,19 +193,19 @@ app.all('/session-flash', function (req, res, next) {
   res.redirect(301, '/');
 });
 
-app.get('/technology', csrfProtection, langCheck, function (req, res, next) {
+app.get('/jarvis/technology', csrfProtection, langCheck, function (req, res, next) {
   res.render('deepDive', { title: 'Technology', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang,csrfToken: req.csrfToken() });
 });
-app.get('/faq', csrfProtection, langCheck, function (req, res, next) {
+app.get('/jarvis/faq', csrfProtection, langCheck, function (req, res, next) {
   res.render('faq', { title: 'FAQ', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, locale: req.session.locale, csrfToken: req.csrfToken() });
 });
-app.get('/governance', csrfProtection, langCheck, function (req, res, next) {
+app.get('/jarvis/governance', csrfProtection, langCheck, function (req, res, next) {
   res.render('governance', { title: 'Governance', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
+app.get('/jarvis/whitepaper', csrfProtection, langCheck, function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper',user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/testing', langCheck, function (req, res) {
+app.get('/jarvis/testing', langCheck, function (req, res) {
   iplocation('56.70.97.8')
     .then(result => {  
       console.log(result.country_name);
@@ -218,7 +218,7 @@ app.get('/testing', langCheck, function (req, res) {
 });
 
 //AJAXING Location look up
-app.post('/startup', function (req, res, next) {
+app.post('/jarvis/startup', function (req, res, next) {
  req.session.loc = null;
     if (!req.session.loc || req.session.loc == '') {
       iplocation(req.ip)
@@ -235,7 +235,7 @@ app.post('/startup', function (req, res, next) {
   });
 
 //LEAVING AFTER BEING PRESENTED WITH EULA I THINK WE CAN MOVE THIS TO AN ALERT BOX ABOUT BEING NAVIGATED AWAY FROM THEIR USER PAGE
-app.get('/leave', function (req, res, next) {
+app.get('/jarvis/leave', function (req, res, next) {
   delete req.session.user;
   req.session.sessionFlash = {
     type: 'error',
@@ -245,13 +245,13 @@ app.get('/leave', function (req, res, next) {
 });
 
 //LOGING OUT AND DESTROYING SESSION
-app.get('/logout', function (req, res, next) {
+app.get('/jarvis/logout', function (req, res, next) {
   delete req.session.user;
   res.redirect('/');
 });
 
 // robots.txt config
-app.get('/robots.txt', function (req, res) {
+app.get('/jarvis/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("Disallow: *");
   // /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");

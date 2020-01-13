@@ -46,7 +46,7 @@ exports.emailResetPasswordPost = function (req, res) {
             } else {
             // Send email
             var transporter = nodemailer.createTransport(sgTransport(options));
-            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + '#modal=pass-reset' };
+            var mailOptions = { from: 'noreply@jarvis.ai', to: user.email, subject: lang.emailPasswordReset, text: lang.emailHello + ',\n\n' + lang.emailPleaseResetPassword + ' \nhttp:\/\/' + req.headers.host + '\/resetpassword\/' + user.passwordResetToken + 'jarvis#modal=pass-reset' };
 
              transporter.sendMail(mailOptions, function (err) {
                  if (err) { reject(lang.errorDefault) } else {
@@ -54,7 +54,7 @@ exports.emailResetPasswordPost = function (req, res) {
                 if (!error) {
                     //data has to be set after the resolving of the promise here
                     var data = {};
-                    // data.redirect = req.headers.host + '/#modal=login',
+                    // data.redirect = req.headers.host + '/jarvis#modal=login',
                     // data.message = lang.messagePasswordResetEmailSent                    
                     resolve(data);
                 } else {
@@ -72,7 +72,7 @@ exports.emailResetPasswordPost = function (req, res) {
                 passwordTokenSender(user);
             }).then(data => {
                 var data = {};
-                data.redirect = req.headers.host + '/#modal=login',
+                data.redirect = req.headers.host + '/jarvis#modal=login',
                 data.message = lang.messagePasswordResetEmailSent,
                 req.session.sessionFlash = {
                     type: 'message',
@@ -99,16 +99,16 @@ exports.passwordResetGet = function (req, res, next) {
                 type: 'keep',
                 message: lang.errorNoUserFound
             };
-            res.redirect('/#modal=login');
+            res.redirect('/jarvis#modal=login');
         } else if (user.passwordResetExpires < Date.now()) {
             req.session.sessionFlash = {
                 type: 'keep',
                 message: lang.messagePasswordTokenExpired
             }; 
-            res.redirect('/#modal=login');
+            res.redirect('/jarvis#modal=login');
         }else{
             req.session.token = req.params.id;
-            res.redirect('/#modal=pass-reset');
+            res.redirect('/jarvis#modal=pass-reset');
         }
     });
 };
@@ -124,7 +124,7 @@ exports.passwordResetPost = function (req, res, next) {
         delete req.session.token;
         console.log(req.session.token);
         if (!user) {
-            data.failure = req.headers.host + '/#modal=login';
+            data.failure = req.headers.host + '/jarvis#modal=login';
             data.message = lang.errorNoUserFound;
             req.session.sessionFlash = {
                 type: 'error',
@@ -133,7 +133,7 @@ exports.passwordResetPost = function (req, res, next) {
             reject(data); 
         } else {
             if (user.passwordResetExpires < Date.now()) { 
-                data.failure = req.headers.host + '/#modal=login';
+                data.failure = req.headers.host + '/jarvis#modal=login';
                 data.message = lang.messagePasswordTokenExpired;
                 req.session.sessionFlash = {
                     type: 'message',
@@ -147,7 +147,7 @@ exports.passwordResetPost = function (req, res, next) {
             // console.log(user)
             if (!err) {
                 var data = {};
-                data.redirect = req.headers.host + '/#modal=login';
+                data.redirect = req.headers.host + '/jarvis#modal=login';
                 data.message = lang.messageResetSuccessful;
                 req.session.sessionFlash = {
                     type: 'keep',

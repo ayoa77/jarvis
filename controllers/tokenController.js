@@ -33,7 +33,7 @@ exports.confirmationGet = function  (req, res, next) {
                 type: 'keep',
                 message: lang.errorNoUserFound
             },
-                res.redirect('/#modal=email-verify');
+                res.redirect('/jarvis#modal=email-verify');
             return;
         }
         // If we found a token, find a matching user
@@ -45,7 +45,7 @@ exports.confirmationGet = function  (req, res, next) {
                         type: 'keep',
                         message: lang.errorNoUserFound
                     },
-                        res.redirect('/#modal=email-verify');
+                        res.redirect('/jarvis#modal=email-verify');
                     return;
                 }
             if (user.status != 'NEW'){ 
@@ -54,7 +54,7 @@ exports.confirmationGet = function  (req, res, next) {
                     type: 'keep',
                     message: lang.errorAlreadyVerified
                 },       
-              res.redirect('/#modal=login');
+              res.redirect('/jarvis#modal=login');
               return;
             }
             
@@ -68,7 +68,7 @@ exports.confirmationGet = function  (req, res, next) {
                 delete req.session.user;
                 req.session.sessionFlash = {type: "keep", message: lang.messageEmailVerified}
                 // res.status(200).send("The account has been verified. Please log in.");
-                res.redirect('/#modal=login');
+                res.redirect('/jarvis#modal=login');
 
             });
         });
@@ -169,7 +169,7 @@ exports.resendTokenPost = function  (req, res, next) {
 //                 //     type: 'message',
 //                 //     message: lang.errorNoUserFound
 //                 // },
-//                 //     res.redirect('/#modal=email-verify');
+//                 //     res.redirect('/jarvis#modal=email-verify');
 //                 // return;
 //             } else { resolve(token) };
 //         });
@@ -189,7 +189,7 @@ exports.resendTokenPost = function  (req, res, next) {
 //                         //     type: 'message',
 //                         //     message: lang.errorNoUserFound
 //                         // },
-//                         //     res.redirect('/#modal=email-verify');
+//                         //     res.redirect('/jarvis#modal=email-verify');
 //                         // return;
 
 
@@ -204,7 +204,7 @@ exports.resendTokenPost = function  (req, res, next) {
 //                                 data = {}
 
 //                                 if (error) {
-//                                     data.failure = req.headers.host + '/#modal=email-verify';
+//                                     data.failure = req.headers.host + '/jarvis#modal=email-verify';
 //                                     data.message = error;
 //                                     req.session.sessionFlash = { type: "error", message: error };
 //                                 }
