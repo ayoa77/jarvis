@@ -165,47 +165,47 @@ var tokenController = require('./controllers/tokenController');
 var passwordController = require('./controllers/passwordController');
 
 
-app.use('/jarvis', indexRoute);
-app.use('/jarvis/after', indexAfterRoute)
-app.use('/jarvis/user', userRoute);
-app.use('/jarvis/login', loginRoute); 
-app.use('/jarvis/login/modal/:modal?', loginRoute); 
-app.use('/jarvis/register', registerRoute);
-app.post('/jarvis/mailerSignUp', mailingListRoute);
-// app.use('/jarvis/wallet', walletRoute);
-app.post('/jarvis/language', languageRoute);
-app.get('/jarvis/confirmation/:id?', langCheck, tokenController.confirmationGet);
-app.post('/jarvis/resend',langCheck, tokenController.resendTokenPost);
-app.route('/jarvis/emailresetpassword')
+app.use('', indexRoute);
+app.use('/after', indexAfterRoute)
+app.use('/user', userRoute);
+app.use('/login', loginRoute); 
+app.use('/login/modal/:modal?', loginRoute); 
+app.use('/register', registerRoute);
+app.post('/mailerSignUp', mailingListRoute);
+// app.use('/wallet', walletRoute);
+app.post('/language', languageRoute);
+app.get('/confirmation/:id?', langCheck, tokenController.confirmationGet);
+app.post('/resend',langCheck, tokenController.resendTokenPost);
+app.route('/emailresetpassword')
   .get(csrfProtection, langCheck, passwordController.emailResetPasswordGet)
   .post(langCheck, passwordController.emailResetPasswordPost);
-app.route('/jarvis/resetpassword/:id?')
+app.route('/resetpassword/:id?')
   .get(csrfProtection, langCheck, passwordController.passwordResetGet)
   .post(langCheck, validationMiddleware.password, passwordController.passwordResetPost);
 
 app.set('port', process.env.PORT || 7000);
 
-app.all('/jarvis/session-flash', function (req, res, next) {
+app.all('/session-flash', function (req, res, next) {
   req.session.sessionFlash = {
     type: 'success',
     message: 'This is a flash message using custom middleware and express-session.'
   };
-  res.redirect(301, '/jarvis');
+  res.redirect(301, '');
 });
 
-app.get('/jarvis/technology', csrfProtection, langCheck, function (req, res, next) {
+app.get('/technology', csrfProtection, langCheck, function (req, res, next) {
   res.render('deepDive', { title: 'Technology', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang,csrfToken: req.csrfToken() });
 });
-app.get('/jarvis/faq', csrfProtection, langCheck, function (req, res, next) {
+app.get('/faq', csrfProtection, langCheck, function (req, res, next) {
   res.render('faq', { title: 'FAQ', user: req.session.user, sessionFlash: res.locals.sessionFlash, lang:lang, locale: req.session.locale, csrfToken: req.csrfToken() });
 });
-app.get('/jarvis/governance', csrfProtection, langCheck, function (req, res, next) {
+app.get('/governance', csrfProtection, langCheck, function (req, res, next) {
   res.render('governance', { title: 'Governance', user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/jarvis/whitepaper', csrfProtection, langCheck, function (req, res, next) {
+app.get('/whitepaper', csrfProtection, langCheck, function (req, res, next) {
   res.render('whitePaper', { title: 'White Paper',user: req.session.user, sessionFlash: res.locals.sessionFlash, locale: req.session.locale, lang:lang, csrfToken: req.csrfToken() });
 });
-app.get('/jarvis/testing', langCheck, function (req, res) {
+app.get('/testing', langCheck, function (req, res) {
   iplocation('56.70.97.8')
     .then(result => {  
       console.log(result.country_name);
@@ -218,7 +218,7 @@ app.get('/jarvis/testing', langCheck, function (req, res) {
 });
 
 //AJAXING Location look up
-app.post('/jarvis/startup', function (req, res, next) {
+app.post('/startup', function (req, res, next) {
  req.session.loc = null;
     if (!req.session.loc || req.session.loc == '') {
       iplocation(req.ip)
@@ -235,23 +235,23 @@ app.post('/jarvis/startup', function (req, res, next) {
   });
 
 //LEAVING AFTER BEING PRESENTED WITH EULA I THINK WE CAN MOVE THIS TO AN ALERT BOX ABOUT BEING NAVIGATED AWAY FROM THEIR USER PAGE
-app.get('/jarvis/leave', function (req, res, next) {
+app.get('/leave', function (req, res, next) {
   delete req.session.user;
   req.session.sessionFlash = {
     type: 'error',
     message: lang.messageKYCRejected
   };
-  res.redirect('/jarvis');
+  res.redirect('');
 });
 
 //LOGING OUT AND DESTROYING SESSION
-app.get('/jarvis/logout', function (req, res, next) {
+app.get('/logout', function (req, res, next) {
   delete req.session.user;
-  res.redirect('/jarvis');
+  res.redirect('');
 });
 
 // robots.txt config
-app.get('/jarvis/robots.txt', function (req, res) {
+app.get('/robots.txt', function (req, res) {
   res.type('text/plain');
   res.send("Disallow: *");
   // /user \nDissalow: /logout \nDissalow: /confirmation \nDissalow: /emailresetpassword");

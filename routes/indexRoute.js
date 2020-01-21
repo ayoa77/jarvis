@@ -25,7 +25,7 @@ router.get('/', csrfProtection,langCheck, function (req, res, next) {
 // console.log(req.session)
 // console.log(res.locals.sessionFlash)
   //  console.log(req.acceptsLanguages('en', 'zh-TW', 'zh', 'jp', 'kr'));
-  console.log(req.session.user);
+  // console.log(req.session.user);
   res.render('index', { title: 'Jarvis',
   lang:lang,
   sessionFlash: res.locals.sessionFlash, 
